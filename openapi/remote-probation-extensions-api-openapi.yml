@@ -1,0 +1,704 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Probation Extensions API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Probation Extensions
+paths:
+  /v1/probation-extensions:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Create a probation extension request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | - | Manage probation documents (`probation_document:write`) |
+
+        '
+      operationId: post_v1_probation-extensions
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProbationExtensionParams'
+        description: ProbationExtension
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProbationExtensionResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - probation_document:write
+        - employment_documents
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - probation_document:write
+        - employment_documents
+        - all:write
+      summary: Create Probation Extension
+      tags:
+      - Probation Extensions
+  /v1/probation-extensions/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Shows a Probation Extension Request.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View probation documents (`probation_document:read`) | Manage probation documents (`probation_document:write`) |
+
+        '
+      operationId: get_v1_probation-extensions_id
+      parameters:
+      - description: Probation Extension Request ID
+        example: 93t3j-probation_extension_id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProbationExtensionResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - probation_document:read
+        - probation_document:write
+        - employment_documents
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - probation_document:read
+        - probation_document:write
+        - employment_documents
+        - all:write
+        - all:read
+      summary: Show Probation Extension
+      tags:
+      - Probation Extensions
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    CreateProbationExtensionParams:
+      additionalProperties: false
+      example:
+        additional_details: Employee is on leave.
+        date_of_discussion_with_employee: '2021-09-01'
+        duration_of_extension_in_days: 30
+        employment_id: 93t3j-employment_id-9suej43
+        reason_for_extension: Employee is on leave.
+        supporting_document:
+          content: base64_encoded_content
+          name: supporting_document.pdf
+        was_employee_informed: true
+      properties:
+        additional_details:
+          description: Any additional details that need to be considered for the probation extension.
+          example: Employee is on leave.
+          type: string
+        date_of_discussion_with_employee:
+          description: The date when the discussion with the employee took place. Is required when `was_employee_informed` is `true` and should be in the past.
+          example: '2021-09-01'
+          format: date
+          type: string
+        duration_of_extension_in_days:
+          description: The number of days to add to the existing probation end date.
+          example: 30
+          type: integer
+        employment_id:
+          description: The employment ID that is related to the probation extension request.
+          example: 93t3j-employment_id-9suej43
+          type: string
+        reason_for_extension:
+          description: The reason for the probation extension.
+          example: Employee is on leave.
+          type: string
+        supporting_document:
+          allOf:
+          - $ref: '#/components/schemas/ProbationExtensionFile'
+          description: 'Upload performance improvement plan or any other supporting document.
+
+            This optional document can be sent only if `was_employee_informed` is `true`.
+
+            '
+          example: https://example.com/supporting_document.pdf
+          type: object
+        was_employee_informed:
+          description: Whether the employee was informed about the probation extension.
+          example: true
+          type: boolean
+      required:
+      - employment_id
+      - duration_of_extension_in_days
+      - reason_for_extension
+      - was_employee_informed
+      title: CreateProbationExtensionParams
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    ProbationExtension:
+      description: A request to extend an employee's probation period. Requires Remote's review for compliance with local labor laws.
+      example:
+        employment_id: 93t3j-employment_id-9suej43
+        id: 93t3j-sfies9_id-9suej43
+        requested_by: 93t3j-requested_by_id-9suej43
+        status: submitted
+        submitted_at: '2021-09-01T00:00:00Z'
+        zendesk_ticket_url: https://zendesk.com/tickets/123
+      properties:
+        employment_id:
+          description: The unique identifier (UUID) of the employment.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the probation extension request.
+          type: string
+        requested_by:
+          description: The unique identifier (UUID) of the user who submitted the request.
+          type: string
+        status:
+          $ref: '#/components/schemas/ProbationExtensionStatus'
+        submitted_at:
+          description: The timestamp when the extension request was submitted.
+          format: datetime
+          type: string
+        zendesk_ticket_url:
+          description: A link to the support ticket for this extension, if one was created. Null otherwise.
+          nullable: true
+          type: string
+      required:
+      - id
+      - employment_id
+      - status
+      - submitted_at
+      - requested_by
+      - zendesk_ticket_url
+      title: ProbationExtension
+      type: object
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    ProbationExtensionResponse:
+      description: Probation Extension Response
+      example:
+        data:
+          probation_extension:
+            employment_id: 93t3j-employment_id-9suej43
+            id: 93t3j-sfies9_id-9suej43
+            requested_by: 93t3j-requested_by_id-9suej43
+            status: submitted
+            submitted_at: '2021-09-01T00:00:00Z'
+            zendesk_ticket_url: https://zendesk.com/tickets/123
+      properties:
+        data:
+          properties:
+            probation_extension:
+              $ref: '#/components/schemas/ProbationExtension'
+          required:
+          - probation_extension
+          type: object
+      title: ProbationExtensionResponse
+      type: object
+    ProbationExtensionFile:
+      additionalProperties: false
+      example:
+        content: base64_encoded_content
+        name: supporting_document.pdf
+      properties:
+        content:
+          description: The content of the file encoded in base64.
+          example: base64_encoded_content
+          format: binary
+          type: string
+        name:
+          description: The name of the file.
+          example: supporting_document.pdf
+          type: string
+      required:
+      - name
+      - content
+      title: ProbationExtensionFile
+      type: object
+    ProbationExtensionStatus:
+      description: 'The current status of a probation extension request.
+
+
+        - `submitted`: The request has been submitted and is awaiting review.
+
+        - `in_review`: Remote is reviewing the request for compliance.
+
+        - `done`: The probation extension has been approved and applied.
+
+        - `canceled`: The request was canceled.
+
+        - `deleted`: The request was deleted.
+
+        '
+      enum:
+      - submitted
+      - in_review
+      - done
+      - canceled
+      - deleted
+      example: submitted
+      title: ProbationExtensionStatus
+      type: string
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

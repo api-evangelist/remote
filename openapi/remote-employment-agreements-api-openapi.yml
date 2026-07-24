@@ -1,0 +1,568 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Employment Agreements API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Employment Agreements
+paths:
+  /v1/employments/{employment_id}/employment-agreement/download:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Downloads a PDF of the auto-generated Employment Agreement for an employment.
+
+
+        The document is rendered as a draft (no signatures) and is not persisted. EA preview is only
+
+        available for countries that have a published Employment Agreement automation template — see the
+
+        `employment_agreement_preview_available` flag on the [Countries](#tag/Countries) endpoint.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |
+
+        '
+      operationId: get_v1_employments_employment_id_employment-agreement_download
+      parameters:
+      - description: Employment ID
+        example: 1a716003-ae89-4810-aa00-25df6e799162
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericFile'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - document:read
+        - document:write
+        - employment_documents
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - document:read
+        - document:write
+        - employment_documents
+        - all:write
+        - all:read
+      summary: Download the Employment Agreement for an employment
+      tags:
+      - Employment Agreements
+  /v1/employments/{employment_id}/employment-agreement/preview:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a base64-encoded PDF preview of the auto-generated Employment Agreement for an employment.
+
+
+        The document is rendered as a draft (no signatures) and is not persisted. EA preview is only
+
+        available for countries that have a published Employment Agreement automation template — see the
+
+        `employment_agreement_preview_available` flag on the [Countries](#tag/Countries) endpoint.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |
+
+        '
+      operationId: get_v1_employments_employment_id_employment-agreement_preview
+      parameters:
+      - description: Employment ID
+        example: 1a716003-ae89-4810-aa00-25df6e799162
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentAgreementPreviewResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - document:read
+        - document:write
+        - employment_documents
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - document:read
+        - document:write
+        - employment_documents
+        - all:write
+        - all:read
+      summary: Preview the Employment Agreement for an employment
+      tags:
+      - Employment Agreements
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    EmploymentAgreementPreviewResponse:
+      additionalProperties: false
+      description: Return a base64 encoded Employment Agreement preview document
+      example:
+        data:
+          employment_agreement:
+            content: data:application/pdf;base64,iVBORw0KGgoAAAANSUhEUgAAAJUAAACVCAYAAABRorhPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWF...
+            name: employment_agreement.pdf
+      properties:
+        data:
+          properties:
+            employment_agreement:
+              properties:
+                content:
+                  format: binary
+                  type: string
+                name:
+                  type: string
+              required:
+              - content
+              - name
+              type: object
+          required:
+          - employment_agreement
+          type: object
+      required:
+      - data
+      title: EmploymentAgreementPreviewResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    GenericFile:
+      description: A file represented as a base64-encoded string.
+      example: base64 encoded content
+      format: binary
+      title: GenericFile
+      type: string
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

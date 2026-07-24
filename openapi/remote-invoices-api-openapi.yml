@@ -1,0 +1,1007 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Invoices API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Invoices
+paths:
+  /v1/contractor-invoices/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Shows a single Contractor Invoice record.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |
+
+        '
+      operationId: get_v1_contractor-invoices_id
+      parameters:
+      - description: Resource unique identifier
+        example: 2ba34003-78d5-4792-9240-998d473184ce
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidSlug'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractorInvoiceResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - invoices:read
+        - invoices:write
+        - invoices
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - invoices:read
+        - invoices:write
+        - invoices
+        - all:write
+        - all:read
+      summary: Show Contractor Invoice
+      tags:
+      - Invoices
+  /v1/contractor-invoices:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Lists Contractor Invoice records.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |
+
+        '
+      operationId: get_v1_contractor-invoices
+      parameters:
+      - description: Filters contractor invoices by status matching the value.
+        example: issued
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/ContractorInvoiceStatus'
+      - description: Filters contractor invoices by invoice schedule ID matching the value.
+        example: d3745787-1b2b-424c-ab83-cdda8b5cea37
+        in: query
+        name: contractor_invoice_schedule_id
+        required: false
+        schema:
+          $ref: '#/components/schemas/UuidSlug'
+      - description: Filters contractor invoices by date greater than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: date_from
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoices by date less than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: date_to
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoices by due date greater than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: due_date_from
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoices by due date less than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: due_date_to
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoices by approved date greater than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: approved_date_from
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoices by approved date less than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: approved_date_to
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoices by paid out date greater than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: paid_out_date_from
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoices by paid out date less than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: paid_out_date_to
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Field to sort by
+        example: date
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - date
+          - due_date
+          - approved_at
+          - paid_out_at
+          type: string
+      - description: Sort order
+        example: asc
+        in: query
+        name: order
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContractorInvoicesResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - invoices:read
+        - invoices:write
+        - invoices
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - invoices:read
+        - invoices:write
+        - invoices
+        - all:write
+        - all:read
+      summary: List Contractor Invoices
+      tags:
+      - Invoices
+components:
+  schemas:
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    ListContractorInvoicesResponse:
+      description: Paginated response schema listing all Contractor Invoices.
+      example:
+        contractor_invoices:
+        - amount: 350000
+          approved_at: '2024-06-05T00:00:00Z'
+          contractor_invoice_schedule_id: 9f8e7d6c-5b4a-3c2d-1e0f-a1b2c3d4e5f6
+          currency: BRL
+          date: '2024-06-01'
+          description: Mobile developer payment.
+          due_date: '2024-06-15'
+          fx_rate: 1.12
+          id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          items:
+          - amount: 5000
+            description: Description
+            type: manual
+          number: ABC123
+          paid_out_at: '2024-06-05T12:00:00Z'
+          pay_out_method: swift_our
+          processing_fee: 500
+          processing_fee_currency: USD
+          processing_fee_payer: company
+          source_amount: 350000
+          source_currency: BRL
+          status: paid_out
+          target_amount: 350000
+          target_currency: BRL
+        current_page: 1
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            contractor_invoices:
+              items:
+                $ref: '#/components/schemas/ContractorInvoice'
+              type: array
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListContractorInvoicesResponse
+      type: object
+    ContractorInvoiceItemType:
+      description: 'Current types.
+
+
+        - `manual`: Item manually entered when creating invoice.
+
+        - `time_tracking`: Item generated by time tracking.
+
+        - `expense`: Item that represents an expense included in the invoice.
+
+        '
+      enum:
+      - manual
+      - time_tracking
+      - expense
+      example: manual
+      nullable: false
+      title: ContractorInvoiceItemType
+      type: string
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    ContractorInvoice:
+      additionalProperties: false
+      description: Contractor Invoice
+      example:
+        amount: 350000
+        approved_at: '2024-06-05T00:00:00Z'
+        contractor_invoice_schedule_id: 9f8e7d6c-5b4a-3c2d-1e0f-a1b2c3d4e5f6
+        currency: BRL
+        date: '2024-06-01'
+        description: Mobile developer payment.
+        due_date: '2024-06-15'
+        fx_rate: 1.12
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        items:
+        - amount: 5000
+          description: Description
+          type: manual
+        number: ABC123
+        paid_out_at: '2024-06-05T12:00:00Z'
+        pay_out_method: swift_our
+        processing_fee: 500
+        processing_fee_currency: USD
+        processing_fee_payer: company
+        source_amount: 350000
+        source_currency: BRL
+        status: paid_out
+        target_amount: 350000
+        target_currency: BRL
+      properties:
+        amount:
+          description: Overall amount that is calculated by summing all invoice items.
+          example: 350000
+          type: integer
+        approved_at:
+          description: The datetime which contractor invoice has been approved and it's pending for payment.
+          example: '2024-06-05T00:00:00Z'
+          format: datetime
+          nullable: true
+          type: string
+        contractor_invoice_schedule_id:
+          description: Invoice schedule that might have generated contractor invoice.
+          example: 9f8e7d6c-5b4a-3c2d-1e0f-a1b2c3d4e5f6
+          format: uuid
+          nullable: true
+          type: string
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        date:
+          description: The issuance date specified by a contractor.
+          example: '2024-06-01'
+          format: date
+          type: string
+        description:
+          description: Custom defined description.
+          example: Mobile developer payment.
+          nullable: true
+          type: string
+        due_date:
+          description: The payment deadline chosen by the contractor while creating an invoice.
+          example: '2024-06-15'
+          format: date
+          nullable: true
+          type: string
+        employment_id:
+          description: Employment identifier associated with the contractor invoice.
+          example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          format: uuid
+          title: EmploymentID
+          type: string
+        fx_rate:
+          description: The guaranteed FX rate applied for the payment. Only present for guaranteed payout invoices.
+          format: float
+          nullable: true
+          type: number
+        id:
+          description: Contractor Invoice identifier.
+          example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          format: uuid
+          title: ContractorInvoiceID
+          type: string
+        items:
+          description: Invoice line items.
+          items:
+            $ref: '#/components/schemas/ContractorInvoiceItem'
+          type: array
+        number:
+          description: Invoice identifier.
+          example: ABC123
+          nullable: true
+          type: string
+        paid_out_at:
+          description: Date and time which invoice was paid to contractor.
+          example: '2024-06-05T12:00:00Z'
+          format: utc_datetime
+          nullable: true
+          type: string
+        pay_out_method:
+          description: 'Payment method used for the payout: local (e.g. bank transfer), swift (SHA), or swift_our (OUR). Only present for guaranteed payout invoices.'
+          enum:
+          - local
+          - swift
+          - swift_our
+          nullable: true
+          type: string
+        processing_fee:
+          description: SWIFT fee amount in cents. Only present when pay_out_method is swift or swift_our.
+          nullable: true
+          type: integer
+        processing_fee_currency:
+          description: Currency code of the SWIFT fee. Only present when processing_fee is set.
+          example: BRL
+          maxLength: 3
+          minLength: 3
+          nullable: true
+          title: CurrencyCode
+          type: string
+        processing_fee_payer:
+          description: Entity responsible for paying the SWIFT fee. Only present when processing_fee is set.
+          enum:
+          - company
+          - contractor
+          nullable: true
+          type: string
+        source_amount:
+          description: The amount the company needs to pay (pay in amount).
+          example: 350000
+          type: integer
+        source_currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        status:
+          $ref: '#/components/schemas/ContractorInvoiceStatus'
+        target_amount:
+          description: The amount the contractor receives (pay out amount). Can be null if pay out is not guaranteed.
+          example: 350000
+          nullable: true
+          type: integer
+        target_currency:
+          description: Currency code in [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) format.
+          example: BRL
+          maxLength: 3
+          minLength: 3
+          nullable: true
+          title: CurrencyCode
+          type: string
+      required:
+      - id
+      - date
+      - items
+      - amount
+      - currency
+      - source_amount
+      - source_currency
+      - status
+      title: ContractorInvoice
+      type: object
+    CurrencyCode:
+      description: Currency code of the SWIFT fee. Only present when processing_fee is set.
+      example: BRL
+      maxLength: 3
+      minLength: 3
+      nullable: true
+      title: CurrencyCode
+      type: string
+    Date:
+      description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+      example: '2021-07-01'
+      format: date
+      title: Date
+      type: string
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    ContractorInvoiceStatus:
+      description: 'Current record state.
+
+
+        - `enqueued`: An outstanding payment is enqueued to complete the invoice payment.
+
+        - `externally_paid`: The invoice was paid outside the platform and the employer reported that the contractor was paid.
+
+        - `issued`: This invoice has been uploaded by the contractor.
+
+        - `in_review`: This invoice has been uploaded by the contractor and is in the process of review by Remote. This is only expected for Contractor of Record invoices.
+
+        - `paid_out`: This invoice has been paid out to contractor. This is the final expected stage of a contractor invoice.
+
+        - `pay_out_failed`: There were issues paying out to the contractor. This is usually caused by a balance issue, an issue with the contractor''s bank account, or another type error that comes from payment partner.
+
+        - `pending_payment`: An outstanding payment has been created for this invoice and is awaiting the company payment before payout begins.
+
+        - `processing`: The invoice is being processed for pay out. This status should only exist for a few seconds.
+
+        - `rejected`: This invoice has been rejected by the the company or Remote support team, when requested by customers. It cannot be rejected if it''s already paid.
+
+        - `rejected_by_remote`: This invoice has been rejected by Remote during the Contractor of Record approval process.
+
+        - `funds_returned`: A pay out was successfully attempted for the invoice, but the funds were rejected by the contractor''s bank, either due to incorrect details or some other reason.
+
+        - `manual_payout`: The invoice is not supported by our automated systems and must instead be manually paid by internal Remote teams.
+
+        - `blocked`: The invoice is marked as blocked. It will not be paid out.
+
+        '
+      enum:
+      - issued
+      - draft
+      - approved
+      - pending_payment
+      - in_review
+      - externally_paid
+      - rejected
+      - rejected_by_remote
+      - blocked
+      - compliance_review
+      - compliance_failed
+      - pay_out_scheduled
+      - enqueued
+      - processing
+      - manual_payout
+      - paid_out
+      - pay_out_failed
+      - funds_returned
+      example: issued
+      nullable: false
+      title: ContractorInvoiceStatus
+      type: string
+    ContractorInvoiceItem:
+      additionalProperties: false
+      description: Line Item schema for a Contractor Invoice.
+      example:
+        amount: 5000
+        description: Description
+        type: manual
+      properties:
+        amount:
+          description: Amount, in cents.
+          type: integer
+        description:
+          description: Describes invoice item intent.
+          type: string
+        type:
+          $ref: '#/components/schemas/ContractorInvoiceItemType'
+      required:
+      - amount
+      - description
+      - type
+      title: ContractorInvoiceItem
+      type: object
+    ContractorInvoiceResponse:
+      additionalProperties: false
+      description: Response schema to show a Contractor Invoice
+      example:
+        data:
+          contractor_invoice:
+            amount: 350000
+            approved_at: '2024-06-05T00:00:00Z'
+            contractor_invoice_schedule_id: 9f8e7d6c-5b4a-3c2d-1e0f-a1b2c3d4e5f6
+            currency: BRL
+            date: '2024-06-01'
+            description: Mobile developer payment.
+            due_date: '2024-06-15'
+            fx_rate: 1.12
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            items:
+            - amount: 5000
+              description: Description
+              type: manual
+            number: ABC123
+            paid_out_at: '2024-06-05T12:00:00Z'
+            pay_out_method: swift_our
+            processing_fee: 500
+            processing_fee_currency: USD
+            processing_fee_payer: company
+            source_amount: 350000
+            source_currency: BRL
+            status: paid_out
+            target_amount: 350000
+            target_currency: BRL
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            contractor_invoice:
+              $ref: '#/components/schemas/ContractorInvoice'
+          required:
+          - contractor_invoice
+          type: object
+      required:
+      - data
+      title: ContractorInvoiceResponse
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

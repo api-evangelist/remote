@@ -1,0 +1,1527 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Cost Calculator API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Cost Calculator
+paths:
+  /v1/cost-calculator/estimation:
+    post:
+      callbacks: {}
+      deprecated: false
+      operationId: post_v1_cost-calculator_estimation
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCalculatorEstimateParams'
+        description: Estimate params
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCalculatorEstimateResponse'
+          description: Success
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - ClientToken: []
+        CustomerAPIToken: []
+        OAuth2AuthorizationCode: []
+        OAuth2ClientCredentials: []
+      summary: Creates a cost estimation of employments
+      tags:
+      - Cost Calculator
+  /v1/cost-calculator/estimation-pdf:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: Creates a PDF cost estimation of employments based on the provided parameters.
+      operationId: post_v1_cost-calculator_estimation-pdf
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCalculatorEstimateParams'
+        description: Estimate params
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCalculatorEstimatePDFResponse'
+          description: Success
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - ClientToken: []
+        CustomerAPIToken: []
+        OAuth2AuthorizationCode: []
+        OAuth2ClientCredentials: []
+      summary: Creates PDF cost estimation of employments
+      tags:
+      - Cost Calculator
+  /v1/cost-calculator/countries:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Lists active and processing countries
+      operationId: get_v1_cost-calculator_countries
+      parameters:
+      - description: If the premium benefits should be included in the response
+        example: 'true'
+        in: query
+        name: include_premium_benefits
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCalculator.ListCountryResponse'
+          description: Success
+      security:
+      - ClientToken: []
+        CustomerAPIToken: []
+        OAuth2AuthorizationCode: []
+        OAuth2ClientCredentials: []
+      summary: List countries for Cost Calculator
+      tags:
+      - Cost Calculator
+  /v1/cost-calculator/regions/{slug}/fields:
+    get:
+      callbacks: {}
+      description: "Returns required fields JSON Schema for a given region. These are required in order to calculate\n      the cost of employment for the region. These fields are based on employer contributions that are associated\n      with the region or any of it's parent regions."
+      operationId: get_v1_cost-calculator_regions_slug_fields
+      parameters:
+      - description: Slug
+        in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      - description: If the premium benefits should be included in the response
+        example: 'true'
+        in: query
+        name: include_premium_benefits
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONSchemaResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorResponse'
+          description: Internal Server Error
+      security:
+      - ClientToken: []
+        CustomerAPIToken: []
+        OAuth2AuthorizationCode: []
+        OAuth2ClientCredentials: []
+      summary: Show region fields
+      tags:
+      - Cost Calculator
+  /v1/cost-calculator/estimation-csv:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: Creates CSV cost estimation of employments
+      operationId: post_v1_cost-calculator_estimation-csv
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCalculatorEstimateParams'
+        description: Estimate params
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCalculatorEstimateCSVResponse'
+          description: Success
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - ClientToken: []
+        CustomerAPIToken: []
+        OAuth2AuthorizationCode: []
+        OAuth2ClientCredentials: []
+      summary: Creates a CSV cost estimation of employments
+      tags:
+      - Cost Calculator
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    ValidationError:
+      example:
+        errors:
+          rejected_reason:
+          - can't be blank
+      properties:
+        errors:
+          additionalProperties: true
+          properties: {}
+          type: object
+      required:
+      - errors
+      title: ValidationError
+      type: object
+    CostCalculatorEmploymentParam:
+      description: Parameters for a single employment to include in the cost estimate. Provide the region and salary (or total cost) — the calculator will compute all employer costs, contributions, and benefits.
+      example:
+        region_slug: region_slug
+      properties:
+        age:
+          description: The employee's age. Used in some countries to calculate age-dependent benefits or contributions.
+          type: integer
+        annual_gross_salary:
+          description: The annual gross salary in the region's local currency, in cents. Provide this OR `annual_total_cost`, not both.
+          type: integer
+        annual_gross_salary_in_employer_currency:
+          description: The annual gross salary in the employer's preferred currency, in cents. Used when you want to specify salary in a different currency than the region's.
+          type: integer
+        annual_total_cost:
+          description: The target total annual cost (salary + all employer costs) in the region's local currency, in cents. The calculator will derive the gross salary. Provide this OR `annual_gross_salary`, not both.
+          type: integer
+        annual_total_cost_in_employer_currency:
+          description: The target total annual cost in the employer's preferred currency, in cents.
+          type: integer
+        benefits:
+          description: Specific benefit selections to include in the estimate.
+          items:
+            $ref: '#/components/schemas/CostCalculatorBenefitParam'
+          type: array
+        discount:
+          $ref: '#/components/schemas/CostCalculatorDiscount'
+        employment_term:
+          $ref: '#/components/schemas/EmploymentTermType'
+        region_slug:
+          description: The unique identifier (slug) of the region/country for this employment. Required.
+          type: string
+        regional_to_employer_exchange_rate:
+          description: A custom exchange rate from the regional currency to the employer currency. If not provided, the current market rate is used.
+          type: string
+        title:
+          description: An optional label for this employment in the estimate (e.g., the job title or role name).
+          type: string
+      required:
+      - region_slug
+      title: CostCalculatorEmploymentParam
+      type: object
+    EmploymentTermType:
+      enum:
+      - fixed
+      - indefinite
+      example: fixed
+      title: EmploymentTermType
+      type: string
+    CostCalculatorDiscountResponse:
+      description: The discount applied to a cost estimate, showing the annual and monthly savings.
+      example:
+        annual_amount: 120000
+        monthly_amount: 10000
+        months: 12
+        text: 10% Discount
+      properties:
+        annual_amount:
+          description: The annual discount amount in cents.
+          type: integer
+        monthly_amount:
+          description: The monthly discount amount in cents.
+          type: integer
+        months:
+          description: The number of months the discount applies to.
+          maximum: 12
+          minimum: 1
+          type: integer
+        text:
+          description: A human-readable label for the discount.
+          type: string
+      required:
+      - annual_amount
+      - monthly_amount
+      - text
+      - months
+      title: CostCalculatorDiscountResponse
+      type: object
+    CostCalculator.CountryAvailability:
+      description: '- active: country is ready to onboard employee
+
+        - coming_soon: country is in process of getting ready
+
+        '
+      enum:
+      - active
+      - coming_soon
+      example: active
+      title: CostCalculator.CountryAvailability
+      type: string
+    CostCalculatorEstimatePDFResponse:
+      example:
+        data:
+          content: base64 encoded content
+      properties:
+        data:
+          properties:
+            content:
+              $ref: '#/components/schemas/GenericFile'
+          required:
+          - content
+          type: object
+      required:
+      - data
+      title: CostCalculatorEstimatePDFResponse
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    MinimalCountry:
+      description: A lightweight country representation with basic identification fields.
+      example:
+        alpha_2_code: PT
+        code: PRT
+        name: Portugal
+        slug: portugal-ab18d96a-a9fd-42c0-9688-24f963d8bdc1
+      properties:
+        alpha_2_code:
+          description: The ISO 3166-1 alpha-2 country code (e.g., "PT", "US", "GB").
+          type: string
+        code:
+          description: The ISO 3166-1 alpha-3 country code (e.g., "PRT", "USA", "GBR"). This is the primary code used across the Remote API.
+          type: string
+        features:
+          description: Feature flags indicating which Remote services are available in this country.
+          items:
+            type: string
+          type: array
+        name:
+          description: The country's full English name.
+          type: string
+        slug:
+          description: A unique URL-friendly identifier for the country.
+          type: string
+      required:
+      - alpha_2_code
+      - code
+      - name
+      - slug
+      title: MinimalCountry
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    CostCalculator.CountryLevelRegion:
+      description: A supported country on Remote
+      example:
+        availability: active
+        child_regions:
+        - code: USA
+          name: United States
+          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        code: PRT
+        currency:
+          code: EUR
+          name: European Euro
+          slug: eur-3b840951-099f-4bd5-90b9-032f7bfe51d9
+          symbol: €
+        has_additional_fields: 'true'
+        name: Portugal
+        original_country_slug: portugal-ab18d96a-a9fd-42c0-9688-24f963d8bdc1
+        region_slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        availability:
+          $ref: '#/components/schemas/CostCalculator.CountryAvailability'
+        child_regions:
+          items:
+            $ref: '#/components/schemas/MinimalRegion'
+          type: array
+        code:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        has_additional_fields:
+          type: boolean
+        name:
+          type: string
+        original_country_slug:
+          type: string
+        region_slug:
+          type: string
+      required:
+      - code
+      - currency
+      - name
+      - original_country_slug
+      - region_slug
+      - availability
+      - child_regions
+      title: CostCalculator.CountryLevelRegion
+      type: object
+    CostCalculator.ListCountryResponse:
+      example:
+        data:
+        - availability: active
+          child_regions:
+          - code: USA
+            name: United States
+            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          code: PRT
+          currency:
+            code: EUR
+            name: European Euro
+            slug: eur-3b840951-099f-4bd5-90b9-032f7bfe51d9
+            symbol: €
+          has_additional_fields: 'true'
+          name: Portugal
+          original_country_slug: portugal-ab18d96a-a9fd-42c0-9688-24f963d8bdc1
+          region_slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CostCalculator.CountryLevelRegion'
+          type: array
+      required:
+      - data
+      title: CostCalculator.ListCountryResponse
+      type: object
+    MinimalRegion:
+      example:
+        code: USA
+        name: United States
+        slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        child_regions:
+          items:
+            $ref: '#/components/schemas/MinimalRegion'
+          type: array
+        code:
+          nullable: true
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        status:
+          $ref: '#/components/schemas/RegionStatus'
+      required:
+      - name
+      - slug
+      title: MinimalRegion
+      type: object
+    CostCalculatorEstimateCSVResponse:
+      example:
+        data:
+          content: base64 encoded content
+      properties:
+        data:
+          properties:
+            content:
+              $ref: '#/components/schemas/GenericFile'
+          required:
+          - content
+          type: object
+      required:
+      - data
+      title: CostCalculatorEstimateCSVResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    RegionStatus:
+      enum:
+      - active
+      - inactive
+      example: active
+      nullable: true
+      title: RegionStatus
+      type: string
+    GenericFile:
+      description: A file represented as a base64-encoded string.
+      example: base64 encoded content
+      format: binary
+      title: GenericFile
+      type: string
+    CostCalculatorBenefitParam:
+      additionalProperties: false
+      example:
+        benefit_group_slug: benefit_group_slug
+        benefit_tier_slug: benefit_tier_slug
+      properties:
+        benefit_group_slug:
+          description: The unique identifier (slug) of the benefit group to include in the estimate.
+          type: string
+        benefit_tier_slug:
+          description: The unique identifier (slug) of the benefit tier within the group. Determines the level of coverage and cost.
+          type: string
+      required:
+      - benefit_group_slug
+      - benefit_tier_slug
+      title: CostCalculatorBenefitParam
+      type: object
+    Currency:
+      description: The type of money in general use in a particular country
+      example:
+        code: EUR
+        name: European Euro
+        slug: eur-3b840951-099f-4bd5-90b9-032f7bfe51d9
+        symbol: €
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        slug:
+          type: string
+        symbol:
+          type: string
+      required:
+      - code
+      - slug
+      - symbol
+      title: Currency
+      type: object
+    JSONSchemaResponse:
+      description: JSON Schema Response
+      example:
+        data:
+          schema:
+            properties:
+              ssn:
+                pattern: ^[0-9]{3}-[0-9]{2}-(?!0{4})[0-9]{4}$
+                title: Social security number
+                type: string
+                x-jsf-presentation:
+                  inputType: text
+                  mask: ___-__-____
+                  maskPlaceholder: AAA-GG-SSSS
+                  maskSecret: 4
+            required:
+            - ssn
+            type: object
+            x-jsf-order:
+            - ssn
+          version: 7
+      properties:
+        data:
+          description: JSON Schema
+          example:
+            schema:
+              properties:
+                ssn:
+                  pattern: ^[0-9]{3}-[0-9]{2}-(?!0{4})[0-9]{4}$
+                  title: Social security number
+                  type: string
+                  x-jsf-presentation:
+                    inputType: text
+                    mask: ___-__-____
+                    maskPlaceholder: AAA-GG-SSSS
+                    maskSecret: 4
+              required:
+              - ssn
+              type: object
+              x-jsf-order:
+              - ssn
+            version: 7
+          properties:
+            schema:
+              properties:
+                properties:
+                  additionalProperties: true
+                  type: object
+                required:
+                  items:
+                    type: string
+                  type: array
+                x-jsf-order:
+                  items:
+                    type: string
+                  type: array
+              required:
+              - properties
+              type: object
+            version:
+              type: integer
+          title: JSONSchema
+          type: object
+      title: JSONSchemaResponse
+      type: object
+    InternalServerErrorResponse:
+      anyOf:
+      - $ref: '#/components/schemas/ValidationError'
+      - $ref: '#/components/schemas/MessageResponse'
+      example:
+        errors:
+          message: Internal server error
+      title: InternalServerErrorResponse
+      type: object
+    CostCalculatorCost:
+      additionalProperties: false
+      description: A single cost line item within a cost breakdown (e.g., a specific employer contribution, benefit, or statutory payment).
+      example:
+        amount: 1120000
+        description: Description of how the amount is calculated.
+        name: Insurance
+        zendesk_article_id: '1234'
+        zendesk_article_url: https://examplezendesk.com/article/1234
+      properties:
+        amount:
+          description: The cost amount in cents.
+          type: integer
+        description:
+          description: A human-readable explanation of how this cost is calculated or what it covers.
+          nullable: true
+          type: string
+        name:
+          description: The name of this cost item (e.g., "Health Insurance", "Social Security").
+          type: string
+        zendesk_article_id:
+          description: The ID of the related help article, if available.
+          nullable: true
+          type: string
+        zendesk_article_url:
+          description: A link to a help article with more information about this cost, if available.
+          nullable: true
+          type: string
+      required:
+      - amount
+      - description
+      - name
+      - zendesk_article_url
+      - zendesk_article_id
+      title: CostCalculatorCost
+      type: object
+    MessageResponse:
+      example:
+        message: The company with the provided EIN is already registered.
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: MessageResponse
+      type: object
+    CostCalculatorCosts:
+      additionalProperties: false
+      example:
+        annual_benefits_breakdown:
+        - amount: 1120000
+          description: Description of how the amount is calculated.
+          name: Insurance
+          zendesk_article_id: '1234'
+          zendesk_article_url: https://examplezendesk.com/article/1234
+        annual_benefits_total: 1441200
+        annual_contributions_breakdown:
+        - amount: 1120000
+          description: Description of how the amount is calculated.
+          name: Insurance
+          zendesk_article_id: '1234'
+          zendesk_article_url: https://examplezendesk.com/article/1234
+        annual_contributions_total: 1441200
+        annual_gross_salary: 12000000
+        annual_indirect_tax: 120
+        annual_management_fee: 0
+        annual_total: 13441200
+        currency:
+          code: EUR
+          name: European Euro
+          slug: eur-3b840951-099f-4bd5-90b9-032f7bfe51d9
+          symbol: €
+        discount:
+          annual_amount: 120000
+          monthly_amount: 10000
+          months: 12
+          text: 10% Discount
+        extra_statutory_payments_breakdown:
+        - amount: 1120000
+          description: Description of how the amount is calculated.
+          name: Insurance
+          zendesk_article_id: '1234'
+          zendesk_article_url: https://examplezendesk.com/article/1234
+        extra_statutory_payments_total: 0
+        monthly_benefits_breakdown:
+        - amount: 1120000
+          description: Description of how the amount is calculated.
+          name: Insurance
+          zendesk_article_id: '1234'
+          zendesk_article_url: https://examplezendesk.com/article/1234
+        monthly_benefits_total: 120100
+        monthly_contributions_breakdown:
+        - amount: 1120000
+          description: Description of how the amount is calculated.
+          name: Insurance
+          zendesk_article_id: '1234'
+          zendesk_article_url: https://examplezendesk.com/article/1234
+        monthly_contributions_total: 120100
+        monthly_gross_salary: 1000000
+        monthly_indirect_tax: 10
+        monthly_management_fee: 0
+        monthly_tce: 1120000
+        monthly_total: 1120100
+      properties:
+        annual_benefits_breakdown:
+          description: The list of all annual benefit costs
+          items:
+            $ref: '#/components/schemas/CostCalculatorCost'
+          type: array
+        annual_benefits_total:
+          description: The annual benefits total that a company must pay for this employment
+          type: integer
+        annual_contributions_breakdown:
+          description: The list of all annual employer contribution costs
+          items:
+            $ref: '#/components/schemas/CostCalculatorCost'
+          type: array
+        annual_contributions_total:
+          description: The annual contributions that a company must pay for this employment
+          type: integer
+        annual_gross_salary:
+          description: The annual gross salary that the employee is going to earn
+          type: integer
+        annual_indirect_tax:
+          description: The annual indirect tax that a company must pay for this employment
+          type: integer
+        annual_management_fee:
+          description: The annual management fees
+          type: integer
+        annual_total:
+          description: The annual gross salary + annual contributions + annual fee (monthly fee * 12) + extra statutory payments if applicable
+          type: integer
+        currency:
+          $ref: '#/components/schemas/Currency'
+        discount:
+          $ref: '#/components/schemas/CostCalculatorDiscountResponse'
+        extra_statutory_payments_breakdown:
+          description: The list of all annual extra statutory payment costs
+          items:
+            $ref: '#/components/schemas/CostCalculatorCost'
+          type: array
+        extra_statutory_payments_total:
+          description: 13th month salary, this happens for countries such as Philippines
+          type: integer
+        monthly_benefits_breakdown:
+          description: The list of all monthly benefit costs
+          items:
+            $ref: '#/components/schemas/CostCalculatorCost'
+          type: array
+        monthly_benefits_total:
+          description: The benefits total that the company pays monthly
+          type: integer
+        monthly_contributions_breakdown:
+          description: The list of all monthly employer contribution costs
+          items:
+            $ref: '#/components/schemas/CostCalculatorCost'
+          type: array
+        monthly_contributions_total:
+          description: The contributions that the company pays monthly
+          type: integer
+        monthly_gross_salary:
+          description: The gross monthly salary for the Employee
+          type: integer
+        monthly_indirect_tax:
+          description: The monthly indirect tax that a company must pay for this employment
+          type: integer
+        monthly_management_fee:
+          description: The monthly management fees
+          type: integer
+        monthly_tce:
+          description: Monthly gross salary + monthly contributions  (doesn't include fee)
+          type: integer
+        monthly_total:
+          description: Monthly gross salary + monthly contributions + monthly fee
+          type: integer
+      required:
+      - annual_gross_salary
+      - annual_contributions_total
+      - annual_total
+      - currency
+      - extra_statutory_payments_total
+      - monthly_contributions_total
+      - monthly_gross_salary
+      - monthly_tce
+      - monthly_total
+      title: CostCalculatorCosts
+      type: object
+    CostCalculatorDiscount:
+      additionalProperties: false
+      description: Configuration for applying a discount to a cost estimate. Provide either an `amount` or `percent` — not both.
+      example:
+        amount: 100000
+        months: 12
+        percent: 0.1
+        quoted_amount: 100000
+        text: 10% Discount
+      properties:
+        amount:
+          description: The fixed discount amount in cents. Mutually exclusive with `percent`.
+          type: integer
+        months:
+          default: 12
+          description: The number of months the discount applies to (1-12). Defaults to 12.
+          maximum: 12
+          minimum: 1
+          type: integer
+        percent:
+          description: The discount as a decimal fraction (e.g., 0.1 for 10%). Mutually exclusive with `amount`.
+          type: number
+        quoted_amount:
+          description: The originally quoted amount before discount, in cents.
+          type: integer
+        text:
+          description: A human-readable label for the discount (e.g., "10% Discount").
+          type: string
+      required:
+      - text
+      title: CostCalculatorDiscount
+      type: object
+    CostCalculatorEmployment:
+      additionalProperties: false
+      description: A cost estimate for a single employment, including costs in both the regional (local) currency and the employer's preferred currency.
+      example:
+        country:
+          alpha_2_code: PT
+          code: PRT
+          name: Portugal
+          slug: portugal-ab18d96a-a9fd-42c0-9688-24f963d8bdc1
+        country_benefits_details_url: https://example.com
+        country_guide_url: https://example1.com
+        employer_currency_costs:
+          annual_benefits_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          annual_benefits_total: 1441200
+          annual_contributions_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          annual_contributions_total: 1441200
+          annual_gross_salary: 12000000
+          annual_indirect_tax: 120
+          annual_management_fee: 0
+          annual_total: 13441200
+          currency:
+            code: EUR
+            name: European Euro
+            slug: eur-3b840951-099f-4bd5-90b9-032f7bfe51d9
+            symbol: €
+          discount:
+            annual_amount: 120000
+            monthly_amount: 10000
+            months: 12
+            text: 10% Discount
+          extra_statutory_payments_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          extra_statutory_payments_total: 0
+          monthly_benefits_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          monthly_benefits_total: 120100
+          monthly_contributions_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          monthly_contributions_total: 120100
+          monthly_gross_salary: 1000000
+          monthly_indirect_tax: 10
+          monthly_management_fee: 0
+          monthly_tce: 1120000
+          monthly_total: 1120100
+        has_extra_statutory_payment: false
+        minimum_onboarding_time: 10
+        region:
+          code: USA
+          name: United States
+          slug: usd-663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        regional_currency_costs:
+          annual_benefits_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          annual_benefits_total: 1441200
+          annual_contributions_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          annual_contributions_total: 1441200
+          annual_gross_salary: 12000000
+          annual_indirect_tax: 120
+          annual_management_fee: 0
+          annual_total: 13441200
+          currency:
+            code: EUR
+            name: European Euro
+            slug: eur-3b840951-099f-4bd5-90b9-032f7bfe51d9
+            symbol: €
+          discount:
+            annual_amount: 120000
+            monthly_amount: 10000
+            months: 12
+            text: 10% Discount
+          extra_statutory_payments_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          extra_statutory_payments_total: 0
+          monthly_benefits_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          monthly_benefits_total: 120100
+          monthly_contributions_breakdown:
+          - amount: 1120000
+            description: Description of how the amount is calculated.
+            name: Insurance
+            zendesk_article_id: '1234'
+            zendesk_article_url: https://examplezendesk.com/article/1234
+          monthly_contributions_total: 120100
+          monthly_gross_salary: 1000000
+          monthly_indirect_tax: 10
+          monthly_management_fee: 0
+          monthly_tce: 1120000
+          monthly_total: 1120100
+      properties:
+        country:
+          $ref: '#/components/schemas/MinimalCountry'
+        country_benefits_details_url:
+          description: A link to Remote's guide on benefits available in this country. Null if not available.
+          nullable: true
+          type: string
+        country_guide_url:
+          description: A link to Remote's country hiring guide. Null if not available.
+          nullable: true
+          type: string
+        employer_currency_costs:
+          $ref: '#/components/schemas/CostCalculatorCosts'
+        has_extra_statutory_payment:
+          description: Whether this country has extra statutory payments (e.g., 13th month salary in the Philippines).
+          type: boolean
+        minimum_onboarding_time:
+          description: The minimum number of business days required to onboard an employee in this country. Null if not determined.
+          nullable: true
+          type: number
+        region:
+          $ref: '#/components/schemas/MinimalRegion'
+        regional_currency_costs:
+          $ref: '#/components/schemas/CostCalculatorCosts'
+      required:
+      - country
+      - employer_currency_costs
+      - has_extra_statutory_payment
+      - region
+      - regional_currency_costs
+      - country_benefits_details_url
+      - country_guide_url
+      - minimum_onboarding_time
+      title: CostCalculatorEmployment
+      type: object
+    CostCalculatorEstimateParams:
+      description: Parameters for generating a cost estimate for one or more employments across different countries/regions.
+      example:
+        company_name: My Company
+        employer_currency_slug: USD
+        employments:
+        - region_slug: region_slug
+      properties:
+        company_name:
+          description: The company name, used for labeling in PDF/CSV exports.
+          type: string
+        employer_currency_slug:
+          description: The ISO 4217 currency code for the employer's preferred currency (e.g., "USD"). All costs will be converted to this currency.
+          type: string
+        employments:
+          description: One or more employments to estimate costs for.
+          items:
+            $ref: '#/components/schemas/CostCalculatorEmploymentParam'
+          type: array
+        global_discount:
+          $ref: '#/components/schemas/CostCalculatorDiscount'
+        include_benefits:
+          description: Whether to include benefit costs in the estimate. Defaults to false if not provided.
+          type: boolean
+        include_cost_breakdowns:
+          description: Whether to include detailed cost breakdowns (individual contributions, benefits, etc.) in the response.
+          type: boolean
+        include_management_fee:
+          description: Whether to include Remote's management fee in the total cost calculation.
+          type: boolean
+        include_premium_benefits:
+          description: Whether to include premium benefit options in the estimate.
+          type: boolean
+      required:
+      - employments
+      - employer_currency_slug
+      title: CostCalculatorEstimateParams
+      type: object
+    CostCalculatorEstimateResponse:
+      example:
+        data:
+          employments:
+          - country:
+              alpha_2_code: PT
+              code: PRT
+              name: Portugal
+              slug: portugal-ab18d96a-a9fd-42c0-9688-24f963d8bdc1
+            country_benefits_details_url: https://example.com
+            country_guide_url: https://example1.com
+            employer_currency_costs:
+              annual_benefits_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              annual_benefits_total: 1441200
+              annual_contributions_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              annual_contributions_total: 1441200
+              annual_gross_salary: 12000000
+              annual_indirect_tax: 120
+              annual_management_fee: 0
+              annual_total: 13441200
+              currency:
+                code: EUR
+                name: European Euro
+                slug: eur-3b840951-099f-4bd5-90b9-032f7bfe51d9
+                symbol: €
+              discount:
+                annual_amount: 120000
+                monthly_amount: 10000
+                months: 12
+                text: 10% Discount
+              extra_statutory_payments_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              extra_statutory_payments_total: 0
+              monthly_benefits_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              monthly_benefits_total: 120100
+              monthly_contributions_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              monthly_contributions_total: 120100
+              monthly_gross_salary: 1000000
+              monthly_indirect_tax: 10
+              monthly_management_fee: 0
+              monthly_tce: 1120000
+              monthly_total: 1120100
+            has_extra_statutory_payment: false
+            minimum_onboarding_time: 10
+            region:
+              code: USA
+              name: United States
+              slug: usd-663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            regional_currency_costs:
+              annual_benefits_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              annual_benefits_total: 1441200
+              annual_contributions_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              annual_contributions_total: 1441200
+              annual_gross_salary: 12000000
+              annual_indirect_tax: 120
+              annual_management_fee: 0
+              annual_total: 13441200
+              currency:
+                code: EUR
+                name: European Euro
+                slug: eur-3b840951-099f-4bd5-90b9-032f7bfe51d9
+                symbol: €
+              discount:
+                annual_amount: 120000
+                monthly_amount: 10000
+                months: 12
+                text: 10% Discount
+              extra_statutory_payments_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              extra_statutory_payments_total: 0
+              monthly_benefits_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              monthly_benefits_total: 120100
+              monthly_contributions_breakdown:
+              - amount: 1120000
+                description: Description of how the amount is calculated.
+                name: Insurance
+                zendesk_article_id: '1234'
+                zendesk_article_url: https://examplezendesk.com/article/1234
+              monthly_contributions_total: 120100
+              monthly_gross_salary: 1000000
+              monthly_indirect_tax: 10
+              monthly_management_fee: 0
+              monthly_tce: 1120000
+              monthly_total: 1120100
+      properties:
+        data:
+          properties:
+            employments:
+              items:
+                $ref: '#/components/schemas/CostCalculatorEmployment'
+              type: array
+          type: object
+      required:
+      - data
+      title: CostCalculatorEstimateResponse
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

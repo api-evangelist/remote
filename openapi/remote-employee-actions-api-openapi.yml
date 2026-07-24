@@ -1,0 +1,1444 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Employee Actions API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Employee Actions
+paths:
+  /v1/employee/incentives:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns all incentives for the authenticated employee.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage expenses (`employment_payments`) | View incentives (`incentive:read`) | Manage incentives (`incentive:write`) |
+
+        '
+      operationId: get_v1_employee_incentives
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - incentive:read
+        - incentive:write
+        - employment_payments
+        - all:write
+        - all:read
+      summary: List incentives for the authenticated employee
+      tags:
+      - Employee Actions
+  /v1/employee/payslips:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a paginated list of payslip files belonging to the current employee.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |
+
+        '
+      operationId: get_v1_employee_payslips
+      parameters:
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEmployeePayslipsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - payslip:read
+        - employment_documents
+        - all:write
+        - all:read
+      summary: List approved payslip files for the authenticated employee
+      tags:
+      - Employee Actions
+  /v1/employee/timesheets:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a paginated list of timesheets for the authenticated employee.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: get_v1_employee_timesheets
+      parameters:
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List timesheets for the authenticated employee
+      tags:
+      - Employee Actions
+  /v1/employee/expense-categories:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns the flat list of expense categories applicable to the current employee. Only active categories are returned, filtered by the employee''s country / legal-entity visibility rules. Leaf nodes have `is_selectable: true`; parent nodes are excluded unless `include_parents=true`.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |
+
+        '
+      operationId: get_v1_employee_expense-categories
+      parameters:
+      - description: Include parent (non-selectable) categories in addition to selectable leaves
+        in: query
+        name: include_parents
+        required: false
+        schema:
+          type: boolean
+      - description: Expense ID (slug) whose category should be included in the result, even if it is not selectable by default
+        in: query
+        name: expense_id
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExpenseCategoriesResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - expense:read
+        - expense:write
+        - employment_payments
+        - all:write
+        - all:read
+      summary: List expense categories for the authenticated employee
+      tags:
+      - Employee Actions
+  /v1/employee/personal-information:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns personal information for the authenticated employee.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View personal details (`personal_detail:read`) | Manage personal details (`personal_detail:write`) |
+
+        '
+      operationId: get_v1_employee_personal-information
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - personal_detail:read
+        - personal_detail:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show personal information for the authenticated employee
+      tags:
+      - Employee Actions
+  /v1/employee/payslip-files:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a paginated list of payslip files belonging to the current employee.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |
+
+        '
+      operationId: get_v1_employee_payslip-files
+      parameters:
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPayslipFilesResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - payslip:read
+        - employment_documents
+        - all:write
+        - all:read
+      summary: List payslip files for the authenticated employee
+      tags:
+      - Employee Actions
+  /v1/employee/current:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Returns user and company information for the authenticated employee.
+      operationId: get_v1_employee_current
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+      security:
+      - OAuth2Assertion: []
+      summary: Get employee token identity
+      tags:
+      - Employee Actions
+  /v1/employee/expenses:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a paginated list of expenses belonging to the current employee.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |
+
+        '
+      operationId: get_v1_employee_expenses
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - expense:read
+        - expense:write
+        - employment_payments
+        - all:write
+        - all:read
+      summary: List expenses for the authenticated employee
+      tags:
+      - Employee Actions
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates a new expense record for the current employee.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage expenses (`employment_payments`) | - | Manage expenses (`expense:write`) |
+
+        '
+      operationId: post_v1_employee_expenses
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParamsToCreateEmployeeExpense'
+        description: Expense params
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - expense:write
+        - employment_payments
+        - all:write
+      summary: Create an expense for the authenticated employee
+      tags:
+      - Employee Actions
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    Decimal:
+      description: A decimal number represented as a string to preserve precision. Supports negative values and fractional digits.
+      example: '-123.456'
+      pattern: ^-?\d+(\.\d+)?$
+      title: Decimal
+      type: string
+    ListExpenseCategoriesResponse:
+      description: 'Response containing a flat list of expense categories. Parent categories have is_selectable: false, while leaf categories have is_selectable: true. Child categories include parent_slug information.'
+      example:
+        data:
+        - code: travel
+          description: Travel-related expenses
+          instructions: null
+          is_selectable: false
+          parent: null
+          prompt: null
+          scope: global
+          slug: travel-abc123
+          status: active
+          title: Travel
+        - code: travel.flights
+          description: Flight expenses for business travel
+          instructions: Please include flight confirmation number
+          is_selectable: true
+          parent:
+            code: travel
+            slug: travel-abc123
+            title: Travel
+          prompt: What was the purpose of this flight?
+          scope: global
+          slug: travel-flights-abc123
+          status: active
+          title: Flights
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ExpenseCategoryNode'
+          type: array
+      title: ListExpenseCategoriesResponse
+      type: object
+    PayslipItem:
+      description: A payslip with file, payslip, payroll run, and payroll output metadata.
+      example:
+        file:
+          inserted_at: '2026-04-01T00:00:00Z'
+          name: payslip.pdf
+          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        has_employee_payroll_overviews: false
+        payroll_output: null
+        payroll_run:
+          expected_payout_date: '2026-05-01'
+          period_end: '2026-04-30'
+          period_start: '2026-04-01'
+          type: regular
+        payslip:
+          active_compensation: null
+          has_content_layout: false
+          net_salary: null
+          slug: 7f4bc535-3d7a-43f5-ab44-360ca91acc7a
+      properties:
+        file:
+          description: File metadata
+          properties:
+            inserted_at:
+              format: date-time
+              type: string
+            name:
+              type: string
+            slug:
+              $ref: '#/components/schemas/UuidSlug'
+          type: object
+        has_employee_payroll_overviews:
+          type: boolean
+        payroll_output:
+          description: Payroll output breakdown
+          nullable: true
+          type: object
+        payroll_run:
+          description: Payroll run metadata
+          nullable: true
+          properties:
+            expected_payout_date:
+              format: date
+              nullable: true
+              type: string
+            period_end:
+              format: date
+              type: string
+            period_start:
+              format: date
+              type: string
+            type:
+              type: string
+          type: object
+        payslip:
+          description: Payslip data
+          properties:
+            active_compensation:
+              description: Active compensation at the time of the payslip
+              nullable: true
+              type: object
+            has_content_layout:
+              type: boolean
+            net_salary:
+              description: Net salary amount
+              nullable: true
+              type: object
+            slug:
+              $ref: '#/components/schemas/UuidSlug'
+          type: object
+      required:
+      - file
+      - payslip
+      - has_employee_payroll_overviews
+      title: PayslipItem
+      type: object
+    SuccessResponse:
+      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
+      example:
+        data:
+          status: ok
+      properties:
+        data:
+          properties:
+            status:
+              description: The result status. Always `"ok"` for successful operations.
+              type: string
+          type: object
+      required:
+      - data
+      title: SuccessResponse
+      type: object
+    Timezone:
+      description: '[TZ identifier](https://www.iana.org/time-zones)'
+      example: Etc/UTC
+      title: Timezone
+      type: string
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    CurrencyCode:
+      description: Currency code of the SWIFT fee. Only present when processing_fee is set.
+      example: BRL
+      maxLength: 3
+      minLength: 3
+      nullable: true
+      title: CurrencyCode
+      type: string
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    PayslipFile:
+      description: A single payslip file with its associated payroll run metadata.
+      example:
+        currency:
+          code: USD
+          symbol: $
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        name: payslip.pdf
+        net_salary:
+          converted_amount: 460000
+          converter: Transferwise
+          fee: '0.00'
+          rate: '0.92'
+          source_amount: 500000
+        period_end: '2026-04-30'
+        period_start: '2026-04-01'
+      properties:
+        currency:
+          $ref: '#/components/schemas/PayslipFileCurrency'
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        name:
+          description: Original filename of the payslip
+          example: payslip.pdf
+          type: string
+        net_salary:
+          $ref: '#/components/schemas/PayslipFileNetSalary'
+        period_end:
+          format: date
+          nullable: true
+          type: string
+        period_start:
+          format: date
+          nullable: true
+          type: string
+      required:
+      - id
+      - name
+      title: PayslipFile
+      type: object
+    Base64File:
+      description: All the params needed upload a base64 file.
+      example:
+        content: UGVyaW9kIEVuZCBEYXRlLFBheSBEYXRlLEVtcG...5jZSBPZiBSZXNpZGVuYdXJyZW50LEFsbG93
+        name: receipt.pdf
+      properties:
+        content:
+          description: The content in base64 encoding.
+          format: binary
+          type: string
+        name:
+          description: The file name.
+          type: string
+      required:
+      - name
+      - content
+      title: Base64File
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    ListPayslipFilesResponse:
+      description: Response schema listing many payslip_files
+      example:
+        current_page: 1
+        payslip_files:
+        - currency:
+            code: USD
+            symbol: $
+          id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          name: payslip.pdf
+          net_salary:
+            converted_amount: 460000
+            converter: Transferwise
+            fee: '0.00'
+            rate: '0.92'
+            source_amount: 500000
+          period_end: '2026-04-30'
+          period_start: '2026-04-01'
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            payslip_files:
+              items:
+                $ref: '#/components/schemas/PayslipFile'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListPayslipFilesResponse
+      type: object
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    ParamsToCreateEmployeeExpense:
+      description: "  Params for creating an expense as the authenticated employee.\n\n  The employment is implied by the access token, so `employment_id` is not accepted.\n  `reviewer_id` and `reviewed_at` are also omitted — they only apply to manager-created expenses.\n\n  Category selection mirrors the company endpoint: use either `category` (legacy enum, deprecated but supported)\n  or `expense_category_slug` (recommended). When both are provided, `expense_category_slug` wins.\n"
+      example:
+        amount: 8000
+        currency: EUR
+        expense_category_slug: uuid-tech-equipment-slug
+        expense_date: '2020-12-11'
+        receipt:
+          content: UGVyaW9kIEVuZCBEYXRlLFBheSBEYXRlLEVtcG...5jZSBPZiBSZXNpZGVuYdXJyZW50LEFsbG93
+          name: receipt.pdf
+        tax_amount: 0
+        timezone: Etc/UTC
+        title: new keyboard
+      properties:
+        amount:
+          description: The expense amount in the specified currency, in cents.
+          type: integer
+        category:
+          deprecated: true
+          description: 'Categories allowed for an expense (legacy, deprecated).<br/>
+
+            Note: `coworking`, `home_office`, `phone_utilities`, `travel` are deprecated and will be removed in the future.
+
+            '
+          enum:
+          - car_rental
+          - coworking_office
+          - education_training
+          - entertainment
+          - flight
+          - fuel
+          - gifts
+          - insurance
+          - lodging
+          - meals
+          - other
+          - parking_toll
+          - subscription
+          - tech_equipment
+          - telecommunication
+          - transport
+          - utilities
+          - vaccination_testing
+          - visa
+          - wellness
+          - coworking
+          - home_office
+          - phone_utilities
+          - travel
+          nullable: true
+          type: string
+        currency:
+          description: "  The three-letter code for the expense currency.<br/>\n  Examples: `\"USD\"`, `\"EUR\"`, `\"CAD\"`\n"
+          type: string
+        expense_category_slug:
+          description: Slug of the expense category from the hierarchical categories system (recommended). Takes precedence over legacy category field.
+          nullable: true
+          type: string
+        expense_date:
+          description: Date of the purchase, which must be in the past
+          type: string
+        receipt:
+          $ref: '#/components/schemas/Base64File'
+        receipts:
+          items:
+            $ref: '#/components/schemas/Base64File'
+          maxItems: 5
+          type: array
+        tax_amount:
+          description: The tax portion of the expense amount, in cents. Use 0 if no tax applies.
+          type: integer
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        title:
+          description: A short description of the expense (e.g., "New keyboard", "Team dinner").
+          type: string
+      required:
+      - expense_date
+      - title
+      - amount
+      - currency
+      title: ParamsToCreateEmployeeExpense
+      type: object
+    PayslipFileCurrency:
+      example:
+        code: USD
+        symbol: $
+      nullable: true
+      properties:
+        code:
+          $ref: '#/components/schemas/CurrencyCode'
+        symbol:
+          description: The currency symbol
+          example: $
+          type: string
+      required:
+      - code
+      - symbol
+      title: PayslipFileCurrency
+      type: object
+    ExpenseCategoryNode:
+      description: A single expense category in the flat list structure
+      example:
+        code: travel.flights
+        description: Flight expenses for business travel
+        instructions: Please include flight confirmation number
+        is_selectable: true
+        parent:
+          code: travel
+          slug: travel-abc123
+          title: Travel
+        prompt: What was the purpose of this flight?
+        scope: global
+        slug: travel-flights-abc123
+        status: active
+        title: Flights
+      properties:
+        code:
+          description: Category code (e.g., 'travel.flights')
+          type: string
+        description:
+          description: Category description
+          nullable: true
+          type: string
+        instructions:
+          description: Instructions for using this category
+          nullable: true
+          type: string
+        is_selectable:
+          description: Whether this category can be selected
+          type: boolean
+        parent:
+          description: Parent category information if this is a child category
+          nullable: true
+          properties:
+            code:
+              description: Parent category code
+              type: string
+            slug:
+              description: Parent category slug
+              type: string
+            title:
+              description: Parent category title
+              type: string
+          type: object
+        prompt:
+          description: Prompt for user guidance
+          nullable: true
+          type: string
+        scope:
+          description: Category scope (global, country, company, legal_entity)
+          type: string
+        slug:
+          description: Unique identifier for the category
+          type: string
+        status:
+          description: Category status (active, inactive)
+          type: string
+        title:
+          description: Human-readable category name
+          type: string
+      title: ExpenseCategoryNode
+      type: object
+    PayslipFileNetSalary:
+      additionalProperties: true
+      description: Net salary amount including source/converted amounts, currencies and conversion rate. Shape produced by `Tiger.Billing.Value.Amount.build/1`.
+      example:
+        converted_amount: 460000
+        converter: Transferwise
+        fee: '0.00'
+        rate: '0.92'
+        source_amount: 500000
+      nullable: true
+      properties:
+        converted_amount:
+          nullable: true
+          type: integer
+        converter:
+          nullable: true
+          type: string
+        fee:
+          $ref: '#/components/schemas/Decimal'
+        rate:
+          $ref: '#/components/schemas/Decimal'
+        source_amount:
+          nullable: true
+          type: integer
+      title: PayslipFileNetSalary
+      type: object
+    ListEmployeePayslipsResponse:
+      description: Response schema listing many payslips
+      example:
+        current_page: 1
+        payslips:
+        - file:
+            inserted_at: '2026-04-01T00:00:00Z'
+            name: payslip.pdf
+            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          has_employee_payroll_overviews: false
+          payroll_output: null
+          payroll_run:
+            expected_payout_date: '2026-05-01'
+            period_end: '2026-04-30'
+            period_start: '2026-04-01'
+            type: regular
+          payslip:
+            active_compensation: null
+            has_content_layout: false
+            net_salary: null
+            slug: 7f4bc535-3d7a-43f5-ab44-360ca91acc7a
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            payslips:
+              items:
+                $ref: '#/components/schemas/PayslipItem'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListEmployeePayslipsResponse
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

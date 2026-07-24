@@ -1,0 +1,803 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Employee Bank Account API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Employee Bank Account
+paths:
+  /v1/employee/bank-account:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns the authenticated employee''s bank account details.
+
+
+        This endpoint requires and returns country-specific data. The exact fields vary depending on which
+
+        country the authenticated employee''s employment is in. Query the
+
+        [Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`
+
+        as the form name to discover the schema for a given country.
+
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View bank accounts (`bank_account:read`) | Manage bank accounts (`bank_account:write`) |
+
+        '
+      operationId: get_v1_employee_bank-account
+      parameters:
+      - description: Version of the bank_account_details form schema
+        example: 1
+        in: query
+        name: bank_account_details_json_schema_version
+        required: false
+        schema:
+          default: latest
+          oneOf:
+          - description: Specific version number
+            minimum: 1
+            type: integer
+          - description: Use latest version
+            enum:
+            - latest
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentDetailsOnlyResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2Assertion:
+        - bank_account:read
+        - bank_account:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show employee bank account
+      tags:
+      - Employee Bank Account
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Upserts the authenticated employee''s bank account details.
+
+
+        This endpoint requires and returns country-specific data. The exact fields vary depending on which
+
+        country the authenticated employee''s employment is in. Query the
+
+        [Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`
+
+        as the form name to discover the schema for a given country.
+
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage bank accounts (`bank_account:write`) |
+
+        '
+      operationId: put_v1_employee_bank-account
+      parameters:
+      - description: Version of the bank_account_details form schema
+        example: 1
+        in: query
+        name: bank_account_details_json_schema_version
+        required: false
+        schema:
+          default: latest
+          oneOf:
+          - description: Specific version number
+            minimum: 1
+            type: integer
+          - description: Use latest version
+            enum:
+            - latest
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmploymentBankAccountDetailsParams'
+        description: Employee bank account details params
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentDetailsOnlyResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2Assertion:
+        - bank_account:write
+        - employments
+        - all:write
+      summary: Update employee bank account
+      tags:
+      - Employee Bank Account
+components:
+  schemas:
+    EmploymentDetailsOnlyResponse:
+      description: Response containing only the updated details struct plus base employment fields (id, status, type, updated_at, user_status). Exactly one of the details properties is present per response.
+      example:
+        data:
+          employment:
+            contract_origin: remote_contract
+            id: 20a72f86-employment-id-9e4942a902ff
+            personal_details: {}
+            status: created
+            type: employee
+            updated_at: '2024-01-15T10:30:00Z'
+            user_status: active
+      properties:
+        data:
+          properties:
+            employment:
+              properties:
+                address_details:
+                  description: Home address information. Its properties may vary depending on the country. Null if the employee has not submitted their address yet.
+                  nullable: true
+                  type: object
+                administrative_details:
+                  description: Administrative information. Its properties may vary depending on the country.
+                  type: object
+                bank_account_details:
+                  items:
+                    description: List of bank account information. Its properties may vary depending on the country.
+                    type: object
+                  type: array
+                basic_information:
+                  description: Basic information. Its properties may vary depending on the country.
+                  type: object
+                billing_address_details:
+                  description: Billing address information. Its properties may vary depending on the country.
+                  type: object
+                contract_details:
+                  description: Contract details information. Its properties may vary depending on the country.
+                  type: object
+                contract_origin:
+                  description: Origin of the employment contract. Returned by the basic information endpoint.
+                  enum:
+                  - remote_contract
+                  - custom_remote_contract
+                  - provided_by_customer
+                  nullable: true
+                  type: string
+                emergency_contact_details:
+                  description: Emergency contact information. Its properties may vary depending on the country. Null if the employee has not submitted their emergency contact yet.
+                  nullable: true
+                  type: object
+                id:
+                  description: The unique identifier (UUID) of the employment.
+                  type: string
+                personal_details:
+                  description: Personal details information. Its properties may vary depending on the country. Null if the employee has not submitted their personal details yet.
+                  nullable: true
+                  type: object
+                pricing_plan_details:
+                  description: Pricing plan information.
+                  type: object
+                status:
+                  $ref: '#/components/schemas/EmploymentStatus'
+                type:
+                  description: The type of employment.
+                  enum:
+                  - employee
+                  - contractor
+                  - direct_employee
+                  - global_payroll_employee
+                  type: string
+                updated_at:
+                  description: The timestamp when this employment record was last updated.
+                  type: string
+                user_status:
+                  $ref: '#/components/schemas/UserStatus'
+              required:
+              - id
+              - status
+              - type
+              - updated_at
+              - user_status
+              type: object
+          type: object
+      required:
+      - data
+      title: EmploymentDetailsOnlyResponse
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    UserStatus:
+      description: 'The status of the user account associated with this employment.
+
+
+        - `active`: The user account is active and the user can log in.
+
+        - `created`: The user account has been created but not yet activated.
+
+        - `initiated`: The user has been invited but has not completed registration.
+
+        - `cancelled`: The user account was cancelled before activation.
+
+        - `inactive`: The user account has been deactivated (e.g., after offboarding).
+
+        - `deleted`: The user account has been deleted.
+
+        '
+      enum:
+      - active
+      - created
+      - initiated
+      - cancelled
+      - inactive
+      - deleted
+      example: active
+      title: UserStatus
+      type: string
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    EmploymentBankAccountDetailsParams:
+      additionalProperties: false
+      description: 'Employment bank account details params.
+
+        '
+      example:
+        bank_account_details:
+          account_holder_name: Jane Smith
+          iban: GB29NWBK60161331926819
+      properties:
+        bank_account_details:
+          description: 'Bank account information. As its properties may vary depending on the country,
+
+            you must query the [Show form schema](#tag/Countries/operation/get_show_form_country) endpoint
+
+            passing the country code and `bank_account_details` as path parameters.
+
+            '
+          type: object
+      required:
+      - bank_account_details
+      title: EmploymentBankAccountDetailsParams
+      type: object
+    EmploymentStatus:
+      description: 'The current status of the employment record.
+
+
+        - `active`: The employee is fully onboarded and actively working.
+
+        - `created`: The employment has been created but onboarding has not started.
+
+        - `pre_hire`: A pre-hire employment record, created before formal onboarding begins.
+
+        - `created_awaiting_reserve`: The employment is created but waiting for a risk reserve deposit to be paid.
+
+        - `created_reserve_paid`: The risk reserve has been paid and the employment can proceed with onboarding.
+
+        - `initiated`: Onboarding has been started by the employer.
+
+        - `invited`: The employee has been invited to complete their self-enrollment on Remote.
+
+        - `pending`: The employment is pending review or further action before it can become active.
+
+        - `review`: The employment is under review by Remote (e.g., contract or compliance review).
+
+        - `archived`: The employment has been terminated or offboarded.
+
+        - `deleted`: The employment record has been deleted.
+
+        '
+      enum:
+      - active
+      - created
+      - pre_hire
+      - created_awaiting_reserve
+      - created_reserve_paid
+      - initiated
+      - invited
+      - pending
+      - review
+      - job_title_review
+      - pending_post_self_enrollment_actions
+      - offboarding
+      - archived
+      - deleted
+      example: active
+      title: EmploymentStatus
+      type: string
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    TooManyRequestsResponse:
+      description: Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.
+      example:
+        message: Too many requests
+      properties:
+        message:
+          pattern: Too many requests
+          type: string
+      title: TooManyRequestsResponse
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

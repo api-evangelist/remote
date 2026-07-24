@@ -1,0 +1,1310 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Custom Fields API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Custom Fields
+paths:
+  /v1/custom-fields:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns custom fields definitions
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage custom fields (`custom_field:write`) |
+
+        '
+      operationId: get_v1_custom-fields
+      parameters:
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEmploymentCustomFieldsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field:write
+        - employments
+        - all:write
+      summary: Lists custom fields definitions
+      tags:
+      - Custom Fields
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates a new custom field definition.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View custom fields (`custom_field:read`) | Manage custom fields (`custom_field:write`) |
+
+        '
+      operationId: post_v1_custom-fields
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomFieldDefinitionParams'
+        description: Custom Field Definition Create Parameters
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEmploymentCustomFieldResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field:read
+        - custom_field:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field:read
+        - custom_field:write
+        - employments
+        - all:write
+        - all:read
+      summary: Create Custom Field Definition
+      tags:
+      - Custom Fields
+  /v1/employments/{employment_id}/custom-fields:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a list of custom field values for a given employment
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |
+
+        '
+      operationId: get_v1_employments_employment_id_custom-fields
+      parameters:
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEmploymentCustomFieldValuePaginatedResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:read
+        - custom_field_value:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:read
+        - custom_field_value:write
+        - employments
+        - all:write
+        - all:read
+      summary: List custom field value for an employment
+      tags:
+      - Custom Fields
+  /v1/custom-fields/{custom_field_id}/values/{employment_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a custom field value for a given employment
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |
+
+        '
+      operationId: get_v1_custom-fields_custom_field_id_values_employment_id
+      parameters:
+      - description: Custom field ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: custom_field_id
+        required: true
+        schema:
+          type: string
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentCustomFieldValueResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:read
+        - custom_field_value:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:read
+        - custom_field_value:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show a custom field value
+      tags:
+      - Custom Fields
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a custom field value for a given employment.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |
+
+        '
+      operationId: patch_v1_custom-fields_custom_field_id_values_employment_id (2)
+      parameters:
+      - description: Custom field ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: custom_field_id
+        required: true
+        schema:
+          type: string
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmploymentCustomFieldValueParams'
+        description: Custom Field Value Update Parameters
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentCustomFieldValueResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:write
+        - employments
+        - all:write
+      summary: Update a Custom Field Value
+      tags:
+      - Custom Fields
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a custom field value for a given employment.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |
+
+        '
+      operationId: patch_v1_custom-fields_custom_field_id_values_employment_id
+      parameters:
+      - description: Custom field ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: custom_field_id
+        required: true
+        schema:
+          type: string
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmploymentCustomFieldValueParams'
+        description: Custom Field Value Update Parameters
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentCustomFieldValueResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:write
+        - employments
+        - all:write
+      summary: Update a Custom Field Value
+      tags:
+      - Custom Fields
+components:
+  schemas:
+    CreateSingleSelectCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a single select custom field definition
+      example:
+        data_entry_access: company_admin_only
+        metadata:
+          options:
+          - S
+          - M
+          - L
+          - XL
+        name: T-Shirt Size
+        required: false
+        type: single_select
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        metadata:
+          $ref: '#/components/schemas/SingleSelectMetadata'
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          enum:
+          - single_select
+          type: string
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - name
+      - type
+      - required
+      - data_entry_access
+      - visibility_scope
+      - metadata
+      title: CreateSingleSelectCustomFieldDefinitionParams
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    ListEmploymentCustomFieldsResponse:
+      description: Response schema listing many custom_fields
+      example:
+        current_page: 1
+        custom_fields:
+        - data_entry_access: company_admin_only
+          id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+          metadata: {}
+          name: Internal ID
+          required: true
+          type: string
+          visibility_scope: everyone
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            custom_fields:
+              items:
+                $ref: '#/components/schemas/EmploymentCustomField'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListEmploymentCustomFieldsResponse
+      type: object
+    SingleSelectMetadata:
+      description: The metadata for a single select custom field
+      example:
+        options:
+        - S
+        - M
+        - L
+        - XL
+      properties:
+        options:
+          items:
+            nullable: false
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - options
+      title: SingleSelectMetadata
+      type: object
+    ListEmploymentCustomFieldValuePaginatedResponse:
+      description: Response schema listing many custom_field_values
+      example:
+        current_page: 1
+        custom_field_values:
+        - custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+          name: Custom field
+          type: string
+          value: UXH34HG
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            custom_field_values:
+              items:
+                $ref: '#/components/schemas/ListEmploymentCustomFieldValueResponse'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListEmploymentCustomFieldValuePaginatedResponse
+      type: object
+    EmploymentCustomFieldValueResponse:
+      description: Response containing a single custom field value for an employment.
+      example:
+        data:
+          custom_field_value:
+            custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+            value: UXH34HG
+      properties:
+        data:
+          properties:
+            custom_field_value:
+              $ref: '#/components/schemas/EmploymentCustomFieldValue'
+          required:
+          - custom_field_value
+          type: object
+      required:
+      - data
+      title: EmploymentCustomFieldValueResponse
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    CurrencyCode:
+      description: Currency code of the SWIFT fee. Only present when processing_fee is set.
+      example: BRL
+      maxLength: 3
+      minLength: 3
+      nullable: true
+      title: CurrencyCode
+      type: string
+    CreateCurrencyCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a currency custom field definition
+      example:
+        data_entry_access: company_admin_only
+        metadata:
+          currency: USD
+        name: Learning Budget
+        required: false
+        type: currency
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        metadata:
+          properties:
+            currency:
+              $ref: '#/components/schemas/CurrencyCode'
+          type: object
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          enum:
+          - currency
+          type: string
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - name
+      - type
+      - required
+      - data_entry_access
+      - visibility_scope
+      - metadata
+      title: CreateCurrencyCustomFieldDefinitionParams
+      type: object
+    CustomFieldDataType:
+      description: The datatype of the custom field
+      enum:
+      - string
+      - text
+      - integer
+      - date
+      - boolean
+      - percentage
+      - decimal
+      - link
+      - currency
+      - single_select
+      example: string
+      title: CustomFieldDataType
+      type: string
+    ListEmploymentCustomFieldValueResponse:
+      description: A custom field value as returned in list responses, including the field definition details alongside the value.
+      example:
+        custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+        name: Custom field
+        type: string
+        value: UXH34HG
+      properties:
+        custom_field_id:
+          description: The unique identifier (UUID) of the custom field definition.
+          type: string
+        name:
+          description: The display name of the custom field.
+          type: string
+        type:
+          description: The data type of the custom field (e.g., "string", "integer", "single_select").
+          type: string
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - description: Decimal value represented as a String
+            format: decimal
+            type: number
+          - $ref: '#/components/schemas/EmploymentCustomFieldValueJsonValue'
+          nullable: true
+      required:
+      - custom_field_id
+      - name
+      - type
+      - value
+      title: ListEmploymentCustomFieldValueResponse
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    EmploymentCustomFieldValue:
+      description: The value of a custom field for a specific employment. The type of `value` depends on the custom field's data type.
+      example:
+        custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+        value: UXH34HG
+      properties:
+        custom_field_id:
+          description: The unique identifier (UUID) of the custom field definition this value belongs to.
+          type: string
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - description: Decimal value represented as a String
+            format: decimal
+            type: number
+          - $ref: '#/components/schemas/EmploymentCustomFieldValueJsonValue'
+          nullable: true
+      required:
+      - custom_field_id
+      - value
+      title: EmploymentCustomFieldValue
+      type: object
+    CustomFieldSimpleDataType:
+      additionalProperties: false
+      description: The datatype of the custom field
+      enum:
+      - string
+      - text
+      - integer
+      - date
+      - boolean
+      - percentage
+      - decimal
+      - link
+      example: string
+      title: CustomFieldSimpleDataType
+      type: string
+    UpdateEmploymentCustomFieldValueParams:
+      description: Schema for updating a custom field value.
+      example:
+        value: UXH34HG
+      properties:
+        value:
+          anyOf:
+          - description: For string, text, or link data types. Also decimal values represented as strings, including percentage, decimal, and currency data types. Currency values must be provided in cents (e.g. "1042.00" for $10.42)
+            type: string
+          - description: For integer data type.
+            type: integer
+          - description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+            example: '2021-07-01'
+            format: date
+            title: Date
+            type: string
+          - description: For boolean data type.
+            type: boolean
+          - description: Selected option value. For single select data.
+            example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            format: uuid
+            title: OptionValue
+            type: string
+      required:
+      - value
+      title: UpdateEmploymentCustomFieldValueParams
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    CustomFieldVisibilityScope:
+      description: Who can see this custom field and its values. Controls visibility across different user roles.
+      enum:
+      - company_admin_only
+      - everyone
+      example: everyone
+      title: CustomFieldVisibilityScope
+      type: string
+    EmploymentCustomField:
+      description: A custom field definition that can be applied to employments within a company. Custom fields allow you to store additional structured data on employments beyond the standard fields.
+      example:
+        data_entry_access: company_admin_only
+        id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+        metadata: {}
+        name: Internal ID
+        required: true
+        type: string
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        id:
+          description: The unique identifier (UUID) of the custom field definition.
+          type: string
+        metadata:
+          description: Additional configuration for the field. For `single_select` fields, contains the list of selectable options. For `currency` fields, contains the currency code. Null for simple field types.
+          nullable: true
+          type: object
+        name:
+          description: The display name of the custom field (e.g., "Internal ID", "T-Shirt Size").
+          type: string
+        required:
+          description: Whether this custom field is required for all employments in the company.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CustomFieldDataType'
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - id
+      - name
+      - type
+      - required
+      - visibility_scope
+      - data_entry_access
+      - metadata
+      title: EmploymentCustomField
+      type: object
+    CustomFieldDataEntryAccess:
+      description: Who can enter or edit values for this custom field. Controls which users see the field as editable vs read-only.
+      enum:
+      - company_admin_only
+      - employee_only
+      - everyone
+      example: company_admin_only
+      title: CustomFieldDataEntryAccess
+      type: string
+    CreateCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a custom field definition
+      example:
+        data_entry_access: company_admin_only
+        name: Internal ID
+        required: false
+        type: string
+        visibility_scope: everyone
+      oneOf:
+      - $ref: '#/components/schemas/CreateGeneralCustomFieldDefinitionParams'
+      - $ref: '#/components/schemas/CreateSingleSelectCustomFieldDefinitionParams'
+      - $ref: '#/components/schemas/CreateCurrencyCustomFieldDefinitionParams'
+      title: CreateCustomFieldDefinitionParams
+    EmploymentCustomFieldValueJsonValue:
+      description: The value for a single-select custom field, containing both the option ID and its human-readable label.
+      example:
+        selected_option: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb55
+        selected_option_label: XL
+      properties:
+        selected_option:
+          description: The unique identifier of the selected option.
+          type: string
+        selected_option_label:
+          description: The human-readable label of the selected option (e.g., "XL").
+          type: string
+      required:
+      - selected_option
+      - selected_option_label
+      title: EmploymentCustomFieldValueJsonValue
+      type: object
+    CreateEmploymentCustomFieldResponse:
+      description: Response returned after successfully creating a new custom field definition.
+      example:
+        data:
+          custom_field:
+            data_entry_access: company_admin_only
+            id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+            metadata: {}
+            name: Internal ID
+            required: true
+            type: string
+            visibility_scope: everyone
+      properties:
+        data:
+          properties:
+            custom_field:
+              $ref: '#/components/schemas/EmploymentCustomField'
+          required:
+          - custom_field
+          type: object
+      required:
+      - data
+      title: CreateEmploymentCustomFieldResponse
+      type: object
+    CreateGeneralCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a general custom field definition
+      example:
+        data_entry_access: company_admin_only
+        name: Internal ID
+        required: false
+        type: string
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CustomFieldSimpleDataType'
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - name
+      - type
+      - required
+      - data_entry_access
+      - visibility_scope
+      title: CreateGeneralCustomFieldDefinitionParams
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

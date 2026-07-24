@@ -1,0 +1,1086 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Recurring Incentives API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Recurring Incentives
+paths:
+  /v1/incentives/recurring:
+    get:
+      callbacks: {}
+      description: 'List all Recurring Incentives of a company.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage expenses (`employment_payments`) | View incentives (`incentive:read`) | Manage incentives (`incentive:write`) |
+
+        '
+      operationId: get_v1_incentives_recurring
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: 'Filter by recurring incentive status: active or deactive.'
+        example: active
+        in: query
+        name: status
+        required: false
+        schema:
+          type: string
+      - description: Filter by recurring incentive type.
+        example: meal_allowance
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+      - description: Filter by recurring incentives that contain the value in their notes.
+        example: meal
+        in: query
+        name: note
+        required: false
+        schema:
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+      - description: Change the amount of records returned per page, defaults to 20, limited to 100
+        example: 30
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecurringIncentivesResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - incentive:read
+        - incentive:write
+        - employment_payments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - incentive:read
+        - incentive:write
+        - employment_payments
+        - all:write
+        - all:read
+      summary: List Recurring Incentive
+      tags:
+      - Recurring Incentives
+    post:
+      callbacks: {}
+      description: 'Create a Recurring Incentive, that is, a monthly paid incentive.
+
+
+        Incentives use the currency of the employment specified provided in the `employment_id` field.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |
+
+        '
+      operationId: post_v1_incentives_recurring
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRecurringIncentiveParams'
+        description: RecurringIncentive
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecurringIncentiveResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - incentive:write
+        - employment_payments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - incentive:write
+        - employment_payments
+        - all:write
+      summary: Create Recurring Incentive
+      tags:
+      - Recurring Incentives
+  /v1/incentives/recurring/{id}:
+    delete:
+      callbacks: {}
+      description: 'Delete a Recurring Incentive, that is, a monthly paid incentive.
+
+
+        Internally, Remote schedules upcoming incentives. As such, when you attempt to
+
+        delete a recurring incentive, Remote will **ONLY** delete scheduled incentives
+
+        with the `pending` status.
+
+
+        Incentives payments that are already scheduled and cannot be deleted will be
+
+        included in the response, in case you need to reference them.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |
+
+        '
+      operationId: delete_v1_incentives_recurring_id
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Recurring Incentive ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRecurringIncentiveResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - incentive:write
+        - employment_payments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - incentive:write
+        - employment_payments
+        - all:write
+      summary: Delete a Recurring Incentive
+      tags:
+      - Recurring Incentives
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    CommonIncentiveParams:
+      example:
+        amount: 50000
+        amount_tax_type: net
+        effective_date: '2021-12-20'
+        note: Bonus for moving start date to an earlier date
+      properties:
+        amount:
+          description: 'The amount (in the currency of the employment) to be given to the employee.
+
+
+            This field accepts fractional amounts as well. However to avoid precision issues
+
+            and errors that can arise from storing fractional amounts, the Remote API only
+
+            accepts currencies and their fractional amounts as integers. This means you
+
+            should append fractional amounts to the end of the amount you''re passing in with
+
+            this field.
+
+
+            For example, if the incentive you''re offering is EUR 500.25, you would specify `50025` as
+
+            the amount for this field.
+
+            '
+          type: integer
+        amount_tax_type:
+          $ref: '#/components/schemas/AmountTaxType'
+        effective_date:
+          description: 'The date at which the incentive should take effect.
+
+
+            Note that the incentive is not paid out on the effective date, but during the
+
+            next payroll cycle. The effective date determines which payroll cycle the
+
+            incentive will be paid out in.
+
+
+            The effective date needs to be today or a future date.
+
+
+            Note for recurring incentives: since the months don''t have the same amount of days,
+
+            if day of month of `effective_date` is one of [28, 29, 30, 31] it will be transformed to
+
+            the last day of each month, avoiding the possibility of skipping a month in the recurrence.
+
+            '
+          format: date
+          type: string
+        note:
+          nullable: true
+          type: string
+      title: CommonIncentiveParams
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    CreateRecurringIncentiveParams:
+      allOf:
+      - $ref: '#/components/schemas/CommonIncentiveParams'
+      - properties:
+          duration_in_months:
+            description: 'How many times the payment will repeat. At the moment we only fully support monthly frequency.
+
+
+              This field is only necessary if the recurring incentive has an end date.
+
+              '
+            format: integer
+            type: string
+          employment_id:
+            type: string
+          type:
+            enum:
+            - acting_up_allowance
+            - allowance
+            - car_allowance
+            - health_and_wellness_allowance
+            - internet_allowance
+            - meal_allowance
+            - on_call_allowance
+            - parenthood_allowance
+            - phone_allowance
+            - relocation_allowance
+            - travel_allowance
+            - work_from_home_allowance
+            - bonus
+            - holiday_bonus
+            - referral_bonus
+            - retention_bonus
+            - commission
+            - other
+            - overtime
+            - stipend
+            type: string
+        type: object
+      example:
+        amount: 50000
+        amount_tax_type: net
+        duration_in_months: '3'
+        effective_date: '2021-12-20'
+        employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+        note: Bonus for moving start date to an earlier date
+        type: meal_allowance
+      required:
+      - type
+      - amount
+      - amount_tax_type
+      - employment_id
+      - effective_date
+      title: CreateRecurringIncentiveParams
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    RecurringIncentiveResponse:
+      description: Recurring Incentive response
+      example:
+        data:
+          recurring_incentive:
+            amount: 50000
+            amount_tax_type: net
+            employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+            end_date: '2022-12-20'
+            id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+            note: Monthly stipend to buy food
+            start_date: '2021-12-20'
+            status: active
+            type: meal_allowance
+      properties:
+        data:
+          properties:
+            recurring_incentive:
+              $ref: '#/components/schemas/RecurringIncentive'
+          required:
+          - recurring_incentive
+          type: object
+      title: RecurringIncentiveResponse
+      type: object
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    DeleteRecurringIncentiveResponse:
+      description: '`"status": "ok"` indicates that any recurring incentives with `pending` status were
+
+        successfully deleted.
+
+
+        `already_scheduled_incentives` returns a list of incentives that were already scheduled
+
+        for payout and as such, cannot be deleted. You will notice that these incentives do not
+
+        have a `pending` status.
+
+        '
+      example:
+        data:
+          already_scheduled_incentives: []
+          status: ok
+      properties:
+        data:
+          properties:
+            already_scheduled_incentives:
+              items:
+                $ref: '#/components/schemas/Incentive'
+              type: array
+            status:
+              type: string
+          required:
+          - already_scheduled_incentives
+          type: object
+      required:
+      - data
+      title: DeleteRecurringIncentiveResponse
+      type: object
+    AmountTaxType:
+      description: "  Whether the amount given accounts for taxes or not.\n\n  `gross` indicates that the amount given is the amount to be paid before taxes\n  are subtracted.\n\n  `net` indicates that the amount given is the amount which will be paid to the\n  employee after taxes. Remote will gross this up to ensure the taxes are\n  included and employee receives the amount requested without further reduction.\n"
+      enum:
+      - gross
+      - net
+      example: net
+      title: AmountTaxType
+      type: string
+    ListRecurringIncentivesResponse:
+      description: Response schema listing many recurring_incentives
+      example:
+        current_page: 1
+        recurring_incentives:
+        - amount: 50000
+          amount_tax_type: net
+          employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+          end_date: '2022-12-20'
+          id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+          note: Monthly stipend to buy food
+          start_date: '2021-12-20'
+          status: active
+          type: meal_allowance
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            recurring_incentives:
+              items:
+                $ref: '#/components/schemas/RecurringIncentive'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListRecurringIncentivesResponse
+      type: object
+    TooManyRequestsResponse:
+      description: Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.
+      example:
+        message: Too many requests
+      properties:
+        message:
+          pattern: Too many requests
+          type: string
+      title: TooManyRequestsResponse
+      type: object
+    Incentive:
+      description: An incentive (bonus, commission, or other additional payment) for an employee. Incentives are paid out through payroll on the next applicable cycle after the effective date.
+      example:
+        amount: 50000
+        amount_tax_type: net
+        effective_date: '2021-12-20'
+        employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+        expected_payout_date: '2021-12-31'
+        id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+        note: Signing bonus
+        recurring_incentive_id: 1c130827-f95c-4495-b7cb-5876dce686b8
+        status: pending
+        type: signing_bonus
+      properties:
+        amount:
+          description: The incentive amount in the employment's currency, in cents. For example, EUR 500.25 would be represented as 50025.
+          type: integer
+        amount_tax_type:
+          $ref: '#/components/schemas/AmountTaxType'
+        effective_date:
+          description: The date the incentive takes effect. Determines which payroll cycle the incentive will be paid in.
+          format: date
+          nullable: true
+          type: string
+        employment_id:
+          description: The unique identifier (UUID) of the employment this incentive belongs to.
+          type: string
+        expected_payout_date:
+          description: The expected date when this incentive will be paid to the employee. Null if not yet determined.
+          format: date
+          nullable: true
+          type: string
+        id:
+          description: The unique identifier (UUID) of the incentive.
+          type: string
+        note:
+          description: An optional note describing the reason or context for this incentive.
+          nullable: true
+          type: string
+        period_end:
+          description: The end date of the period this incentive covers. Null for non-periodic incentives.
+          format: date
+          nullable: true
+          type: string
+        period_start:
+          description: The start date of the period this incentive covers (e.g., for quarterly bonuses). Null for non-periodic incentives.
+          format: date
+          nullable: true
+          type: string
+        recurring_incentive_id:
+          description: If this incentive was generated from a recurring incentive schedule, this is the ID of the parent recurring incentive. Null for one-time incentives.
+          nullable: true
+          type: string
+        status:
+          description: The current status of the incentive (e.g., "pending", "scheduled", "paid", "cancelled").
+          type: string
+        type:
+          description: The type of incentive (e.g., "signing_bonus", "performance_bonus", "commission", "referral_bonus").
+          type: string
+      required:
+      - id
+      - employment_id
+      - type
+      - status
+      - amount
+      - amount_tax_type
+      - effective_date
+      title: Incentive
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    RecurringIncentive:
+      description: A recurring incentive (e.g., monthly meal allowance, housing stipend) that automatically generates individual incentive payments on a monthly schedule.
+      example:
+        amount: 50000
+        amount_tax_type: net
+        employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+        end_date: '2022-12-20'
+        id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+        note: Monthly stipend to buy food
+        start_date: '2021-12-20'
+        status: active
+        type: meal_allowance
+      properties:
+        amount:
+          description: The recurring payment amount in the employment's currency, in cents.
+          type: integer
+        amount_tax_type:
+          $ref: '#/components/schemas/AmountTaxType'
+        employment_id:
+          description: The unique identifier (UUID) of the employment.
+          type: string
+        end_date:
+          description: The date the recurring incentive stops generating payments. Null for open-ended recurring incentives.
+          format: date
+          nullable: true
+          type: string
+        id:
+          description: The unique identifier (UUID) of the recurring incentive.
+          type: string
+        note:
+          description: An optional note describing the purpose of this recurring incentive.
+          nullable: true
+          type: string
+        start_date:
+          description: The date the recurring incentive starts generating payments.
+          format: date
+          type: string
+        status:
+          description: Whether this recurring incentive is currently active and generating payments, or inactive (paused/ended).
+          enum:
+          - active
+          - inactive
+          type: string
+        type:
+          description: The type of recurring incentive (e.g., "meal_allowance", "housing_allowance").
+          enum:
+          - acting_up_allowance
+          - allowance
+          - car_allowance
+          - health_and_wellness_allowance
+          - internet_allowance
+          - meal_allowance
+          - on_call_allowance
+          - parenthood_allowance
+          - phone_allowance
+          - relocation_allowance
+          - travel_allowance
+          - work_from_home_allowance
+          - bonus
+          - holiday_bonus
+          - referral_bonus
+          - retention_bonus
+          - commission
+          - other
+          - overtime
+          - stipend
+          type: string
+      required:
+      - id
+      - employment_id
+      - type
+      - status
+      - amount
+      - amount_tax_type
+      - start_date
+      title: RecurringIncentive
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

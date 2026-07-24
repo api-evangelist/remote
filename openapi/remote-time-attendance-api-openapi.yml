@@ -1,0 +1,5099 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Time & Attendance API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Time & Attendance
+paths:
+  /v1/timesheets/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Shows a timesheet by its ID.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: get_v1_timesheets_id
+      parameters:
+      - description: Timesheet ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: Show timesheet
+      tags:
+      - Time & Attendance
+  /v1/timeoff/{timeoff_id}/cancel:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Cancel a time off request that was already approved.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: post_v1_timeoff_timeoff_id_cancel
+      parameters:
+      - description: Time Off ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: timeoff_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelTimeoffParams'
+        description: CancelTimeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Cancel Time Off
+      tags:
+      - Time & Attendance
+  /v1/employee/timeoff/{id}:
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a Time Off record as Employee
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: patch_v1_employee_timeoff_id (2)
+      parameters:
+      - description: Timeoff ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmployeeTimeoffParams'
+        description: UpdateTimeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Update Time Off as Employee
+      tags:
+      - Time & Attendance
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a Time Off record as Employee
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: patch_v1_employee_timeoff_id
+      parameters:
+      - description: Timeoff ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmployeeTimeoffParams'
+        description: UpdateTimeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Update Time Off as Employee
+      tags:
+      - Time & Attendance
+  /v1/contractors/employments/{employment_id}/timesheets:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates a timesheet on behalf of a contractor employment.
+
+
+        The submitted hours are immediately available to the contractor in the Remote UI for
+
+        self-serve invoice creation (Invoices → Create invoice → "Use Time Tracking").
+
+
+        This endpoint is restricted to contractor employments. Calls against EOR or Global Payroll
+
+        employments are rejected with `422`.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: post_v1_contractors_employments_employment_id_timesheets
+      parameters:
+      - description: Contractor employment ID
+        example: c0a167b8-459d-4e96-9766-7a04c160892e
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractorCreateTimesheetParams'
+        description: ContractorCreateTimesheetParams
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractorTimesheetResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractorCreateTimesheetUnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+      summary: Create a contractor timesheet
+      tags:
+      - Time & Attendance
+  /v1/employee/leave-policies:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'List the leave policies for the current employee
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_employee_leave-policies
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLeavePoliciesDetailsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List Employee Leave Policies
+      tags:
+      - Time & Attendance
+  /v1/employee/leave-policies/summary:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'List the leave policies summary (balances and entitlements) for the current employee
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_employee_leave-policies_summary
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLeavePoliciesSummaryResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List Employee Leave Policies Summary
+      tags:
+      - Time & Attendance
+  /v1/timeoff-balances/{employment_id}:
+    get:
+      callbacks: {}
+      deprecated: true
+      description: 'Shows the time off balance for the given employment_id.
+
+
+        Deprecated since February 2025 in favour of **[List Leave Policies Summary](#tag/Leave-Policies/operation/get_index_leave_policies_summary)** endpoint.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_timeoff-balances_employment_id
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Employment ID for which to show the time off balance
+        example: 03675381-50c9-492d-b8ed-e84e99046091
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffBalanceResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffBalanceNotFoundResponse'
+          description: TimeoffBalanceNotFoundResponse
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: Show Time Off Balance
+      tags:
+      - Time & Attendance
+  /v1/employee/timeoff/{id}/cancel:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Cancels a Time Off record as Employee
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: post_v1_employee_timeoff_id_cancel
+      parameters:
+      - description: Timeoff ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelTimeoffParams'
+        description: CancelTimeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Cancel Time Off as Employee
+      tags:
+      - Time & Attendance
+  /v1/timesheets/{timesheet_id}/approve:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Approves the given timesheet.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: post_v1_timesheets_timesheet_id_approve
+      parameters:
+      - description: Timesheet ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: timesheet_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MinimalTimesheetResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+      summary: Approve timesheet
+      tags:
+      - Time & Attendance
+  /v1/leave-policies/summary/{employment_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'List all the data related to time off for a given employment
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_leave-policies_summary_employment_id
+      parameters:
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLeavePoliciesSummaryResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List Leave Policies Summary
+      tags:
+      - Time & Attendance
+  /v1/timeoff/{timeoff_id}/cancel-request/decline:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Decline a time off cancellation request.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: post_v1_timeoff_timeoff_id_cancel-request_decline
+      parameters:
+      - description: Time Off ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: timeoff_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeclineTimeoffParams'
+        description: Timeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictResponse'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Decline a time off cancellation request
+      tags:
+      - Time & Attendance
+  /v1/timesheets:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Lists all timesheets.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: get_v1_timesheets
+      parameters:
+      - description: Filter timesheets by their status
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/TimesheetStatus'
+      - description: Sort order
+        example: asc
+        in: query
+        name: order
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Field to sort by
+        example: submitted_at
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - submitted_at
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTimesheetsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List timesheets
+      tags:
+      - Time & Attendance
+  /v1/leave-policies/details/{employment_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Describe the leave policies (custom or not) for a given employment
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_leave-policies_details_employment_id
+      parameters:
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLeavePoliciesDetailsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List Leave Policies Details
+      tags:
+      - Time & Attendance
+  /v1/timeoff/types:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Lists all time off types that can be used for the `timeoff_type` parameter.
+
+
+        **Backward compatibility:** Calling this endpoint without the `type` query parameter returns the same response as before (time off types for full-time employments). Existing integrations do not need to change.
+
+
+        Optionally, pass `type=contractor` to get time off types for contractor employments, or `type=full_time` for full-time employments (same as omitting the parameter).
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_timeoff_types
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: 'Optional. Employment type to list time off types for: `contractor` or `full_time`. Omit for backward-compatible behavior (full-time types).'
+        example: full_time
+        in: query
+        name: type
+        required: false
+        schema:
+          $ref: '#/components/schemas/TimeoffTypesEmploymentType'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTimeoffTypesResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List Time Off Types
+      tags:
+      - Time & Attendance
+  /v1/timeoff/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Shows a single Time Off record
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_timeoff_id
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Timeoff ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: Show Time Off
+      tags:
+      - Time & Attendance
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a Time Off record.
+
+        Warning: Updating the status of a time off through this endpoint is deprecated and will be removed on January 13, 2025.
+
+        To approve or cancel an approved time off, use the `/approve` and `/cancel` endpoints instead.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: patch_v1_timeoff_id (2)
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Timeoff ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApprovedTimeoffParams'
+        description: UpdateTimeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Update Time Off
+      tags:
+      - Time & Attendance
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a Time Off record.
+
+        Warning: Updating the status of a time off through this endpoint is deprecated and will be removed on January 13, 2025.
+
+        To approve or cancel an approved time off, use the `/approve` and `/cancel` endpoints instead.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: patch_v1_timeoff_id
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Timeoff ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateApprovedTimeoffParams'
+        description: UpdateTimeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Update Time Off
+      tags:
+      - Time & Attendance
+  /v1/timeoff/{timeoff_id}/decline:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Decline a time off request. Please note that only time off requests on the `requested` status can be declined.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: post_v1_timeoff_timeoff_id_decline
+      parameters:
+      - description: Time Off ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: timeoff_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeclineTimeoffParams'
+        description: DeclineTimeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Decline Time Off
+      tags:
+      - Time & Attendance
+  /v1/timeoff/{timeoff_id}/approve:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Approve a time off request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: post_v1_timeoff_timeoff_id_approve
+      parameters:
+      - description: Time Off ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: timeoff_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApproveTimeoffParams'
+        description: ApproveTimeoff
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Approve Time Off
+      tags:
+      - Time & Attendance
+  /v1/employee/timeoff:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Lists the current employee''s time off records
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_employee_timeoff
+      parameters:
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List employee time offs
+      tags:
+      - Time & Attendance
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates a pending Time Off record
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: post_v1_employee_timeoff
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmployeeTimeoffParams'
+        description: Timeoff
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Create a Pending Time Off
+      tags:
+      - Time & Attendance
+  /v1/timeoff:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Lists all Time Off records.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: get_v1_timeoff
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Only show time off for a specific employment
+        example: 31b8e49b-aa1c-47af-849c-3d0a53e20e0d
+        in: query
+        name: employment_id
+        required: false
+        schema:
+          type: string
+      - description: Filter time off by its type
+        example: sick_leave
+        in: query
+        name: timeoff_type
+        required: false
+        schema:
+          $ref: '#/components/schemas/TimeoffType'
+      - description: Filter time off by its status
+        example: approved
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/TimeoffStatus'
+      - description: 'ISO 8601 date. When combined with `end_date`, returns all time off records that overlap the `[start_date, end_date]` window — including records that only partially overlap at either boundary. When used alone, returns records whose `start_date` is on or after this date.
+
+          '
+        example: '2024-01-01'
+        in: query
+        name: start_date
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: 'ISO 8601 date. When combined with `start_date`, returns all time off records that overlap the `[start_date, end_date]` window — including records that only partially overlap at either boundary. When used alone, returns records whose `end_date` is on or before this date.
+
+          '
+        example: '2024-12-31'
+        in: query
+        name: end_date
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Sort order
+        example: asc
+        in: query
+        name: order
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Field to sort by
+        example: timeoff_type
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - timeoff_type
+          - status
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTimeoffResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:read
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List Time Off
+      tags:
+      - Time & Attendance
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates a Time Off record
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: post_v1_timeoff
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApprovedTimeoffParams'
+        description: Timeoff
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeoffResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Create Time Off
+      tags:
+      - Time & Attendance
+  /v1/timesheets/{timesheet_id}/send-back:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Sends the given timesheet back to the employee for review or modification.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: post_v1_timesheets_timesheet_id_send-back
+      parameters:
+      - description: Timesheet ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: timesheet_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendBackTimesheetParams'
+        description: SendBackTimesheetParams
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SentBackTimesheetResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+      summary: Send back a timesheet for review or modification
+      tags:
+      - Time & Attendance
+  /v1/timeoff/{timeoff_id}/cancel-request/approve:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Approve a time off cancellation request.
+
+        In order to approve a time off cancellation request, the timeoff status must be `cancel_requested`.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |
+
+        '
+      operationId: post_v1_timeoff_timeoff_id_cancel-request_approve
+      parameters:
+      - description: Time Off ID
+        example: 93t3j-timeoff-id-9suej43
+        in: path
+        name: timeoff_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timeoff:write
+        - time_and_attendance
+        - all:write
+      summary: Approve a time off cancellation request
+      tags:
+      - Time & Attendance
+components:
+  schemas:
+    CreateApprovedTimeoffParams:
+      additionalProperties: false
+      allOf:
+      - $ref: '#/components/schemas/CreateTimeoffParams'
+      - properties:
+          approved_at:
+            $ref: '#/components/schemas/DateTimeIso8601'
+          approver_id:
+            $ref: '#/components/schemas/NullableApproverId'
+          status:
+            enum:
+            - approved
+            type: string
+        required:
+        - status
+        - approver_id
+        - approved_at
+        type: object
+      description: Approved timeoff creation params
+      example:
+        approved_at: '2021-07-15T18:18:17Z'
+        approver_id: 123e4567-e89b-12d3-a456-426614174000
+        employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+        end_date: '2021-12-21'
+        start_date: '2021-12-20'
+        status: approved
+        timeoff_days:
+        - day: '2021-12-20'
+          hours: 8
+        - day: '2021-12-21'
+          hours: 8
+        timeoff_type: paid_time_off
+        timezone: Asia/Kolkata
+      title: CreateApprovedTimeoffParams
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    MinimalTimesheet:
+      additionalProperties: false
+      description: A lightweight timesheet representation returned after create and approve operations. Contains basic identification and status fields but not the detailed hours breakdown or time tracking entries.
+      example:
+        approval_required: true
+        country_code: PRT
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        end_date: '2021-07-01'
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        notes: Some notes
+        start_date: '2021-07-01'
+        status: submitted
+        submitted_at: '2021-07-15T18:18:17Z'
+      properties:
+        approval_required:
+          description: Whether this timesheet requires explicit approval before processing.
+          type: boolean
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        employment_id:
+          $ref: '#/components/schemas/UuidSlug'
+        end_date:
+          $ref: '#/components/schemas/Date'
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        notes:
+          description: Optional notes added by the employee.
+          nullable: true
+          type: string
+        start_date:
+          $ref: '#/components/schemas/Date'
+        status:
+          $ref: '#/components/schemas/TimesheetStatus'
+        submitted_at:
+          description: The timestamp when the employee submitted this timesheet. Null if not yet submitted.
+          format: datetime
+          nullable: true
+          type: string
+      required:
+      - id
+      - start_date
+      - end_date
+      - status
+      - country_code
+      - employment_id
+      - submitted_at
+      - approval_required
+      - notes
+      title: MinimalTimesheet
+      type: object
+    ResourceErrorResponse:
+      description: Returned when an operation fails due to a resource-level conflict or constraint. Includes a structured error with a machine-readable code, a human-readable message, and the type and ID of the affected resource.
+      example:
+        message:
+          code: resource_already_exists
+          message: There is already a submitted Employee termination request for this user, so you can't submit another one
+          resource_id: aca8ba1f-8d3a-4de8-9ab4-e0fcb4b210be
+          resource_type: termination_request
+      properties:
+        message:
+          properties:
+            code:
+              description: A machine-readable error code identifying the specific type of resource error.
+              enum:
+              - resource_not_eligible
+              - resource_already_exists
+              - action_unrecognized
+              - action_invalid
+              - parameter_invalid_date
+              - resource_invalid_state
+              - parameter_value_invalid
+              - parameter_value_unknown
+              - request_body_empty
+              - request_internal_server_error
+              - parameter_required_missing
+              - parameter_one_of_required_missing
+              - parameter_too_many
+              - parameter_unknown
+              - parameter_map_empty
+              - resource_not_supported_for_country
+              type: string
+            message:
+              description: A human-readable message explaining the error and how to resolve it.
+              type: string
+            resource_id:
+              description: The unique identifier of the specific resource that caused the error. May be null if the resource has not been created yet.
+              nullable: true
+              type: string
+            resource_type:
+              description: The type of resource that caused the error (e.g., "termination_request", "employment").
+              type: string
+          type: object
+      required:
+      - message
+      title: ResourceErrorResponse
+      type: object
+    TimeoffResponse:
+      description: Timeoff response
+      example:
+        data:
+          timeoff:
+            automatic: false
+            document:
+              id: 9880b711-file-id-ecf8f551bd78
+              inserted_at: '2021-07-15T18:18:17Z'
+              name: id.pdf
+              sub_type: personal_id
+              type: id
+            employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+            end_date: '2021-12-21'
+            id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+            leave_policy:
+              leave_policy_variant_slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+              leave_type: sick_leave
+              name: Self-Care
+            notes: Some notes
+            start_date: '2021-12-20'
+            status: approved
+            timeoff_days:
+            - day: '2021-12-20'
+              hours: 8
+              minutes: 480
+            - day: '2021-12-21'
+              hours: 8
+              minutes: 480
+            timeoff_type: paid_time_off
+            timezone: Asia/Kolkata
+            total_minutes: 960
+      properties:
+        data:
+          properties:
+            timeoff:
+              $ref: '#/components/schemas/Timeoff'
+          required:
+          - timeoff
+          type: object
+      required:
+      - data
+      title: TimeoffResponse
+      type: object
+    TimeTracking:
+      additionalProperties: false
+      description: A single time tracking entry within a timesheet, representing a block of work with clock-in/out times. Includes detailed breakdowns of hours by type (regular, overtime, night, weekend, holiday).
+      example:
+        clock_in: '2021-07-15T18:18:17Z'
+        clock_out: '2021-07-15T18:18:17Z'
+        has_holiday_hours: false
+        has_night_hours: false
+        has_weekend_hours: false
+        holiday_hours:
+          hours: 35
+          minutes: 13
+        night_hours:
+          hours: 35
+          minutes: 13
+        notes: Time tracking project.
+        time_breakdown:
+          day:
+            holiday:
+              hours: 35
+              minutes: 13
+            regular:
+              hours: 35
+              minutes: 13
+            weekend:
+              hours: 35
+              minutes: 13
+          night:
+            holiday:
+              hours: 35
+              minutes: 13
+            regular:
+              hours: 35
+              minutes: 13
+            weekend:
+              hours: 35
+              minutes: 13
+        timezone: Etc/UTC
+        total_hours:
+          hours: 35
+          minutes: 13
+        type: regular_hours
+        weekend_hours:
+          hours: 35
+          minutes: 13
+      properties:
+        clock_in:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        clock_out:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        has_holiday_hours:
+          description: Whether this time tracking entry includes any hours worked on public holidays.
+          type: boolean
+        has_night_hours:
+          description: Whether this time tracking entry includes any hours worked during night hours.
+          type: boolean
+        has_weekend_hours:
+          description: Whether this time tracking entry includes any hours worked on weekends.
+          type: boolean
+        holiday_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        night_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        notes:
+          description: Optional free-text notes about this time tracking entry, such as project or task details.
+          nullable: true
+          type: string
+        time_breakdown:
+          $ref: '#/components/schemas/TimeBreakdown'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        total_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        type:
+          description: The category of time being tracked (e.g., regular hours, overtime, on-call, break time).
+          enum:
+          - regular_hours
+          - overtime
+          - on_call
+          - break
+          - unpaid_break
+          - time_off
+          - public_holiday
+          type: string
+        weekend_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+      required:
+      - type
+      - notes
+      - timezone
+      - clock_in
+      - clock_out
+      - total_hours
+      - night_hours
+      - weekend_hours
+      - holiday_hours
+      - has_night_hours
+      - has_weekend_hours
+      - has_holiday_hours
+      - time_breakdown
+      title: TimeTracking
+      type: object
+    Date:
+      description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+      example: '2021-07-01'
+      format: date
+      title: Date
+      type: string
+    ContractorTimesheetResponse:
+      additionalProperties: false
+      description: Response returned after creating a contractor timesheet.
+      example:
+        data:
+          timesheet:
+            break_hours:
+              hours: 35
+              minutes: 13
+            country_code: PRT
+            employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            end_date: '2021-07-01'
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            notes: null
+            on_call_hours:
+              hours: 35
+              minutes: 13
+            regular_hours:
+              hours: 35
+              minutes: 13
+            start_date: '2021-07-01'
+            submitted_at: '2021-07-15T18:18:17Z'
+            time_trackings:
+            - clock_in: '2021-07-15T18:18:17Z'
+              clock_out: '2021-07-15T18:18:17Z'
+              notes: Project Alpha
+              timezone: Etc/UTC
+              total_hours:
+                hours: 35
+                minutes: 13
+              type: regular_hours
+            total_hours:
+              hours: 35
+              minutes: 13
+      properties:
+        data:
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/ContractorTimesheet'
+          required:
+          - timesheet
+          type: object
+      title: ContractorTimesheetResponse
+      type: object
+    TimeoffBalanceNotSupportedResponse:
+      example:
+        message:
+          code: resource_already_exists
+          message: There is already a submitted Employee termination request for this user, so you can't submit another one
+          resource_id: aca8ba1f-8d3a-4de8-9ab4-e0fcb4b210be
+          resource_type: termination_request
+      oneOf:
+      - $ref: '#/components/schemas/ResourceErrorResponse'
+      title: TimeoffBalanceNotSupportedResponse
+      type: object
+    TimeBreakdown:
+      additionalProperties: false
+      description: Detailed hours breakdown for a time tracking entry, split by time of day (day vs night) and then by type of day (regular, weekend, holiday). Useful for calculating overtime, night shift premiums, and holiday pay.
+      example:
+        day:
+          holiday:
+            hours: 35
+            minutes: 13
+          regular:
+            hours: 35
+            minutes: 13
+          weekend:
+            hours: 35
+            minutes: 13
+        night:
+          holiday:
+            hours: 35
+            minutes: 13
+          regular:
+            hours: 35
+            minutes: 13
+          weekend:
+            hours: 35
+            minutes: 13
+      properties:
+        day:
+          $ref: '#/components/schemas/TypeOfDayBreakdown'
+        night:
+          $ref: '#/components/schemas/TypeOfDayBreakdown'
+      required:
+      - day
+      - night
+      title: TimeBreakdown
+      type: object
+    UpdateEmployeeTimeoffParams:
+      description: Update timeoff params
+      example:
+        edit_reason: Some edit reason
+      properties:
+        document:
+          $ref: '#/components/schemas/TimeoffDocumentParams'
+        edit_reason:
+          description: The reason for the update. Required when updating the time off data but not changing the status.
+          type: string
+        end_date:
+          $ref: '#/components/schemas/Date'
+        leave_policy_variant_id:
+          nullable: false
+          type: string
+        notes:
+          type: string
+        start_date:
+          $ref: '#/components/schemas/Date'
+        timeoff_days:
+          items:
+            $ref: '#/components/schemas/TimeoffDaysParams'
+          type: array
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+      required:
+      - edit_reason
+      title: UpdateEmployeeTimeoffParams
+      type: object
+    CancelTimeoffParams:
+      description: Cancel timeoff params
+      example:
+        cancel_reason: Business purposes
+      properties:
+        cancel_reason:
+          type: string
+      required:
+      - cancel_reason
+      title: CancelTimeoffParams
+      type: object
+    ConflictResponse:
+      description: Returned when the request conflicts with the current state of a resource (HTTP 409). For example, trying to create a resource that already exists or performing an action that requires the resource to be in a different state.
+      example:
+        message: Company needs to be in status active to manage employments
+      properties:
+        message:
+          description: A human-readable message describing the conflict and the expected state.
+          type: string
+      title: ConflictResponse
+      type: object
+    SuccessResponse:
+      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
+      example:
+        data:
+          status: ok
+      properties:
+        data:
+          properties:
+            status:
+              description: The result status. Always `"ok"` for successful operations.
+              type: string
+          type: object
+      required:
+      - data
+      title: SuccessResponse
+      type: object
+    LimitedDaysandHoursResponse:
+      additionalProperties: false
+      description: Includes requested timeoffs (not approved) in the past or in the future.
+      example:
+        days: 1
+        hours: 3
+        type: limited
+      properties:
+        days:
+          nullable: false
+          type: integer
+        hours:
+          nullable: false
+          type: integer
+        type:
+          enum:
+          - limited
+          type: string
+      required:
+      - type
+      - days
+      - hours
+      title: LimitedDaysandHoursResponse
+      type: object
+    ApproveTimeoffParams:
+      description: Approve timeoff params
+      example:
+        approver_id: 123e4567-e89b-12d3-a456-426614174000
+      properties:
+        approver_id:
+          $ref: '#/components/schemas/NullableApproverId'
+      required:
+      - approver_id
+      title: ApproveTimeoffParams
+      type: object
+    Timesheet:
+      additionalProperties: false
+      description: 'A timesheet represents an employee''s recorded working hours for a specific date range. It contains aggregated hour totals and individual time tracking entries. Timesheets progress through a lifecycle: open (draft) -> submitted -> approved -> processed, or they may be sent back for revision.'
+      example:
+        approval_required: true
+        break_hours:
+          hours: 35
+          minutes: 13
+        country_code: PRT
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        end_date: '2021-07-01'
+        holiday_hours:
+          hours: 35
+          minutes: 13
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        night_hours:
+          hours: 35
+          minutes: 13
+        notes: Some notes
+        on_call_hours:
+          hours: 35
+          minutes: 13
+        overtime_hours:
+          hours: 35
+          minutes: 13
+        regular_hours:
+          hours: 35
+          minutes: 13
+        start_date: '2021-07-01'
+        status: submitted
+        submitted_at: '2021-07-15T18:18:17Z'
+        time_trackings:
+        - clock_in: '2021-07-15T18:18:17Z'
+          clock_out: '2021-07-15T18:18:17Z'
+          has_holiday_hours: false
+          has_night_hours: false
+          has_weekend_hours: false
+          holiday_hours:
+            hours: 35
+            minutes: 13
+          night_hours:
+            hours: 35
+            minutes: 13
+          notes: Time tracking project.
+          time_breakdown:
+            day:
+              holiday:
+                hours: 35
+                minutes: 13
+              regular:
+                hours: 35
+                minutes: 13
+              weekend:
+                hours: 35
+                minutes: 13
+            night:
+              holiday:
+                hours: 35
+                minutes: 13
+              regular:
+                hours: 35
+                minutes: 13
+              weekend:
+                hours: 35
+                minutes: 13
+          timezone: Etc/UTC
+          total_hours:
+            hours: 35
+            minutes: 13
+          type: regular_hours
+          weekend_hours:
+            hours: 35
+            minutes: 13
+        total_hours:
+          hours: 35
+          minutes: 13
+        unpaid_break_hours:
+          hours: 35
+          minutes: 13
+        weekend_hours:
+          hours: 35
+          minutes: 13
+      properties:
+        approval_required:
+          description: Whether this timesheet requires explicit approval before it can be processed. When false, the timesheet may be auto-approved based on the company's configuration.
+          type: boolean
+        break_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        employment_id:
+          $ref: '#/components/schemas/UuidSlug'
+        end_date:
+          $ref: '#/components/schemas/Date'
+        holiday_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        night_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        notes:
+          description: Optional notes added by the employee when submitting the timesheet.
+          nullable: true
+          type: string
+        on_call_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        overtime_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        regular_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        start_date:
+          $ref: '#/components/schemas/Date'
+        status:
+          $ref: '#/components/schemas/TimesheetStatus'
+        submitted_at:
+          description: The timestamp when the employee submitted this timesheet for approval. Null if the timesheet has not been submitted yet (status is `open`).
+          format: datetime
+          nullable: true
+          type: string
+        time_trackings:
+          description: The individual time tracking entries that make up this timesheet.
+          items:
+            $ref: '#/components/schemas/TimeTracking'
+          type: array
+        timeoff_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        total_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        unpaid_break_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        weekend_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+      required:
+      - id
+      - start_date
+      - end_date
+      - status
+      - country_code
+      - employment_id
+      - submitted_at
+      - approval_required
+      - notes
+      - regular_hours
+      - total_hours
+      - break_hours
+      - unpaid_break_hours
+      - overtime_hours
+      - holiday_hours
+      - weekend_hours
+      - night_hours
+      - on_call_hours
+      - time_trackings
+      title: Timesheet
+      type: object
+    TimeoffDocumentParams:
+      description: Timeoff document params
+      example:
+        content: base64 encoded content
+        name: document.pdf
+      properties:
+        content:
+          description: The binary content of the file encoded with base64
+          type: string
+        name:
+          description: The file name of the document
+          type: string
+      required:
+      - content
+      - name
+      title: TimeoffDocumentParams
+      type: object
+    TimeoffType:
+      enum:
+      - time_off
+      - sick_leave
+      - public_holiday
+      - unpaid_leave
+      - extended_leave
+      - in_lieu_time
+      - maternity_leave
+      - paternity_leave
+      - parental_leave
+      - bereavement
+      - military_leave
+      - other
+      - paid_time_off
+      - custom_company_leave
+      - rtt
+      - casual_leave
+      - rol
+      - ex_festivita
+      example: sick_leave
+      title: TimeoffType
+      type: string
+    SentBackTimesheet:
+      additionalProperties: false
+      description: A timesheet that has been sent back to the employee for revision. The status will be `in_calibration` and includes the reason provided by the reviewer.
+      example:
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        sent_back: true
+        sent_back_reason: Please review the timesheet.
+        status: submitted
+      properties:
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        sent_back:
+          description: Always `true` for sent-back timesheets, indicating the timesheet was returned for revision.
+          type: boolean
+        sent_back_reason:
+          description: The reason provided by the reviewer for why the timesheet needs to be revised.
+          nullable: false
+          type: string
+        status:
+          $ref: '#/components/schemas/TimesheetStatus'
+      required:
+      - id
+      - status
+      - sent_back
+      - sent_back_reason
+      title: SentBackTimesheet
+      type: object
+    Timezone:
+      description: '[TZ identifier](https://www.iana.org/time-zones)'
+      example: Etc/UTC
+      title: Timezone
+      type: string
+    TypeOfDayBreakdown:
+      additionalProperties: false
+      description: Hours breakdown by type of day (regular working day, weekend, or public holiday) for a specific time of day (day or night).
+      example:
+        holiday:
+          hours: 35
+          minutes: 13
+        regular:
+          hours: 35
+          minutes: 13
+        weekend:
+          hours: 35
+          minutes: 13
+      properties:
+        holiday:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        regular:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        weekend:
+          $ref: '#/components/schemas/HoursAndMinutes'
+      required:
+      - regular
+      - weekend
+      - holiday
+      title: TypeOfDayBreakdown
+      type: object
+    TimeoffStatus:
+      description: 'The current status of a time off request.
+
+
+        - `requested`: The employee has submitted a time off request and it is awaiting approval.
+
+        - `approved`: The time off request has been approved by a manager.
+
+        - `cancelled`: The time off request was cancelled by the employee or an admin.
+
+        - `declined`: The time off request was declined by a manager.
+
+        - `taken`: The approved time off has been taken (the dates have passed).
+
+        - `cancel_requested`: The employee has requested cancellation of a previously approved time off, pending manager approval.
+
+        '
+      enum:
+      - approved
+      - cancelled
+      - declined
+      - requested
+      - taken
+      - cancel_requested
+      example: requested
+      title: TimeoffStatus
+      type: string
+    ListTimesheetsResponse:
+      description: Response schema listing many timesheets
+      example:
+        current_page: 1
+        timesheets:
+        - approval_required: true
+          break_hours:
+            hours: 35
+            minutes: 13
+          country_code: PRT
+          employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          end_date: '2021-07-01'
+          holiday_hours:
+            hours: 35
+            minutes: 13
+          id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          night_hours:
+            hours: 35
+            minutes: 13
+          notes: Some notes
+          on_call_hours:
+            hours: 35
+            minutes: 13
+          overtime_hours:
+            hours: 35
+            minutes: 13
+          regular_hours:
+            hours: 35
+            minutes: 13
+          start_date: '2021-07-01'
+          status: submitted
+          submitted_at: '2021-07-15T18:18:17Z'
+          time_trackings:
+          - clock_in: '2021-07-15T18:18:17Z'
+            clock_out: '2021-07-15T18:18:17Z'
+            has_holiday_hours: false
+            has_night_hours: false
+            has_weekend_hours: false
+            holiday_hours:
+              hours: 35
+              minutes: 13
+            night_hours:
+              hours: 35
+              minutes: 13
+            notes: Time tracking project.
+            time_breakdown:
+              day:
+                holiday:
+                  hours: 35
+                  minutes: 13
+                regular:
+                  hours: 35
+                  minutes: 13
+                weekend:
+                  hours: 35
+                  minutes: 13
+              night:
+                holiday:
+                  hours: 35
+                  minutes: 13
+                regular:
+                  hours: 35
+                  minutes: 13
+                weekend:
+                  hours: 35
+                  minutes: 13
+            timezone: Etc/UTC
+            total_hours:
+              hours: 35
+              minutes: 13
+            type: regular_hours
+            weekend_hours:
+              hours: 35
+              minutes: 13
+          total_hours:
+            hours: 35
+            minutes: 13
+          unpaid_break_hours:
+            hours: 35
+            minutes: 13
+          weekend_hours:
+            hours: 35
+            minutes: 13
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            timesheets:
+              items:
+                $ref: '#/components/schemas/Timesheet'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListTimesheetsResponse
+      type: object
+    ListLeavePoliciesSummaryResponse:
+      description: Response schema for listing leave policies summary
+      example:
+        data:
+        - annual_balance:
+            days: 1
+            hours: 3
+            type: limited
+          annual_entitlement:
+            days: 1
+            hours: 3
+            type: limited
+          balance:
+            days: 1
+            hours: 3
+            type: limited
+          booked:
+            days: 1
+            hours: 3
+            type: limited
+          current_entitlement:
+            days: 1
+            hours: 3
+            type: limited
+          leave_policy:
+            description: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+            leave_type: sick_leave
+            name: Self-Care
+            unit: days
+          pending_approval:
+            days: 1
+            hours: 3
+            type: limited
+          taken:
+            days: 1
+            hours: 3
+            type: limited
+          upcoming_approved:
+            days: 1
+            hours: 3
+            type: limited
+          upcoming_requested:
+            days: 1
+            hours: 3
+            type: limited
+          used:
+            days: 1
+            hours: 3
+            type: limited
+          working_hours_per_day: 8
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/LeavePolicySummary'
+          type: array
+      required:
+      - data
+      title: ListLeavePoliciesSummaryResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    ContractorCreateTimesheetParams:
+      additionalProperties: false
+      description: 'Parameters for creating a timesheet on behalf of a contractor employment. The target employment is taken from the URL path, not the request body. Allowed `time_trackings.type` values are restricted to the contractor subset: `regular_hours`, `on_call`, `break`.'
+      example:
+        end_date: '2021-07-01'
+        start_date: '2021-07-01'
+        time_trackings:
+        - clock_in: '2021-07-15T18:18:17Z'
+          clock_out: '2021-07-15T18:18:17Z'
+          notes: Project Alpha
+          timezone: Etc/UTC
+          type: regular_hours
+      properties:
+        end_date:
+          $ref: '#/components/schemas/Date'
+        start_date:
+          $ref: '#/components/schemas/Date'
+        time_trackings:
+          description: One or more time tracking entries to include in the timesheet.
+          items:
+            $ref: '#/components/schemas/ContractorTimeTrackingParams'
+          minItems: 1
+          type: array
+      required:
+      - start_date
+      - end_date
+      - time_trackings
+      title: ContractorCreateTimesheetParams
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    TimeoffDaysParams:
+      description: Timeoff days params
+      example:
+        day: '2021-12-20'
+        hours: 8
+      properties:
+        day:
+          $ref: '#/components/schemas/Date'
+        hours:
+          type: integer
+      title: TimeoffDaysParams
+      type: object
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    LeavePolicy:
+      additionalProperties: false
+      description: The leave policy associated with a time off request. Policies define the rules and entitlements for specific types of leave.
+      example:
+        leave_policy_variant_slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        leave_type: sick_leave
+        name: Self-Care
+      properties:
+        leave_policy_variant_slug:
+          description: The unique identifier (slug) of the specific policy variant.
+          type: string
+        leave_type:
+          $ref: '#/components/schemas/TimeoffType'
+        name:
+          description: The display name of the leave policy (e.g., "Self-Care", "Annual Leave").
+          nullable: false
+          type: string
+      required:
+      - name
+      - leave_type
+      - leave_policy_variant_slug
+      title: LeavePolicy
+      type: object
+    TimeoffBalanceResponse:
+      description: Time Off Balance response
+      example:
+        data:
+          timeoff_balance:
+            contractual_entitled:
+              days: 25
+              hours: 0
+            leave_entitlements:
+            - entitled:
+                days: 28
+                hours: 0
+              expiry_date: '2022-12-31'
+              name: Annual paid time off
+              remaining:
+                days: 25
+                hours: 0
+              taken:
+                days: 3
+                hours: 0
+              type: annual_paid_timeoff
+            - entitled:
+                days: 3
+                hours: 0
+              expiry_date: '2022-12-31'
+              name: Extra days for good performance
+              remaining:
+                days: 3
+                hours: 0
+              taken:
+                days: 0
+                hours: 0
+              type: additional_pto
+            taken:
+              days: 3
+              hours: 0
+            total_entitled_days: 31
+            working_hours_per_day: 8
+      properties:
+        data:
+          properties:
+            timeoff_balance:
+              $ref: '#/components/schemas/TimeoffBalance'
+          required:
+          - timeoff_balance
+          type: object
+      required:
+      - data
+      title: TimeoffBalanceResponse
+      type: object
+    SendBackTimesheetParams:
+      additionalProperties: false
+      description: Parameters for sending a submitted timesheet back to the employee for revision. The timesheet status will change to `in_calibration` and the employee will be notified.
+      example:
+        sent_back_reason: Please review the timesheet.
+      properties:
+        sent_back_reason:
+          description: A required explanation of why the timesheet is being sent back. This will be visible to the employee.
+          nullable: false
+          type: string
+      required:
+      - sent_back_reason
+      title: SendBackTimesheetParams
+      type: object
+    ContractorTimesheet:
+      additionalProperties: false
+      description: A contractor timesheet, returned by the contractor create endpoint. Only contains fields relevant to the contractor flow — EOR-only fields (overtime, night/weekend/holiday hours, approval flag) are not included.
+      example:
+        break_hours:
+          hours: 35
+          minutes: 13
+        country_code: PRT
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        end_date: '2021-07-01'
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        notes: null
+        on_call_hours:
+          hours: 35
+          minutes: 13
+        regular_hours:
+          hours: 35
+          minutes: 13
+        start_date: '2021-07-01'
+        submitted_at: '2021-07-15T18:18:17Z'
+        time_trackings:
+        - clock_in: '2021-07-15T18:18:17Z'
+          clock_out: '2021-07-15T18:18:17Z'
+          notes: Project Alpha
+          timezone: Etc/UTC
+          total_hours:
+            hours: 35
+            minutes: 13
+          type: regular_hours
+        total_hours:
+          hours: 35
+          minutes: 13
+      properties:
+        break_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        employment_id:
+          $ref: '#/components/schemas/UuidSlug'
+        end_date:
+          $ref: '#/components/schemas/Date'
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        notes:
+          description: Optional notes attached to the timesheet.
+          nullable: true
+          type: string
+        on_call_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        regular_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        start_date:
+          $ref: '#/components/schemas/Date'
+        submitted_at:
+          description: The timestamp the timesheet was submitted.
+          format: datetime
+          nullable: true
+          type: string
+        time_trackings:
+          description: The individual time tracking entries that make up this timesheet.
+          items:
+            $ref: '#/components/schemas/ContractorTimeTracking'
+          type: array
+        total_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+      required:
+      - id
+      - employment_id
+      - country_code
+      - start_date
+      - end_date
+      - submitted_at
+      - notes
+      - total_hours
+      - regular_hours
+      - on_call_hours
+      - break_hours
+      - time_trackings
+      title: ContractorTimesheet
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    ContractorTimesheetOverlapResponse:
+      description: 'Returned when the submitted dates overlap an existing timesheet for the employment (HTTP 422).
+
+
+        In addition to the standard `errors`/`message` fields, the response includes
+
+        `conflicting_timesheet_id` — the `id` of the existing timesheet the submitted dates overlap.
+
+        '
+      example:
+        conflicting_timesheet_id: c0a167b8-459d-4e96-9766-7a04c160892e
+        errors:
+          start_date:
+          - you already have a timesheet within these start and end dates
+        message: Unprocessable Entity
+      properties:
+        conflicting_timesheet_id:
+          $ref: '#/components/schemas/UuidSlug'
+        errors:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        message:
+          type: string
+      required:
+      - errors
+      - message
+      - conflicting_timesheet_id
+      title: ContractorTimesheetOverlapResponse
+      type: object
+    HoursAndMinutes:
+      description: A duration expressed as hours and minutes.
+      example:
+        hours: 35
+        minutes: 13
+      properties:
+        hours:
+          description: The number of whole hours.
+          type: integer
+        minutes:
+          description: The number of remaining minutes (0-59).
+          type: integer
+      title: HoursAndMinutes
+      type: object
+    ListLeavePoliciesDetailsResponse:
+      description: Response schema for listing leave policies details
+      example:
+        data:
+        - custom: true
+          leave_policy_variant_id: 123e4567-e89b-12d3-a456-426614174000
+          name: Self-Care
+          uses_accrual_as_balance: false
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/LeavePolicyDetails'
+          type: array
+      required:
+      - data
+      title: ListLeavePoliciesDetailsResponse
+      type: object
+    TimeoffTypeResponse:
+      description: A single time off type with name and description
+      example:
+        description: Sick leave
+        name: sick_leave
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          $ref: '#/components/schemas/TimeoffType'
+      required:
+      - name
+      title: TimeoffTypeResponse
+      type: object
+    ContractorCreateTimesheetUnprocessableEntityResponse:
+      anyOf:
+      - $ref: '#/components/schemas/UnprocessableEntityResponse'
+      - $ref: '#/components/schemas/ContractorTimesheetOverlapResponse'
+      description: 'A validation error (HTTP 422). Either a standard error response, or — when the submitted
+
+        dates overlap an existing timesheet — a response that additionally includes
+
+        `conflicting_timesheet_id`.
+
+        '
+      example:
+        conflicting_timesheet_id: c0a167b8-459d-4e96-9766-7a04c160892e
+        errors:
+          start_date:
+          - you already have a timesheet within these start and end dates
+        message: Unprocessable Entity
+      title: ContractorCreateTimesheetUnprocessableEntityResponse
+    DeclineTimeoffParams:
+      example:
+        decline_reason: Business purposes
+      properties:
+        decline_reason:
+          nullable: true
+          type: string
+      required:
+      - decline_reason
+      title: DeclineTimeoffParams
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    TimesheetResponse:
+      additionalProperties: false
+      description: Response containing a full timesheet with all hour breakdowns and time tracking entries.
+      example:
+        data:
+          timesheet:
+            approval_required: true
+            break_hours:
+              hours: 35
+              minutes: 13
+            country_code: PRT
+            employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            end_date: '2021-07-01'
+            holiday_hours:
+              hours: 35
+              minutes: 13
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            night_hours:
+              hours: 35
+              minutes: 13
+            notes: Some notes
+            on_call_hours:
+              hours: 35
+              minutes: 13
+            overtime_hours:
+              hours: 35
+              minutes: 13
+            regular_hours:
+              hours: 35
+              minutes: 13
+            start_date: '2021-07-01'
+            status: submitted
+            submitted_at: '2021-07-15T18:18:17Z'
+            time_trackings:
+            - clock_in: '2021-07-15T18:18:17Z'
+              clock_out: '2021-07-15T18:18:17Z'
+              has_holiday_hours: false
+              has_night_hours: false
+              has_weekend_hours: false
+              holiday_hours:
+                hours: 35
+                minutes: 13
+              night_hours:
+                hours: 35
+                minutes: 13
+              notes: Time tracking project.
+              time_breakdown:
+                day:
+                  holiday:
+                    hours: 35
+                    minutes: 13
+                  regular:
+                    hours: 35
+                    minutes: 13
+                  weekend:
+                    hours: 35
+                    minutes: 13
+                night:
+                  holiday:
+                    hours: 35
+                    minutes: 13
+                  regular:
+                    hours: 35
+                    minutes: 13
+                  weekend:
+                    hours: 35
+                    minutes: 13
+              timezone: Etc/UTC
+              total_hours:
+                hours: 35
+                minutes: 13
+              type: regular_hours
+              weekend_hours:
+                hours: 35
+                minutes: 13
+            total_hours:
+              hours: 35
+              minutes: 13
+            unpaid_break_hours:
+              hours: 35
+              minutes: 13
+            weekend_hours:
+              hours: 35
+              minutes: 13
+      properties:
+        data:
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/Timesheet'
+          required:
+          - timesheet
+          type: object
+      title: TimesheetResponse
+      type: object
+    CreateTimeoffParams:
+      description: Timeoff creation params
+      example:
+        employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+        end_date: '2021-12-21'
+        start_date: '2021-12-20'
+        timeoff_days:
+        - day: '2021-12-20'
+          hours: 8
+        - day: '2021-12-21'
+          hours: 8
+        timeoff_type: paid_time_off
+        timezone: Asia/Kolkata
+      properties:
+        document:
+          $ref: '#/components/schemas/TimeoffDocumentParams'
+        employment_id:
+          type: string
+        end_date:
+          format: datetime
+          nullable: false
+          type: string
+        leave_policy_variant_id:
+          description: UUID of a custom company leave policy assigned to the employment. Use this field instead of `timeoff_type` when creating time off against a custom leave policy. Discover available custom leave policy UUIDs via `GET /v1/leave-policies/details/{employment_id}`.
+          format: uuid
+          nullable: false
+          type: string
+        notes:
+          type: string
+        start_date:
+          format: datetime
+          nullable: false
+          type: string
+        timeoff_days:
+          items:
+            $ref: '#/components/schemas/TimeoffDaysParams'
+          type: array
+        timeoff_type:
+          $ref: '#/components/schemas/TimeoffType'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+      required:
+      - employment_id
+      - start_date
+      - end_date
+      - timezone
+      - timeoff_days
+      title: CreateTimeoffParams
+      type: object
+    TimesheetStatus:
+      description: 'The current status of a timesheet in its lifecycle.
+
+
+        - `open`: The timesheet is a draft and only visible to the employee. It has not been submitted yet.
+
+        - `submitted`: The employee has submitted the timesheet for review. It is awaiting approval.
+
+        - `approved`: The timesheet has been approved and will be included in the next payroll run.
+
+        - `in_calibration`: The timesheet was sent back to the employee for revision. The employee needs to correct and resubmit it.
+
+        - `processed`: The timesheet has been processed as part of a payroll run. This is a terminal state.
+
+        '
+      enum:
+      - open
+      - submitted
+      - approved
+      - in_calibration
+      - processed
+      example: submitted
+      nullable: false
+      title: TimesheetStatus
+      type: string
+    ListTimeoffResponse:
+      description: Response schema listing many timeoffs
+      example:
+        current_page: 1
+        timeoffs:
+        - automatic: false
+          document:
+            id: 9880b711-file-id-ecf8f551bd78
+            inserted_at: '2021-07-15T18:18:17Z'
+            name: id.pdf
+            sub_type: personal_id
+            type: id
+          employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+          end_date: '2021-12-21'
+          id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+          leave_policy:
+            leave_policy_variant_slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            leave_type: sick_leave
+            name: Self-Care
+          notes: Some notes
+          start_date: '2021-12-20'
+          status: approved
+          timeoff_days:
+          - day: '2021-12-20'
+            hours: 8
+            minutes: 480
+          - day: '2021-12-21'
+            hours: 8
+            minutes: 480
+          timeoff_type: paid_time_off
+          timezone: Asia/Kolkata
+          total_minutes: 960
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            timeoffs:
+              items:
+                $ref: '#/components/schemas/Timeoff'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListTimeoffResponse
+      type: object
+    File:
+      additionalProperties: false
+      description: A file associated with an employment, such as a contract, tax form, or identity document.
+      example:
+        id: 9880b711-file-id-ecf8f551bd78
+        inserted_at: '2021-07-15T18:18:17Z'
+        name: id.pdf
+        sub_type: personal_id
+        type: id
+      properties:
+        id:
+          description: The unique identifier (UUID) of the file.
+          type: string
+        inserted_at:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        name:
+          description: The file name including extension (e.g., "id.pdf", "contract.pdf").
+          type: string
+        sub_type:
+          description: A more specific classification of the file within its type (e.g., "personal_id" within type "id", or "ir_35" within type "contract"). Null if no sub-type applies.
+          nullable: true
+          type: string
+        type:
+          description: The broad category of the file (e.g., "id", "contract", "tax_form").
+          type: string
+      required:
+      - id
+      - inserted_at
+      - name
+      - type
+      title: File
+      type: object
+    TimeoffBalanceNotFoundResponse:
+      example:
+        message: '{resource} not found'
+      oneOf:
+      - $ref: '#/components/schemas/TimeoffBalanceNotSupportedResponse'
+      - $ref: '#/components/schemas/NotFoundResponse'
+      title: TimeoffBalanceNotFoundResponse
+      type: object
+    NullableApproverId:
+      description: 'The field matches the `id` of a user in the
+
+        Remote Platform that has permission to approve time off
+
+        requests. [Available users][] can be found fetching
+
+        the [List Company Manager][] endpoint.
+
+
+        [Available users]: https://support.remote.com/hc/en-us/articles/360054668651-Approving-Declining-time-off-requests#h_01G0014GZKZ3EMN6P7C99HAK55
+
+        [List Company Manager]: https://gateway.remote.com/v1/docs/openapi.html#tag/Company-Managers
+
+        '
+      example: 51546f60-dd71-4223-9312-4efede68a497
+      nullable: true
+      title: NullableApproverId
+      type: string
+    ContractorTimeTrackingParams:
+      additionalProperties: false
+      description: Parameters for a single time tracking entry on a contractor timesheet. Allowed `type` values are restricted to the contractor subset.
+      example:
+        clock_in: '2021-07-15T18:18:17Z'
+        clock_out: '2021-07-15T18:18:17Z'
+        notes: Project Alpha
+        timezone: Etc/UTC
+        type: regular_hours
+      properties:
+        clock_in:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        clock_out:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        notes:
+          description: Optional free-text notes about this time entry, such as project or task details.
+          nullable: true
+          type: string
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          description: The category of time being tracked. Contractors are restricted to `regular_hours`, `on_call`, or `break`.
+          enum:
+          - regular_hours
+          - on_call
+          - break
+          type: string
+      required:
+      - type
+      - timezone
+      - clock_in
+      - clock_out
+      title: ContractorTimeTrackingParams
+      type: object
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    CreateEmployeeTimeoffParams:
+      description: Employee timeoff creation params
+      example:
+        end_date: '2021-12-21'
+        leave_policy_variant_id: paid_time_off
+        start_date: '2021-12-20'
+        timeoff_days:
+        - day: '2021-12-20'
+          hours: 8
+        - day: '2021-12-21'
+          hours: 8
+        timezone: Asia/Kolkata
+      properties:
+        document:
+          $ref: '#/components/schemas/TimeoffDocumentParams'
+        end_date:
+          $ref: '#/components/schemas/Date'
+        leave_policy_variant_id:
+          nullable: false
+          type: string
+        notes:
+          type: string
+        start_date:
+          $ref: '#/components/schemas/Date'
+        timeoff_days:
+          items:
+            $ref: '#/components/schemas/TimeoffDaysParams'
+          type: array
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+      required:
+      - start_date
+      - end_date
+      - leave_policy_variant_id
+      - timezone
+      - timeoff_days
+      title: CreateEmployeeTimeoffParams
+      type: object
+    TimeoffDaysAndHours:
+      example:
+        days: 1
+        hours: 3
+      properties:
+        days:
+          description: The number of whole days.
+          type: integer
+        hours:
+          description: The number of additional hours beyond whole days.
+          type: integer
+      title: TimeoffDaysAndHours
+      type: object
+    UpdateApprovedTimeoffParams:
+      description: Update timeoff params
+      example:
+        cancel_reason: Some cancel reason
+        edit_reason: Some edit reason
+      properties:
+        approved_at:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        approver_id:
+          $ref: '#/components/schemas/NullableApproverId'
+        cancel_reason:
+          description: The reason for cancelling a time off. Required when updating to status `cancelled`.
+          type: string
+        document:
+          $ref: '#/components/schemas/TimeoffDocumentParams'
+        edit_reason:
+          description: The reason for the update. Required when updating the time off data but not changing the status.
+          type: string
+        end_date:
+          $ref: '#/components/schemas/Date'
+        notes:
+          type: string
+        start_date:
+          $ref: '#/components/schemas/Date'
+        status:
+          deprecated: true
+          enum:
+          - approved
+          - cancelled
+          type: string
+        timeoff_days:
+          items:
+            $ref: '#/components/schemas/TimeoffDaysParams'
+          type: array
+        timeoff_type:
+          $ref: '#/components/schemas/TimeoffType'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+      required:
+      - edit_reason
+      - cancel_reason
+      title: UpdateApprovedTimeoffParams
+      type: object
+    TimeoffDay:
+      description: A single day within a time off request, specifying the date and the number of hours taken off that day.
+      example:
+        day: '2021-01-01'
+        hours: 8
+        minutes: 480
+      properties:
+        day:
+          $ref: '#/components/schemas/Date'
+        hours:
+          description: The number of hours taken off on this day (e.g., 8 for a full day, 4 for a half day). For minute-precision durations (e.g., 7 hours 30 minutes), use `minutes`.
+          type: integer
+        minutes:
+          description: The number of minutes taken off on this day (e.g., 480 for a full 8-hour day, 450 for 7 hours 30 minutes). Minute-precision counterpart of `hours`.
+          maximum: 1440
+          minimum: 0
+          type: integer
+      required:
+      - day
+      - hours
+      - minutes
+      title: TimeoffDay
+      type: object
+    DateTimeIso8601:
+      description: 'UTC date time in [ISO 8601][] format.
+
+
+        [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
+
+        '
+      example: '2021-07-15T18:18:17Z'
+      format: date-time
+      title: DateTimeIso8601
+      type: string
+    Timeoff:
+      additionalProperties: false
+      description: A time off record for an employee, representing a period of leave (e.g., vacation, sick leave, parental leave).
+      example:
+        automatic: false
+        document:
+          id: 9880b711-file-id-ecf8f551bd78
+          inserted_at: '2021-07-15T18:18:17Z'
+          name: id.pdf
+          sub_type: personal_id
+          type: id
+        employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+        end_date: '2021-12-21'
+        id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+        leave_policy:
+          leave_policy_variant_slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          leave_type: sick_leave
+          name: Self-Care
+        notes: Some notes
+        start_date: '2021-12-20'
+        status: approved
+        timeoff_days:
+        - day: '2021-12-20'
+          hours: 8
+          minutes: 480
+        - day: '2021-12-21'
+          hours: 8
+          minutes: 480
+        timeoff_type: paid_time_off
+        timezone: Asia/Kolkata
+        total_minutes: 960
+      properties:
+        approved_at:
+          description: The timestamp when the time off was approved. Null if not yet approved.
+          format: date-time
+          nullable: true
+          type: string
+        approver_id:
+          $ref: '#/components/schemas/NullableApproverId'
+        automatic:
+          description: Whether this time off was automatically created by the system (e.g., public holidays) rather than requested by the employee.
+          type: boolean
+        cancel_reason:
+          description: The reason provided when the time off was cancelled. Null if not cancelled.
+          nullable: true
+          type: string
+        cancelled_at:
+          $ref: '#/components/schemas/NullableDateTime'
+        document:
+          $ref: '#/components/schemas/File'
+        employment_id:
+          description: The unique identifier (UUID) of the employment this time off belongs to.
+          type: string
+        end_date:
+          description: The last day of the time off period (ISO 8601 date).
+          format: date
+          type: string
+        id:
+          description: The unique identifier (UUID) of the time off record.
+          type: string
+        leave_policy:
+          $ref: '#/components/schemas/LeavePolicy'
+        leave_policy_variant_id:
+          description: UUID of the custom company leave policy variant associated with this time off. Null for standard leave types.
+          format: uuid
+          nullable: true
+          type: string
+        notes:
+          description: Optional notes provided by the employee when requesting the time off.
+          nullable: true
+          type: string
+        start_date:
+          description: The first day of the time off period (ISO 8601 date).
+          format: date
+          type: string
+        status:
+          description: 'The current status of a time off request.
+
+
+            - `requested`: The employee has submitted a time off request and it is awaiting approval.
+
+            - `approved`: The time off request has been approved by a manager.
+
+            - `cancelled`: The time off request was cancelled by the employee or an admin.
+
+            - `declined`: The time off request was declined by a manager.
+
+            - `taken`: The approved time off has been taken (the dates have passed).
+
+            - `cancel_requested`: The employee has requested cancellation of a previously approved time off, pending manager approval.
+
+            '
+          enum:
+          - requested
+          - approved
+          - cancelled
+          - declined
+          - taken
+          - cancel_requested
+          type: string
+        timeoff_days:
+          description: The individual days and hours within this time off period.
+          items:
+            $ref: '#/components/schemas/TimeoffDay'
+          type: array
+        timeoff_type:
+          $ref: '#/components/schemas/TimeoffType'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        total_minutes:
+          description: The total number of minutes taken off across all `timeoff_days`. Always equals the sum of the per-day `minutes` values.
+          minimum: 0
+          type: integer
+      required:
+      - id
+      - employment_id
+      - status
+      - start_date
+      - end_date
+      - timeoff_days
+      - total_minutes
+      - timeoff_type
+      - leave_policy
+      - timezone
+      title: Timeoff
+      type: object
+    SentBackTimesheetResponse:
+      additionalProperties: false
+      description: Response returned after a timesheet has been sent back to the employee for revision.
+      example:
+        data:
+          timesheet:
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            sent_back: true
+            sent_back_reason: Please review the timesheet.
+            status: submitted
+      properties:
+        data:
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/SentBackTimesheet'
+          required:
+          - timesheet
+          type: object
+      title: SentBackTimesheetResponse
+      type: object
+    TimeoffBalance:
+      example:
+        contractual_entitled:
+          days: 25
+          hours: 0
+        leave_entitlements:
+        - entitled:
+            days: 28
+            hours: 0
+          expiry_date: '2022-12-31'
+          name: Annual paid time off
+          remaining:
+            days: 25
+            hours: 0
+          taken:
+            days: 3
+            hours: 0
+          type: annual_paid_timeoff
+        - entitled:
+            days: 3
+            hours: 0
+          expiry_date: '2022-12-31'
+          name: Extra days for good performance
+          remaining:
+            days: 3
+            hours: 0
+          taken:
+            days: 0
+            hours: 0
+          type: additional_pto
+        taken:
+          days: 3
+          hours: 0
+        total_entitled_days: 31
+        working_hours_per_day: 8
+      properties:
+        contractual_entitled:
+          description: 'Number of time off days for the employment, based on their contract.
+
+
+            The value of this field is `0` if the employment''s contract does not
+
+            include that information.
+
+            '
+          type: integer
+        contractual_leave_entitlement_type:
+          description: 'Leave entitlement type for the employment, based on their contract.
+
+
+            The value of this field is `fixed` when the employment has a fixed
+
+            limit of time off days to be taken, and `unlimited` otherwise.
+
+            '
+          type: string
+        taken:
+          description: 'Number of time off days taken by the employment as of today.
+
+
+            You can get a list of taken time off data for this employment using the
+
+            [list time off endpoint](#tag/Time-Off/operation/get_index_timeoff).
+
+            '
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimeoffDaysAndHours'
+          type: object
+        timeoff_entitlements:
+          description: 'A list of individual time off entitlements for the employment. This list
+
+            gives more granular details for the type of time off that''s available
+
+            to the employment.
+
+            '
+          items:
+            $ref: '#/components/schemas/TimeoffEntitlement'
+          type: array
+        total_entitled_days:
+          description: 'Number of time off days for the employment, based on their contract and
+
+            any additional time off that''s granted to them.
+
+
+            This is the sum of all `entitled` fields in the `leave_entitlements`
+
+            array, but does not take the hours into account.
+
+            '
+          type: integer
+        upcoming_approved:
+          description: 'Number of future, approved time off days for the employment, as of today.
+
+
+            You can get a list of approved time off data for this employment using the
+
+            [list time off endpoint](#tag/Time-Off/operation/get_index_timeoff).
+
+            '
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimeoffDaysAndHours'
+          type: object
+        upcoming_requested:
+          description: 'Number of future, requested time off days for the employment, as of today.
+
+
+            You can get a list of requested time off data for this employment using the
+
+            [list time off endpoint](#tag/Time-Off/operation/get_index_timeoff).
+
+            '
+          nullable: true
+          oneOf:
+          - $ref: '#/components/schemas/TimeoffDaysAndHours'
+          type: object
+        working_hours_per_day:
+          description: The number of working hours per day as defined in the employment's contract. Used to convert between days and hours.
+          type: integer
+      required:
+      - timeoff_entitlements
+      - taken
+      - upcoming_approved
+      - upcoming_requested
+      - working_hours_per_day
+      - contractual_leave_entitlement_type
+      title: TimeoffBalance
+      type: object
+    NullableDateTime:
+      description: Optional UTC date time in YYYY-MM-DDTHH:mm:ss format
+      example: '2021-07-15T18:18:17'
+      format: datetime
+      nullable: true
+      title: NullableDateTime
+      type: string
+    ContractorTimeTracking:
+      additionalProperties: false
+      description: A single time tracking entry on a contractor timesheet.
+      example:
+        clock_in: '2021-07-15T18:18:17Z'
+        clock_out: '2021-07-15T18:18:17Z'
+        notes: Project Alpha
+        timezone: Etc/UTC
+        total_hours:
+          hours: 35
+          minutes: 13
+        type: regular_hours
+      properties:
+        clock_in:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        clock_out:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        notes:
+          description: Optional notes about this entry.
+          nullable: true
+          type: string
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        total_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        type:
+          description: The category of time being tracked. One of `regular_hours`, `on_call`, `break`.
+          enum:
+          - regular_hours
+          - on_call
+          - break
+          type: string
+      required:
+      - type
+      - notes
+      - timezone
+      - clock_in
+      - clock_out
+      - total_hours
+      title: ContractorTimeTracking
+      type: object
+    UnlimitedDaysandHoursResponse:
+      additionalProperties: false
+      example:
+        type: unlimited
+      properties:
+        type:
+          enum:
+          - unlimited
+          type: string
+      required:
+      - type
+      title: UnlimitedDaysandHoursResponse
+      type: object
+    LeavePolicySummary:
+      additionalProperties: false
+      description: Leave Policy Summary
+      example:
+        annual_balance:
+          days: 1
+          hours: 3
+          type: limited
+        annual_entitlement:
+          days: 1
+          hours: 3
+          type: limited
+        balance:
+          days: 1
+          hours: 3
+          type: limited
+        booked:
+          days: 1
+          hours: 3
+          type: limited
+        current_entitlement:
+          days: 1
+          hours: 3
+          type: limited
+        leave_policy:
+          description: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+          leave_type: sick_leave
+          name: Self-Care
+          unit: days
+        pending_approval:
+          days: 1
+          hours: 3
+          type: limited
+        taken:
+          days: 1
+          hours: 3
+          type: limited
+        upcoming_approved:
+          days: 1
+          hours: 3
+          type: limited
+        upcoming_requested:
+          days: 1
+          hours: 3
+          type: limited
+        used:
+          days: 1
+          hours: 3
+          type: limited
+        working_hours_per_day: 8
+      properties:
+        annual_balance:
+          anyOf:
+          - $ref: '#/components/schemas/UnlimitedDaysandHoursResponse'
+          - $ref: '#/components/schemas/LimitedDaysandHoursResponse'
+          description: 'The annual balance represents the balance for the current entitlement period.
+
+            Unlike the regular balance, it does not account for accrued value and only considers the annual entitlement as the basis for calculations.
+
+            '
+        annual_entitlement:
+          anyOf:
+          - $ref: '#/components/schemas/UnlimitedDaysandHoursResponse'
+          - $ref: '#/components/schemas/LimitedDaysandHoursResponse'
+          description: 'The annual entitlement represents what an employee is entitled to in the current entitlement period.
+
+            It does not account for any accrued value.
+
+            '
+        balance:
+          anyOf:
+          - $ref: '#/components/schemas/UnlimitedDaysandHoursResponse'
+          - $ref: '#/components/schemas/LimitedDaysandHoursResponse'
+          description: The balance is the entitlement minus the taken timeoff (i.e 10 entitlement - 3 taken = 7 balance)
+        booked:
+          additionalProperties: false
+          description: Includes all upcoming requested time off.
+          example:
+            days: 1
+            hours: 3
+            type: limited
+          properties:
+            days:
+              nullable: false
+              type: integer
+            hours:
+              nullable: false
+              type: integer
+            type:
+              enum:
+              - limited
+              type: string
+          required:
+          - type
+          - days
+          - hours
+          title: LimitedDaysandHoursResponse
+          type: object
+        current_entitlement:
+          anyOf:
+          - $ref: '#/components/schemas/UnlimitedDaysandHoursResponse'
+          - $ref: '#/components/schemas/LimitedDaysandHoursResponse'
+          description: The current entitlement is the accrued time entitled for the employee plus any other extra entitlements (such as carryover).
+        leave_policy:
+          $ref: '#/components/schemas/EmployeeLeavePolicy'
+        pending_approval:
+          additionalProperties: false
+          description: Includes requested timeoffs (not approved) in the past or in the future.
+          example:
+            days: 1
+            hours: 3
+            type: limited
+          properties:
+            days:
+              nullable: false
+              type: integer
+            hours:
+              nullable: false
+              type: integer
+            type:
+              enum:
+              - limited
+              type: string
+          required:
+          - type
+          - days
+          - hours
+          title: LimitedDaysandHoursResponse
+          type: object
+        taken:
+          additionalProperties: false
+          description: Includes all time off (past and future, pending or approved).
+          example:
+            days: 1
+            hours: 3
+            type: limited
+          properties:
+            days:
+              nullable: false
+              type: integer
+            hours:
+              nullable: false
+              type: integer
+            type:
+              enum:
+              - limited
+              type: string
+          required:
+          - type
+          - days
+          - hours
+          title: LimitedDaysandHoursResponse
+          type: object
+        upcoming_approved:
+          additionalProperties: false
+          description: Includes all upcoming approved time off.
+          example:
+            days: 1
+            hours: 3
+            type: limited
+          properties:
+            days:
+              nullable: false
+              type: integer
+            hours:
+              nullable: false
+              type: integer
+            type:
+              enum:
+              - limited
+              type: string
+          required:
+          - type
+          - days
+          - hours
+          title: LimitedDaysandHoursResponse
+          type: object
+        upcoming_requested:
+          additionalProperties: false
+          description: Includes all upcoming requested time off.
+          example:
+            days: 1
+            hours: 3
+            type: limited
+          properties:
+            days:
+              nullable: false
+              type: integer
+            hours:
+              nullable: false
+              type: integer
+            type:
+              enum:
+              - limited
+              type: string
+          required:
+          - type
+          - days
+          - hours
+          title: LimitedDaysandHoursResponse
+          type: object
+        used:
+          additionalProperties: false
+          description: Includes only approved time off in the past.
+          example:
+            days: 1
+            hours: 3
+            type: limited
+          properties:
+            days:
+              nullable: false
+              type: integer
+            hours:
+              nullable: false
+              type: integer
+            type:
+              enum:
+              - limited
+              type: string
+          required:
+          - type
+          - days
+          - hours
+          title: LimitedDaysandHoursResponse
+          type: object
+        working_hours_per_day:
+          type: integer
+      required:
+      - leave_policy
+      - annual_entitlement
+      - annual_balance
+      - current_entitlement
+      - balance
+      - upcoming_approved
+      - upcoming_requested
+      - pending_approval
+      - taken
+      - used
+      - booked
+      - working_hours_per_day
+      title: LeavePolicySummary
+      type: object
+    ListTimeoffTypesResponse:
+      description: Time off types response
+      example:
+        data:
+          timeoff_types:
+          - description: Sick leave
+            name: sick_leave
+          - description: Yearly paid vacation days granted to employees.
+            name: paid_time_off
+      properties:
+        data:
+          properties:
+            timeoff_types:
+              description: List of time off types available for the requested employment type
+              items:
+                $ref: '#/components/schemas/TimeoffTypeResponse'
+              type: array
+          required:
+          - timeoff_types
+          type: object
+      title: ListTimeoffTypesResponse
+      type: object
+    CountryCode:
+      description: Country code according to ISO 3166-1 3-digit alphabetic codes.
+      example: PRT
+      title: CountryCode
+      type: string
+    EmployeeLeavePolicy:
+      additionalProperties: false
+      description: Leave Policy abstraction representation for the employee
+      example:
+        description: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+        leave_type: sick_leave
+        name: Self-Care
+        unit: days
+      properties:
+        description:
+          nullable: true
+          type: string
+        leave_type:
+          $ref: '#/components/schemas/TimeoffType'
+        name:
+          nullable: false
+          type: string
+        unit:
+          enum:
+          - days
+          - hours
+          - unlimited
+          type: string
+      required:
+      - name
+      - description
+      - unit
+      - leave_type
+      title: EmployeeLeavePolicy
+      type: object
+    TimeoffTypesEmploymentType:
+      description: 'Optional query parameter for the List Time Off Types endpoint.
+
+        - `contractor` — time off types for contractor employments (e.g. includes `time_off`).
+
+        - `full_time` — time off types for full-time employments (e.g. includes `paid_time_off`).
+
+        When omitted, the response is unchanged from previous API versions (full-time types).
+
+        '
+      enum:
+      - contractor
+      - full_time
+      example: full_time
+      title: TimeoffTypesEmploymentType
+      type: string
+    TooManyRequestsResponse:
+      description: Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.
+      example:
+        message: Too many requests
+      properties:
+        message:
+          pattern: Too many requests
+          type: string
+      title: TooManyRequestsResponse
+      type: object
+    MinimalTimesheetResponse:
+      additionalProperties: false
+      description: Response containing a minimal timesheet representation, returned after create and approve operations.
+      example:
+        data:
+          timesheet:
+            approval_required: true
+            country_code: PRT
+            employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            end_date: '2021-07-01'
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            notes: Some notes
+            start_date: '2021-07-01'
+            status: submitted
+            submitted_at: '2021-07-15T18:18:17Z'
+      properties:
+        data:
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/MinimalTimesheet'
+          required:
+          - timesheet
+          type: object
+      title: MinimalTimesheetResponse
+      type: object
+    LeavePolicyDetails:
+      additionalProperties: false
+      description: Leave Policy Details
+      example:
+        custom: true
+        leave_policy_variant_id: 123e4567-e89b-12d3-a456-426614174000
+        name: Self-Care
+        uses_accrual_as_balance: false
+      properties:
+        custom:
+          example: true
+          type: boolean
+        leave_policy_variant_id:
+          anyOf:
+          - example: 123e4567-e89b-12d3-a456-426614174000
+            format: uuid
+            type: string
+          - enum:
+            - time_off
+            - sick_leave
+            - public_holiday
+            - unpaid_leave
+            - extended_leave
+            - in_lieu_time
+            - maternity_leave
+            - paternity_leave
+            - parental_leave
+            - bereavement
+            - military_leave
+            - other
+            - paid_time_off
+            - custom_company_leave
+            - rtt
+            - casual_leave
+            - rol
+            - ex_festivita
+            example: sick_leave
+            title: TimeoffType
+            type: string
+          description: The ID of the leave policy variant
+        name:
+          example: Self-Care
+          type: string
+        uses_accrual_as_balance:
+          description: Whether leave balance is determined by accruals
+          example: false
+          type: boolean
+      required:
+      - leave_policy_variant_id
+      - custom
+      - name
+      title: LeavePolicyDetails
+      type: object
+    TimeoffEntitlement:
+      description: 'Detailed breakdown of an employment''s time off balance.
+
+        '
+      example:
+        available:
+          days: 15
+          hours: 4
+        expiry_date: '2022-12-31'
+        name: Extra days for good performance
+        taken:
+          days: 15
+          hours: 4
+        type: additional_pto
+      properties:
+        can_expire:
+          description: 'Indicates whether this entitlement can expire.
+
+
+            When `false`, `expiry_date` will be `nil`.
+
+            '
+          type: boolean
+        entitled:
+          description: 'Indicates how much this time off this entitlement contributes to the total time
+
+            off entitlement.
+
+            '
+          oneOf:
+          - $ref: '#/components/schemas/TimeoffDaysAndHours'
+          type: object
+        expiry_date:
+          description: 'Indicates the date this entitlement expires and is no longer counted
+
+            towards the total time off entitlement for the employment.
+
+
+            When this entitlement doesn''t expire, `expiry_date` will be set to
+
+            `nil`. Use the `can_expire` parameter to determine whether
+
+            an entitlement can expire or not.
+
+            '
+          format: date
+          nullable: true
+          type: string
+        name:
+          description: A human-readable name for this entitlement (e.g., "Annual paid time off", "Extra days for good performance"). Null for the default contractual entitlement.
+          nullable: true
+          type: string
+        remaining:
+          description: 'Indicates how much time off the employment has remaining in this entitlement.
+
+            '
+          oneOf:
+          - $ref: '#/components/schemas/TimeoffDaysAndHours'
+          type: object
+        taken:
+          description: 'Indicates how much time off the employment has taken from this entitlement.
+
+            '
+          oneOf:
+          - $ref: '#/components/schemas/TimeoffDaysAndHours'
+          type: object
+        type:
+          description: 'Indicates the type of the time off entitlement.
+
+
+            `annual_paid_timeoff` entitlements are calculated from the employment''s
+
+            contract. All other time off entitlements are granted by the employer
+
+            or automatically by the country of employment.
+
+            '
+          enum:
+          - carryover_pto
+          - additional_pto
+          - transfer_pto
+          - annual_paid_timeoff
+          type: string
+      required:
+      - name
+      - expiry_date
+      - can_expire
+      - entitled
+      - taken
+      - remaining
+      - type
+      title: TimeoffEntitlement
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

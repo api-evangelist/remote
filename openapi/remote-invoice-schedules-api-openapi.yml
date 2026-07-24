@@ -1,0 +1,1569 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Invoice Schedules API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Invoice Schedules
+paths:
+  /v1/contractor-invoice-schedules/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Shows a single Contractor Invoice Schedule record
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |
+
+        '
+      operationId: get_v1_contractor-invoice-schedules_id
+      parameters:
+      - description: Resource unique identifier
+        example: a6ef7b64-5c02-4ce2-a8c8-e17a99724365
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidSlug'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractorInvoiceScheduleResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - invoices:read
+        - invoices:write
+        - invoices
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - invoices:read
+        - invoices:write
+        - invoices
+        - all:write
+        - all:read
+      summary: Show Contractor Invoice Schedule
+      tags:
+      - Invoice Schedules
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a contractor invoice schedule record
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage invoices (`invoices`) | - | Manage invoices (`invoices:write`) |
+
+        '
+      operationId: patch_v1_contractor-invoice-schedules_id (2)
+      parameters:
+      - description: Resource unique identifier
+        example: b3e8b42c-830a-48e5-abb7-39fdbae2a9fe
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidSlug'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateScheduleContractorInvoiceParams'
+        description: Update parameters
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractorInvoiceScheduleResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - invoices:write
+        - invoices
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - invoices:write
+        - invoices
+        - all:write
+      summary: Updates Contractor Invoice Schedule
+      tags:
+      - Invoice Schedules
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a contractor invoice schedule record
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage invoices (`invoices`) | - | Manage invoices (`invoices:write`) |
+
+        '
+      operationId: patch_v1_contractor-invoice-schedules_id
+      parameters:
+      - description: Resource unique identifier
+        example: 5a10e9c3-97c9-4f8a-88f3-274842726d32
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidSlug'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateScheduleContractorInvoiceParams'
+        description: Update parameters
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractorInvoiceScheduleResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - invoices:write
+        - invoices
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - invoices:write
+        - invoices
+        - all:write
+      summary: Updates Contractor Invoice Schedule
+      tags:
+      - Invoice Schedules
+  /v1/contractor-invoice-schedules:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Lists Contractor Invoice Schedule records.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage invoices (`invoices`) | - | Manage invoices (`invoices:write`) |
+
+        '
+      operationId: get_v1_contractor-invoice-schedules
+      parameters:
+      - description: Filters contractor invoice schedules by start date greater than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: start_date_from
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoice schedules by start date less than or equal to the value.
+        example: '2021-12-31'
+        in: query
+        name: start_date_to
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoice schedules by next invoice date greater than or equal to the value.
+        example: '2021-01-01'
+        in: query
+        name: next_invoice_date_from
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoice schedules by next invoice date less than or equal to the value.
+        example: '2021-12-31'
+        in: query
+        name: next_invoice_date_to
+        required: false
+        schema:
+          $ref: '#/components/schemas/Date'
+      - description: Filters contractor invoice schedules by status matching the value.
+        example: active
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/ContractorInvoiceScheduleStatus'
+      - description: Filters contractor invoice schedules by employment id matching the value.
+        example: 25a1b787-cc49-4b30-852e-907ebc7a6b3b
+        in: query
+        name: employment_id
+        required: false
+        schema:
+          $ref: '#/components/schemas/UuidSlug'
+      - description: Filters contractor invoice schedules by periodicity matching the value.
+        example: monthly
+        in: query
+        name: periodicity
+        required: false
+        schema:
+          $ref: '#/components/schemas/ContractorInvoiceSchedulePeriodicity'
+      - description: Filters contractor invoice schedules by currency matching the value.
+        example: USD
+        in: query
+        name: currency
+        required: false
+        schema:
+          type: string
+      - description: Field to sort by
+        example: number
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - number
+          - total_amount
+          - next_invoice_at
+          - start_date
+          - nr_occurrences
+          type: string
+      - description: Sort order
+        example: asc
+        in: query
+        name: order
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContractorInvoiceSchedulesResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - invoices:write
+        - invoices
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - invoices:write
+        - invoices
+        - all:write
+      summary: List Contractor Invoice Schedules
+      tags:
+      - Invoice Schedules
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates many invoice schedules records.
+
+        It''s supposed to return two lists: one containing created records, and another one containing the schedules that failed to be inserted.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage invoices (`invoices`) | - | Manage invoices (`invoices:write`) |
+
+        '
+      operationId: post_v1_contractor-invoice-schedules
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkContractorInvoiceScheduleCreateParams'
+        description: Bulk creation payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                description: Response containing the lists of succeeded and failed schedules.
+                example:
+                  data:
+                    failures: []
+                    successes:
+                    - currency: BRL
+                      employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+                      id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+                      items:
+                      - amount: 5000
+                        description: Description
+                      note: A note to make it clear why schedule is needed.
+                      nr_occurrences: 10
+                      number: CIS0001
+                      periodicity: monthly
+                      start_date: '2024-06-01'
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      failures:
+                        items:
+                          $ref: '#/components/schemas/ContractorInvoiceScheduleCreateResponseFailure'
+                        type: array
+                      successes:
+                        items:
+                          $ref: '#/components/schemas/ContractorInvoiceScheduleCreateResponseSuccess'
+                        type: array
+                    required:
+                    - successes
+                    - failures
+                    type: object
+                required:
+                - data
+                title: BulkContractorInvoiceScheduleCreateResponse
+                type: object
+          description: All entries have been created
+        '207':
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                description: Response containing the lists of succeeded and failed schedules.
+                example:
+                  data:
+                    failures:
+                    - currency: USD
+                      employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+                      errors:
+                        employment_id:
+                        - not found
+                      items:
+                      - amount: 5000
+                        description: Description
+                      note: Contractor payment schedules.
+                      nr_occurrences: 15
+                      number: XYZ0001
+                      periodicity: bi_weekly
+                      start_date: '2024-06-01'
+                    successes:
+                    - currency: BRL
+                      employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+                      id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+                      items:
+                      - amount: 5000
+                        description: Description
+                      note: A note to make it clear why schedule is needed.
+                      nr_occurrences: 10
+                      number: CIS0001
+                      periodicity: monthly
+                      start_date: '2024-06-01'
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      failures:
+                        items:
+                          $ref: '#/components/schemas/ContractorInvoiceScheduleCreateResponseFailure'
+                        type: array
+                      successes:
+                        items:
+                          $ref: '#/components/schemas/ContractorInvoiceScheduleCreateResponseSuccess'
+                        type: array
+                    required:
+                    - successes
+                    - failures
+                    type: object
+                required:
+                - data
+                title: BulkContractorInvoiceScheduleCreateResponse
+                type: object
+          description: Multiple successes and failures
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                description: Response containing the lists of succeeded and failed schedules.
+                example:
+                  data:
+                    failures:
+                    - currency: USD
+                      employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+                      errors:
+                        employment_id:
+                        - not found
+                      items:
+                      - amount: 5000
+                        description: Description
+                      note: Contractor payment schedules.
+                      nr_occurrences: 15
+                      number: XYZ0001
+                      periodicity: bi_weekly
+                      start_date: '2024-06-01'
+                    successes: []
+                properties:
+                  data:
+                    additionalProperties: false
+                    properties:
+                      failures:
+                        items:
+                          $ref: '#/components/schemas/ContractorInvoiceScheduleCreateResponseFailure'
+                        type: array
+                      successes:
+                        items:
+                          $ref: '#/components/schemas/ContractorInvoiceScheduleCreateResponseSuccess'
+                        type: array
+                    required:
+                    - successes
+                    - failures
+                    type: object
+                required:
+                - data
+                title: BulkContractorInvoiceScheduleCreateResponse
+                type: object
+          description: All entries had failed
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - invoices:write
+        - invoices
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - invoices:write
+        - invoices
+        - all:write
+      summary: Create Contractor Invoice Schedules
+      tags:
+      - Invoice Schedules
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    Date:
+      description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+      example: '2021-07-01'
+      format: date
+      title: Date
+      type: string
+    ContractorInvoiceSchedule:
+      additionalProperties: false
+      description: Contractor Invoice Schedule.
+      example:
+        currency: BRL
+        employment_id: 3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        items:
+        - amount: 5000
+          description: Description
+        next_invoice_at: '2024-06-15T00:00:00Z'
+        note: Mobile developer payment.
+        nr_occurrences: 10
+        number: ABC123
+        periodicity: semi_monthly
+        start_date: '2024-06-01'
+        status: active
+        total_amount: 500000
+      properties:
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        employment_id:
+          description: Employment identifier.
+          example: 3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d
+          format: uuid
+          type: string
+        id:
+          description: Schedule identifier.
+          example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          format: uuid
+          title: ScheduleID
+          type: string
+        items:
+          description: List of invoice items that composes the overall invoice amount.
+          items:
+            $ref: '#/components/schemas/ContractorInvoiceScheduleItem'
+          type: array
+        next_invoice_at:
+          description: Date time which next invoice will be generated.
+          example: '2024-06-15T00:00:00Z'
+          format: datetime
+          nullable: true
+          type: string
+        note:
+          description: Custom defined note.
+          example: Mobile developer payment.
+          nullable: true
+          type: string
+        nr_occurrences:
+          description: Count of remaining invoices that should be generated.
+          example: 10
+          nullable: true
+          type: integer
+        number:
+          description: Invoice identifier.
+          example: ABC123
+          nullable: true
+          type: string
+        periodicity:
+          $ref: '#/components/schemas/ContractorInvoiceSchedulePeriodicity'
+        start_date:
+          description: Date which invoices generation will start.
+          example: '2024-06-01'
+          format: date
+          type: string
+        status:
+          $ref: '#/components/schemas/ContractorInvoiceScheduleStatus'
+        total_amount:
+          description: Overall amount that is calculated by summing all invoice items.
+          example: 500000
+          type: integer
+      required:
+      - id
+      - employment_id
+      - start_date
+      - periodicity
+      - status
+      - currency
+      - items
+      - total_amount
+      title: ContractorInvoiceSchedule
+      type: object
+    ListContractorInvoiceSchedulesResponse:
+      description: Paginated response schema listing all Contractor Invoice Schedules.
+      example:
+        contractor_invoice_schedules:
+        - currency: BRL
+          employment_id: 3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d
+          id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          items:
+          - amount: 5000
+            description: Description
+          next_invoice_at: '2024-06-15T00:00:00Z'
+          note: Mobile developer payment.
+          nr_occurrences: 10
+          number: ABC123
+          periodicity: semi_monthly
+          start_date: '2024-06-01'
+          status: active
+          total_amount: 500000
+        current_page: 1
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            contractor_invoice_schedules:
+              items:
+                $ref: '#/components/schemas/ContractorInvoiceSchedule'
+              type: array
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListContractorInvoiceSchedulesResponse
+      type: object
+    ContractorInvoiceScheduleCreateResponseFailure:
+      additionalProperties: false
+      description: Set of invoice schedule attributes with failed validation.
+      example:
+        currency: USD
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        errors:
+          employment_id:
+          - not found
+        items:
+        - amount: 5000
+          description: Description
+        note: Contractor payment schedules.
+        nr_occurrences: 15
+        number: XYZ0001
+        periodicity: bi_weekly
+        start_date: '2024-06-01'
+      properties:
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        employment_id:
+          description: Employment identifier
+          example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          format: uuid
+          type: string
+        errors:
+          additionalProperties: false
+          properties:
+            currency:
+              items:
+                type: string
+              type: array
+            employment_id:
+              items:
+                type: string
+              type: array
+            items:
+              items:
+                additionalProperties: false
+                properties:
+                  amount:
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              type: array
+            note:
+              items:
+                type: string
+              type: array
+            nr_occurrences:
+              items:
+                type: string
+              type: array
+            number:
+              items:
+                type: string
+              type: array
+            periodicity:
+              items:
+                type: string
+              type: array
+            start_date:
+              items:
+                type: string
+              type: array
+          type: object
+        items:
+          description: List of invoice items that composes the overall invoice amount.
+          example:
+          - amount: 5000
+            description: Description
+          items:
+            $ref: '#/components/schemas/ContractorInvoiceScheduleItem'
+          maxItems: 10
+          minItems: 1
+          type: array
+        note:
+          description: Custom defined note.
+          example: A note to make it clear why schedule is needed.
+          type: string
+        nr_occurrences:
+          description: Count of invoices that should be generated during schedule lifetime.
+          example: 10
+          minimum: 1
+          type: integer
+        number:
+          description: Invoice identifier.
+          example: CIS0001
+          maxLength: 10
+          minLength: 1
+          type: string
+        periodicity:
+          $ref: '#/components/schemas/ContractorInvoiceSchedulePeriodicity'
+        start_date:
+          description: Date of the first contractor invoice generation.
+          example: '2024-06-01'
+          format: date
+          type: string
+      required:
+      - employment_id
+      - currency
+      - start_date
+      - periodicity
+      - items
+      - errors
+      title: ContractorInvoiceScheduleCreateResponseFailure
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    UpdateScheduleContractorInvoiceParams:
+      additionalProperties: false
+      description: Payload shape used to update invoice schedules.
+      example:
+        currency: USD
+        items:
+        - amount: 5000
+          description: Description
+        note: Contractor invoice note
+        nr_occurrences: 8
+        number: Num321
+        periodicity: monthly
+        start_date: '2021-07-01'
+      properties:
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        items:
+          description: List of invoice items that composes the overall invoice amount.
+          items:
+            $ref: '#/components/schemas/ContractorInvoiceScheduleItem'
+          type: array
+        note:
+          description: Custom defined note.
+          nullable: true
+          type: string
+        nr_occurrences:
+          description: Count of remaining invoices that should be generated.
+          nullable: true
+          type: integer
+        number:
+          description: Invoice identifier.
+          nullable: true
+          type: string
+        periodicity:
+          $ref: '#/components/schemas/ContractorInvoiceSchedulePeriodicity'
+        start_date:
+          $ref: '#/components/schemas/Date'
+      title: UpdateScheduleContractorInvoiceParams
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    CurrencyCode:
+      description: Currency code of the SWIFT fee. Only present when processing_fee is set.
+      example: BRL
+      maxLength: 3
+      minLength: 3
+      nullable: true
+      title: CurrencyCode
+      type: string
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    ContractorInvoiceScheduleCreateResponseSuccess:
+      additionalProperties: false
+      description: Set of invoice schedule attributes that were successfully created.
+      example:
+        currency: BRL
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        items:
+        - amount: 5000
+          description: Description
+        note: A note to make it clear why schedule is needed.
+        nr_occurrences: 10
+        number: CIS0001
+        periodicity: monthly
+        start_date: '2024-06-01'
+      properties:
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        employment_id:
+          description: Employment identifier
+          example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          format: uuid
+          type: string
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        items:
+          description: List of invoice items that composes the overall invoice amount.
+          example:
+          - amount: 5000
+            description: Description
+          items:
+            $ref: '#/components/schemas/ContractorInvoiceScheduleItem'
+          maxItems: 10
+          minItems: 1
+          type: array
+        note:
+          description: Custom defined note.
+          example: A note to make it clear why schedule is needed.
+          type: string
+        nr_occurrences:
+          description: Count of invoices that should be generated during schedule lifetime.
+          example: 10
+          minimum: 1
+          type: integer
+        number:
+          description: Invoice identifier.
+          example: CIS0001
+          maxLength: 10
+          minLength: 1
+          type: string
+        periodicity:
+          $ref: '#/components/schemas/ContractorInvoiceSchedulePeriodicity'
+        start_date:
+          description: Date of the first contractor invoice generation.
+          example: '2024-06-01'
+          format: date
+          type: string
+      required:
+      - employment_id
+      - currency
+      - start_date
+      - periodicity
+      - items
+      - id
+      title: ContractorInvoiceScheduleCreateResponseSuccess
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    ContractorInvoiceScheduleItem:
+      additionalProperties: false
+      description: Line Item schema for a Contractor Invoice Schedule
+      example:
+        amount: 5000
+        description: Description
+      properties:
+        amount:
+          description: Amount, in cents.
+          type: integer
+        description:
+          description: Describes invoice item intent.
+          type: string
+      required:
+      - amount
+      - description
+      title: ContractorInvoiceScheduleItem
+      type: object
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    ContractorInvoiceScheduleResponse:
+      additionalProperties: false
+      description: Response schema to show a Contractor Invoice Schedule
+      example:
+        data:
+          contractor_invoice_schedule:
+            currency: BRL
+            employment_id: 3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            items:
+            - amount: 5000
+              description: Description
+            next_invoice_at: '2024-06-15T00:00:00Z'
+            note: Mobile developer payment.
+            nr_occurrences: 10
+            number: ABC123
+            periodicity: semi_monthly
+            start_date: '2024-06-01'
+            status: active
+            total_amount: 500000
+      properties:
+        data:
+          properties:
+            contractor_invoice_schedule:
+              $ref: '#/components/schemas/ContractorInvoiceSchedule'
+          required:
+          - contractor_invoice_schedule
+          type: object
+      required:
+      - data
+      title: ContractorInvoiceScheduleResponse
+      type: object
+    BulkContractorInvoiceScheduleCreateParams:
+      additionalProperties: false
+      description: Schema defining a bulk creation payload.
+      example:
+        contractor_invoice_schedules:
+        - currency: BRL
+          employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          items:
+          - amount: 5000
+            description: Description
+          note: A note to make it clear why schedule is needed.
+          nr_occurrences: 10
+          number: CIS0001
+          periodicity: monthly
+          start_date: '2024-06-01'
+        - currency: USD
+          employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          items:
+          - amount: 5000
+            description: Description
+          note: Contractor payment schedules.
+          nr_occurrences: 15
+          number: XYZ0001
+          periodicity: bi_weekly
+          start_date: '2024-06-01'
+      properties:
+        contractor_invoice_schedules:
+          description: List of invoice schedules payload.
+          items:
+            $ref: '#/components/schemas/ContractorInvoiceScheduleCreateParams'
+          maxItems: 200
+          minItems: 1
+          type: array
+      required:
+      - contractor_invoice_schedules
+      title: BulkContractorInvoiceScheduleCreateParams
+      type: object
+    ContractorInvoiceScheduleCreateParams:
+      additionalProperties: false
+      description: Payload shape used to create invoice schedules.
+      example:
+        currency: BRL
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        items:
+        - amount: 5000
+          description: Description
+        note: A note to make it clear why schedule is needed.
+        nr_occurrences: 10
+        number: CIS0001
+        periodicity: monthly
+        start_date: '2024-06-01'
+      properties:
+        currency:
+          $ref: '#/components/schemas/CurrencyCode'
+        employment_id:
+          description: Employment identifier
+          example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          format: uuid
+          type: string
+        items:
+          description: List of invoice items that composes the overall invoice amount.
+          example:
+          - amount: 5000
+            description: Description
+          items:
+            $ref: '#/components/schemas/ContractorInvoiceScheduleItem'
+          maxItems: 10
+          minItems: 1
+          type: array
+        note:
+          description: Custom defined note.
+          example: A note to make it clear why schedule is needed.
+          type: string
+        nr_occurrences:
+          description: Count of invoices that should be generated during schedule lifetime.
+          example: 10
+          minimum: 1
+          type: integer
+        number:
+          description: Invoice identifier.
+          example: CIS0001
+          maxLength: 10
+          minLength: 1
+          type: string
+        periodicity:
+          $ref: '#/components/schemas/ContractorInvoiceSchedulePeriodicity'
+        start_date:
+          description: Date of the first contractor invoice generation.
+          example: '2024-06-01'
+          format: date
+          type: string
+      required:
+      - employment_id
+      - currency
+      - start_date
+      - periodicity
+      - items
+      title: ContractorInvoiceScheduleCreateParams
+      type: object
+    ContractorInvoiceScheduleStatus:
+      description: 'Current record state.
+
+
+        - `active`: Once an invoice is generated, and a withdrawal method has been set, then it''s set to active.
+
+        - `processing`: Ephemeral status indicating that we are currently attempting to generate a contractor invoice from the scheduled contractor invoice.
+
+        - `pending_company_action`: Company needs to trigger some actions related to payment configuration.
+
+        - `pending_contractor_action`: When schedule is blocked by contractor onboarding or invoice generation failed due to withdrawal methods issues that needs contractor action.
+
+        - `generation_failed_unrelated_to_withdrawal_method`: Generation failed for any other reason.
+
+        - `completed`: Number of generated contractor invoices has been reached.
+
+        - `inactive`: Does not create any further contractor invoices but it''s still possible for the employer to activate it again.
+
+        '
+      enum:
+      - inactive
+      - completed
+      - active
+      - processing
+      - pending_company_action
+      - pending_contractor_action
+      - generation_failed_unrelated_to_withdrawal_method
+      example: active
+      nullable: false
+      title: ContractorInvoiceScheduleStatus
+      type: string
+    TooManyRequestsResponse:
+      description: Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.
+      example:
+        message: Too many requests
+      properties:
+        message:
+          pattern: Too many requests
+          type: string
+      title: TooManyRequestsResponse
+      type: object
+    ContractorInvoiceSchedulePeriodicity:
+      description: "Defines how often contractor invoices will be generated.\n\n- `bi_weekly`: Invoices will be generated every other week, on the given day of the week based on the start date.\n- `monthly`: Invoices will be generated once a month.\n- `semi_monthly`: Invoices will be generated at fixed dates twice a month (with 14 days of difference between each other), depending on the start date.\n   In months with just 30 days, if `start_date` is set to the 31st day, then generation occurs in the last of day of the month.\n- `weekly`: Invoices will be generated each week.\n"
+      enum:
+      - bi_weekly
+      - monthly
+      - semi_monthly
+      - weekly
+      example: monthly
+      nullable: false
+      title: ContractorInvoiceSchedulePeriodicity
+      type: string
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

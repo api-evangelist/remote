@@ -1,0 +1,1264 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Contract Amendments API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Contract Amendments
+paths:
+  /v1/contract-amendments/schema:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns the json schema of the `contract_amendment` form for a specific employment.
+
+        This endpoint requires a company access token, as forms are dependent on certain
+
+        properties of companies and their current employments.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View contract amendments (`contract_amendment:read`) | Manage contract amendments (`contract_amendment:write`) |
+
+        '
+      operationId: get_v1_contract-amendments_schema
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: The ID of the employment concerned by the contract amendment request.
+        example: 31b8e49b-aa1c-47af-849c-3d0a53e20e0d
+        in: query
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      - description: Country code according to ISO 3-digit alphabetic codes.
+        example: CAN
+        in: query
+        name: country_code
+        required: true
+        schema:
+          type: string
+      - description: Name of the desired form
+        example: contract_amendment
+        in: query
+        name: form
+        required: false
+        schema:
+          enum:
+          - contract_amendment
+          type: string
+      - description: Version of the form schema
+        example: 1
+        in: query
+        name: json_schema_version
+        required: false
+        schema:
+          default: latest
+          oneOf:
+          - description: Specific version number
+            minimum: 1
+            type: integer
+          - description: Use latest version
+            enum:
+            - latest
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractAmendmentFormResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:read
+        - contract_amendment:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:read
+        - contract_amendment:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show form schema
+      tags:
+      - Contract Amendments
+  /v1/contract-amendments:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'List Contract Amendment requests.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View contract amendments (`contract_amendment:read`) | Manage contract amendments (`contract_amendment:write`) |
+
+        '
+      operationId: get_v1_contract-amendments
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Employment ID
+        in: query
+        name: employment_id
+        required: false
+        schema:
+          type: string
+      - description: Contract Amendment status
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/ContractAmendmentStatus'
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContractAmendmentResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:read
+        - contract_amendment:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:read
+        - contract_amendment:write
+        - employments
+        - all:write
+        - all:read
+      summary: List Contract Amendment
+      tags:
+      - Contract Amendments
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates a Contract Amendment request.
+
+
+        This endpoint requires and returns country-specific data. The exact required and returned fields will
+
+        vary depending on which country the employment is in. To see the list of parameters for each country,
+
+        see the **Show form schema** endpoint under the [Contract Amendments](#tag/Contract-Amendments) category.
+
+
+        Please note that the compliance requirements for each country are subject to change according to local
+
+        laws. Given its continual updates, using Remote''s [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid
+
+        compliance issues and to have the latest version of a country requirements.
+
+
+        If you are using this endpoint to build an integration, make sure you are dynamically collecting or
+
+        displaying the latest parameters for each country by querying the _"Show form schema"_ endpoint.
+
+
+        For more information on JSON Schemas, see the **How JSON Schemas work** documentation.
+
+
+        To learn how you can dynamically generate forms to display in your UI, see the documentation for
+
+        the [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.
+
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage contract amendments (`contract_amendment:write`) |
+
+        '
+      operationId: post_v1_contract-amendments
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Version of the form schema
+        example: 1
+        in: query
+        name: json_schema_version
+        required: false
+        schema:
+          default: latest
+          oneOf:
+          - description: Specific version number
+            minimum: 1
+            type: integer
+          - description: Use latest version
+            enum:
+            - latest
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContractAmendmentParams'
+        description: Contract Amendment
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractAmendmentResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:write
+        - employments
+        - all:write
+      summary: Create Contract Amendment
+      tags:
+      - Contract Amendments
+  /v1/contract-amendments/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Show a single Contract Amendment request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View contract amendments (`contract_amendment:read`) | Manage contract amendments (`contract_amendment:write`) |
+
+        '
+      operationId: get_v1_contract-amendments_id
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Contract amendment request ID
+        example: 93t3j-contract_amendment_id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractAmendmentResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:read
+        - contract_amendment:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:read
+        - contract_amendment:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show Contract Amendment
+      tags:
+      - Contract Amendments
+  /v1/contract-amendments/automatable:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Check if a contract amendment request is automatable.
+
+        If the contract amendment request is automatable, then after submission, it will instantly amend the employee''s contract
+
+        and send them an updated document.
+
+
+        This endpoint requires and returns country-specific data. The exact required and returned fields will
+
+        vary depending on which country the employment is in. To see the list of parameters for each country,
+
+        see the **Show form schema** endpoint under the [Contract Amendments](#tag/Contract-Amendments) category.
+
+
+        Please note that the compliance requirements for each country are subject to change according to local
+
+        laws. Given its continual updates, using Remote''s [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid
+
+        compliance issues and to have the latest version of a country requirements.
+
+
+        If you are using this endpoint to build an integration, make sure you are dynamically collecting or
+
+        displaying the latest parameters for each country by querying the _"Show form schema"_ endpoint.
+
+
+        For more information on JSON Schemas, see the **How JSON Schemas work** documentation.
+
+
+        To learn how you can dynamically generate forms to display in your UI, see the documentation for
+
+        the [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.
+
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage contract amendments (`contract_amendment:write`) |
+
+        '
+      operationId: post_v1_contract-amendments_automatable
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Version of the form schema
+        example: 1
+        in: query
+        name: json_schema_version
+        required: false
+        schema:
+          default: latest
+          oneOf:
+          - description: Specific version number
+            minimum: 1
+            type: integer
+          - description: Use latest version
+            enum:
+            - latest
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContractAmendmentParams'
+        description: Contract Amendment
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractAmendmentAutomatableResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - contract_amendment:write
+        - employments
+        - all:write
+      summary: Automatable Contract Amendment
+      tags:
+      - Contract Amendments
+components:
+  schemas:
+    ContractAmendmentFormResponse:
+      description: Object with required and optional fields, its descriptions and suggested presentation
+      example:
+        data:
+          additionalProperties: false
+          properties:
+            effective_date:
+              description: 'If you want to backdate this amendment, we cannot guarantee your preferred date is possible due to country-specific laws.
+
+                Please enter your preferred date, and we’ll reach out to you if there are any issues.
+
+                '
+              title: Effective date of change
+              type: date
+            job_title:
+              description: What is their job title? E.g. Product designer
+              maxLength: 255
+              title: Job title
+              type: string
+          required:
+          - job_title
+          - effective_date
+          type: object
+      properties:
+        data:
+          type: object
+      title: ContractAmendmentFormResponse
+      type: object
+    ListContractAmendmentResponse:
+      description: Response schema listing many contract_amendments
+      example:
+        contract_amendments:
+        - employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+          id: ba310525-9282-40c9-8977-14d844bf891a
+          job_title: Engineer
+          reason_for_change: annual_pay_adjustment
+          requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+          requested_effective_date: '2023-04-13T13:35:06Z'
+          status: submitted
+          submitted_at: '2023-04-13T13:35:06Z'
+        current_page: 1
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            contract_amendments:
+              items:
+                $ref: '#/components/schemas/MinimalContractAmendment'
+              type: array
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListContractAmendmentResponse
+      type: object
+    MinimalContractAmendment:
+      description: A lightweight contract amendment representation used in list responses.
+      example:
+        employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+        id: ba310525-9282-40c9-8977-14d844bf891a
+        job_title: Engineer
+        reason_for_change: annual_pay_adjustment
+        requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+        requested_effective_date: '2023-04-13T13:35:06Z'
+        status: submitted
+        submitted_at: '2023-04-13T13:35:06Z'
+      properties:
+        employment_id:
+          description: The unique identifier (UUID) of the employment.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the contract amendment.
+          type: string
+        job_title:
+          description: The current job title from the employment's contract.
+          type: string
+        reason_for_change:
+          enum:
+          - annual_pay_adjustment
+          - country_rule_change
+          - error_correction
+          - job_change_reevaluation
+          - promotion
+          - other
+          type: string
+        requested_by:
+          description: The unique identifier (UUID) of the user who submitted the amendment request.
+          type: string
+        requested_effective_date:
+          description: The date when the amendment changes should take effect.
+          format: datetime
+          type: string
+        status:
+          $ref: '#/components/schemas/ContractAmendmentStatus'
+        submitted_at:
+          description: The timestamp when the amendment was submitted.
+          format: datetime
+          type: string
+      required:
+      - id
+      - employment_id
+      - status
+      - requested_by
+      - submitted_at
+      - requested_effective_date
+      - reason_for_change
+      title: MinimalContractAmendment
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    ContractAmendmentAutomatableResponse:
+      description: Contract Amendment Automatable response
+      example:
+        data:
+          automatable: true
+          message: The contract amendment request will be processed as an automatable request.
+      properties:
+        data:
+          properties:
+            automatable:
+              description: If true, it means that the contract amendment request is automatable.
+              type: boolean
+            message:
+              description: The message to explain how the contract amendment request will be processed depending if it is automatable or not.
+              type: string
+          type: object
+      title: ContractAmendmentAutomatableResponse
+      type: object
+    CreateContractAmendmentParams:
+      additionalProperties: false
+      example:
+        amendment_contract_id: c15993d8-aa8a-4fbb-b395-8b7a54f57db1
+        contract_amendment: {}
+        employment_id: e31adae1-company-id-af5fba7dd803
+      properties:
+        amendment_contract_id:
+          description: The contract ID of the contract that needs to be amended.
+          type: string
+        contract_amendment:
+          description: "Contract amendment informations. As its properties may vary depending on the country,\n                you must query the [Show form schema](#tag/Contract-Amendments/operation/post_show_form_contract_amendment_schema) endpoint\n            passing the country code, `contract_amendment` and the employment ID as request body."
+          type: object
+        employment_id:
+          description: The employment ID that is related to the contract amendment request.
+          type: string
+      required:
+      - employment_id
+      - amendment_contract_id
+      - contract_amendment
+      title: CreateContractAmendmentParams
+      type: object
+    ContractAmendmentResponse:
+      description: Contract Amendment response
+      example:
+        data:
+          contract_amendment:
+            amendment_contract_id: 8772a9f1-b43c-46be-a1ce-e50b6819f5ee
+            changes:
+              compensation.amount:
+                current: 500000
+                previous: 400000
+              contract.job_title:
+                current: A new job title
+                previous: An old job title
+              contract_details.details.contract_duration_type:
+                current: fixed_term
+                previous: indefinite
+            employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+            id: ba310525-9282-40c9-8977-14d844bf891a
+            request_details:
+              additional_comments: null
+              effective_date: '2024-03-04'
+              reason_for_change: annual_pay_adjustment
+              reason_for_change_description: null
+              salary_decrease_details: null
+            requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+            status: submitted
+            submitted_at: '2023-04-13T13:35:06Z'
+            zendesk_ticket_url: https://zendesk.com/ticket-23333
+      properties:
+        data:
+          properties:
+            contract_amendment:
+              $ref: '#/components/schemas/ContractAmendment'
+          required:
+          - contract_amendment
+          type: object
+      title: ContractAmendmentResponse
+      type: object
+    ContractAmendmentStatus:
+      description: 'The current status of a contract amendment request.
+
+
+        - `submitted`: The amendment has been submitted and is awaiting Remote''s review.
+
+        - `in_review`: Remote is reviewing the amendment for compliance and feasibility.
+
+        - `done`: The amendment has been approved and applied to the contract.
+
+        - `canceled`: The amendment request was canceled before completion.
+
+        - `deleted`: The amendment request was deleted.
+
+        '
+      enum:
+      - submitted
+      - in_review
+      - done
+      - canceled
+      - deleted
+      example: submitted
+      title: ContractAmendmentStatus
+      type: string
+    SalaryDecreaseDetails:
+      description: The details of the salary decrease request if there is one
+      nullable: true
+      properties:
+        salary_decrease_reason:
+          enum:
+          - change_in_working_hours
+          - trade_salary_for_equity
+          - error_in_initial_salary
+          - role_change_or_demotion
+          - compensation_restructure
+          - other
+          type: string
+        salary_decrease_reason_description:
+          nullable: true
+          type: string
+        was_employee_informed:
+          type: string
+      title: SalaryDecreaseDetails
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    ContractAmendment:
+      description: A full contract amendment record, including the requested changes with their previous and current values.
+      example:
+        amendment_contract_id: 8772a9f1-b43c-46be-a1ce-e50b6819f5ee
+        changes:
+          compensation.amount:
+            current: 500000
+            previous: 400000
+          contract.job_title:
+            current: A new job title
+            previous: An old job title
+          contract_details.details.contract_duration_type:
+            current: fixed_term
+            previous: indefinite
+        employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+        id: ba310525-9282-40c9-8977-14d844bf891a
+        request_details:
+          additional_comments: null
+          effective_date: '2024-03-04'
+          reason_for_change: annual_pay_adjustment
+          reason_for_change_description: null
+          salary_decrease_details: null
+        requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+        status: submitted
+        submitted_at: '2023-04-13T13:35:06Z'
+        zendesk_ticket_url: https://zendesk.com/ticket-23333
+      properties:
+        amendment_contract_id:
+          description: The unique identifier of the contract being amended. Null if no specific contract was targeted.
+          nullable: true
+          type: string
+        changes:
+          description: Describes all the changes requested for the contract and contract details with all their previous and current values.
+          type: object
+        employment_id:
+          description: The unique identifier (UUID) of the employment.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the contract amendment.
+          type: string
+        request_details:
+          $ref: '#/components/schemas/RequestDetails'
+        requested_by:
+          description: The unique identifier (UUID) of the user who submitted the amendment.
+          type: string
+        status:
+          $ref: '#/components/schemas/ContractAmendmentStatus'
+        submitted_at:
+          description: The timestamp when the amendment was submitted.
+          format: datetime
+          type: string
+        zendesk_ticket_url:
+          description: A link to the support ticket associated with this amendment, if one was created. Null otherwise.
+          nullable: true
+          type: string
+      required:
+      - id
+      - amendment_contract_id
+      - employment_id
+      - status
+      - requested_by
+      - submitted_at
+      - request_details
+      - changes
+      - zendesk_ticket_url
+      title: ContractAmendment
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    RequestDetails:
+      description: The details of the requested changes for the contract amendment.
+      example:
+        additional_comments: null
+        effective_date: '2024-03-04'
+        reason_for_change: annual_pay_adjustment
+        reason_for_change_description: null
+        salary_decrease_details: null
+      properties:
+        additional_comments:
+          nullable: true
+          type: string
+        effective_date:
+          format: date
+          type: string
+        reason_for_change:
+          enum:
+          - annual_pay_adjustment
+          - country_rule_change
+          - error_correction
+          - job_change_reevaluation
+          - promotion
+          - other
+          nullable: true
+          type: string
+        reason_for_change_description:
+          description: This is filled when the reason_for_change is 'other'.
+          nullable: true
+          type: string
+        salary_decrease_details:
+          $ref: '#/components/schemas/SalaryDecreaseDetails'
+      title: RequestDetails
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

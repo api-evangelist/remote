@@ -1,0 +1,1069 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Pre-Onboarding Documents API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Pre-Onboarding Documents
+paths:
+  /v1/onboarding/employments/{employment_id}/pre-onboarding-document-requirements:
+    get:
+      callbacks: {}
+      deprecated: true
+      description: 'Returns the list of pre-onboarding document requirements (e.g. master service agreements,
+
+        individual labour agreements) that must be fulfilled before the given employment can be onboarded.
+
+
+        Deprecated: use `GET /onboarding/employments/:employment_id/pre-onboarding-requirements` instead,
+
+        which returns both document and acknowledgement requirements.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |
+
+        '
+      operationId: get_v1_onboarding_employments_employment_id_pre-onboarding-document-requirements
+      parameters:
+      - description: Employment ID
+        example: 9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IndexPreOnboardingDocumentRequirementsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - document:read
+        - document:write
+        - employment_documents
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - document:read
+        - document:write
+        - employment_documents
+        - all:write
+        - all:read
+      summary: List pre-onboarding document requirements for an employment
+      tags:
+      - Pre-Onboarding Documents
+  /v1/onboarding/employments/{employment_id}/pre-onboarding-documents/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns the rendered contract PDF (base64-encoded) and the list of signatories for the given
+
+        pre-onboarding document. The `content` field is prefixed with `data:application/pdf;base64,` so
+
+        it can be embedded directly in a document viewer.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |
+
+        '
+      operationId: get_v1_onboarding_employments_employment_id_pre-onboarding-documents_id
+      parameters:
+      - description: Employment ID
+        example: 9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      - description: Pre-onboarding document ID
+        example: 1a716003-ae89-4810-aa00-25df6e799162
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShowPreOnboardingDocumentResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - document:read
+        - document:write
+        - employment_documents
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - document:read
+        - document:write
+        - employment_documents
+        - all:write
+        - all:read
+      summary: Retrieve a pre-onboarding document with its rendered PDF content
+      tags:
+      - Pre-Onboarding Documents
+  /v1/onboarding/employments/{employment_id}/pre-onboarding-documents:
+    post:
+      callbacks: {}
+      deprecated: true
+      description: 'Finds an existing unsigned pre-onboarding document for the given requirement, or creates a new one.
+
+        Idempotent: repeated calls with the same `pre_onboarding_document_requirement_slug` return the same
+
+        document until it is signed.
+
+
+        Deprecated: use
+
+        `POST /onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/documents` instead.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |
+
+        '
+      operationId: post_v1_onboarding_employments_employment_id_pre-onboarding-documents
+      parameters:
+      - description: Employment ID
+        example: 9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindOrCreatePreOnboardingDocumentParams'
+        description: FindOrCreatePreOnboardingDocumentParams
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePreOnboardingDocumentResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - document:write
+        - employment_documents
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - document:write
+        - employment_documents
+        - all:write
+      summary: Find or create a pre-onboarding document for an employment
+      tags:
+      - Pre-Onboarding Documents
+  /v1/onboarding/employments/{employment_id}/pre-onboarding-documents/{id}/sign:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Signs the latest contract document associated with the given pre-onboarding document on behalf
+
+        of the company signatory.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |
+
+        '
+      operationId: post_v1_onboarding_employments_employment_id_pre-onboarding-documents_id_sign
+      parameters:
+      - description: Employment ID
+        example: 9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      - description: Pre-onboarding document ID
+        example: 1a716003-ae89-4810-aa00-25df6e799162
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignContractDocument'
+        description: SignContractDocument
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - document:write
+        - employment_documents
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - document:write
+        - employment_documents
+        - all:write
+      summary: Sign a pre-onboarding document
+      tags:
+      - Pre-Onboarding Documents
+components:
+  schemas:
+    PreOnboardingDocumentRequirement:
+      additionalProperties: false
+      description: A pre-onboarding document requirement that must be fulfilled before an employee can be onboarded.
+      example:
+        depends_on_requirement: null
+        description: Agreement governing the overall terms of service for the engagement.
+        document_constraints_ack_at: '2024-01-15T10:30:00Z'
+        freeze_employment_data: true
+        name: Master Service Agreement
+        needs_constraints_ack: false
+        redlining_help_email: redlining-help@remote.com
+        slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        status: awaiting_signatures
+        supports_redlining: true
+      properties:
+        depends_on_requirement:
+          allOf:
+          - $ref: '#/components/schemas/PreOnboardingDocumentRequirement'
+          description: The requirement that must be fulfilled before this one becomes available (if any).
+          nullable: true
+        description:
+          description: Human-readable description of the requirement.
+          type: string
+        document_constraints_ack_at:
+          description: Timestamp when the customer acknowledged the constraints (if any).
+          format: date-time
+          nullable: true
+          type: string
+        freeze_employment_data:
+          description: Whether the employment data is frozen because a document for this requirement exists.
+          nullable: true
+          type: boolean
+        name:
+          description: Human-readable name of the requirement.
+          type: string
+        needs_constraints_ack:
+          description: Whether the customer must acknowledge the hiring constraints of the country before creating a document.
+          type: boolean
+        redlining_help_email:
+          description: Email address to contact for help with redlining when supported.
+          nullable: true
+          type: string
+        slug:
+          $ref: '#/components/schemas/UuidSlug'
+        status:
+          description: Current status of this requirement for the given employment.
+          enum:
+          - blocked
+          - awaiting_signatures
+          - finished
+          - revised
+          nullable: true
+          type: string
+        supports_redlining:
+          description: Whether the requirement supports redlining (collaborative editing) of the generated document.
+          type: boolean
+      required:
+      - slug
+      - name
+      - description
+      - supports_redlining
+      - needs_constraints_ack
+      title: PreOnboardingDocumentRequirement
+      type: object
+    SignContractDocument:
+      description: SignContractDocument schema
+      example:
+        signature: Don Van Vliet
+      properties:
+        signature:
+          description: The signer's full legal name as their electronic signature.
+          type: string
+      required:
+      - signature
+      title: SignContractDocument
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    SuccessResponse:
+      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
+      example:
+        data:
+          status: ok
+      properties:
+        data:
+          properties:
+            status:
+              description: The result status. Always `"ok"` for successful operations.
+              type: string
+          type: object
+      required:
+      - data
+      title: SuccessResponse
+      type: object
+    SignatoryStatus:
+      description: Current signing status of this signatory
+      enum:
+      - pending
+      - signed
+      - unassigned
+      example: pending
+      title: SignatoryStatus
+      type: string
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    Signatory:
+      additionalProperties: false
+      description: A signatory on a contract document. For company and employee signatories, `user_id` is provided. For other signatory types, `user_id` is null.
+      example:
+        email: john@example.com
+        name: John Doe
+        signature: data:image/png;base64,iVBORw0KGgo...
+        signed_at: '2024-01-15T10:30:00Z'
+        status: signed
+        type: employee
+        user_id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+      properties:
+        email:
+          description: Email address of the signatory
+          nullable: true
+          type: string
+        name:
+          description: Full name of the signatory
+          nullable: true
+          type: string
+        signature:
+          description: Signature image as a data URI (e.g. `data:image/png;base64,...`), null if not yet signed
+          nullable: true
+          type: string
+        signature_method:
+          description: Signing method used by this signatory
+          enum:
+          - in_platform
+          - docusign
+          type: string
+        signature_type:
+          description: Legal signature level applied when signing
+          enum:
+          - standard
+          - qes
+          - aes
+          - ses
+          type: string
+        signed_at:
+          description: Timestamp when the signatory signed the document, null if not yet signed
+          format: date-time
+          nullable: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SignatoryStatus'
+        type:
+          $ref: '#/components/schemas/SignatoryType'
+        user_id:
+          description: User identifier for internal signatories, null for external signatories
+          nullable: true
+          type: string
+      required:
+      - type
+      - status
+      title: Signatory
+      type: object
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    ContractorContractDocumentStatus:
+      description: 'The signing status of a contract document.
+
+
+        - `draft`: The document is being prepared and has not been sent for signing.
+
+        - `awaiting_signatures`: The document has been sent and is waiting for one or more parties to sign.
+
+        - `finished`: All required signatures have been collected and the contract is fully executed.
+
+        '
+      enum:
+      - draft
+      - awaiting_signatures
+      - finished
+      example: draft
+      title: ContractorContractDocumentStatus
+      type: string
+    SignatoryType:
+      description: The role of this signatory in the contract signing process
+      enum:
+      - company
+      - employee
+      - admin
+      - external
+      - unknown
+      example: company
+      title: SignatoryType
+      type: string
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    IndexPreOnboardingDocumentRequirementsResponse:
+      additionalProperties: false
+      description: List of pre-onboarding document requirements for an employment.
+      example:
+        data:
+        - depends_on_requirement: null
+          description: Agreement governing the overall terms of service for the engagement.
+          document_constraints_ack_at: '2024-01-15T10:30:00Z'
+          freeze_employment_data: true
+          name: Master Service Agreement
+          needs_constraints_ack: false
+          redlining_help_email: redlining-help@remote.com
+          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          status: awaiting_signatures
+          supports_redlining: true
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PreOnboardingDocumentRequirement'
+          type: array
+      required:
+      - data
+      title: IndexPreOnboardingDocumentRequirementsResponse
+      type: object
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    ShowPreOnboardingDocumentResponse:
+      additionalProperties: false
+      description: Returns the rendered contract PDF (base64) and signatories for a pre-onboarding document.
+      example:
+        data:
+          pre_onboarding_document:
+            content: data:application/pdf;base64,JVBERi0xLjQK...
+            name: Master Service Agreement.pdf
+            signatories:
+            - email: john@example.com
+              name: John Doe
+              signature: data:image/png;base64,iVBORw0KGgo...
+              signed_at: '2024-01-15T10:30:00Z'
+              status: signed
+              type: employee
+              user_id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+            status: draft
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            pre_onboarding_document:
+              additionalProperties: false
+              properties:
+                content:
+                  description: Base64-encoded PDF, prefixed with `data:application/pdf;base64,`.
+                  format: binary
+                  type: string
+                name:
+                  description: File name of the rendered document.
+                  type: string
+                signatories:
+                  description: Parties that must sign or have signed the document.
+                  items:
+                    $ref: '#/components/schemas/Signatory'
+                  type: array
+                status:
+                  $ref: '#/components/schemas/ContractorContractDocumentStatus'
+              required:
+              - name
+              - content
+              - signatories
+              - status
+              type: object
+          required:
+          - pre_onboarding_document
+          type: object
+      required:
+      - data
+      title: ShowPreOnboardingDocumentResponse
+      type: object
+    FindOrCreatePreOnboardingDocumentParams:
+      additionalProperties: false
+      description: Parameters to find an existing unsigned pre-onboarding document or create a new one.
+      example:
+        pre_onboarding_document_requirement_slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        constraints_ack_at:
+          description: 'Timestamp when the customer acknowledged the hiring constraints. Required when the requirement has `needs_constraints_ack: true`.'
+          format: date-time
+          nullable: true
+          type: string
+        pre_onboarding_document_requirement_slug:
+          allOf:
+          - $ref: '#/components/schemas/UuidSlug'
+          description: Slug of the pre-onboarding document requirement to fulfil. Obtain this from the `GET .../pre-onboarding-document-requirements` endpoint.
+      required:
+      - pre_onboarding_document_requirement_slug
+      title: FindOrCreatePreOnboardingDocumentParams
+      type: object
+    CreatePreOnboardingDocumentResponse:
+      additionalProperties: false
+      description: Returns the slug of the found-or-created pre-onboarding document.
+      example:
+        data:
+          pre_onboarding_document:
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            pre_onboarding_document:
+              additionalProperties: false
+              properties:
+                id:
+                  $ref: '#/components/schemas/UuidSlug'
+              required:
+              - id
+              type: object
+          required:
+          - pre_onboarding_document
+          type: object
+      required:
+      - data
+      title: CreatePreOnboardingDocumentResponse
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

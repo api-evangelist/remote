@@ -1,0 +1,1914 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Timesheets API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Timesheets
+paths:
+  /v1/timesheets/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Shows a timesheet by its ID.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: get_v1_timesheets_id
+      parameters:
+      - description: Timesheet ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimesheetResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: Show timesheet
+      tags:
+      - Timesheets
+  /v1/contractors/employments/{employment_id}/timesheets:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates a timesheet on behalf of a contractor employment.
+
+
+        The submitted hours are immediately available to the contractor in the Remote UI for
+
+        self-serve invoice creation (Invoices → Create invoice → "Use Time Tracking").
+
+
+        This endpoint is restricted to contractor employments. Calls against EOR or Global Payroll
+
+        employments are rejected with `422`.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: post_v1_contractors_employments_employment_id_timesheets
+      parameters:
+      - description: Contractor employment ID
+        example: c0a167b8-459d-4e96-9766-7a04c160892e
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractorCreateTimesheetParams'
+        description: ContractorCreateTimesheetParams
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractorTimesheetResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractorCreateTimesheetUnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+      summary: Create a contractor timesheet
+      tags:
+      - Timesheets
+  /v1/employee/timesheets:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a paginated list of timesheets for the authenticated employee.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: get_v1_employee_timesheets
+      parameters:
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2Assertion:
+        - https://gateway.remote.com/employment.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List timesheets for the authenticated employee
+      tags:
+      - Timesheets
+  /v1/timesheets/{timesheet_id}/approve:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Approves the given timesheet.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: post_v1_timesheets_timesheet_id_approve
+      parameters:
+      - description: Timesheet ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: timesheet_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MinimalTimesheetResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+      summary: Approve timesheet
+      tags:
+      - Timesheets
+  /v1/timesheets:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Lists all timesheets.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: get_v1_timesheets
+      parameters:
+      - description: Filter timesheets by their status
+        in: query
+        name: status
+        required: false
+        schema:
+          $ref: '#/components/schemas/TimesheetStatus'
+      - description: Sort order
+        example: asc
+        in: query
+        name: order
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Field to sort by
+        example: submitted_at
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - submitted_at
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTimesheetsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:read
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        - all:read
+      summary: List timesheets
+      tags:
+      - Timesheets
+  /v1/timesheets/{timesheet_id}/send-back:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Sends the given timesheet back to the employee for review or modification.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |
+
+        '
+      operationId: post_v1_timesheets_timesheet_id_send-back
+      parameters:
+      - description: Timesheet ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: timesheet_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendBackTimesheetParams'
+        description: SendBackTimesheetParams
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SentBackTimesheetResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - timesheet:write
+        - time_and_attendance
+        - all:write
+      summary: Send back a timesheet for review or modification
+      tags:
+      - Timesheets
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    MinimalTimesheet:
+      additionalProperties: false
+      description: A lightweight timesheet representation returned after create and approve operations. Contains basic identification and status fields but not the detailed hours breakdown or time tracking entries.
+      example:
+        approval_required: true
+        country_code: PRT
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        end_date: '2021-07-01'
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        notes: Some notes
+        start_date: '2021-07-01'
+        status: submitted
+        submitted_at: '2021-07-15T18:18:17Z'
+      properties:
+        approval_required:
+          description: Whether this timesheet requires explicit approval before processing.
+          type: boolean
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        employment_id:
+          $ref: '#/components/schemas/UuidSlug'
+        end_date:
+          $ref: '#/components/schemas/Date'
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        notes:
+          description: Optional notes added by the employee.
+          nullable: true
+          type: string
+        start_date:
+          $ref: '#/components/schemas/Date'
+        status:
+          $ref: '#/components/schemas/TimesheetStatus'
+        submitted_at:
+          description: The timestamp when the employee submitted this timesheet. Null if not yet submitted.
+          format: datetime
+          nullable: true
+          type: string
+      required:
+      - id
+      - start_date
+      - end_date
+      - status
+      - country_code
+      - employment_id
+      - submitted_at
+      - approval_required
+      - notes
+      title: MinimalTimesheet
+      type: object
+    TimeTracking:
+      additionalProperties: false
+      description: A single time tracking entry within a timesheet, representing a block of work with clock-in/out times. Includes detailed breakdowns of hours by type (regular, overtime, night, weekend, holiday).
+      example:
+        clock_in: '2021-07-15T18:18:17Z'
+        clock_out: '2021-07-15T18:18:17Z'
+        has_holiday_hours: false
+        has_night_hours: false
+        has_weekend_hours: false
+        holiday_hours:
+          hours: 35
+          minutes: 13
+        night_hours:
+          hours: 35
+          minutes: 13
+        notes: Time tracking project.
+        time_breakdown:
+          day:
+            holiday:
+              hours: 35
+              minutes: 13
+            regular:
+              hours: 35
+              minutes: 13
+            weekend:
+              hours: 35
+              minutes: 13
+          night:
+            holiday:
+              hours: 35
+              minutes: 13
+            regular:
+              hours: 35
+              minutes: 13
+            weekend:
+              hours: 35
+              minutes: 13
+        timezone: Etc/UTC
+        total_hours:
+          hours: 35
+          minutes: 13
+        type: regular_hours
+        weekend_hours:
+          hours: 35
+          minutes: 13
+      properties:
+        clock_in:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        clock_out:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        has_holiday_hours:
+          description: Whether this time tracking entry includes any hours worked on public holidays.
+          type: boolean
+        has_night_hours:
+          description: Whether this time tracking entry includes any hours worked during night hours.
+          type: boolean
+        has_weekend_hours:
+          description: Whether this time tracking entry includes any hours worked on weekends.
+          type: boolean
+        holiday_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        night_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        notes:
+          description: Optional free-text notes about this time tracking entry, such as project or task details.
+          nullable: true
+          type: string
+        time_breakdown:
+          $ref: '#/components/schemas/TimeBreakdown'
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        total_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        type:
+          description: The category of time being tracked (e.g., regular hours, overtime, on-call, break time).
+          enum:
+          - regular_hours
+          - overtime
+          - on_call
+          - break
+          - unpaid_break
+          - time_off
+          - public_holiday
+          type: string
+        weekend_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+      required:
+      - type
+      - notes
+      - timezone
+      - clock_in
+      - clock_out
+      - total_hours
+      - night_hours
+      - weekend_hours
+      - holiday_hours
+      - has_night_hours
+      - has_weekend_hours
+      - has_holiday_hours
+      - time_breakdown
+      title: TimeTracking
+      type: object
+    Date:
+      description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+      example: '2021-07-01'
+      format: date
+      title: Date
+      type: string
+    ContractorTimesheetResponse:
+      additionalProperties: false
+      description: Response returned after creating a contractor timesheet.
+      example:
+        data:
+          timesheet:
+            break_hours:
+              hours: 35
+              minutes: 13
+            country_code: PRT
+            employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            end_date: '2021-07-01'
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            notes: null
+            on_call_hours:
+              hours: 35
+              minutes: 13
+            regular_hours:
+              hours: 35
+              minutes: 13
+            start_date: '2021-07-01'
+            submitted_at: '2021-07-15T18:18:17Z'
+            time_trackings:
+            - clock_in: '2021-07-15T18:18:17Z'
+              clock_out: '2021-07-15T18:18:17Z'
+              notes: Project Alpha
+              timezone: Etc/UTC
+              total_hours:
+                hours: 35
+                minutes: 13
+              type: regular_hours
+            total_hours:
+              hours: 35
+              minutes: 13
+      properties:
+        data:
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/ContractorTimesheet'
+          required:
+          - timesheet
+          type: object
+      title: ContractorTimesheetResponse
+      type: object
+    TimeBreakdown:
+      additionalProperties: false
+      description: Detailed hours breakdown for a time tracking entry, split by time of day (day vs night) and then by type of day (regular, weekend, holiday). Useful for calculating overtime, night shift premiums, and holiday pay.
+      example:
+        day:
+          holiday:
+            hours: 35
+            minutes: 13
+          regular:
+            hours: 35
+            minutes: 13
+          weekend:
+            hours: 35
+            minutes: 13
+        night:
+          holiday:
+            hours: 35
+            minutes: 13
+          regular:
+            hours: 35
+            minutes: 13
+          weekend:
+            hours: 35
+            minutes: 13
+      properties:
+        day:
+          $ref: '#/components/schemas/TypeOfDayBreakdown'
+        night:
+          $ref: '#/components/schemas/TypeOfDayBreakdown'
+      required:
+      - day
+      - night
+      title: TimeBreakdown
+      type: object
+    SuccessResponse:
+      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
+      example:
+        data:
+          status: ok
+      properties:
+        data:
+          properties:
+            status:
+              description: The result status. Always `"ok"` for successful operations.
+              type: string
+          type: object
+      required:
+      - data
+      title: SuccessResponse
+      type: object
+    Timesheet:
+      additionalProperties: false
+      description: 'A timesheet represents an employee''s recorded working hours for a specific date range. It contains aggregated hour totals and individual time tracking entries. Timesheets progress through a lifecycle: open (draft) -> submitted -> approved -> processed, or they may be sent back for revision.'
+      example:
+        approval_required: true
+        break_hours:
+          hours: 35
+          minutes: 13
+        country_code: PRT
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        end_date: '2021-07-01'
+        holiday_hours:
+          hours: 35
+          minutes: 13
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        night_hours:
+          hours: 35
+          minutes: 13
+        notes: Some notes
+        on_call_hours:
+          hours: 35
+          minutes: 13
+        overtime_hours:
+          hours: 35
+          minutes: 13
+        regular_hours:
+          hours: 35
+          minutes: 13
+        start_date: '2021-07-01'
+        status: submitted
+        submitted_at: '2021-07-15T18:18:17Z'
+        time_trackings:
+        - clock_in: '2021-07-15T18:18:17Z'
+          clock_out: '2021-07-15T18:18:17Z'
+          has_holiday_hours: false
+          has_night_hours: false
+          has_weekend_hours: false
+          holiday_hours:
+            hours: 35
+            minutes: 13
+          night_hours:
+            hours: 35
+            minutes: 13
+          notes: Time tracking project.
+          time_breakdown:
+            day:
+              holiday:
+                hours: 35
+                minutes: 13
+              regular:
+                hours: 35
+                minutes: 13
+              weekend:
+                hours: 35
+                minutes: 13
+            night:
+              holiday:
+                hours: 35
+                minutes: 13
+              regular:
+                hours: 35
+                minutes: 13
+              weekend:
+                hours: 35
+                minutes: 13
+          timezone: Etc/UTC
+          total_hours:
+            hours: 35
+            minutes: 13
+          type: regular_hours
+          weekend_hours:
+            hours: 35
+            minutes: 13
+        total_hours:
+          hours: 35
+          minutes: 13
+        unpaid_break_hours:
+          hours: 35
+          minutes: 13
+        weekend_hours:
+          hours: 35
+          minutes: 13
+      properties:
+        approval_required:
+          description: Whether this timesheet requires explicit approval before it can be processed. When false, the timesheet may be auto-approved based on the company's configuration.
+          type: boolean
+        break_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        employment_id:
+          $ref: '#/components/schemas/UuidSlug'
+        end_date:
+          $ref: '#/components/schemas/Date'
+        holiday_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        night_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        notes:
+          description: Optional notes added by the employee when submitting the timesheet.
+          nullable: true
+          type: string
+        on_call_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        overtime_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        regular_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        start_date:
+          $ref: '#/components/schemas/Date'
+        status:
+          $ref: '#/components/schemas/TimesheetStatus'
+        submitted_at:
+          description: The timestamp when the employee submitted this timesheet for approval. Null if the timesheet has not been submitted yet (status is `open`).
+          format: datetime
+          nullable: true
+          type: string
+        time_trackings:
+          description: The individual time tracking entries that make up this timesheet.
+          items:
+            $ref: '#/components/schemas/TimeTracking'
+          type: array
+        timeoff_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        total_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        unpaid_break_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        weekend_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+      required:
+      - id
+      - start_date
+      - end_date
+      - status
+      - country_code
+      - employment_id
+      - submitted_at
+      - approval_required
+      - notes
+      - regular_hours
+      - total_hours
+      - break_hours
+      - unpaid_break_hours
+      - overtime_hours
+      - holiday_hours
+      - weekend_hours
+      - night_hours
+      - on_call_hours
+      - time_trackings
+      title: Timesheet
+      type: object
+    SentBackTimesheet:
+      additionalProperties: false
+      description: A timesheet that has been sent back to the employee for revision. The status will be `in_calibration` and includes the reason provided by the reviewer.
+      example:
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        sent_back: true
+        sent_back_reason: Please review the timesheet.
+        status: submitted
+      properties:
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        sent_back:
+          description: Always `true` for sent-back timesheets, indicating the timesheet was returned for revision.
+          type: boolean
+        sent_back_reason:
+          description: The reason provided by the reviewer for why the timesheet needs to be revised.
+          nullable: false
+          type: string
+        status:
+          $ref: '#/components/schemas/TimesheetStatus'
+      required:
+      - id
+      - status
+      - sent_back
+      - sent_back_reason
+      title: SentBackTimesheet
+      type: object
+    ContractorTimesheet:
+      additionalProperties: false
+      description: A contractor timesheet, returned by the contractor create endpoint. Only contains fields relevant to the contractor flow — EOR-only fields (overtime, night/weekend/holiday hours, approval flag) are not included.
+      example:
+        break_hours:
+          hours: 35
+          minutes: 13
+        country_code: PRT
+        employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        end_date: '2021-07-01'
+        id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        notes: null
+        on_call_hours:
+          hours: 35
+          minutes: 13
+        regular_hours:
+          hours: 35
+          minutes: 13
+        start_date: '2021-07-01'
+        submitted_at: '2021-07-15T18:18:17Z'
+        time_trackings:
+        - clock_in: '2021-07-15T18:18:17Z'
+          clock_out: '2021-07-15T18:18:17Z'
+          notes: Project Alpha
+          timezone: Etc/UTC
+          total_hours:
+            hours: 35
+            minutes: 13
+          type: regular_hours
+        total_hours:
+          hours: 35
+          minutes: 13
+      properties:
+        break_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        employment_id:
+          $ref: '#/components/schemas/UuidSlug'
+        end_date:
+          $ref: '#/components/schemas/Date'
+        id:
+          $ref: '#/components/schemas/UuidSlug'
+        notes:
+          description: Optional notes attached to the timesheet.
+          nullable: true
+          type: string
+        on_call_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        regular_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        start_date:
+          $ref: '#/components/schemas/Date'
+        submitted_at:
+          description: The timestamp the timesheet was submitted.
+          format: datetime
+          nullable: true
+          type: string
+        time_trackings:
+          description: The individual time tracking entries that make up this timesheet.
+          items:
+            $ref: '#/components/schemas/ContractorTimeTracking'
+          type: array
+        total_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+      required:
+      - id
+      - employment_id
+      - country_code
+      - start_date
+      - end_date
+      - submitted_at
+      - notes
+      - total_hours
+      - regular_hours
+      - on_call_hours
+      - break_hours
+      - time_trackings
+      title: ContractorTimesheet
+      type: object
+    Timezone:
+      description: '[TZ identifier](https://www.iana.org/time-zones)'
+      example: Etc/UTC
+      title: Timezone
+      type: string
+    TypeOfDayBreakdown:
+      additionalProperties: false
+      description: Hours breakdown by type of day (regular working day, weekend, or public holiday) for a specific time of day (day or night).
+      example:
+        holiday:
+          hours: 35
+          minutes: 13
+        regular:
+          hours: 35
+          minutes: 13
+        weekend:
+          hours: 35
+          minutes: 13
+      properties:
+        holiday:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        regular:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        weekend:
+          $ref: '#/components/schemas/HoursAndMinutes'
+      required:
+      - regular
+      - weekend
+      - holiday
+      title: TypeOfDayBreakdown
+      type: object
+    ListTimesheetsResponse:
+      description: Response schema listing many timesheets
+      example:
+        current_page: 1
+        timesheets:
+        - approval_required: true
+          break_hours:
+            hours: 35
+            minutes: 13
+          country_code: PRT
+          employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          end_date: '2021-07-01'
+          holiday_hours:
+            hours: 35
+            minutes: 13
+          id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          night_hours:
+            hours: 35
+            minutes: 13
+          notes: Some notes
+          on_call_hours:
+            hours: 35
+            minutes: 13
+          overtime_hours:
+            hours: 35
+            minutes: 13
+          regular_hours:
+            hours: 35
+            minutes: 13
+          start_date: '2021-07-01'
+          status: submitted
+          submitted_at: '2021-07-15T18:18:17Z'
+          time_trackings:
+          - clock_in: '2021-07-15T18:18:17Z'
+            clock_out: '2021-07-15T18:18:17Z'
+            has_holiday_hours: false
+            has_night_hours: false
+            has_weekend_hours: false
+            holiday_hours:
+              hours: 35
+              minutes: 13
+            night_hours:
+              hours: 35
+              minutes: 13
+            notes: Time tracking project.
+            time_breakdown:
+              day:
+                holiday:
+                  hours: 35
+                  minutes: 13
+                regular:
+                  hours: 35
+                  minutes: 13
+                weekend:
+                  hours: 35
+                  minutes: 13
+              night:
+                holiday:
+                  hours: 35
+                  minutes: 13
+                regular:
+                  hours: 35
+                  minutes: 13
+                weekend:
+                  hours: 35
+                  minutes: 13
+            timezone: Etc/UTC
+            total_hours:
+              hours: 35
+              minutes: 13
+            type: regular_hours
+            weekend_hours:
+              hours: 35
+              minutes: 13
+          total_hours:
+            hours: 35
+            minutes: 13
+          unpaid_break_hours:
+            hours: 35
+            minutes: 13
+          weekend_hours:
+            hours: 35
+            minutes: 13
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            timesheets:
+              items:
+                $ref: '#/components/schemas/Timesheet'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListTimesheetsResponse
+      type: object
+    ContractorCreateTimesheetParams:
+      additionalProperties: false
+      description: 'Parameters for creating a timesheet on behalf of a contractor employment. The target employment is taken from the URL path, not the request body. Allowed `time_trackings.type` values are restricted to the contractor subset: `regular_hours`, `on_call`, `break`.'
+      example:
+        end_date: '2021-07-01'
+        start_date: '2021-07-01'
+        time_trackings:
+        - clock_in: '2021-07-15T18:18:17Z'
+          clock_out: '2021-07-15T18:18:17Z'
+          notes: Project Alpha
+          timezone: Etc/UTC
+          type: regular_hours
+      properties:
+        end_date:
+          $ref: '#/components/schemas/Date'
+        start_date:
+          $ref: '#/components/schemas/Date'
+        time_trackings:
+          description: One or more time tracking entries to include in the timesheet.
+          items:
+            $ref: '#/components/schemas/ContractorTimeTrackingParams'
+          minItems: 1
+          type: array
+      required:
+      - start_date
+      - end_date
+      - time_trackings
+      title: ContractorCreateTimesheetParams
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    SendBackTimesheetParams:
+      additionalProperties: false
+      description: Parameters for sending a submitted timesheet back to the employee for revision. The timesheet status will change to `in_calibration` and the employee will be notified.
+      example:
+        sent_back_reason: Please review the timesheet.
+      properties:
+        sent_back_reason:
+          description: A required explanation of why the timesheet is being sent back. This will be visible to the employee.
+          nullable: false
+          type: string
+      required:
+      - sent_back_reason
+      title: SendBackTimesheetParams
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    ContractorTimesheetOverlapResponse:
+      description: 'Returned when the submitted dates overlap an existing timesheet for the employment (HTTP 422).
+
+
+        In addition to the standard `errors`/`message` fields, the response includes
+
+        `conflicting_timesheet_id` — the `id` of the existing timesheet the submitted dates overlap.
+
+        '
+      example:
+        conflicting_timesheet_id: c0a167b8-459d-4e96-9766-7a04c160892e
+        errors:
+          start_date:
+          - you already have a timesheet within these start and end dates
+        message: Unprocessable Entity
+      properties:
+        conflicting_timesheet_id:
+          $ref: '#/components/schemas/UuidSlug'
+        errors:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        message:
+          type: string
+      required:
+      - errors
+      - message
+      - conflicting_timesheet_id
+      title: ContractorTimesheetOverlapResponse
+      type: object
+    HoursAndMinutes:
+      description: A duration expressed as hours and minutes.
+      example:
+        hours: 35
+        minutes: 13
+      properties:
+        hours:
+          description: The number of whole hours.
+          type: integer
+        minutes:
+          description: The number of remaining minutes (0-59).
+          type: integer
+      title: HoursAndMinutes
+      type: object
+    ContractorCreateTimesheetUnprocessableEntityResponse:
+      anyOf:
+      - $ref: '#/components/schemas/UnprocessableEntityResponse'
+      - $ref: '#/components/schemas/ContractorTimesheetOverlapResponse'
+      description: 'A validation error (HTTP 422). Either a standard error response, or — when the submitted
+
+        dates overlap an existing timesheet — a response that additionally includes
+
+        `conflicting_timesheet_id`.
+
+        '
+      example:
+        conflicting_timesheet_id: c0a167b8-459d-4e96-9766-7a04c160892e
+        errors:
+          start_date:
+          - you already have a timesheet within these start and end dates
+        message: Unprocessable Entity
+      title: ContractorCreateTimesheetUnprocessableEntityResponse
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    TimesheetResponse:
+      additionalProperties: false
+      description: Response containing a full timesheet with all hour breakdowns and time tracking entries.
+      example:
+        data:
+          timesheet:
+            approval_required: true
+            break_hours:
+              hours: 35
+              minutes: 13
+            country_code: PRT
+            employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            end_date: '2021-07-01'
+            holiday_hours:
+              hours: 35
+              minutes: 13
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            night_hours:
+              hours: 35
+              minutes: 13
+            notes: Some notes
+            on_call_hours:
+              hours: 35
+              minutes: 13
+            overtime_hours:
+              hours: 35
+              minutes: 13
+            regular_hours:
+              hours: 35
+              minutes: 13
+            start_date: '2021-07-01'
+            status: submitted
+            submitted_at: '2021-07-15T18:18:17Z'
+            time_trackings:
+            - clock_in: '2021-07-15T18:18:17Z'
+              clock_out: '2021-07-15T18:18:17Z'
+              has_holiday_hours: false
+              has_night_hours: false
+              has_weekend_hours: false
+              holiday_hours:
+                hours: 35
+                minutes: 13
+              night_hours:
+                hours: 35
+                minutes: 13
+              notes: Time tracking project.
+              time_breakdown:
+                day:
+                  holiday:
+                    hours: 35
+                    minutes: 13
+                  regular:
+                    hours: 35
+                    minutes: 13
+                  weekend:
+                    hours: 35
+                    minutes: 13
+                night:
+                  holiday:
+                    hours: 35
+                    minutes: 13
+                  regular:
+                    hours: 35
+                    minutes: 13
+                  weekend:
+                    hours: 35
+                    minutes: 13
+              timezone: Etc/UTC
+              total_hours:
+                hours: 35
+                minutes: 13
+              type: regular_hours
+              weekend_hours:
+                hours: 35
+                minutes: 13
+            total_hours:
+              hours: 35
+              minutes: 13
+            unpaid_break_hours:
+              hours: 35
+              minutes: 13
+            weekend_hours:
+              hours: 35
+              minutes: 13
+      properties:
+        data:
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/Timesheet'
+          required:
+          - timesheet
+          type: object
+      title: TimesheetResponse
+      type: object
+    TimesheetStatus:
+      description: 'The current status of a timesheet in its lifecycle.
+
+
+        - `open`: The timesheet is a draft and only visible to the employee. It has not been submitted yet.
+
+        - `submitted`: The employee has submitted the timesheet for review. It is awaiting approval.
+
+        - `approved`: The timesheet has been approved and will be included in the next payroll run.
+
+        - `in_calibration`: The timesheet was sent back to the employee for revision. The employee needs to correct and resubmit it.
+
+        - `processed`: The timesheet has been processed as part of a payroll run. This is a terminal state.
+
+        '
+      enum:
+      - open
+      - submitted
+      - approved
+      - in_calibration
+      - processed
+      example: submitted
+      nullable: false
+      title: TimesheetStatus
+      type: string
+    ContractorTimeTrackingParams:
+      additionalProperties: false
+      description: Parameters for a single time tracking entry on a contractor timesheet. Allowed `type` values are restricted to the contractor subset.
+      example:
+        clock_in: '2021-07-15T18:18:17Z'
+        clock_out: '2021-07-15T18:18:17Z'
+        notes: Project Alpha
+        timezone: Etc/UTC
+        type: regular_hours
+      properties:
+        clock_in:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        clock_out:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        notes:
+          description: Optional free-text notes about this time entry, such as project or task details.
+          nullable: true
+          type: string
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        type:
+          description: The category of time being tracked. Contractors are restricted to `regular_hours`, `on_call`, or `break`.
+          enum:
+          - regular_hours
+          - on_call
+          - break
+          type: string
+      required:
+      - type
+      - timezone
+      - clock_in
+      - clock_out
+      title: ContractorTimeTrackingParams
+      type: object
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    DateTimeIso8601:
+      description: 'UTC date time in [ISO 8601][] format.
+
+
+        [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
+
+        '
+      example: '2021-07-15T18:18:17Z'
+      format: date-time
+      title: DateTimeIso8601
+      type: string
+    SentBackTimesheetResponse:
+      additionalProperties: false
+      description: Response returned after a timesheet has been sent back to the employee for revision.
+      example:
+        data:
+          timesheet:
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            sent_back: true
+            sent_back_reason: Please review the timesheet.
+            status: submitted
+      properties:
+        data:
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/SentBackTimesheet'
+          required:
+          - timesheet
+          type: object
+      title: SentBackTimesheetResponse
+      type: object
+    ContractorTimeTracking:
+      additionalProperties: false
+      description: A single time tracking entry on a contractor timesheet.
+      example:
+        clock_in: '2021-07-15T18:18:17Z'
+        clock_out: '2021-07-15T18:18:17Z'
+        notes: Project Alpha
+        timezone: Etc/UTC
+        total_hours:
+          hours: 35
+          minutes: 13
+        type: regular_hours
+      properties:
+        clock_in:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        clock_out:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        notes:
+          description: Optional notes about this entry.
+          nullable: true
+          type: string
+        timezone:
+          $ref: '#/components/schemas/Timezone'
+        total_hours:
+          $ref: '#/components/schemas/HoursAndMinutes'
+        type:
+          description: The category of time being tracked. One of `regular_hours`, `on_call`, `break`.
+          enum:
+          - regular_hours
+          - on_call
+          - break
+          type: string
+      required:
+      - type
+      - notes
+      - timezone
+      - clock_in
+      - clock_out
+      - total_hours
+      title: ContractorTimeTracking
+      type: object
+    CountryCode:
+      description: Country code according to ISO 3166-1 3-digit alphabetic codes.
+      example: PRT
+      title: CountryCode
+      type: string
+    MinimalTimesheetResponse:
+      additionalProperties: false
+      description: Response containing a minimal timesheet representation, returned after create and approve operations.
+      example:
+        data:
+          timesheet:
+            approval_required: true
+            country_code: PRT
+            employment_id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            end_date: '2021-07-01'
+            id: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            notes: Some notes
+            start_date: '2021-07-01'
+            status: submitted
+            submitted_at: '2021-07-15T18:18:17Z'
+      properties:
+        data:
+          properties:
+            timesheet:
+              $ref: '#/components/schemas/MinimalTimesheet'
+          required:
+          - timesheet
+          type: object
+      title: MinimalTimesheetResponse
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

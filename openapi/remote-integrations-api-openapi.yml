@@ -1,0 +1,3017 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Integrations API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Integrations
+paths:
+  /v1/help-center-articles/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Get a help center article by its ID
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage company resources (`company_admin`) | View help articles (`help_center_article:read`) | - |
+
+        '
+      operationId: get_v1_help-center-articles_id
+      parameters:
+      - description: Help Center Article Zendesk ID
+        example: 12345679
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelpCenterArticleResponse'
+          description: Success
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - help_center_article:read
+        - company_admin
+        - all:write
+        - all:read
+        OAuth2ClientCredentials:
+        - https://gateway.remote.com/company.manage
+        - help_center_article:read
+        - company_admin
+        - all:write
+        - all:read
+      summary: Get Help Center Article
+      tags:
+      - Integrations
+  /v1/scim/v2/Users/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieves a single user for the authenticated company by user ID
+      operationId: get_v1_scim_v2_Users_id
+      parameters:
+      - description: User ID (slug)
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.User'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Not Found
+      summary: Get user by ID via SCIM v2.0
+      tags:
+      - Integrations
+  /v1/webhook-events:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'List all webhook events
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage company resources (`company_admin`) | View webhooks (`webhook:read`) | Manage webhooks (`webhook:write`) |
+
+        '
+      operationId: get_v1_webhook-events
+      parameters:
+      - description: Filter by webhook event type
+        example: timesheet.created
+        in: query
+        name: event_type
+        required: false
+        schema:
+          type: string
+      - description: Filter by delivery status (true = 200, false = 4xx/5xx)
+        example: true
+        in: query
+        name: successfully_delivered
+        required: false
+        schema:
+          type: boolean
+      - description: Filter by company ID
+        example: 123e4567-e89b-12d3-a456-426614174000
+        in: query
+        name: company_id
+        required: false
+        schema:
+          type: string
+      - description: Filter by date before (ISO 8601 format)
+        example: '2025-01-01T00:00:00Z'
+        in: query
+        name: before
+        required: false
+        schema:
+          type: string
+      - description: Filter by date after (ISO 8601 format)
+        example: '2025-01-01T00:00:00Z'
+        in: query
+        name: after
+        required: false
+        schema:
+          type: string
+      - description: Sort order
+        example: asc
+        in: query
+        name: order
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Field to sort by
+        example: first_triggered_at
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - first_triggered_at
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWebhookEventsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2ClientCredentials:
+        - https://gateway.remote.com/company.manage
+        - webhook:read
+        - webhook:write
+        - company_admin
+        - all:write
+        - all:read
+      summary: List Webhook Events
+      tags:
+      - Integrations
+  /v1/webhook-events/replay:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Replay webhook events
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |
+
+        '
+      operationId: post_v1_webhook-events_replay
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplayWebhookEventsParams'
+        description: WebhookEvent
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - OAuth2ClientCredentials:
+        - https://gateway.remote.com/company.manage
+        - webhook:write
+        - company_admin
+        - all:write
+      summary: Replay Webhook Events
+      tags:
+      - Integrations
+  /v1/webhook-callbacks/{id}:
+    delete:
+      callbacks: {}
+      deprecated: false
+      description: 'Delete a callback previously registered for webhooks
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |
+
+        '
+      operationId: delete_v1_webhook-callbacks_id
+      parameters:
+      - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
+
+
+          The refresh token needs to have been obtained through the Authorization Code flow.
+
+          '
+        example: Bearer <COMPANY-SCOPED ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      - description: Webhook Callback ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - webhook:write
+        - company_admin
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - webhook:write
+        - company_admin
+        - all:write
+      summary: Delete a Webhook Callback
+      tags:
+      - Integrations
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: 'Update a callback previously registered for webhooks
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |
+
+        '
+      operationId: patch_v1_webhook-callbacks_id
+      parameters:
+      - description: Webhook Callback ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebhookCallbackParams'
+        description: WebhookCallback
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookCallbackResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - webhook:write
+        - company_admin
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - webhook:write
+        - company_admin
+        - all:write
+      summary: Update a Webhook Callback
+      tags:
+      - Integrations
+  /v1/webhook-callbacks:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Register a callback to be used for webhooks
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |
+
+        '
+      operationId: post_v1_webhook-callbacks
+      parameters:
+      - description: 'This endpoint works with any of the access tokens provided. You can use an access
+
+          token obtained through the Client Credentials flow, the Authorization Code flow, or the Refresh Token flow.
+
+          '
+        example: Bearer <ANY ACCESS TOKEN>
+        in: header
+        name: Authorization
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookCallbackParams'
+        description: WebhookCallback
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookCallbackResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - webhook:write
+        - company_admin
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - webhook:write
+        - company_admin
+        - all:write
+        OAuth2ClientCredentials:
+        - https://gateway.remote.com/company.manage
+        - webhook:write
+        - company_admin
+        - all:write
+      summary: Create a Webhook Callback
+      tags:
+      - Integrations
+  /v1/scim/v2/Users:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieves a list of users for the authenticated company following SCIM 2.0 standard
+      operationId: get_v1_scim_v2_Users
+      parameters:
+      - description: 1-based index of the first result
+        example: 1
+        in: query
+        name: startIndex
+        required: false
+        schema:
+          type: integer
+      - description: Maximum number of results per page
+        example: 50
+        in: query
+        name: count
+        required: false
+        schema:
+          type: integer
+      - description: Filter expression for attributes (supports eq, ne, co, sw, ew, pr, lt, le, gt, ge)
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.UserListResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Not Found
+      summary: List users via SCIM v2.0
+      tags:
+      - Integrations
+  /v1/scim/v2/Groups:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieves a list of groups (departments) for the authenticated company following SCIM 2.0 standard
+      operationId: get_v1_scim_v2_Groups
+      parameters:
+      - description: 1-based index of the first result
+        example: 1
+        in: query
+        name: startIndex
+        required: false
+        schema:
+          type: integer
+      - description: Maximum number of results per page
+        example: 50
+        in: query
+        name: count
+        required: false
+        schema:
+          type: integer
+      - description: Filter expression for attributes (supports eq, ne, co, sw, ew, pr, lt, le, gt, ge)
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.GroupListResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Not Found
+      summary: List groups via SCIM v2.0
+      tags:
+      - Integrations
+  /v1/custom-fields:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns custom fields definitions
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage custom fields (`custom_field:write`) |
+
+        '
+      operationId: get_v1_custom-fields
+      parameters:
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEmploymentCustomFieldsResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field:write
+        - employments
+        - all:write
+      summary: Lists custom fields definitions
+      tags:
+      - Integrations
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Creates a new custom field definition.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View custom fields (`custom_field:read`) | Manage custom fields (`custom_field:write`) |
+
+        '
+      operationId: post_v1_custom-fields
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCustomFieldDefinitionParams'
+        description: Custom Field Definition Create Parameters
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEmploymentCustomFieldResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field:read
+        - custom_field:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field:read
+        - custom_field:write
+        - employments
+        - all:write
+        - all:read
+      summary: Create Custom Field Definition
+      tags:
+      - Integrations
+  /v1/employments/{employment_id}/custom-fields:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a list of custom field values for a given employment
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |
+
+        '
+      operationId: get_v1_employments_employment_id_custom-fields
+      parameters:
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEmploymentCustomFieldValuePaginatedResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:read
+        - custom_field_value:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:read
+        - custom_field_value:write
+        - employments
+        - all:write
+        - all:read
+      summary: List custom field value for an employment
+      tags:
+      - Integrations
+  /v1/companies/{company_id}/webhook-callbacks:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'List callbacks for a given company
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage company resources (`company_admin`) | View webhooks (`webhook:read`) | Manage webhooks (`webhook:write`) |
+
+        '
+      operationId: get_v1_companies_company_id_webhook-callbacks
+      parameters:
+      - description: Company ID
+        example: d2091b1e-b1a4-437a-91ea-2809ffbb6d59
+        in: path
+        name: company_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWebhookCallbacksResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - webhook:read
+        - webhook:write
+        - company_admin
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - webhook:read
+        - webhook:write
+        - company_admin
+        - all:write
+        - all:read
+      summary: List Webhook Callbacks
+      tags:
+      - Integrations
+  /v1/custom-fields/{custom_field_id}/values/{employment_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns a custom field value for a given employment
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |
+
+        '
+      operationId: get_v1_custom-fields_custom_field_id_values_employment_id
+      parameters:
+      - description: Custom field ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: custom_field_id
+        required: true
+        schema:
+          type: string
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentCustomFieldValueResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:read
+        - custom_field_value:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:read
+        - custom_field_value:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show a custom field value
+      tags:
+      - Integrations
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a custom field value for a given employment.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |
+
+        '
+      operationId: patch_v1_custom-fields_custom_field_id_values_employment_id (2)
+      parameters:
+      - description: Custom field ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: custom_field_id
+        required: true
+        schema:
+          type: string
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmploymentCustomFieldValueParams'
+        description: Custom Field Value Update Parameters
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentCustomFieldValueResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:write
+        - employments
+        - all:write
+      summary: Update a Custom Field Value
+      tags:
+      - Integrations
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a custom field value for a given employment.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |
+
+        '
+      operationId: patch_v1_custom-fields_custom_field_id_values_employment_id
+      parameters:
+      - description: Custom field ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: custom_field_id
+        required: true
+        schema:
+          type: string
+      - description: Employment ID
+        example: ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmploymentCustomFieldValueParams'
+        description: Custom Field Value Update Parameters
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentCustomFieldValueResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - custom_field_value:write
+        - employments
+        - all:write
+      summary: Update a Custom Field Value
+      tags:
+      - Integrations
+  /v1/scim/v2/Groups/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: Retrieves a single group (department) for the authenticated company by group ID
+      operationId: get_v1_scim_v2_Groups_id
+      parameters:
+      - description: Group ID (slug)
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.Group'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations.Scim.ErrorResponse'
+          description: Not Found
+      summary: Get group by ID via SCIM v2.0
+      tags:
+      - Integrations
+components:
+  schemas:
+    CreateSingleSelectCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a single select custom field definition
+      example:
+        data_entry_access: company_admin_only
+        metadata:
+          options:
+          - S
+          - M
+          - L
+          - XL
+        name: T-Shirt Size
+        required: false
+        type: single_select
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        metadata:
+          $ref: '#/components/schemas/SingleSelectMetadata'
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          enum:
+          - single_select
+          type: string
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - name
+      - type
+      - required
+      - data_entry_access
+      - visibility_scope
+      - metadata
+      title: CreateSingleSelectCustomFieldDefinitionParams
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    ListEmploymentCustomFieldsResponse:
+      description: Response schema listing many custom_fields
+      example:
+        current_page: 1
+        custom_fields:
+        - data_entry_access: company_admin_only
+          id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+          metadata: {}
+          name: Internal ID
+          required: true
+          type: string
+          visibility_scope: everyone
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            custom_fields:
+              items:
+                $ref: '#/components/schemas/EmploymentCustomField'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListEmploymentCustomFieldsResponse
+      type: object
+    SingleSelectMetadata:
+      description: The metadata for a single select custom field
+      example:
+        options:
+        - S
+        - M
+        - L
+        - XL
+      properties:
+        options:
+          items:
+            nullable: false
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - options
+      title: SingleSelectMetadata
+      type: object
+    SuccessResponse:
+      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
+      example:
+        data:
+          status: ok
+      properties:
+        data:
+          properties:
+            status:
+              description: The result status. Always `"ok"` for successful operations.
+              type: string
+          type: object
+      required:
+      - data
+      title: SuccessResponse
+      type: object
+    WebhookEvent:
+      additionalProperties: false
+      example:
+        company_id: 123e4567-e89b-12d3-a456-426614174000
+        event_type: timesheet.created
+        first_triggered_at: '2025-01-01T00:00:00Z'
+        id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+        last_triggered_at: '2025-01-02T00:00:00Z'
+        successfully_delivered: true
+      properties:
+        company_id:
+          description: The unique identifier (UUID) of the company this event belongs to.
+          type: string
+        event_type:
+          description: The type of event that was triggered (e.g., "timesheet.created", "employment.activated").
+          type: string
+        first_triggered_at:
+          description: The timestamp when this event was first triggered.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the webhook event.
+          type: string
+        last_triggered_at:
+          description: The timestamp of the most recent delivery attempt for this event.
+          type: string
+        successfully_delivered:
+          description: Whether the webhook event was successfully delivered to the callback URL (received a 2XX response).
+          type: boolean
+      required:
+      - id
+      - event_type
+      - successfully_delivered
+      - company_id
+      - first_triggered_at
+      - last_triggered_at
+      title: WebhookEvent
+      type: object
+    ListEmploymentCustomFieldValuePaginatedResponse:
+      description: Response schema listing many custom_field_values
+      example:
+        current_page: 1
+        custom_field_values:
+        - custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+          name: Custom field
+          type: string
+          value: UXH34HG
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            custom_field_values:
+              items:
+                $ref: '#/components/schemas/ListEmploymentCustomFieldValueResponse'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListEmploymentCustomFieldValuePaginatedResponse
+      type: object
+    Integrations.Scim.GroupListResponse:
+      additionalProperties: false
+      example:
+        Resources:
+        - displayName: Engineering
+          id: engineering-dept
+          members:
+          - display: John Doe
+            value: user-123-slug
+          meta:
+            created: '2024-01-01T00:00:00Z'
+            lastModified: '2024-01-01T00:00:00Z'
+            resourceType: Group
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        itemsPerPage: 10
+        schemas:
+        - urn:ietf:params:scim:api:messages:2.0:ListResponse
+        startIndex: 1
+        totalResults: 10
+      properties:
+        Resources:
+          description: Array of group resources
+          items:
+            $ref: '#/components/schemas/Integrations.Scim.Group'
+          type: array
+        itemsPerPage:
+          description: Number of results returned in the current set
+          type: integer
+        schemas:
+          description: SCIM schema identifiers
+          items:
+            type: string
+          type: array
+        startIndex:
+          description: 1-based index of the first result in the current set
+          type: integer
+        totalResults:
+          description: Total number of results matching the query
+          type: integer
+      required:
+      - schemas
+      - totalResults
+      - startIndex
+      - itemsPerPage
+      - Resources
+      title: Integrations.Scim.GroupListResponse
+      type: object
+    EmploymentCustomFieldValueResponse:
+      description: Response containing a single custom field value for an employment.
+      example:
+        data:
+          custom_field_value:
+            custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+            value: UXH34HG
+      properties:
+        data:
+          properties:
+            custom_field_value:
+              $ref: '#/components/schemas/EmploymentCustomFieldValue'
+          required:
+          - custom_field_value
+          type: object
+      required:
+      - data
+      title: EmploymentCustomFieldValueResponse
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    CreateWebhookCallbackParams:
+      additionalProperties: false
+      description: 'Webhook callback creation params. Provide either `subscribed_events` or `subscribe_to_all_events: true` (they are mutually exclusive).'
+      example:
+        subscribe_to_all_events: true
+        url: https://example.com/callback
+      properties:
+        subscribe_to_all_events:
+          default: false
+          description: When true, subscribe this callback to all current and future event types. Cannot be combined with `subscribed_events`.
+          type: boolean
+        subscribed_events:
+          items:
+            description: The setting to be enabled.
+            enum:
+            - background_check.status.updated
+            - benefit_renewal_request.created
+            - billing_document.issued
+            - company.activated
+            - company.manager_created
+            - company.manager_deleted
+            - company.manager_updated
+            - company.owner_changed
+            - company.archived
+            - company.eor_hiring.additional_information_required
+            - company.eor_hiring.reserve_payment_requested
+            - company.eor_hiring.no_reserve_payment_requested
+            - company.eor_hiring.referred
+            - company.eor_hiring.verification_completed
+            - company.partner_offboarded
+            - company.pricing_plan.updated
+            - contract_amendment.canceled
+            - contract_amendment.deleted
+            - contract_amendment.done
+            - contract_amendment.review_started
+            - contract_amendment.submitted
+            - contract.termination_date_reached
+            - contract_document.status.changed
+            - contractor_invoice.employer_paid
+            - contractor_invoice.issued
+            - contractor_invoice.paid_out
+            - contractor_invoice.payment_initiated
+            - custom_field.value_updated
+            - employment.benefits.selected
+            - employment_company_structure_node.updated
+            - employment_contract.active_contract_updated
+            - employment_contract.adjusted_during_onboarding
+            - employment.account.updated
+            - employment.administrative_details.updated
+            - employment_basic_information.updated
+            - employment.contractor_management_plan.updated
+            - employment.contractor_of_record_termination.cancelled
+            - employment.contractor_of_record_termination.executed
+            - employment.contractor_of_record_termination.initiated
+            - employment.details.updated
+            - employment.employment_agreement.available
+            - employment.cor_hiring.invoice_created
+            - employment.eor_hiring.invoice_created
+            - employment.cor_hiring.proof_of_payment_accepted
+            - employment.cor_hiring.proof_of_payment_submitted
+            - employment.eor_hiring.proof_of_payment_accepted
+            - employment.eor_hiring.proof_of_payment_submitted
+            - employment.no_longer_eligible_for_onboarding_cancellation
+            - employment.onboarding_task.completed
+            - employment.onboarding.cancelled
+            - employment.onboarding.completed
+            - employment.onboarding.started
+            - employment.personal_information.updated
+            - employment.probation_completion_letter.cancelled
+            - employment.probation_completion_letter.completed
+            - employment.probation_completion_letter.submitted
+            - employment.probation.period_ending_reminder_sent
+            - employment.probation_period_extension.cancelled
+            - employment.probation_period_extension.completed
+            - employment.probation_period_extension.submitted
+            - employment.start_date.changed
+            - employment.status.updated
+            - employment.updated
+            - employment.user_status.activated
+            - employment.user_status.deactivated
+            - employment.user_status.initiated
+            - employment.user_status.invited
+            - employment.work_email.updated
+            - expense.approved
+            - expense.declined
+            - expense.deleted
+            - expense.reimbursed
+            - expense.submitted
+            - expense.updated
+            - identity_verification.verification_required
+            - incentive.created
+            - incentive.deleted
+            - incentive.paid
+            - incentive.processing_started
+            - incentive.updated
+            - offboarding.completed
+            - offboarding.deleted
+            - offboarding.done
+            - offboarding.review_started
+            - offboarding.submitted_to_payroll
+            - offboarding.submitted
+            - payslip.released
+            - sso_configuration.disabled
+            - sso_configuration.enabled
+            - sso_configuration.updated
+            - timeoff.approved
+            - timeoff.canceled
+            - timeoff.cancellation_requested
+            - timeoff.date_changed
+            - timeoff.declined
+            - timeoff.requested
+            - timeoff.started
+            - timeoff.taken
+            - timeoff.updated
+            - timesheet.submitted
+            - timesheet.in_calibration
+            - travel_letter.approved_by_manager
+            - travel_letter.approved_by_remote
+            - travel_letter.declined_by_manager
+            - travel_letter.declined_by_remote
+            - travel_letter.requested
+            - work_authorization.approved_by_manager
+            - work_authorization.approved_by_remote
+            - work_authorization.cancelled
+            - work_authorization.declined_by_manager
+            - work_authorization.declined_by_remote
+            - work_authorization.requested
+            type: string
+          type: array
+        url:
+          type: string
+      required:
+      - url
+      title: CreateWebhookCallbackParams
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    CurrencyCode:
+      description: Currency code of the SWIFT fee. Only present when processing_fee is set.
+      example: BRL
+      maxLength: 3
+      minLength: 3
+      nullable: true
+      title: CurrencyCode
+      type: string
+    HelpCenterArticleResponse:
+      additionalProperties: false
+      description: Help Center Article Response
+      example:
+        data:
+          help_center_article:
+            body: Help Center Article Body
+            html_url: https://www.example.com
+            title: Help Center Article
+            zendesk_id: 12345679
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            help_center_article:
+              $ref: '#/components/schemas/HelpCenterArticle'
+          required:
+          - help_center_article
+          type: object
+      required:
+      - data
+      title: HelpCenterArticleResponse
+      type: object
+    Integrations.Scim.User:
+      additionalProperties: false
+      example:
+        active: true
+        department: Engineering
+        emails:
+        - primary: true
+          type: work
+          value: john.doe@example.com
+        employeeNumber: EMP001
+        id: '123456'
+        manager:
+          displayName: Jane Manager
+          value: '789012'
+        meta:
+          created: '2023-01-01T00:00:00Z'
+          lastModified: '2023-01-01T00:00:00Z'
+          resourceType: User
+        name:
+          familyName: Doe
+          formatted: John Doe
+          givenName: John
+        schemas:
+        - urn:ietf:params:scim:schemas:core:2.0:User
+        - urn:ietf:params:scim:schemas:extension:enterprise:2.0:User
+        userName: john.doe@example.com
+      properties:
+        active:
+          description: Whether the user is active
+          type: boolean
+        department:
+          description: Identifies the name of a department (Enterprise User extension)
+          type: string
+        emails:
+          items:
+            properties:
+              primary:
+                description: Whether this is the primary email
+                type: boolean
+              type:
+                description: Type of email (e.g., 'work')
+                type: string
+              value:
+                description: Email address
+                type: string
+            required:
+            - value
+            - type
+            type: object
+          type: array
+        employeeNumber:
+          description: Numeric or alphanumeric identifier assigned to a person (Enterprise User extension)
+          type: string
+        id:
+          description: Unique identifier for the user
+          type: string
+        manager:
+          description: The user's manager (Enterprise User extension)
+          properties:
+            $ref:
+              description: The URI of the SCIM resource representing the user's manager
+              type: string
+            displayName:
+              description: The displayName of the user's manager
+              type: string
+            value:
+              description: The id of the SCIM resource representing the user's manager
+              type: string
+          type: object
+        meta:
+          properties:
+            created:
+              description: Creation timestamp
+              type: string
+            lastModified:
+              description: Last modification timestamp
+              type: string
+            resourceType:
+              description: Resource type
+              type: string
+          type: object
+        name:
+          properties:
+            familyName:
+              description: Last name
+              type: string
+            formatted:
+              description: Full name
+              type: string
+            givenName:
+              description: First name
+              type: string
+          required:
+          - givenName
+          - familyName
+          type: object
+        schemas:
+          description: SCIM schema identifiers
+          items:
+            type: string
+          type: array
+        userName:
+          description: Username for the user
+          type: string
+      required:
+      - schemas
+      - id
+      - userName
+      - name
+      - emails
+      - active
+      title: Integrations.Scim.User
+      type: object
+    CreateCurrencyCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a currency custom field definition
+      example:
+        data_entry_access: company_admin_only
+        metadata:
+          currency: USD
+        name: Learning Budget
+        required: false
+        type: currency
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        metadata:
+          properties:
+            currency:
+              $ref: '#/components/schemas/CurrencyCode'
+          type: object
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          enum:
+          - currency
+          type: string
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - name
+      - type
+      - required
+      - data_entry_access
+      - visibility_scope
+      - metadata
+      title: CreateCurrencyCustomFieldDefinitionParams
+      type: object
+    CustomFieldDataType:
+      description: The datatype of the custom field
+      enum:
+      - string
+      - text
+      - integer
+      - date
+      - boolean
+      - percentage
+      - decimal
+      - link
+      - currency
+      - single_select
+      example: string
+      title: CustomFieldDataType
+      type: string
+    EmploymentCustomFieldValue:
+      description: The value of a custom field for a specific employment. The type of `value` depends on the custom field's data type.
+      example:
+        custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+        value: UXH34HG
+      properties:
+        custom_field_id:
+          description: The unique identifier (UUID) of the custom field definition this value belongs to.
+          type: string
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - description: Decimal value represented as a String
+            format: decimal
+            type: number
+          - $ref: '#/components/schemas/EmploymentCustomFieldValueJsonValue'
+          nullable: true
+      required:
+      - custom_field_id
+      - value
+      title: EmploymentCustomFieldValue
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    Integrations.Scim.UserListResponse:
+      additionalProperties: false
+      example:
+        Resources:
+        - active: true
+          department: Engineering
+          emails:
+          - primary: true
+            type: work
+            value: john.doe@example.com
+          employeeNumber: EMP001
+          id: '123456'
+          manager:
+            displayName: Jane Manager
+            value: '789012'
+          meta:
+            created: '2023-01-01T00:00:00Z'
+            lastModified: '2023-01-01T00:00:00Z'
+            resourceType: User
+          name:
+            familyName: Doe
+            formatted: John Doe
+            givenName: John
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          - urn:ietf:params:scim:schemas:extension:enterprise:2.0:User
+          userName: john.doe@example.com
+        itemsPerPage: 50
+        schemas:
+        - urn:ietf:params:scim:api:messages:2.0:ListResponse
+        startIndex: 1
+        totalResults: 100
+      properties:
+        Resources:
+          description: Array of user resources
+          items:
+            $ref: '#/components/schemas/Integrations.Scim.User'
+          type: array
+        itemsPerPage:
+          description: Number of results returned in the current set
+          type: integer
+        schemas:
+          description: SCIM schema identifiers
+          items:
+            type: string
+          type: array
+        startIndex:
+          description: 1-based index of the first result in the current set
+          type: integer
+        totalResults:
+          description: Total number of results matching the query
+          type: integer
+      required:
+      - schemas
+      - totalResults
+      - startIndex
+      - itemsPerPage
+      - Resources
+      title: Integrations.Scim.UserListResponse
+      type: object
+    ListEmploymentCustomFieldValueResponse:
+      description: A custom field value as returned in list responses, including the field definition details alongside the value.
+      example:
+        custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+        name: Custom field
+        type: string
+        value: UXH34HG
+      properties:
+        custom_field_id:
+          description: The unique identifier (UUID) of the custom field definition.
+          type: string
+        name:
+          description: The display name of the custom field.
+          type: string
+        type:
+          description: The data type of the custom field (e.g., "string", "integer", "single_select").
+          type: string
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - description: Decimal value represented as a String
+            format: decimal
+            type: number
+          - $ref: '#/components/schemas/EmploymentCustomFieldValueJsonValue'
+          nullable: true
+      required:
+      - custom_field_id
+      - name
+      - type
+      - value
+      title: ListEmploymentCustomFieldValueResponse
+      type: object
+    CustomFieldSimpleDataType:
+      additionalProperties: false
+      description: The datatype of the custom field
+      enum:
+      - string
+      - text
+      - integer
+      - date
+      - boolean
+      - percentage
+      - decimal
+      - link
+      example: string
+      title: CustomFieldSimpleDataType
+      type: string
+    WebhookCallback:
+      description: A registered webhook callback endpoint. Remote sends HTTP POST requests to the configured URL when subscribed events occur.
+      example:
+        id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+        subscribed_events:
+        - employment.onboarding_task.completed
+        url: https://example.com/callback
+      properties:
+        id:
+          description: The unique identifier (UUID) of the webhook callback.
+          type: string
+        signing_key:
+          description: 'This key will be used to sign the signature provided with webhook requests we
+
+            send to the `url` you provided for this webhook callback.
+
+
+            The webhook signature will be included in a custom header, `X-Remote-Signature`.
+
+            You can use this signature to verify that requests are coming from Remote and
+
+            not some unauthorized third-party.
+
+            '
+          type: string
+        subscribe_to_all_events:
+          description: When true, this callback is subscribed to all current and future event types. `subscribed_events` then lists every currently supported event.
+          type: boolean
+        subscribed_events:
+          items:
+            description: The setting to be enabled.
+            enum:
+            - background_check.status.updated
+            - benefit_renewal_request.created
+            - billing_document.issued
+            - company.activated
+            - company.manager_created
+            - company.manager_deleted
+            - company.manager_updated
+            - company.owner_changed
+            - company.archived
+            - company.eor_hiring.additional_information_required
+            - company.eor_hiring.reserve_payment_requested
+            - company.eor_hiring.no_reserve_payment_requested
+            - company.eor_hiring.referred
+            - company.eor_hiring.verification_completed
+            - company.partner_offboarded
+            - company.pricing_plan.updated
+            - contract_amendment.canceled
+            - contract_amendment.deleted
+            - contract_amendment.done
+            - contract_amendment.review_started
+            - contract_amendment.submitted
+            - contract.termination_date_reached
+            - contract_document.status.changed
+            - contractor_invoice.employer_paid
+            - contractor_invoice.issued
+            - contractor_invoice.paid_out
+            - contractor_invoice.payment_initiated
+            - custom_field.value_updated
+            - employment.benefits.selected
+            - employment_company_structure_node.updated
+            - employment_contract.active_contract_updated
+            - employment_contract.adjusted_during_onboarding
+            - employment.account.updated
+            - employment.administrative_details.updated
+            - employment_basic_information.updated
+            - employment.contractor_management_plan.updated
+            - employment.contractor_of_record_termination.cancelled
+            - employment.contractor_of_record_termination.executed
+            - employment.contractor_of_record_termination.initiated
+            - employment.details.updated
+            - employment.employment_agreement.available
+            - employment.cor_hiring.invoice_created
+            - employment.eor_hiring.invoice_created
+            - employment.cor_hiring.proof_of_payment_accepted
+            - employment.cor_hiring.proof_of_payment_submitted
+            - employment.eor_hiring.proof_of_payment_accepted
+            - employment.eor_hiring.proof_of_payment_submitted
+            - employment.no_longer_eligible_for_onboarding_cancellation
+            - employment.onboarding_task.completed
+            - employment.onboarding.cancelled
+            - employment.onboarding.completed
+            - employment.onboarding.started
+            - employment.personal_information.updated
+            - employment.probation_completion_letter.cancelled
+            - employment.probation_completion_letter.completed
+            - employment.probation_completion_letter.submitted
+            - employment.probation.period_ending_reminder_sent
+            - employment.probation_period_extension.cancelled
+            - employment.probation_period_extension.completed
+            - employment.probation_period_extension.submitted
+            - employment.start_date.changed
+            - employment.status.updated
+            - employment.updated
+            - employment.user_status.activated
+            - employment.user_status.deactivated
+            - employment.user_status.initiated
+            - employment.user_status.invited
+            - employment.work_email.updated
+            - expense.approved
+            - expense.declined
+            - expense.deleted
+            - expense.reimbursed
+            - expense.submitted
+            - expense.updated
+            - identity_verification.verification_required
+            - incentive.created
+            - incentive.deleted
+            - incentive.paid
+            - incentive.processing_started
+            - incentive.updated
+            - offboarding.completed
+            - offboarding.deleted
+            - offboarding.done
+            - offboarding.review_started
+            - offboarding.submitted_to_payroll
+            - offboarding.submitted
+            - payslip.released
+            - sso_configuration.disabled
+            - sso_configuration.enabled
+            - sso_configuration.updated
+            - timeoff.approved
+            - timeoff.canceled
+            - timeoff.cancellation_requested
+            - timeoff.date_changed
+            - timeoff.declined
+            - timeoff.requested
+            - timeoff.started
+            - timeoff.taken
+            - timeoff.updated
+            - timesheet.submitted
+            - timesheet.in_calibration
+            - travel_letter.approved_by_manager
+            - travel_letter.approved_by_remote
+            - travel_letter.declined_by_manager
+            - travel_letter.declined_by_remote
+            - travel_letter.requested
+            - work_authorization.approved_by_manager
+            - work_authorization.approved_by_remote
+            - work_authorization.cancelled
+            - work_authorization.declined_by_manager
+            - work_authorization.declined_by_remote
+            - work_authorization.requested
+            type: string
+          type: array
+        url:
+          description: The HTTPS URL where Remote will send webhook event payloads.
+          type: string
+      required:
+      - id
+      - url
+      title: WebhookCallback
+      type: object
+    UpdateEmploymentCustomFieldValueParams:
+      description: Schema for updating a custom field value.
+      example:
+        value: UXH34HG
+      properties:
+        value:
+          anyOf:
+          - description: For string, text, or link data types. Also decimal values represented as strings, including percentage, decimal, and currency data types. Currency values must be provided in cents (e.g. "1042.00" for $10.42)
+            type: string
+          - description: For integer data type.
+            type: integer
+          - description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+            example: '2021-07-01'
+            format: date
+            title: Date
+            type: string
+          - description: For boolean data type.
+            type: boolean
+          - description: Selected option value. For single select data.
+            example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            format: uuid
+            title: OptionValue
+            type: string
+      required:
+      - value
+      title: UpdateEmploymentCustomFieldValueParams
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    Integrations.Scim.Group:
+      additionalProperties: false
+      example:
+        displayName: Engineering
+        id: engineering-dept
+        members:
+        - display: John Doe
+          value: user-123-slug
+        meta:
+          created: '2024-01-01T00:00:00Z'
+          lastModified: '2024-01-01T00:00:00Z'
+          resourceType: Group
+        schemas:
+        - urn:ietf:params:scim:schemas:core:2.0:Group
+      properties:
+        displayName:
+          description: Display name of the group
+          type: string
+        id:
+          description: Unique identifier for the group
+          type: string
+        members:
+          description: Array of group members (per RFC 7643)
+          items:
+            properties:
+              $ref:
+                description: URI of the user resource
+                type: string
+              display:
+                description: Display name of the user
+                type: string
+              value:
+                description: User ID (slug)
+                type: string
+            required:
+            - value
+            type: object
+          type: array
+        meta:
+          properties:
+            created:
+              description: Creation timestamp
+              type: string
+            lastModified:
+              description: Last modification timestamp
+              type: string
+            resourceType:
+              description: Resource type
+              type: string
+          type: object
+        schemas:
+          description: SCIM schema identifiers
+          items:
+            type: string
+          type: array
+      required:
+      - schemas
+      - id
+      - displayName
+      - members
+      title: Integrations.Scim.Group
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    CustomFieldVisibilityScope:
+      description: Who can see this custom field and its values. Controls visibility across different user roles.
+      enum:
+      - company_admin_only
+      - everyone
+      example: everyone
+      title: CustomFieldVisibilityScope
+      type: string
+    EmploymentCustomField:
+      description: A custom field definition that can be applied to employments within a company. Custom fields allow you to store additional structured data on employments beyond the standard fields.
+      example:
+        data_entry_access: company_admin_only
+        id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+        metadata: {}
+        name: Internal ID
+        required: true
+        type: string
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        id:
+          description: The unique identifier (UUID) of the custom field definition.
+          type: string
+        metadata:
+          description: Additional configuration for the field. For `single_select` fields, contains the list of selectable options. For `currency` fields, contains the currency code. Null for simple field types.
+          nullable: true
+          type: object
+        name:
+          description: The display name of the custom field (e.g., "Internal ID", "T-Shirt Size").
+          type: string
+        required:
+          description: Whether this custom field is required for all employments in the company.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CustomFieldDataType'
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - id
+      - name
+      - type
+      - required
+      - visibility_scope
+      - data_entry_access
+      - metadata
+      title: EmploymentCustomField
+      type: object
+    IdsRequiredParams:
+      additionalProperties: false
+      example:
+        ids:
+        - 0073fcb5-b669-4e4a-b963-2a47744e75a1
+      properties:
+        ids:
+          description: A list of webhook event IDs to replay.
+          example:
+          - 0073fcb5-b669-4e4a-b963-2a47744e75a1
+          items:
+            type: string
+          type: array
+      required:
+      - ids
+      title: IdsRequiredParams
+      type: object
+    CustomFieldDataEntryAccess:
+      description: Who can enter or edit values for this custom field. Controls which users see the field as editable vs read-only.
+      enum:
+      - company_admin_only
+      - employee_only
+      - everyone
+      example: company_admin_only
+      title: CustomFieldDataEntryAccess
+      type: string
+    ReplayWebhookEventsParams:
+      additionalProperties: false
+      description: Replay webhook events params
+      example:
+        after: '2025-01-02T00:00:00Z'
+        before: '2025-01-01T00:00:00Z'
+        company_id: 123e4567-e89b-12d3-a456-426614174000
+        event_type: timesheet.created
+        successfully_delivered: true
+      oneOf:
+      - $ref: '#/components/schemas/IdsRequiredParams'
+      - $ref: '#/components/schemas/BeforeAfterRequiredParams'
+      title: ReplayWebhookEventsParams
+      type: object
+    CreateCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a custom field definition
+      example:
+        data_entry_access: company_admin_only
+        name: Internal ID
+        required: false
+        type: string
+        visibility_scope: everyone
+      oneOf:
+      - $ref: '#/components/schemas/CreateGeneralCustomFieldDefinitionParams'
+      - $ref: '#/components/schemas/CreateSingleSelectCustomFieldDefinitionParams'
+      - $ref: '#/components/schemas/CreateCurrencyCustomFieldDefinitionParams'
+      title: CreateCustomFieldDefinitionParams
+    Integrations.Scim.ErrorResponse:
+      additionalProperties: false
+      example:
+        detail: 'Invalid filter. Expected format: <attribute> eq <value>.'
+        schemas:
+        - urn:ietf:params:scim:api:messages:2.0:Error
+        scimType: invalidFilter
+        status: '400'
+      properties:
+        detail:
+          description: Human-readable error message
+          type: string
+        schemas:
+          description: SCIM schema identifiers
+          items:
+            type: string
+          type: array
+        scimType:
+          description: SCIM error type
+          nullable: true
+          type: string
+        status:
+          description: HTTP status code
+          type: string
+      required:
+      - schemas
+      - detail
+      - status
+      title: Integrations.Scim.ErrorResponse
+      type: object
+    BeforeAfterRequiredParams:
+      additionalProperties: false
+      example:
+        after: '2025-01-02T00:00:00Z'
+        before: '2025-01-01T00:00:00Z'
+      properties:
+        after:
+          description: Only replay events triggered after this timestamp (ISO 8601).
+          example: '2025-01-01T00:00:00Z'
+          type: string
+        before:
+          description: Only replay events triggered before this timestamp (ISO 8601).
+          example: '2025-01-01T00:00:00Z'
+          type: string
+        company_id:
+          description: Optional filter to only replay events for a specific company.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        event_type:
+          description: Optional filter to only replay events of this type.
+          example: timesheet.created
+          type: string
+        successfully_delivered:
+          description: Optional filter by delivery status. Set to false to replay only failed deliveries.
+          example: true
+          type: boolean
+      required:
+      - before
+      - after
+      title: BeforeAfterRequiredParams
+      type: object
+    UpdateWebhookCallbackParams:
+      additionalProperties: false
+      description: 'Webhook callback update params. Provide either `subscribed_events` or `subscribe_to_all_events` (they are mutually exclusive). Omitting `subscribe_to_all_events` leaves the current subscription mode unchanged, so resending an event list does not disable all-events delivery. Setting `subscribe_to_all_events: false` requires a non-empty `subscribed_events`.'
+      example:
+        subscribed_events:
+        - employment.onboarding_task.completed
+        url: https://example.com/callback
+      properties:
+        subscribe_to_all_events:
+          description: When true, subscribe this callback to all current and future event types. Cannot be combined with `subscribed_events`.
+          type: boolean
+        subscribed_events:
+          items:
+            description: The setting to be enabled.
+            enum:
+            - background_check.status.updated
+            - benefit_renewal_request.created
+            - billing_document.issued
+            - company.activated
+            - company.manager_created
+            - company.manager_deleted
+            - company.manager_updated
+            - company.owner_changed
+            - company.archived
+            - company.eor_hiring.additional_information_required
+            - company.eor_hiring.reserve_payment_requested
+            - company.eor_hiring.no_reserve_payment_requested
+            - company.eor_hiring.referred
+            - company.eor_hiring.verification_completed
+            - company.partner_offboarded
+            - company.pricing_plan.updated
+            - contract_amendment.canceled
+            - contract_amendment.deleted
+            - contract_amendment.done
+            - contract_amendment.review_started
+            - contract_amendment.submitted
+            - contract.termination_date_reached
+            - contract_document.status.changed
+            - contractor_invoice.employer_paid
+            - contractor_invoice.issued
+            - contractor_invoice.paid_out
+            - contractor_invoice.payment_initiated
+            - custom_field.value_updated
+            - employment.benefits.selected
+            - employment_company_structure_node.updated
+            - employment_contract.active_contract_updated
+            - employment_contract.adjusted_during_onboarding
+            - employment.account.updated
+            - employment.administrative_details.updated
+            - employment_basic_information.updated
+            - employment.contractor_management_plan.updated
+            - employment.contractor_of_record_termination.cancelled
+            - employment.contractor_of_record_termination.executed
+            - employment.contractor_of_record_termination.initiated
+            - employment.details.updated
+            - employment.employment_agreement.available
+            - employment.cor_hiring.invoice_created
+            - employment.eor_hiring.invoice_created
+            - employment.cor_hiring.proof_of_payment_accepted
+            - employment.cor_hiring.proof_of_payment_submitted
+            - employment.eor_hiring.proof_of_payment_accepted
+            - employment.eor_hiring.proof_of_payment_submitted
+            - employment.no_longer_eligible_for_onboarding_cancellation
+            - employment.onboarding_task.completed
+            - employment.onboarding.cancelled
+            - employment.onboarding.completed
+            - employment.onboarding.started
+            - employment.personal_information.updated
+            - employment.probation_completion_letter.cancelled
+            - employment.probation_completion_letter.completed
+            - employment.probation_completion_letter.submitted
+            - employment.probation.period_ending_reminder_sent
+            - employment.probation_period_extension.cancelled
+            - employment.probation_period_extension.completed
+            - employment.probation_period_extension.submitted
+            - employment.start_date.changed
+            - employment.status.updated
+            - employment.updated
+            - employment.user_status.activated
+            - employment.user_status.deactivated
+            - employment.user_status.initiated
+            - employment.user_status.invited
+            - employment.work_email.updated
+            - expense.approved
+            - expense.declined
+            - expense.deleted
+            - expense.reimbursed
+            - expense.submitted
+            - expense.updated
+            - identity_verification.verification_required
+            - incentive.created
+            - incentive.deleted
+            - incentive.paid
+            - incentive.processing_started
+            - incentive.updated
+            - offboarding.completed
+            - offboarding.deleted
+            - offboarding.done
+            - offboarding.review_started
+            - offboarding.submitted_to_payroll
+            - offboarding.submitted
+            - payslip.released
+            - sso_configuration.disabled
+            - sso_configuration.enabled
+            - sso_configuration.updated
+            - timeoff.approved
+            - timeoff.canceled
+            - timeoff.cancellation_requested
+            - timeoff.date_changed
+            - timeoff.declined
+            - timeoff.requested
+            - timeoff.started
+            - timeoff.taken
+            - timeoff.updated
+            - timesheet.submitted
+            - timesheet.in_calibration
+            - travel_letter.approved_by_manager
+            - travel_letter.approved_by_remote
+            - travel_letter.declined_by_manager
+            - travel_letter.declined_by_remote
+            - travel_letter.requested
+            - work_authorization.approved_by_manager
+            - work_authorization.approved_by_remote
+            - work_authorization.cancelled
+            - work_authorization.declined_by_manager
+            - work_authorization.declined_by_remote
+            - work_authorization.requested
+            type: string
+          type: array
+        url:
+          type: string
+      title: UpdateWebhookCallbackParams
+      type: object
+    WebhookCallbackResponse:
+      description: Webhook callback response
+      example:
+        data:
+          webhook_callback:
+            id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+            subscribed_events:
+            - employment.onboarding_task.completed
+            url: https://example.com/callback
+      properties:
+        data:
+          properties:
+            webhook_callback:
+              $ref: '#/components/schemas/WebhookCallback'
+          required:
+          - webhook_callback
+          type: object
+      required:
+      - data
+      title: WebhookCallbackResponse
+      type: object
+    ListWebhookCallbacksResponse:
+      example:
+        data:
+        - id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+          subscribed_events:
+          - employment.onboarding_task.completed
+          url: https://example.com/callback
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WebhookCallback'
+          type: array
+      required:
+      - data
+      title: ListWebhookCallbacksResponse
+      type: object
+    EmploymentCustomFieldValueJsonValue:
+      description: The value for a single-select custom field, containing both the option ID and its human-readable label.
+      example:
+        selected_option: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb55
+        selected_option_label: XL
+      properties:
+        selected_option:
+          description: The unique identifier of the selected option.
+          type: string
+        selected_option_label:
+          description: The human-readable label of the selected option (e.g., "XL").
+          type: string
+      required:
+      - selected_option
+      - selected_option_label
+      title: EmploymentCustomFieldValueJsonValue
+      type: object
+    HelpCenterArticle:
+      additionalProperties: false
+      description: Help Center Article
+      example:
+        body: Help Center Article Body
+        html_url: https://www.example.com
+        title: Help Center Article
+        zendesk_id: 12345679
+      properties:
+        body:
+          description: Body of the article
+          type: string
+        html_url:
+          description: HTML URL of the article
+          type: string
+        title:
+          description: Title of the article
+          type: string
+        zendesk_id:
+          description: Zendesk ID of the article
+          type: integer
+      required:
+      - zendesk_id
+      - title
+      - body
+      - html_url
+      title: HelpCenterArticle
+      type: object
+    CreateEmploymentCustomFieldResponse:
+      description: Response returned after successfully creating a new custom field definition.
+      example:
+        data:
+          custom_field:
+            data_entry_access: company_admin_only
+            id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+            metadata: {}
+            name: Internal ID
+            required: true
+            type: string
+            visibility_scope: everyone
+      properties:
+        data:
+          properties:
+            custom_field:
+              $ref: '#/components/schemas/EmploymentCustomField'
+          required:
+          - custom_field
+          type: object
+      required:
+      - data
+      title: CreateEmploymentCustomFieldResponse
+      type: object
+    CreateGeneralCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a general custom field definition
+      example:
+        data_entry_access: company_admin_only
+        name: Internal ID
+        required: false
+        type: string
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CustomFieldSimpleDataType'
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - name
+      - type
+      - required
+      - data_entry_access
+      - visibility_scope
+      title: CreateGeneralCustomFieldDefinitionParams
+      type: object
+    ListWebhookEventsResponse:
+      description: Response schema listing many webhook_events
+      example:
+        current_page: 1
+        total_count: 1
+        total_pages: 1
+        webhook_events:
+        - company_id: 123e4567-e89b-12d3-a456-426614174000
+          event_type: timesheet.created
+          first_triggered_at: '2025-01-01T00:00:00Z'
+          id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+          last_triggered_at: '2025-01-02T00:00:00Z'
+          successfully_delivered: true
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+            webhook_events:
+              items:
+                $ref: '#/components/schemas/WebhookEvent'
+              type: array
+          type: object
+      title: ListWebhookEventsResponse
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

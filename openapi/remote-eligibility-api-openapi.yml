@@ -1,0 +1,745 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Eligibility API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Eligibility
+paths:
+  /v1/contractors/eligibility-questionnaire:
+    post:
+      callbacks: {}
+      deprecated: false
+      description: 'Submits an eligibility questionnaire for a contractor employment.
+
+
+        The questionnaire determines if the contractor is eligible for certain products or features.
+
+        The responses are validated against the JSON schema for the questionnaire type.
+
+
+        **Requirements:**
+
+        - Employment must be of type `contractor`
+
+        - Employment must be in `created` status
+
+        - Responses must conform to the questionnaire JSON schema
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage employments (`employment:write`) |
+
+        '
+      operationId: post_v1_contractors_eligibility-questionnaire
+      parameters:
+      - description: Version of the form schema
+        example: 1
+        in: query
+        name: json_schema_version
+        required: false
+        schema:
+          default: latest
+          oneOf:
+          - description: Specific version number
+            minimum: 1
+            type: integer
+          - description: Use latest version
+            enum:
+            - latest
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitEligibilityQuestionnaireRequest'
+        description: Eligibility questionnaire submission
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EligibilityQuestionnaireResponse'
+          description: Questionnaire submitted successfully
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorResponse'
+          description: Conflict
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - employment:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - employment:write
+        - employments
+        - all:write
+      summary: Submit eligibility questionnaire
+      tags:
+      - Eligibility
+  /v1/contractors/schemas/eligibility-questionnaire:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Returns the JSON schema for the eligibility questionnaire by type.
+
+
+        The schema defines the structure and validation rules for the questionnaire responses.
+
+        Supports versioning to allow for schema evolution while maintaining backwards compatibility.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |
+
+        '
+      operationId: get_v1_contractors_schemas_eligibility-questionnaire
+      parameters:
+      - description: Type of eligibility questionnaire
+        example: contractor_of_record
+        in: query
+        name: type
+        required: true
+        schema:
+          enum:
+          - contractor_of_record
+          example: contractor_of_record
+          nullable: false
+          type: string
+      - description: Version of the form schema
+        example: 1
+        in: query
+        name: json_schema_version
+        required: false
+        schema:
+          default: latest
+          oneOf:
+          - description: Specific version number
+            minimum: 1
+            type: integer
+          - description: Use latest version
+            enum:
+            - latest
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EligibilityQuestionnaireJSONSchemaResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - employment:read
+        - employment:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - employment:read
+        - employment:write
+        - employments
+        - all:write
+        - all:read
+      summary: Get eligibility questionnaire schema
+      tags:
+      - Eligibility
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    EligibilityQuestionnaireResponse:
+      additionalProperties: false
+      example:
+        data:
+          is_blocking: true
+          questions:
+            question_key1: This is the label of the question
+            question_key2: This is another question label
+          responses:
+            question_key1: 'yes'
+            question_key2: 'no'
+          slug: fd32b683-a94a-4496-a0c4-726c088af483
+          submitted_at: '2021-07-15T18:18:17'
+          type: contractor_of_record
+      properties:
+        data:
+          $ref: '#/components/schemas/EligibilityQuestionnaire'
+      required:
+      - data
+      title: EligibilityQuestionnaireResponse
+      type: object
+    ValidationError:
+      example:
+        errors:
+          rejected_reason:
+          - can't be blank
+      properties:
+        errors:
+          additionalProperties: true
+          properties: {}
+          type: object
+      required:
+      - errors
+      title: ValidationError
+      type: object
+    EligibilityQuestionnaire:
+      additionalProperties: false
+      example:
+        is_blocking: true
+        questions:
+          question_key1: This is the label of the question
+          question_key2: This is another question label
+        responses:
+          question_key1: 'yes'
+          question_key2: 'no'
+        slug: fd32b683-a94a-4496-a0c4-726c088af483
+        submitted_at: '2021-07-15T18:18:17'
+        type: contractor_of_record
+      properties:
+        is_blocking:
+          description: Whether the questionnaire blocks further progress if failed
+          type: boolean
+        questions:
+          description: The questions in the questionnaire
+          type: object
+        responses:
+          description: The responses to the questionnaire
+          type: object
+        slug:
+          $ref: '#/components/schemas/UuidSlug'
+        submitted_at:
+          $ref: '#/components/schemas/DateTime'
+        type:
+          enum:
+          - contractor_of_record
+          example: contractor_of_record
+          nullable: false
+          type: string
+      required:
+      - slug
+      - is_blocking
+      - type
+      - submitted_at
+      - questions
+      - responses
+      title: EligibilityQuestionnaire
+      type: object
+    DateTime:
+      description: UTC date time in YYYY-MM-DDTHH:mm:ss format
+      example: '2021-07-15T18:18:17'
+      format: datetime
+      title: DateTime
+      type: string
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    MessageResponse:
+      example:
+        message: The company with the provided EIN is already registered.
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: MessageResponse
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    ConflictErrorResponse:
+      anyOf:
+      - $ref: '#/components/schemas/ValidationError'
+      - $ref: '#/components/schemas/MessageResponse'
+      example:
+        errors:
+          message: Conflict
+      title: ConflictErrorResponse
+      type: object
+    EligibilityQuestionnaireJSONSchemaResponse:
+      description: JSON Schema definition for eligibility questionnaire
+      example:
+        data:
+          permissions: {}
+          schema:
+            properties:
+              question_key1:
+                type: string
+              question_key2:
+                type: string
+            required:
+            - question_key1
+            - question_key2
+            type: object
+          version: 1
+      properties:
+        data:
+          properties:
+            permissions:
+              description: Permissions related to the schema
+              type: object
+            schema:
+              description: The JSON Schema definition
+              type: object
+            version:
+              description: The version of the JSON Schema
+              type: integer
+          type: object
+      title: EligibilityQuestionnaireJSONSchemaResponse
+      type: object
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    SubmitEligibilityQuestionnaireRequest:
+      additionalProperties: false
+      description: Request body for submitting an eligibility questionnaire
+      example:
+        employment_slug: fd32b683-a94a-4496-a0c4-726c088af483
+        responses:
+          question_key1: 'yes'
+          question_key2: 'no'
+        type: contractor_of_record
+      properties:
+        employment_slug:
+          description: The slug/ID of the employment
+          format: uuid
+          type: string
+        responses:
+          additionalProperties:
+            type: string
+          description: Responses to the questionnaire questions
+          type: object
+        type:
+          enum:
+          - contractor_of_record
+          example: contractor_of_record
+          nullable: false
+          type: string
+      required:
+      - employment_slug
+      - type
+      - responses
+      title: SubmitEligibilityQuestionnaireRequest
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

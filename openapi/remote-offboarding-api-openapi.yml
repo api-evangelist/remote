@@ -1,0 +1,4098 @@
+openapi: 3.0.0
+info:
+  title: Remote Address Details Offboarding API
+  version: 0.1.0
+servers:
+- url: https://gateway.remote.com/
+  variables: {}
+- url: https://gateway.remote-sandbox.com/
+  variables: {}
+security:
+- OAuth2: []
+tags:
+- name: Offboarding
+paths:
+  /v1/offboardings:
+    get:
+      callbacks: {}
+      description: 'Lists Offboarding requests.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |
+
+        '
+      operationId: get_v1_offboardings
+      parameters:
+      - description: Filter by Employment ID
+        example: 93t3j-employment-id-9suej43
+        in: query
+        name: employment_id
+        required: false
+        schema:
+          type: string
+      - description: Filter by offboarding type
+        example: paid
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+      - description: 'By default, the results do not include confidential termination requests.
+
+          Send `include_confidential=true` to include confidential requests in the response.
+
+          '
+        example: 'true'
+        in: query
+        name: include_confidential
+        required: false
+        schema:
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+      - description: Change the amount of records returned per page, defaults to 20, limited to 100
+        example: 30
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOffboardingResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+      summary: List Offboarding
+      tags:
+      - Offboarding
+    post:
+      callbacks: {}
+      description: 'Creates an Offboarding request
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage offboarding (`offboarding:write`) |
+
+        '
+      operationId: post_v1_offboardings
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOffboardingParams'
+        description: Offboarding
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffboardingResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestError'
+          description: Internal Server Error
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - offboarding:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - offboarding:write
+        - employments
+        - all:write
+      summary: Create Offboarding
+      tags:
+      - Offboarding
+  /v2/offboardings:
+    get:
+      callbacks: {}
+      description: 'Lists offboardings for a company.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |
+
+        '
+      operationId: get_v2_offboardings
+      parameters:
+      - description: Filter by Employment ID
+        example: 93t3j-employment-id-9suej43
+        in: query
+        name: employment_id
+        required: false
+        schema:
+          type: string
+      - description: Filter by offboarding type.
+        example: termination
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - termination
+          - resignation
+          - cancellation
+          - relocation
+          - transfer
+          - conversion
+          type: string
+      - description: 'By default, the results do not include confidential termination requests.
+
+          Send `include_confidential=true` to include confidential requests in the response.
+
+          '
+        example: true
+        in: query
+        name: include_confidential
+        required: false
+        schema:
+          type: boolean
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+      - description: Change the amount of records returned per page, defaults to 20, limited to 100
+        example: 30
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2ListOffboardingResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+      summary: List Offboardings (v2)
+      tags:
+      - Offboarding
+  /v2/offboardings/{id}:
+    get:
+      callbacks: {}
+      description: 'Returns a single offboarding by its ID.
+
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |
+
+        '
+      operationId: get_v2_offboardings_id
+      parameters:
+      - description: Offboarding ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V2OffboardingResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show Offboarding (v2)
+      tags:
+      - Offboarding
+  /v1/work-authorization-requests/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Show a single work authorization request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View work authorizations (`work_authorization:read`) | Manage work authorizations (`work_authorization:write`) |
+
+        '
+      operationId: get_v1_work-authorization-requests_id
+      parameters:
+      - description: work authorization request ID
+        example: 2d3cfb38-27e7-42de-a43d-da23e3d4ffea
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkAuthorizationRequestResponse'
+          description: Success
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - work_authorization:read
+        - work_authorization:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - work_authorization:read
+        - work_authorization:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show work authorization request
+      tags:
+      - Offboarding
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a work authorization request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage work authorizations (`work_authorization:write`) |
+
+        '
+      operationId: patch_v1_work-authorization-requests_id (2)
+      parameters:
+      - description: work authorization request ID
+        example: e2a7d189-1346-453a-9818-03772b716e48
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkAuthorizationRequestParams'
+        description: Work Authorization Request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkAuthorizationRequestResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - work_authorization:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - work_authorization:write
+        - employments
+        - all:write
+      summary: Update work authorization request
+      tags:
+      - Offboarding
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a work authorization request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage work authorizations (`work_authorization:write`) |
+
+        '
+      operationId: patch_v1_work-authorization-requests_id
+      parameters:
+      - description: work authorization request ID
+        example: e2a7d189-1346-453a-9818-03772b716e48
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkAuthorizationRequestParams'
+        description: Work Authorization Request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkAuthorizationRequestResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - work_authorization:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - work_authorization:write
+        - employments
+        - all:write
+      summary: Update work authorization request
+      tags:
+      - Offboarding
+  /v1/resignations/{offboarding_request_id}/resignation-letter:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Downloads a resignation letter from an employment request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View resignation letters (`resignation_letter:read`) | - |
+
+        '
+      operationId: get_v1_resignations_offboarding_request_id_resignation-letter
+      parameters:
+      - description: Offboarding request ID
+        example: 3ab2e491-ad1c-47af-849c-3d0a53e20e0d
+        in: path
+        name: offboarding_request_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/msword:
+              schema:
+                $ref: '#/components/schemas/GenericFile'
+            application/pdf:
+              schema:
+                $ref: '#/components/schemas/GenericFile'
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+              schema:
+                $ref: '#/components/schemas/GenericFile'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - resignation_letter:read
+        - employment_documents
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - resignation_letter:read
+        - employment_documents
+        - all:write
+        - all:read
+      summary: Download a resignation letter
+      tags:
+      - Offboarding
+  /v1/travel-letter-requests/{id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Show a single travel letter request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View travel letters (`travel_letter:read`) | Manage travel letters (`travel_letter:write`) |
+
+        '
+      operationId: get_v1_travel-letter-requests_id
+      parameters:
+      - description: travel letter request ID
+        example: 93t3j-travel_letter_id-9suej43
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UuidSlug'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLetterResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - travel_letter:read
+        - travel_letter:write
+        - employment_documents
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - travel_letter:read
+        - travel_letter:write
+        - employment_documents
+        - all:write
+        - all:read
+      summary: Show travel letter request
+      tags:
+      - Offboarding
+    patch:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a travel letter request
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | - | Manage travel letters (`travel_letter:write`) |
+
+        '
+      operationId: patch_v1_travel-letter-requests_id (2)
+      parameters:
+      - description: Travel letter Request ID
+        example: 3ab2e491-ad1c-47af-849c-3d0a53e20e0d
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTravelLetterRequestParams'
+        description: Travel letter Request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLetterResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - travel_letter:write
+        - employment_documents
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - travel_letter:write
+        - employment_documents
+        - all:write
+      summary: Updates a travel letter request
+      tags:
+      - Offboarding
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Updates a travel letter request
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | - | Manage travel letters (`travel_letter:write`) |
+
+        '
+      operationId: patch_v1_travel-letter-requests_id
+      parameters:
+      - description: Travel letter Request ID
+        example: 3ab2e491-ad1c-47af-849c-3d0a53e20e0d
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTravelLetterRequestParams'
+        description: Travel letter Request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TravelLetterResponse'
+          description: Success
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - travel_letter:write
+        - employment_documents
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - travel_letter:write
+        - employment_documents
+        - all:write
+      summary: Updates a travel letter request
+      tags:
+      - Offboarding
+  /v1/travel-letter-requests:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'List travel letter requests.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employment documents (`employment_documents`) | View travel letters (`travel_letter:read`) | Manage travel letters (`travel_letter:write`) |
+
+        '
+      operationId: get_v1_travel-letter-requests
+      parameters:
+      - description: Filter results on the given status
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - pending
+          - cancelled
+          - declined_by_manager
+          - declined_by_remote
+          - approved_by_manager
+          - approved_by_remote
+          type: string
+      - description: Filter results on the given employment slug
+        in: query
+        name: employment_id
+        required: false
+        schema:
+          type: string
+      - description: Filter results on the given employee name
+        in: query
+        name: employee_name
+        required: false
+        schema:
+          type: string
+      - description: Sort order
+        example: asc
+        in: query
+        name: order
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Field to sort by
+        example: submitted_at
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - submitted_at
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTravelLettersResponse'
+          description: Success
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - travel_letter:read
+        - travel_letter:write
+        - employment_documents
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - travel_letter:read
+        - travel_letter:write
+        - employment_documents
+        - all:write
+        - all:read
+      summary: List travel letter requests
+      tags:
+      - Offboarding
+  /v1/offboardings/employments/{employment_id}:
+    get:
+      callbacks: {}
+      description: 'Lists Offboarding requests for a specific employment.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |
+
+        '
+      operationId: get_v1_offboardings_employments_employment_id
+      parameters:
+      - description: Employment ID
+        in: path
+        name: employment_id
+        required: true
+        schema:
+          type: string
+        x-resource-type: employment
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+      - description: Change the amount of records returned per page, defaults to 20, limited to 100
+        example: 30
+        in: query
+        name: page_size
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOffboardingResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+      summary: List Offboardings for Employment
+      tags:
+      - Offboarding
+  /v1/offboardings/{id}:
+    get:
+      callbacks: {}
+      description: 'Shows an Offboarding request.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |
+
+        '
+      operationId: get_v1_offboardings_id
+      parameters:
+      - description: Offboarding request ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        x-safe: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffboardingResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Too many requests
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - offboarding:read
+        - offboarding:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show Offboarding
+      tags:
+      - Offboarding
+  /v1/resignations/{offboarding_request_id}:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'Shows the details of a resignation with status `submitted`.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View resignations (`resignation:read`) | Manage resignations (`resignation:write`) |
+
+        '
+      operationId: get_v1_resignations_offboarding_request_id
+      parameters:
+      - description: Offboarding request ID
+        example: 3ab2e491-ad1c-47af-849c-3d0a53e20e0d
+        in: path
+        name: offboarding_request_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResignationResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - resignation:read
+        - resignation:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - resignation:read
+        - resignation:write
+        - employments
+        - all:write
+        - all:read
+      summary: Show Resignation
+      tags:
+      - Offboarding
+  /v1/resignations/{offboarding_request_id}/validate:
+    put:
+      callbacks: {}
+      deprecated: false
+      description: 'Validates a resignation employment request
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | - | Manage resignations (`resignation:write`) |
+
+        '
+      operationId: put_v1_resignations_offboarding_request_id_validate
+      parameters:
+      - description: Offboarding request ID
+        example: 3ab2e491-ad1c-47af-849c-3d0a53e20e0d
+        in: path
+        name: offboarding_request_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateResignationRequestParams'
+        description: ValidateResignation
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - resignation:write
+        - employments
+        - all:write
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - resignation:write
+        - employments
+        - all:write
+      summary: Validate resignation request
+      tags:
+      - Offboarding
+  /v1/work-authorization-requests:
+    get:
+      callbacks: {}
+      deprecated: false
+      description: 'List work authorization requests.
+
+
+        ## Scopes
+
+
+        | Category | Read only Scope | Write only Scope (read access implicit) |
+
+        |---|---|---|
+
+        | Manage employments (`employments`) | View work authorizations (`work_authorization:read`) | Manage work authorizations (`work_authorization:write`) |
+
+        '
+      operationId: get_v1_work-authorization-requests
+      parameters:
+      - description: Filter results on the given status
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - pending
+          - cancelled
+          - declined_by_manager
+          - declined_by_remote
+          - approved_by_manager
+          - approved_by_remote
+          type: string
+      - description: Filter results on the given employment slug
+        in: query
+        name: employment_id
+        required: false
+        schema:
+          type: string
+      - description: Filter results on the given employee name
+        in: query
+        name: employee_name
+        required: false
+        schema:
+          type: string
+      - description: Sort order
+        example: asc
+        in: query
+        name: order
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Field to sort by
+        example: submitted_at
+        in: query
+        name: sort_by
+        required: false
+        schema:
+          enum:
+          - submitted_at
+          type: string
+      - description: Starts fetching records after the given page
+        example: 1
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 1
+          minimum: 1
+          type: integer
+      - description: Number of items per page
+        example: 20
+        in: query
+        name: page_size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkAuthorizationRequestsResponse'
+          description: Success
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityResponse'
+          description: Unprocessable Entity
+      security:
+      - CustomerAPIToken:
+        - https://gateway.remote.com/company.manage
+        - work_authorization:read
+        - work_authorization:write
+        - employments
+        - all:write
+        - all:read
+        OAuth2AuthorizationCode:
+        - https://gateway.remote.com/company.manage
+        - work_authorization:read
+        - work_authorization:write
+        - employments
+        - all:write
+        - all:read
+      summary: List work authorization requests
+      tags:
+      - Offboarding
+components:
+  schemas:
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    WorkAuthorizationRequestResponse:
+      additionalProperties: false
+      description: Schema for work authorization request
+      example:
+        data:
+          work_authorization_request:
+            additional_information: Some additional information
+            destination_country:
+              alpha_2_code: PT
+              code: PRT
+              contractor_products_available:
+              - standard
+              - plus
+              - cor
+              country_subdivisions:
+              - code: PT-06
+                name: Coimbra
+                subdivision_type: District
+              - code: PT-11
+                name: Lisboa
+                subdivision_type: District
+              employment_agreement_preview_available: true
+              eor_onboarding: true
+              locked_benefits: after_first_hire
+              name: Portugal
+              region: Europe
+              subregion: Southern Europe
+              supported_json_schemas:
+              - additional_documents
+              - address_details
+              - administrative_details
+              - employment-basic-information
+              - bank_account_details
+              - contract_details
+              - emergency_contact
+            employer_approver:
+              email: user0@company.com
+              id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+              name: User Name
+            employer_special_instructions: Some special instruction
+            id: d1bb9535-3296-4240-8a67-81475bd24e80
+            reason: Some reason
+            status: pending
+            submitted_at: '2021-07-15T18:18:17Z'
+            travel_date_end: '2021-07-01'
+            travel_date_start: '2021-07-01'
+            travel_document_number: FC123456
+            user:
+              email: user0@company.com
+              id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+              name: User Name
+            will_negotiate_or_sign_contracts: true
+            work_location: Some work location
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            work_authorization_request:
+              $ref: '#/components/schemas/WorkAuthorizationRequest'
+          required:
+          - work_authorization_request
+          type: object
+      required:
+      - data
+      title: WorkAuthorizationRequestResponse
+      type: object
+    TerminationDetailsParams:
+      example:
+        confidential: false
+        proposed_termination_date: '2024-10-30'
+        reason_description: They had some performance issues and mismatched expectations.
+        risk_assessment_reasons:
+        - pregnant_or_breastfeeding
+        - family_leave
+        termination_reason: performance
+        will_challenge_termination: true
+      properties:
+        acknowledge_termination_procedure:
+          description: Whether the employer acknowledges and agrees to follow Remote's termination procedure for this jurisdiction.
+          nullable: true
+          type: boolean
+        additional_comments:
+          description: Additional details regarding the termination process.
+          nullable: true
+          type: string
+        agrees_to_pto_amount:
+          description: Whether the employer agrees with the employee's current paid time off balance. If false, you may provide a timesheet file documenting any discrepancies.
+          nullable: true
+          type: boolean
+        agrees_to_pto_amount_notes:
+          description: Additional notes about the PTO balance, especially if there are discrepancies.
+          nullable: true
+          type: string
+        confidential:
+          description: Confidential requests are visible for who authorized the token or integration. Non-confidential requests are visible to all admins in the company.
+          type: boolean
+        customer_informed_employee:
+          description: Whether the employer has already informed the employee about the termination. Remote advises not informing the employee until the request has been reviewed for legal risks.
+          nullable: true
+          type: boolean
+        employee_awareness:
+          description: Remote advises not to inform the employee of their termination until we review your request for legal risks. When we approve your request, you can inform the employee and we’ll take it from there. This field is only required if employee was informed before creating the offboarding request.
+          properties:
+            date:
+              description: When the employee was told about the termination.
+              format: date
+              nullable: true
+              type: string
+            note:
+              description: Notes describing how the termination was shared with the employee. Remote advises being as specific as possible, and include details about the employee’s response, if applicable.
+              nullable: true
+              type: string
+          type: object
+        personal_email:
+          description: 'Remote will use this email address for post-termination communication.
+
+            If it is not provided, this field will be derived from the employment record. Therefore, it is important to ensure that it is not a company email.
+
+            '
+          format: email
+          type: string
+        proposed_termination_date:
+          description: In most cases, employee needs to be notified before termination. The required notice period depends on local labor laws, the employment agreement, and other factors. Remote will use those factors to determine the required notice period. Please note that we cannot commit to a termination date until we conduct a full review of the information you submit.
+          format: date
+          type: string
+        reason_description:
+          description: Description of the reason for termination
+          type: string
+        risk_assessment_reasons:
+          description: Possible reasons for offboarding risk assessment
+          items:
+            enum:
+            - caring_responsibilities
+            - disabled_or_health_condition
+            - family_leave
+            - member_of_union_or_works_council
+            - none_of_these
+            - pregnant_or_breastfeeding
+            - reported_concerns_with_workplace
+            - requested_medical_or_family_leave
+            - sick_leave
+            type: string
+          minItems: 1
+          type: array
+        termination_reason:
+          description: 'Choose an accurate termination reason to avoid unfair or unlawful dismissal claims.
+
+
+            If the termination is created before the employee''s start date, this field
+
+            will be set to `cancellation_before_start_date`.
+
+            '
+          enum:
+          - cancellation_before_start_date
+          - compliance_issue
+          - conversion_to_contractor
+          - dissatisfaction_with_remote_service
+          - end_of_fixed_term_contract_compliance_issue
+          - end_of_fixed_term_contract_incapacity_to_perform_inherent_duties
+          - end_of_fixed_term_contract_local_regulations_max_term_reached
+          - end_of_fixed_term_contract_misconduct
+          - end_of_fixed_term_contract_operational_reasons
+          - end_of_fixed_term_contract_other
+          - end_of_fixed_term_contract_performance
+          - end_of_fixed_term_contract_redundancy
+          - end_of_fixed_term_contract_values
+          - gross_misconduct
+          - incapacity_to_perform_inherent_duties
+          - job_abandonment
+          - mutual_agreement
+          - other
+          - performance
+          - values
+          - workforce_reduction
+          type: string
+        termination_reason_files:
+          description: Any supporting documents regarding the termination reason
+          items:
+            $ref: '#/components/schemas/OffboardingFile'
+          type: array
+        timesheet_file:
+          allOf:
+          - $ref: '#/components/schemas/OffboardingFile'
+          description: 'Paid time off accuracy
+
+
+            Typically, any vacation pay accrued and unpaid at the time
+
+            of termination must be paid out to the employee. To avoid overpaying or underpaying,
+
+            please make sure we have an accurate account of their paid time off by querying the
+
+            [Show Time Off Balance](#operation/get_show_timeoff_balance) endpoint,
+
+            filtering by the `employment_id`.
+
+            This optional document should be sent in case of any discrepancies.
+
+            '
+          type: object
+        will_challenge_termination:
+          description: Whether is it likely or not that the employee will challenge their termination
+          type: boolean
+        will_challenge_termination_description:
+          description: If it is likely that the employee will challenge their termination, please provide additional details explaining the risk
+          type: string
+      required:
+      - confidential
+      - proposed_termination_date
+      - termination_reason
+      - risk_assessment_reasons
+      - will_challenge_termination
+      - reason_description
+      title: TerminationDetailsParams
+      type: object
+    ApprovedWorkAuthozation:
+      additionalProperties: false
+      description: Schema for approved work authorization
+      example:
+        employer_special_instructions: some special instruction
+        status: approved_by_manager
+      properties:
+        employer_special_instructions:
+          nullable: true
+          type: string
+        status:
+          enum:
+          - approved_by_manager
+          type: string
+      required:
+      - status
+      title: ApprovedWorkAuthozation
+      type: object
+    ResignationResponse:
+      description: Resignation response
+      example:
+        data:
+          resignation:
+            contract_currency_code: USD
+            contract_job_title: Developer
+            contract_proabtion_period_passed: true
+            contract_probation_period_end_date: '2021-06-15'
+            contract_start_date: '2021-03-15'
+            days_of_notice: 31
+            paid_timeoffs_breakdown_labels:
+            - 'Used until today: 60 days'
+            - 'Waiting for approval: 0 days'
+            proposed_last_day: '2024-04-12'
+            resignation_date: '2024-03-12'
+            resignation_reason_label: Retirement
+      properties:
+        data:
+          $ref: '#/components/schemas/Resignation'
+      title: ResignationResponse
+      type: object
+    V2Offboarding:
+      additionalProperties: false
+      description: 'An offboarding record. Top-level fields hold the offboarding''s lifecycle state. The
+
+        nested `request` object holds the immutable creation snapshot of the inputs submitted
+
+        when the offboarding was created.
+
+        '
+      example:
+        confidential: false
+        employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+        id: ba310525-9282-40c9-8977-14d844bf891a
+        inserted_at: '2023-12-01T10:30:00Z'
+        reason: performance
+        request:
+          additional_comments: Final paycheck to include unused PTO.
+          agrees_to_pto_amount: true
+          employee_awareness:
+            date: '2023-11-15'
+            note: Conversation held during 1:1.
+          proposed_termination_date: '2024-01-15'
+          reason_description: Sustained underperformance after improvement plan.
+          risk_assessment_reasons:
+          - none_of_these
+          will_challenge_termination: false
+          will_challenge_termination_description: ''
+        status: pending_payment
+        termination_date: '2024-01-15'
+        type: termination
+      properties:
+        confidential:
+          description: 'Whether the offboarding is confidential. Confidential offboardings are hidden from
+
+            list and show responses by default.
+
+            '
+          nullable: true
+          type: boolean
+        employment_id:
+          description: The unique identifier (UUID) of the employment being offboarded.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the offboarding record.
+          type: string
+        inserted_at:
+          description: The timestamp when the offboarding record was created.
+          format: datetime
+          type: string
+        reason:
+          description: The reason for the offboarding.
+          nullable: true
+          type: string
+        request:
+          $ref: '#/components/schemas/V2OffboardingRequest'
+        status:
+          description: 'The current processing status of the offboarding.
+
+
+            - `requested`: The offboarding request has been received and is awaiting review.
+
+            - `in_review`: Remote is reviewing the request for legal compliance and risks.
+
+            - `pending_payment`: The offboarding has been approved and submitted to payroll; the employee''s final payment is being processed.
+
+            - `completed`: The offboarding is complete and the employment has been terminated.
+
+            '
+          enum:
+          - requested
+          - in_review
+          - pending_payment
+          - completed
+          type: string
+        termination_date:
+          description: The confirmed last day of employment. May be null until Remote finalizes the date.
+          format: date
+          nullable: true
+          type: string
+        type:
+          description: 'The offboarding type.
+
+            '
+          enum:
+          - termination
+          - resignation
+          - cancellation
+          - relocation
+          - transfer
+          - conversion
+          type: string
+      required:
+      - id
+      - status
+      - type
+      - employment_id
+      - inserted_at
+      title: V2Offboarding
+      type: object
+    Date:
+      description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+      example: '2021-07-01'
+      format: date
+      title: Date
+      type: string
+    WorkAuthorizationUser:
+      additionalProperties: false
+      description: A user associated with a work authorization request (either the employee or the employer approver).
+      example:
+        email: user0@company.com
+        id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+        name: User Name
+      nullable: true
+      properties:
+        email:
+          description: The user's email address.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the user.
+          format: uuid
+          type: string
+        name:
+          description: The user's full name.
+          type: string
+      required:
+      - email
+      - name
+      - id
+      title: WorkAuthorizationUser
+      type: object
+    Resignation:
+      description: Resignation details for an offboarding request. The shape depends on whether the employee resigned before or after their employment start date.
+      example:
+        resignation:
+          contract_currency_code: USD
+          contract_job_title: Developer
+          contract_proabtion_period_passed: true
+          contract_probation_period_end_date: '2021-06-15'
+          contract_start_date: '2021-03-15'
+          days_of_notice: 31
+          paid_timeoffs_breakdown_labels:
+          - 'Used until today: 60 days'
+          - 'Waiting for approval: 0 days'
+          proposed_last_day: '2024-04-12'
+          resignation_date: '2024-03-12'
+          resignation_reason_label: Retirement
+      properties:
+        resignation:
+          anyOf:
+          - $ref: '#/components/schemas/ResignationBeforeStartDate'
+          - $ref: '#/components/schemas/ResignationAfterStartDate'
+          type: object
+      title: Resignation
+      type: object
+    ListWorkAuthorizationRequestsResponse:
+      description: Response schema listing many work_authorization_requests
+      example:
+        current_page: 1
+        total_count: 1
+        total_pages: 1
+        work_authorization_requests:
+        - additional_information: Some additional information
+          destination_country:
+            alpha_2_code: PT
+            code: PRT
+            contractor_products_available:
+            - standard
+            - plus
+            - cor
+            country_subdivisions:
+            - code: PT-06
+              name: Coimbra
+              subdivision_type: District
+            - code: PT-11
+              name: Lisboa
+              subdivision_type: District
+            employment_agreement_preview_available: true
+            eor_onboarding: true
+            locked_benefits: after_first_hire
+            name: Portugal
+            region: Europe
+            subregion: Southern Europe
+            supported_json_schemas:
+            - additional_documents
+            - address_details
+            - administrative_details
+            - employment-basic-information
+            - bank_account_details
+            - contract_details
+            - emergency_contact
+          employer_approver:
+            email: user0@company.com
+            id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+            name: User Name
+          employer_special_instructions: Some special instruction
+          id: d1bb9535-3296-4240-8a67-81475bd24e80
+          reason: Some reason
+          status: pending
+          submitted_at: '2021-07-15T18:18:17Z'
+          travel_date_end: '2021-07-01'
+          travel_date_start: '2021-07-01'
+          travel_document_number: FC123456
+          user:
+            email: user0@company.com
+            id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+            name: User Name
+          will_negotiate_or_sign_contracts: true
+          work_location: Some work location
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+            work_authorization_requests:
+              items:
+                $ref: '#/components/schemas/WorkAuthorizationRequest'
+              type: array
+          type: object
+      title: ListWorkAuthorizationRequestsResponse
+      type: object
+    ListOffboardingResponse:
+      description: Response schema listing many offboardings
+      example:
+        current_page: 1
+        offboardings:
+        - additional_comments: ''
+          agrees_to_pto_amount: true
+          employer_awareness: The employer was informed on 2023-12-12
+          employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+          id: ba310525-9282-40c9-8977-14d844bf891a
+          offboarding_id: 71a95754-f8f7-4763-97b4-ae20c73477a3
+          proposed_last_working_day: '2023-12-20'
+          requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+          resignation_reason: other_job_opportunity
+          status: submitted
+          submitted_at: '2023-04-13T13:35:06Z'
+          termination_date: '2023-12-20'
+          type: resignation
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            offboardings:
+              items:
+                $ref: '#/components/schemas/ResignationOrTerminationOffboarding'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListOffboardingResponse
+      type: object
+    WorkAuthorizationRequest:
+      description: A work authorization request submitted by an employee who needs authorization to work in a different country. Similar to a travel letter request but specifically for work authorization purposes.
+      example:
+        additional_information: Some additional information
+        destination_country:
+          alpha_2_code: PT
+          code: PRT
+          contractor_products_available:
+          - standard
+          - plus
+          - cor
+          country_subdivisions:
+          - code: PT-06
+            name: Coimbra
+            subdivision_type: District
+          - code: PT-11
+            name: Lisboa
+            subdivision_type: District
+          employment_agreement_preview_available: true
+          eor_onboarding: true
+          locked_benefits: after_first_hire
+          name: Portugal
+          region: Europe
+          subregion: Southern Europe
+          supported_json_schemas:
+          - additional_documents
+          - address_details
+          - administrative_details
+          - employment-basic-information
+          - bank_account_details
+          - contract_details
+          - emergency_contact
+        employer_approver:
+          email: user0@company.com
+          id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+          name: User Name
+        employer_special_instructions: Some special instruction
+        id: d1bb9535-3296-4240-8a67-81475bd24e80
+        reason: Some reason
+        status: pending
+        submitted_at: '2021-07-15T18:18:17Z'
+        travel_date_end: '2021-07-01'
+        travel_date_start: '2021-07-01'
+        travel_document_number: FC123456
+        user:
+          email: user0@company.com
+          id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+          name: User Name
+        will_negotiate_or_sign_contracts: true
+        work_location: Some work location
+      properties:
+        additional_information:
+          description: Additional information provided by the employee about their work authorization needs.
+          type: string
+        destination_country:
+          $ref: '#/components/schemas/Country'
+        employer_approver:
+          $ref: '#/components/schemas/WorkAuthorizationUser'
+        employer_special_instructions:
+          description: Special instructions from the employer. Null if none provided.
+          nullable: true
+          type: string
+        id:
+          description: The unique identifier (UUID) of the work authorization request.
+          format: uuid
+          type: string
+        reason:
+          description: The reason for the work authorization request.
+          type: string
+        status:
+          description: 'The current status of the work authorization request.
+
+
+            - `pending`: Submitted and awaiting manager review.
+
+            - `cancelled`: Cancelled by the employee.
+
+            - `declined_by_manager`: Declined by the employer manager.
+
+            - `declined_by_remote`: Declined by Remote after manager approval.
+
+            - `approved_by_manager`: Approved by the manager, awaiting Remote''s review.
+
+            - `approved_by_remote`: Fully approved by both manager and Remote.
+
+            '
+          enum:
+          - pending
+          - cancelled
+          - declined_by_manager
+          - declined_by_remote
+          - approved_by_manager
+          - approved_by_remote
+          type: string
+        submitted_at:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        travel_date_end:
+          $ref: '#/components/schemas/Date'
+        travel_date_start:
+          $ref: '#/components/schemas/Date'
+        travel_document_number:
+          description: The employee's travel document (passport) number.
+          type: string
+        user:
+          $ref: '#/components/schemas/WorkAuthorizationUser'
+        will_negotiate_or_sign_contracts:
+          description: Whether the employee will negotiate or sign contracts on behalf of the company in the destination country. This may affect the type of work authorization required.
+          nullable: true
+          type: boolean
+        work_location:
+          description: The specific work location or address in the destination country. Null if not specified.
+          nullable: true
+          type: string
+      required:
+      - additional_information
+      - destination_country
+      - employer_approver
+      - employer_special_instructions
+      - id
+      - reason
+      - status
+      - submitted_at
+      - travel_date_end
+      - travel_date_start
+      - travel_document_number
+      - user
+      - will_negotiate_or_sign_contracts
+      - work_location
+      title: WorkAuthorizationRequest
+      type: object
+    TerminationOffboarding:
+      additionalProperties: false
+      description: An offboarding request initiated by the employer to terminate an employment. Includes termination details, risk assessment, and status tracking through Remote's review process.
+      example:
+        additional_comments: additional comments regarding the termination reason
+        agrees_to_pto_amount: 'true'
+        confidential: false
+        employee_awareness:
+          date: '2023-12-12'
+          note: optional text to add details
+        employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+        id: ba310525-9282-40c9-8977-14d844bf891a
+        offboarding_id: 71a95754-f8f7-4763-97b4-ae20c73477a3
+        proposed_termination_date: '2023-12-20'
+        reason_description: They had some performance issues and mismatched expectations.
+        requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+        risk_assessment_reasons:
+        - pregnant_or_breastfeeding
+        - family_leave
+        status: submitted
+        submitted_at: '2023-04-13T13:35:06Z'
+        termination_date: '2023-12-20'
+        termination_reason: workforce_reduction
+        type: termination
+        will_challenge_termination: true
+        will_challenge_termination_description: additional details for the offboarding risk assessment
+      properties:
+        additional_comments:
+          description: Additional comments or context about the termination provided by the employer.
+          nullable: true
+          type: string
+        agrees_to_pto_amount:
+          description: Whether the employer agreed with the employee's PTO balance at the time of the termination request.
+          type: boolean
+        confidential:
+          description: Whether this offboarding request is confidential. Confidential requests are only visible to the user who authorized the token or integration; non-confidential requests are visible to all company admins.
+          type: boolean
+        employee_awareness:
+          description: Details about whether and when the employee was informed about their termination. Only present if the employee was informed before the offboarding request was submitted.
+          properties:
+            date:
+              description: The date when the employee was told about the termination.
+              format: date
+              nullable: true
+              type: string
+            note:
+              description: Notes about how the termination was communicated to the employee.
+              nullable: true
+              type: string
+          type: object
+        employment_id:
+          description: The unique identifier (UUID) of the employment being terminated.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the offboarding request.
+          type: string
+        offboarding_id:
+          description: 'The unique identifier (UUID) of the offboarding record. When present, this can be used
+
+            to query `GET /api/eor/v2/offboardings/{id}` for the v2 offboarding shape.
+
+            '
+          nullable: true
+          type: string
+        personal_email:
+          description: 'Remote will use this email address for post-termination communication.
+
+            If it is not provided, this field will be derived from the employment record. Therefore, it is important to ensure that it is not a company email.
+
+            '
+          format: email
+          type: string
+        proposed_termination_date:
+          description: The employer's proposed termination date. The actual termination date may differ based on local labor laws and notice period requirements.
+          format: date
+          type: string
+        reason_description:
+          description: A detailed description of the circumstances leading to the termination.
+          type: string
+        requested_by:
+          description: The unique identifier (UUID) of the company admin who submitted the termination request.
+          type: string
+        risk_assessment_reasons:
+          description: Reasons that may increase the legal risk of this termination (e.g., the employee is pregnant, on family leave, etc.).
+          items:
+            enum:
+            - caring_responsibilities
+            - disabled_or_health_condition
+            - family_leave
+            - member_of_union_or_works_council
+            - none_of_these
+            - pregnant_or_breastfeeding
+            - reported_concerns_with_workplace
+            - requested_medical_or_family_leave
+            - sick_leave
+            type: string
+          type: array
+        status:
+          description: 'The current status of the offboarding request.
+
+
+            - `submitted`: The request has been submitted and is awaiting review by Remote.
+
+            - `in_review`: Remote is reviewing the request for legal compliance and risks.
+
+            - `done`: The offboarding has been completed and the employment is terminated.
+
+            - `canceled`: The offboarding request was canceled before completion.
+
+            '
+          enum:
+          - submitted
+          - in_review
+          - done
+          - canceled
+          type: string
+        submitted_at:
+          description: The timestamp when the offboarding request was submitted.
+          format: datetime
+          type: string
+        termination_date:
+          description: Most updated termination date for the offboarding. This date is subject to change through the offboarding process even after it is finalized.
+          format: date
+          nullable: true
+          type: string
+        termination_reason:
+          description: The reason for the termination, as submitted by the employer.
+          enum:
+          - cancellation_before_start_date
+          - compliance_issue
+          - conversion_to_contractor
+          - dissatisfaction_with_remote_service
+          - end_of_fixed_term_contract_compliance_issue
+          - end_of_fixed_term_contract_incapacity_to_perform_inherent_duties
+          - end_of_fixed_term_contract_local_regulations_max_term_reached
+          - end_of_fixed_term_contract_misconduct
+          - end_of_fixed_term_contract_operational_reasons
+          - end_of_fixed_term_contract_other
+          - end_of_fixed_term_contract_performance
+          - end_of_fixed_term_contract_redundancy
+          - end_of_fixed_term_contract_values
+          - gross_misconduct
+          - incapacity_to_perform_inherent_duties
+          - job_abandonment
+          - mutual_agreement
+          - other
+          - performance
+          - values
+          - workforce_reduction
+          type: string
+        type:
+          description: The type of offboarding. Always `"termination"` for employer-initiated terminations.
+          enum:
+          - termination
+          type: string
+        will_challenge_termination:
+          description: Whether the employer believes the employee is likely to challenge their termination.
+          type: boolean
+        will_challenge_termination_description:
+          description: Additional details about why the employee may challenge the termination, if applicable.
+          type: string
+      required:
+      - id
+      - type
+      - status
+      - submitted_at
+      - employment_id
+      - requested_by
+      - confidential
+      - proposed_termination_date
+      - termination_date
+      - termination_reason
+      - reason_description
+      - additional_comments
+      - risk_assessment_reasons
+      - will_challenge_termination
+      title: TerminationOffboarding
+      type: object
+    DeclinedWorkAuthozation:
+      additionalProperties: false
+      description: Schema for declined work authorization
+      example:
+        employer_special_instructions: Some special instruction
+        reason: some reason
+        status: declined_by_manager
+      properties:
+        employer_special_instructions:
+          nullable: true
+          type: string
+        reason:
+          type: string
+        status:
+          enum:
+          - declined_by_manager
+          type: string
+      required:
+      - status
+      - reason
+      title: DeclinedWorkAuthozation
+      type: object
+    ResignationAfterStartDate:
+      description: Resignation details for an employee who resigned after their employment start date. Includes contract terms, notice period calculations, and PTO breakdown needed for the employer to validate the resignation.
+      example:
+        contract_currency_code: USD
+        contract_job_title: Developer
+        contract_proabtion_period_passed: true
+        contract_probation_period_end_date: '2021-06-15'
+        contract_start_date: '2021-03-15'
+        days_of_notice: 31
+        paid_timeoffs_breakdown_labels:
+        - 'Used until today: 60 days'
+        - 'Waiting for approval: 0 days'
+        proposed_last_day: '2024-04-12'
+        resignation_date: '2024-03-12'
+        resignation_reason_label: Retirement
+      properties:
+        contract_currency_code:
+          description: The ISO 4217 currency code of the employee's contract (used for any reimbursement calculations).
+          type: string
+        contract_job_title:
+          description: The job title from the employee's contract.
+          type: string
+        contract_proabtion_period_passed:
+          description: Whether the employee's probation period has passed. Affects notice period requirements in many jurisdictions.
+          type: boolean
+        contract_probation_period_end_date:
+          description: The end date of the employee's probation period. Null if the contract has no probation period.
+          format: date
+          nullable: true
+          type: string
+        contract_start_date:
+          description: The original start date from the employee's contract.
+          format: date
+          type: string
+        days_of_notice:
+          description: The number of calendar days of notice required based on the contract terms and local labor laws.
+          type: integer
+        paid_timeoffs_breakdown_labels:
+          description: 'Human-readable breakdown of the employee''s paid time off usage and balance (e.g., "Used until today: 60 days", "Waiting for approval: 0 days").'
+          items:
+            type: string
+          type: array
+        proposed_last_day:
+          description: The employee's proposed last working day, calculated based on the notice period and local labor laws.
+          format: date
+          type: string
+        resignation_date:
+          description: The date the employee submitted their resignation (UTC).
+          format: date
+          type: string
+        resignation_reason_label:
+          description: A human-readable label describing the reason for resignation (e.g., "Retirement", "Other job opportunity").
+          type: string
+      required:
+      - contract_job_title
+      - contract_start_date
+      - resignation_date
+      - resignation_reason_label
+      - contract_probation_period_end_date
+      - contract_proabtion_period_passed
+      - contract_currency_code
+      - proposed_last_day
+      - days_of_notice
+      - paid_timeoffs_breakdown_labels
+      title: ResignationAfterStartDate
+      type: object
+    SuccessResponse:
+      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
+      example:
+        data:
+          status: ok
+      properties:
+        data:
+          properties:
+            status:
+              description: The result status. Always `"ok"` for successful operations.
+              type: string
+          type: object
+      required:
+      - data
+      title: SuccessResponse
+      type: object
+    V2OffboardingResponse:
+      additionalProperties: false
+      description: Response containing a single v2 offboarding record.
+      example:
+        data:
+          offboarding:
+            confidential: false
+            employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+            id: ba310525-9282-40c9-8977-14d844bf891a
+            inserted_at: '2023-12-01T10:30:00Z'
+            reason: performance
+            request:
+              additional_comments: Final paycheck to include unused PTO.
+              agrees_to_pto_amount: true
+              employee_awareness:
+                date: '2023-11-15'
+                note: Conversation held during 1:1.
+              proposed_termination_date: '2024-01-15'
+              reason_description: Sustained underperformance after improvement plan.
+              risk_assessment_reasons:
+              - none_of_these
+              will_challenge_termination: false
+              will_challenge_termination_description: ''
+            status: pending_payment
+            termination_date: '2024-01-15'
+            type: termination
+      properties:
+        data:
+          properties:
+            offboarding:
+              $ref: '#/components/schemas/V2Offboarding'
+          type: object
+      title: V2OffboardingResponse
+      type: object
+    V2TerminationRequest:
+      additionalProperties: false
+      description: 'Snapshot of the inputs submitted when a `termination` offboarding was created.
+
+        These fields do not change as the offboarding progresses.
+
+        '
+      example:
+        additional_comments: Final paycheck to include unused PTO.
+        agrees_to_pto_amount: true
+        employee_awareness:
+          date: '2023-11-15'
+          note: Conversation held during 1:1.
+        proposed_termination_date: '2024-01-15'
+        reason_description: Sustained underperformance after improvement plan.
+        risk_assessment_reasons:
+        - none_of_these
+        will_challenge_termination: false
+        will_challenge_termination_description: ''
+      properties:
+        additional_comments:
+          description: Free-text additional comments submitted by the requester.
+          nullable: true
+          type: string
+        agrees_to_pto_amount:
+          description: Whether the requester agreed with the proposed PTO amount.
+          nullable: true
+          type: boolean
+        employee_awareness:
+          description: Present only when the requester indicated they have already informed the employee about the termination.
+          nullable: true
+          properties:
+            date:
+              format: date
+              nullable: true
+              type: string
+            note:
+              nullable: true
+              type: string
+          type: object
+        proposed_termination_date:
+          description: The termination date proposed by the requester.
+          format: date
+          nullable: true
+          type: string
+        reason_description:
+          description: Free-text description of the termination reason submitted by the requester.
+          nullable: true
+          type: string
+        risk_assessment_reasons:
+          description: Risk-assessment flags submitted by the requester.
+          items:
+            type: string
+          nullable: true
+          type: array
+        will_challenge_termination:
+          description: Whether the requester expects the employee to challenge the termination.
+          nullable: true
+          type: boolean
+        will_challenge_termination_description:
+          description: Additional context the requester provided about a potential challenge.
+          nullable: true
+          type: string
+      title: V2TerminationRequest
+      type: object
+    OffboardingResponse:
+      additionalProperties: false
+      description: Response containing a single offboarding record with full details.
+      example:
+        data:
+          offboarding:
+            additional_comments: additional comments regarding the termination reason
+            agrees_to_pto_amount: 'true'
+            confidential: false
+            employee_awareness:
+              date: '2023-12-12'
+              note: optional text to add details
+            employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+            id: ba310525-9282-40c9-8977-14d844bf891a
+            offboarding_id: 71a95754-f8f7-4763-97b4-ae20c73477a3
+            proposed_termination_date: '2023-12-20'
+            reason_description: They had some performance issues and mismatched expectations.
+            requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+            risk_assessment_reasons:
+            - pregnant_or_breastfeeding
+            - family_leave
+            status: submitted
+            submitted_at: '2023-04-13T13:35:06Z'
+            termination_date: '2023-12-20'
+            termination_reason: workforce_reduction
+            type: termination
+            will_challenge_termination: true
+            will_challenge_termination_description: additional details for the offboarding risk assessment
+      properties:
+        data:
+          $ref: '#/components/schemas/Offboarding'
+      title: OffboardingResponse
+      type: object
+    RequestError:
+      example:
+        errors:
+          code: request_internal_server_error
+          message: There was an error while uploading a termination reason file
+      properties:
+        errors:
+          properties:
+            code:
+              description: An error code that describes the nature of the error.
+              type: string
+            message:
+              description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+              type: string
+          required:
+          - code
+          - message
+          type: object
+      required:
+      - errors
+      title: RequestError
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    DeclinedTravelLetter:
+      additionalProperties: false
+      description: Schema for declined travel letter
+      example:
+        employer_special_instructions: Some special instruction
+        reason: some reason
+        status: declined_by_manager
+      properties:
+        employer_special_instructions:
+          nullable: true
+          type: string
+        reason:
+          type: string
+        status:
+          enum:
+          - declined_by_manager
+          type: string
+      required:
+      - status
+      - reason
+      title: DeclinedTravelLetter
+      type: object
+    ValidateResignationRequestParams:
+      example:
+        accepts_proposed_notice: false
+        agrees_to_pto_amount: false
+        agrees_to_pto_amount_notes: I don't agree.
+        agrees_to_resignation_reason: false
+        agrees_to_resignation_reason_notes: I don't agree.
+        has_additional_information: true
+        has_additional_information_notes: Some extra info.
+        has_more_salary_info: true
+        has_more_salary_info_notes: Some info about the salary.
+        is_owed_outstanding_reimbursements: true
+        owed_outstanding_reimbursements:
+          amount: 1500
+          notes: Compensation.
+        proposed_last_date:
+          date: '2042-04-15'
+          notes: This date is better.
+        will_take_more_pto: true
+        will_take_more_pto_notes: 3 more days.
+      oneOf:
+      - $ref: '#/components/schemas/ResignationAfterStartDateRequestParams'
+      - $ref: '#/components/schemas/ResignationBeforeStartDateRequestParams'
+      title: ValidateResignationRequestParams
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    ResignationBeforeStartDateRequestParams:
+      additionalProperties: false
+      example:
+        proposed_resignation_accepted: false
+        proposed_resignation_accepted_notes: I do not accept
+      properties:
+        proposed_resignation_accepted:
+          description: Whether the employer accepts the employee's resignation. If false, notes are required explaining why.
+          type: boolean
+        proposed_resignation_accepted_notes:
+          description: Required if `proposed_resignation_accepted` is set to false.
+          type: string
+      required:
+      - proposed_resignation_accepted
+      title: ResignationBeforeStartDateRequestParams
+      type: object
+    Country:
+      description: A supported country on Remote
+      example:
+        alpha_2_code: PT
+        code: PRT
+        contractor_products_available:
+        - standard
+        - plus
+        - cor
+        country_subdivisions:
+        - code: PT-06
+          name: Coimbra
+          subdivision_type: District
+        - code: PT-11
+          name: Lisboa
+          subdivision_type: District
+        employment_agreement_preview_available: true
+        eor_onboarding: true
+        locked_benefits: after_first_hire
+        name: Portugal
+        region: Europe
+        subregion: Southern Europe
+        supported_json_schemas:
+        - additional_documents
+        - address_details
+        - administrative_details
+        - employment-basic-information
+        - bank_account_details
+        - contract_details
+        - emergency_contact
+      properties:
+        alpha_2_code:
+          description: The ISO 3166-1 alpha-2 country code (e.g., "PT").
+          type: string
+        code:
+          description: The ISO 3166-1 alpha-3 country code (e.g., "PRT"). This is the primary code used across the Remote API.
+          type: string
+        contractor_products_available:
+          description: Contractor product names available for this country
+          items:
+            enum:
+            - standard
+            - plus
+            - cor
+            type: string
+          type: array
+        country_subdivisions:
+          description: Administrative subdivisions of the country (e.g., states, provinces, districts). Null if the country has no subdivisions relevant to Remote's services.
+          items:
+            $ref: '#/components/schemas/CountrySubdivision'
+          nullable: true
+          type: array
+        employment_agreement_preview_available:
+          description: Whether an Employment Agreement preview is available for this country.
+          type: boolean
+        eor_onboarding:
+          description: Whether EOR (Employer of Record) onboarding is available in this country.
+          type: boolean
+        locked_benefits:
+          description: When benefit plan selections become locked for this country (e.g., "after_first_hire" means benefits cannot be changed after the first employee is hired).
+          type: string
+        name:
+          description: The country's full English name.
+          type: string
+        region:
+          description: The geographic region the country belongs to (e.g., "Europe", "Asia", "Americas").
+          type: string
+        subregion:
+          description: The geographic subregion (e.g., "Southern Europe", "Southeast Asia"). Null for some countries.
+          nullable: true
+          type: string
+        supported_json_schemas:
+          description: The list of JSON schema form names available for this country (e.g., "address_details", "contract_details"). Use these with the Show form schema endpoint to get country-specific field requirements.
+          items:
+            type: string
+          type: array
+      required:
+      - alpha_2_code
+      - code
+      - name
+      title: Country
+      type: object
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    TravelLetterRequest:
+      additionalProperties: false
+      description: 'A travel letter request submitted by an employee who needs a formal letter from their employer to support a visa or travel application. The request goes through a two-stage approval: first by the employer manager, then by Remote.'
+      example:
+        additional_information: Some additional information
+        destination_country:
+          alpha_2_code: PT
+          code: PRT
+          contractor_products_available:
+          - standard
+          - plus
+          - cor
+          country_subdivisions:
+          - code: PT-06
+            name: Coimbra
+            subdivision_type: District
+          - code: PT-11
+            name: Lisboa
+            subdivision_type: District
+          employment_agreement_preview_available: true
+          eor_onboarding: true
+          locked_benefits: after_first_hire
+          name: Portugal
+          region: Europe
+          subregion: Southern Europe
+          supported_json_schemas:
+          - additional_documents
+          - address_details
+          - administrative_details
+          - employment-basic-information
+          - bank_account_details
+          - contract_details
+          - emergency_contact
+        embassy_address: some embassy address
+        employer_approver:
+          email: user0@company.com
+          id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+          name: User Name
+        employer_special_instructions: Some special instruction
+        id: f4b4369e-cb29-47f0-a608-afd5e19a2102
+        reason: Some reason
+        requires_travel_address: false
+        responsible_for_accommodation_cost: employee
+        responsible_for_meal_cost: employee
+        responsible_for_travel_cost: employee
+        status: pending
+        submitted_at: '2021-07-15T18:18:17Z'
+        travel_address: Some travel address
+        travel_date_end: '2021-07-01'
+        travel_date_start: '2021-07-01'
+        travel_document_number: FC123456
+        travel_reason: Some travel reason
+        travel_reason_details: Some details
+        user:
+          email: user0@company.com
+          id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+          name: User Name
+      properties:
+        additional_information:
+          description: Additional information provided by the employee about their travel plans.
+          type: string
+        destination_country:
+          $ref: '#/components/schemas/Country'
+        embassy_address:
+          description: The address of the embassy or consulate where the travel letter will be submitted.
+          type: string
+        employer_approver:
+          $ref: '#/components/schemas/TravelLetterUser'
+        employer_special_instructions:
+          description: Special instructions from the employer to include in the travel letter. Null if none provided.
+          nullable: true
+          type: string
+        id:
+          description: The unique identifier (UUID) of the travel letter request.
+          format: uuid
+          type: string
+        reason:
+          description: The purpose of the travel (e.g., business meeting, conference, client visit).
+          type: string
+        requires_travel_address:
+          description: Whether the employee needs to provide a specific travel address (accommodation address at the destination).
+          type: boolean
+        responsible_for_accommodation_cost:
+          description: Who is responsible for accommodation costs during the trip. Set by the employer during approval. Null if not yet approved.
+          enum:
+          - employee
+          - employer
+          nullable: true
+          type: string
+        responsible_for_meal_cost:
+          description: Who is responsible for meal costs during the trip. Set by the employer during approval. Null if not yet approved.
+          enum:
+          - employee
+          - employer
+          nullable: true
+          type: string
+        responsible_for_travel_cost:
+          description: Who is responsible for transportation costs. Set by the employer during approval. Null if not yet approved.
+          enum:
+          - employee
+          - employer
+          nullable: true
+          type: string
+        status:
+          description: 'The current status of the travel letter request.
+
+
+            - `pending`: Submitted by the employee and awaiting manager review.
+
+            - `cancelled`: Cancelled by the employee before approval.
+
+            - `declined_by_manager`: The employer manager declined the request.
+
+            - `declined_by_remote`: Remote declined the request after manager approval (e.g., compliance reasons).
+
+            - `approved_by_manager`: Approved by the employer manager, awaiting Remote''s review.
+
+            - `approved_by_remote`: Fully approved by both the manager and Remote. The travel letter will be generated.
+
+            '
+          enum:
+          - pending
+          - cancelled
+          - declined_by_manager
+          - declined_by_remote
+          - approved_by_manager
+          - approved_by_remote
+          type: string
+        submitted_at:
+          $ref: '#/components/schemas/DateTimeIso8601'
+        travel_address:
+          description: The employee's accommodation address at the destination. Null if `requires_travel_address` is false or not yet provided.
+          nullable: true
+          type: string
+        travel_date_end:
+          $ref: '#/components/schemas/Date'
+        travel_date_start:
+          $ref: '#/components/schemas/Date'
+        travel_document_number:
+          description: The employee's travel document (passport) number.
+          type: string
+        travel_reason:
+          description: The category of travel reason selected by the employee.
+          type: string
+        travel_reason_details:
+          description: Detailed explanation of the travel reason provided by the employee.
+          type: string
+        user:
+          $ref: '#/components/schemas/TravelLetterUser'
+      required:
+      - additional_information
+      - destination_country
+      - embassy_address
+      - employer_approver
+      - employer_special_instructions
+      - id
+      - reason
+      - requires_travel_address
+      - responsible_for_accommodation_cost
+      - responsible_for_meal_cost
+      - responsible_for_travel_cost
+      - status
+      - submitted_at
+      - travel_address
+      - travel_date_end
+      - travel_date_start
+      - travel_document_number
+      - travel_reason
+      - travel_reason_details
+      - user
+      title: TravelLetterRequest
+      type: object
+    UpdateWorkAuthorizationRequestParams:
+      additionalProperties: false
+      description: Schema for updating a work authorization request
+      example:
+        employer_special_instructions: some special instruction
+        status: approved_by_manager
+      oneOf:
+      - $ref: '#/components/schemas/ApprovedWorkAuthozation'
+      - $ref: '#/components/schemas/DeclinedWorkAuthozation'
+      title: UpdateWorkAuthorizationRequestParams
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    V2ListOffboardingResponse:
+      description: Response schema listing many offboardings
+      example:
+        current_page: 1
+        offboardings:
+        - confidential: false
+          employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+          id: ba310525-9282-40c9-8977-14d844bf891a
+          inserted_at: '2023-12-01T10:30:00Z'
+          reason: performance
+          request:
+            additional_comments: Final paycheck to include unused PTO.
+            agrees_to_pto_amount: true
+            employee_awareness:
+              date: '2023-11-15'
+              note: Conversation held during 1:1.
+            proposed_termination_date: '2024-01-15'
+            reason_description: Sustained underperformance after improvement plan.
+            risk_assessment_reasons:
+            - none_of_these
+            will_challenge_termination: false
+            will_challenge_termination_description: ''
+          status: pending_payment
+          termination_date: '2024-01-15'
+          type: termination
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            offboardings:
+              items:
+                $ref: '#/components/schemas/V2Offboarding'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: V2ListOffboardingResponse
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
+      properties:
+        message:
+          pattern: Forbidden
+          type: string
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    ApprovedTravelLetter:
+      additionalProperties: false
+      description: Schema for approved travel letter
+      example:
+        employer_special_instructions: some special instruction
+        responsible_for_accommodation_cost: employee
+        responsible_for_meal_cost: employee
+        responsible_for_travel_cost: employee
+        status: approved_by_manager
+      properties:
+        employer_special_instructions:
+          nullable: true
+          type: string
+        responsible_for_accommodation_cost:
+          enum:
+          - employee
+          - employer
+          type: string
+        responsible_for_meal_cost:
+          enum:
+          - employee
+          - employer
+          type: string
+        responsible_for_travel_cost:
+          enum:
+          - employee
+          - employer
+          type: string
+        status:
+          enum:
+          - approved_by_manager
+          type: string
+      required:
+      - status
+      - responsible_for_accommodation_cost
+      - responsible_for_travel_cost
+      - responsible_for_meal_cost
+      title: ApprovedTravelLetter
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    GenericFile:
+      description: A file represented as a base64-encoded string.
+      example: base64 encoded content
+      format: binary
+      title: GenericFile
+      type: string
+    ResignationFile:
+      additionalProperties: false
+      example:
+        content: base64 encoded content
+        name: id.pdf
+      properties:
+        content:
+          description: The content in base64 encoding
+          format: binary
+          type: string
+        name:
+          description: The file name
+          type: string
+      required:
+      - name
+      - content
+      title: ResignationFile
+      type: object
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    ResignationOffboarding:
+      additionalProperties: false
+      description: An offboarding request initiated by the employee (a resignation). Includes the employee's proposed last working day, reason, and status tracking through Remote's process.
+      example:
+        additional_comments: ''
+        agrees_to_pto_amount: true
+        employer_awareness: The employer was informed on 2023-12-12
+        employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+        id: ba310525-9282-40c9-8977-14d844bf891a
+        offboarding_id: 71a95754-f8f7-4763-97b4-ae20c73477a3
+        proposed_last_working_day: '2023-12-20'
+        requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+        resignation_reason: other_job_opportunity
+        status: submitted
+        submitted_at: '2023-04-13T13:35:06Z'
+        termination_date: '2023-12-20'
+        type: resignation
+      properties:
+        additional_comments:
+          description: Additional comments or context about the resignation.
+          nullable: true
+          type: string
+        agrees_to_pto_amount:
+          description: Whether the employer agrees with the employee's PTO balance.
+          type: boolean
+        employer_awareness:
+          description: A description of how and when the employer was made aware of the resignation.
+          type: string
+        employment_id:
+          description: The unique identifier (UUID) of the employment being resigned from.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the offboarding request.
+          type: string
+        offboarding_id:
+          description: 'The unique identifier (UUID) of the offboarding record. When present, this can be used
+
+            to query `GET /api/eor/v2/offboardings/{id}` for the v2 offboarding shape.
+
+            '
+          nullable: true
+          type: string
+        proposed_last_working_day:
+          description: The employee's proposed last working day. The actual last day may differ based on notice period requirements.
+          format: date
+          type: string
+        reason_description:
+          description: A detailed description of the employee's reason for resigning.
+          type: string
+        requested_by:
+          description: The unique identifier (UUID) of the employee who submitted the resignation.
+          type: string
+        resignation_reason:
+          description: The reason the employee gave for their resignation.
+          enum:
+          - cancellation_before_start_date
+          - company_culture_or_values
+          - conversion_to_contractor
+          - conversion_to_global_payroll
+          - conversion_to_peo
+          - dissatisfaction_with_remote_service
+          - incapacity_to_perform_inherent_duties
+          - infrastructure_challenges
+          - lack_of_recognition
+          - leadership
+          - mutual_agreement
+          - other
+          - other_job_opportunity
+          - personal_reasons
+          - position_does_not_meet_expectations
+          - relationship_with_coworkers
+          - relocation_from_entity_to_entity_by_employee
+          - relocation_leaving_remote
+          - remuneration_and_benefits
+          - retirement
+          - transfer_and_relocation_new_customer_and_new_country
+          - transfer_between_remote_customer
+          - transfer_from_remote_to_customer
+          - transfer_from_remote_to_other_eor
+          type: string
+        status:
+          description: 'The current status of the offboarding request.
+
+
+            - `submitted`: The resignation has been submitted and is awaiting review.
+
+            - `in_review`: Remote is processing the resignation.
+
+            - `done`: The offboarding has been completed.
+
+            - `canceled`: The resignation was withdrawn or canceled.
+
+            '
+          enum:
+          - submitted
+          - in_review
+          - done
+          - canceled
+          type: string
+        submitted_at:
+          description: The timestamp when the resignation was submitted.
+          format: datetime
+          type: string
+        termination_date:
+          description: Most updated termination date for the offboarding. This date is subject to change through the offboarding process even after it is finalized.
+          format: date
+          nullable: true
+          type: string
+        type:
+          description: The type of offboarding. Always `"resignation"` for employee-initiated resignations.
+          enum:
+          - resignation
+          type: string
+      required:
+      - id
+      - type
+      - status
+      - submitted_at
+      - employment_id
+      - requested_by
+      - proposed_last_working_day
+      - termination_date
+      - resignation_reason
+      title: ResignationOffboarding
+      type: object
+    OffboardingFile:
+      example:
+        content: UGVyaW9kIEVuZCBEYXRlLFBheSBEYXRlLEVtcG...5jZSBPZiBSZXNpZGVuYdXJyZW50LEFsbG93
+        name: termination_letter.pdf
+      properties:
+        content:
+          description: The content in base64 encoding
+          format: binary
+          type: string
+        name:
+          description: The file name
+          type: string
+      required:
+      - name
+      - content
+      title: OffboardingFile
+      type: object
+    CountrySubdivision:
+      description: A subdivision of a supported country on Remote
+      example:
+        code: PT-11
+        name: Lisboa
+        subdivision_type: District
+      properties:
+        code:
+          description: The ISO 3166-2 subdivision code (e.g., "PT-11" for Lisboa).
+          type: string
+        name:
+          description: The subdivision's name (e.g., "Lisboa", "California").
+          type: string
+        subdivision_type:
+          description: The type of subdivision (e.g., "District", "State", "Province").
+          type: string
+      required:
+      - name
+      title: CountrySubdivision
+      type: object
+    V2ResignationRequest:
+      additionalProperties: false
+      description: 'Snapshot of the inputs submitted when a `resignation` offboarding was created.
+
+        These fields do not change as the offboarding progresses.
+
+        '
+      example:
+        additional_comments: Happy to help with the transition.
+        employer_awareness: Notified my manager last week.
+        proposed_last_working_day: '2024-02-01'
+        reason_description: Pursuing a new opportunity closer to home.
+      properties:
+        additional_comments:
+          description: Free-text additional comments submitted by the employee.
+          nullable: true
+          type: string
+        employer_awareness:
+          description: Present only when the employee indicated they have already informed the employer about the resignation.
+          nullable: true
+          type: string
+        proposed_last_working_day:
+          description: The last working day proposed by the employee.
+          format: date
+          nullable: true
+          type: string
+        reason_description:
+          description: Free-text description of the resignation reason submitted by the employee.
+          nullable: true
+          type: string
+      title: V2ResignationRequest
+      type: object
+    ResignationBeforeStartDate:
+      description: Resignation details for an employee who resigned before their employment start date. Contains basic contract and resignation information only.
+      example:
+        contract_job_title: Developer
+        contract_start_date: '2024-04-12'
+        resignation_date: '2024-04-03'
+        resignation_reason_label: Decided not to join before starting
+      properties:
+        contract_job_title:
+          description: The job title from the employee's contract.
+          type: string
+        contract_start_date:
+          description: The original start date from the employee's contract.
+          format: date
+          type: string
+        resignation_date:
+          description: The date the employee submitted their resignation (UTC).
+          format: date
+          type: string
+        resignation_reason_label:
+          description: A human-readable label describing the reason for resignation (e.g., "Decided not to join before starting").
+          type: string
+      required:
+      - contract_job_title
+      - contract_start_date
+      - resignation_date
+      - resignation_reason_label
+      title: ResignationBeforeStartDate
+      type: object
+    V2OffboardingRequest:
+      description: 'The shape depends on the originating request: offboardings that originated from a
+
+        termination carry a `V2TerminationRequest`; those that originated from a resignation carry
+
+        a `V2ResignationRequest`.
+
+        '
+      example:
+        additional_comments: Final paycheck to include unused PTO.
+        agrees_to_pto_amount: true
+        employee_awareness:
+          date: '2023-11-15'
+          note: Conversation held during 1:1.
+        proposed_termination_date: '2024-01-15'
+        reason_description: Sustained underperformance after improvement plan.
+        risk_assessment_reasons:
+        - none_of_these
+        will_challenge_termination: false
+        will_challenge_termination_description: ''
+      nullable: true
+      oneOf:
+      - $ref: '#/components/schemas/V2TerminationRequest'
+      - $ref: '#/components/schemas/V2ResignationRequest'
+      title: V2OffboardingRequest
+    ResignationOrTerminationOffboarding:
+      additionalProperties: false
+      anyOf:
+      - $ref: '#/components/schemas/ResignationOffboarding'
+      - $ref: '#/components/schemas/TerminationOffboarding'
+      example:
+        additional_comments: ''
+        agrees_to_pto_amount: true
+        employer_awareness: The employer was informed on 2023-12-12
+        employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+        id: ba310525-9282-40c9-8977-14d844bf891a
+        offboarding_id: 71a95754-f8f7-4763-97b4-ae20c73477a3
+        proposed_last_working_day: '2023-12-20'
+        requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+        resignation_reason: other_job_opportunity
+        status: submitted
+        submitted_at: '2023-04-13T13:35:06Z'
+        termination_date: '2023-12-20'
+        type: resignation
+      title: ResignationOrTerminationOffboarding
+      type: object
+    DateTimeIso8601:
+      description: 'UTC date time in [ISO 8601][] format.
+
+
+        [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601
+
+        '
+      example: '2021-07-15T18:18:17Z'
+      format: date-time
+      title: DateTimeIso8601
+      type: string
+    CreateOffboardingParams:
+      example:
+        employment_id: 5e55386e-4f4f-4def-92f4-bdc19a5ce77d
+        termination_details:
+          additional_comments: additional comments regarding the termination reason
+          confidential: false
+          employee_awareness:
+            date: '2023-12-12'
+            note: optional text to add details
+          proposed_termination_date: '2023-12-20'
+          reason_description: termination reason
+          risk_assessment_reasons:
+          - pregnant_or_breastfeeding
+          - family_leave
+          termination_reason: workforce_reduction
+          termination_reason_files:
+          - content: UGVyaW9kIEVuZCBEYXRlLFBheSBEYXRlLEVtcG...5jZSBPZiBSZXNpZGVuYdXJyZW50LEFsbG93
+            name: termination_letter.pdf
+          will_challenge_termination: true
+          will_challenge_termination_description: additional details for the offboarding risk assessment
+        type: termination
+      properties:
+        employment_id:
+          description: The unique identifier (UUID) of the employment to be terminated.
+          type: string
+        termination_details:
+          $ref: '#/components/schemas/TerminationDetailsParams'
+        type:
+          description: The type of the offboarding request. For now, only `termination` is allowed.
+          enum:
+          - termination
+          type: string
+      required:
+      - type
+      - employment_id
+      - termination_details
+      title: CreateOffboardingParams
+      type: object
+    UpdateTravelLetterRequestParams:
+      additionalProperties: false
+      description: Schema for updating travel letter request parameters
+      example:
+        employer_special_instructions: some special instruction
+        responsible_for_accommodation_cost: employee
+        responsible_for_meal_cost: employee
+        responsible_for_travel_cost: employee
+        status: approved_by_manager
+      oneOf:
+      - $ref: '#/components/schemas/ApprovedTravelLetter'
+      - $ref: '#/components/schemas/DeclinedTravelLetter'
+      title: UpdateTravelLetterRequestParams
+    ListTravelLettersResponse:
+      description: Response schema listing many travel_letter_requests
+      example:
+        current_page: 1
+        total_count: 1
+        total_pages: 1
+        travel_letter_requests:
+        - additional_information: Some additional information
+          destination_country:
+            alpha_2_code: PT
+            code: PRT
+            contractor_products_available:
+            - standard
+            - plus
+            - cor
+            country_subdivisions:
+            - code: PT-06
+              name: Coimbra
+              subdivision_type: District
+            - code: PT-11
+              name: Lisboa
+              subdivision_type: District
+            employment_agreement_preview_available: true
+            eor_onboarding: true
+            locked_benefits: after_first_hire
+            name: Portugal
+            region: Europe
+            subregion: Southern Europe
+            supported_json_schemas:
+            - additional_documents
+            - address_details
+            - administrative_details
+            - employment-basic-information
+            - bank_account_details
+            - contract_details
+            - emergency_contact
+          embassy_address: some embassy address
+          employer_approver:
+            email: user0@company.com
+            id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+            name: User Name
+          employer_special_instructions: Some special instruction
+          id: f4b4369e-cb29-47f0-a608-afd5e19a2102
+          reason: Some reason
+          requires_travel_address: false
+          responsible_for_accommodation_cost: employee
+          responsible_for_meal_cost: employee
+          responsible_for_travel_cost: employee
+          status: pending
+          submitted_at: '2021-07-15T18:18:17Z'
+          travel_address: Some travel address
+          travel_date_end: '2021-07-01'
+          travel_date_start: '2021-07-01'
+          travel_document_number: FC123456
+          travel_reason: Some travel reason
+          travel_reason_details: Some details
+          user:
+            email: user0@company.com
+            id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+            name: User Name
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+            travel_letter_requests:
+              items:
+                $ref: '#/components/schemas/TravelLetterRequest'
+              type: array
+          type: object
+      title: ListTravelLettersResponse
+      type: object
+    Offboarding:
+      additionalProperties: false
+      description: A wrapper containing an offboarding record, which can be either a termination (employer-initiated) or a resignation (employee-initiated).
+      example:
+        offboarding:
+          additional_comments: additional comments regarding the termination reason
+          agrees_to_pto_amount: 'true'
+          confidential: false
+          employee_awareness:
+            date: '2023-12-12'
+            note: optional text to add details
+          employment_id: 1e74fdc2-7420-4eef-ab0a-b794cbbef4e1
+          id: ba310525-9282-40c9-8977-14d844bf891a
+          offboarding_id: 71a95754-f8f7-4763-97b4-ae20c73477a3
+          proposed_termination_date: '2023-12-20'
+          reason_description: They had some performance issues and mismatched expectations.
+          requested_by: 5a31f3c1-d7a7-4311-89cb-928959d3d540
+          risk_assessment_reasons:
+          - pregnant_or_breastfeeding
+          - family_leave
+          status: submitted
+          submitted_at: '2023-04-13T13:35:06Z'
+          termination_date: '2023-12-20'
+          termination_reason: workforce_reduction
+          type: termination
+          will_challenge_termination: true
+          will_challenge_termination_description: additional details for the offboarding risk assessment
+      properties:
+        offboarding:
+          $ref: '#/components/schemas/ResignationOrTerminationOffboarding'
+      title: Offboarding
+      type: object
+    ResignationAfterStartDateRequestParams:
+      additionalProperties: false
+      example:
+        accepts_proposed_notice: false
+        agrees_to_pto_amount: false
+        agrees_to_pto_amount_notes: I don't agree.
+        agrees_to_resignation_reason: false
+        agrees_to_resignation_reason_notes: I don't agree.
+        has_additional_information: true
+        has_additional_information_notes: Some extra info.
+        has_more_salary_info: true
+        has_more_salary_info_notes: Some info about the salary.
+        is_owed_outstanding_reimbursements: true
+        owed_outstanding_reimbursements:
+          amount: 1500
+          notes: Compensation.
+        proposed_last_date:
+          date: '2042-04-15'
+          notes: This date is better.
+        will_take_more_pto: true
+        will_take_more_pto_notes: 3 more days.
+      properties:
+        accepts_proposed_notice:
+          description: Whether the employer accepts the proposed notice period and last working day. If false, provide an alternative `proposed_last_date`.
+          type: boolean
+        agrees_to_pto_amount:
+          description: Whether the employer agrees with the employee's current PTO balance. If false, provide notes explaining the discrepancy.
+          type: boolean
+        agrees_to_pto_amount_notes:
+          description: Required if `agrees_to_pto_amount` is set to false.
+          type: string
+        agrees_to_resignation_reason:
+          description: Whether the employer agrees with the resignation reason stated by the employee. If false, provide notes with the employer's perspective.
+          type: boolean
+        agrees_to_resignation_reason_notes:
+          description: required if `agrees_to_resignation_reason` is set to false.
+          type: string
+        has_additional_information:
+          description: Whether the employer has additional information to share about the resignation. If true, provide notes.
+          type: boolean
+        has_additional_information_notes:
+          description: required if `has_additional_information` is set to true.
+          type: string
+        has_more_salary_info:
+          description: Whether there are salary adjustments or additional salary information to communicate. If true, provide notes.
+          type: boolean
+        has_more_salary_info_notes:
+          description: required if `has_more_salary_info` is set to true.
+          type: string
+        is_owed_outstanding_reimbursements:
+          description: Whether the employee is owed any outstanding expense reimbursements. If true, provide the amount and notes.
+          type: boolean
+        owed_outstanding_reimbursements:
+          description: required if `is_owed_outstanding_reimbursements` is set to true.
+          properties:
+            amount:
+              description: 'The amount (in the currency of the employment) to be given to the employee.
+
+
+                This field accepts fractional amounts as well. However to avoid precision issues
+
+                and errors that can arise from storing fractional amounts, the Remote API only
+
+                accepts currencies and their fractional amounts as integers. This means you
+
+                should append fractional amounts to the end of the amount you''re passing in with
+
+                this field.
+
+
+                For example, if the amount you''re offering is EUR 500.25, you would specify `50025` as
+
+                the amount for this field.
+
+                '
+              type: integer
+            notes:
+              type: string
+          type: object
+        proposed_last_date:
+          description: Required if `accepts_proposed_notice` is set to false.
+          properties:
+            date:
+              format: date
+              type: string
+            notes:
+              type: string
+          type: object
+        timesheet_file:
+          allOf:
+          - $ref: '#/components/schemas/ResignationFile'
+          description: 'Paid time off accuracy
+
+
+            Typically, any vacation pay accrued and unpaid at the time
+
+            of termination must be paid out to the employee. To avoid overpaying or underpaying,
+
+            please make sure we have an accurate account of their paid time off by querying the
+
+            [Show Time Off Balance](#operation/get_show_timeoff_balance) endpoint,
+
+            filtering by the `employment_id`.
+
+            This optional document should be sent in case of any discrepancies.
+
+            '
+          type: object
+        will_take_more_pto:
+          description: Whether the employee intends to take more PTO before their last working day. If true, provide notes with details.
+          type: boolean
+        will_take_more_pto_notes:
+          description: required if `will_take_more_pto` is set to true.
+          type: string
+      required:
+      - accepts_proposed_notice
+      - agrees_to_pto_amount
+      - agrees_to_resignation_reason
+      - has_additional_information
+      - has_more_salary_info
+      - is_owed_outstanding_reimbursements
+      - will_take_more_pto
+      title: ResignationAfterStartDateRequestParams
+      type: object
+    TravelLetterResponse:
+      additionalProperties: false
+      description: Schema for travel letter request
+      example:
+        data:
+          travel_letter_request:
+            additional_information: Some additional information
+            destination_country:
+              alpha_2_code: PT
+              code: PRT
+              contractor_products_available:
+              - standard
+              - plus
+              - cor
+              country_subdivisions:
+              - code: PT-06
+                name: Coimbra
+                subdivision_type: District
+              - code: PT-11
+                name: Lisboa
+                subdivision_type: District
+              employment_agreement_preview_available: true
+              eor_onboarding: true
+              locked_benefits: after_first_hire
+              name: Portugal
+              region: Europe
+              subregion: Southern Europe
+              supported_json_schemas:
+              - additional_documents
+              - address_details
+              - administrative_details
+              - employment-basic-information
+              - bank_account_details
+              - contract_details
+              - emergency_contact
+            embassy_address: some embassy address
+            employer_approver:
+              email: user0@company.com
+              id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+              name: User Name
+            employer_special_instructions: Some special instruction
+            id: f4b4369e-cb29-47f0-a608-afd5e19a2102
+            reason: Some reason
+            requires_travel_address: false
+            responsible_for_accommodation_cost: employee
+            responsible_for_meal_cost: employee
+            responsible_for_travel_cost: employee
+            status: pending
+            submitted_at: '2021-07-15T18:18:17Z'
+            travel_address: Some travel address
+            travel_date_end: '2021-07-01'
+            travel_date_start: '2021-07-01'
+            travel_document_number: FC123456
+            travel_reason: Some travel reason
+            travel_reason_details: Some details
+            user:
+              email: user0@company.com
+              id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+              name: User Name
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            travel_letter_request:
+              $ref: '#/components/schemas/TravelLetterRequest'
+          required:
+          - travel_letter_request
+          type: object
+      required:
+      - data
+      title: TravelLetterResponse
+      type: object
+    TooManyRequestsResponse:
+      description: Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.
+      example:
+        message: Too many requests
+      properties:
+        message:
+          pattern: Too many requests
+          type: string
+      title: TooManyRequestsResponse
+      type: object
+    TravelLetterUser:
+      additionalProperties: false
+      description: A user associated with a travel letter request (either the employee or the employer approver).
+      example:
+        email: user0@company.com
+        id: 93aaf0b3-1d79-4d2c-8d47-3d5406727d70
+        name: User Name
+      nullable: true
+      properties:
+        email:
+          description: The user's email address.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the user.
+          format: uuid
+          type: string
+        name:
+          description: The user's full name.
+          type: string
+      required:
+      - email
+      - name
+      - id
+      title: TravelLetterUser
+      type: object
+  securitySchemes:
+    BasicAuth:
+      description: 'Authenticate using the basic authentication for partners.
+
+
+        Use the CLIENT_ID as login and CLIENT_SECRET as password.
+
+        '
+      scheme: basic
+      type: http
+    ClientToken:
+      description: 'Authenticate a partner using only the the provided `client_token`.
+
+
+        This authentication method only allows accessing marketing endpoints.
+
+        '
+      scheme: bearer
+      type: http
+    CustomerAPIToken:
+      description: 'Authenticate using API Key generated by the customer in their Integration Settings page.
+
+        '
+      scheme: bearer
+      type: http
+    OAuth2:
+      description: 'Authenticate using OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2Assertion:
+      description: 'Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer` grant in the OAuth2 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            address:read: address:read
+            address:write: address:write
+            bank_account:read: bank_account:read
+            bank_account:write: bank_account:write
+            document:read: document:read
+            document:write: document:write
+            emergency_contact:read: emergency_contact:read
+            emergency_contact:write: emergency_contact:write
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            expense:read: expense:read
+            incentive:read: incentive:read
+            payroll: payroll
+            payslip:read: payslip:read
+            personal_detail:read: personal_detail:read
+            personal_detail:write: personal_detail:write
+            time_and_attendance: time_and_attendance
+            timeoff:read: timeoff:read
+            timeoff:write: timeoff:write
+            timesheet:read: timesheet:read
+          tokenUrl: /auth/oauth2/token
+          x-assertionType: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+      type: oauth2
+    OAuth2AuthorizationCode:
+      description: 'Authenticate as the token authorizer using `authorization_code` / `refresh_token` grants in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        authorizationCode:
+          authorizationUrl: /auth/oauth2/authorize
+          refreshUrl: /auth/oauth2/token
+          scopes:
+            company_department:read: company_department:read
+            webhook:write: webhook:write
+            magic_link:write: magic_link:write
+            offboarding:write: offboarding:write
+            custom_field:write: custom_field:write
+            address:write: address:write
+            expense:read: expense:read
+            employment:write: employment:write
+            identity_verification:write: identity_verification:write
+            timesheet:write: timesheet:write
+            travel_letter:write: travel_letter:write
+            incentive:read: incentive:read
+            personal_detail:read: personal_detail:read
+            invoices:write: invoices:write
+            work_authorization:write: work_authorization:write
+            timeoff:write: timeoff:write
+            company_structure:read: company_structure:read
+            benefit_renewal:write: benefit_renewal:write
+            benefit_offer:read: benefit_offer:read
+            employment_documents: employment_documents
+            onboarding:write: onboarding:write
+            payroll_run:read: payroll_run:read
+            risk_reserve:write: risk_reserve:write
+            invoices: invoices
+            resignation_letter:read: resignation_letter:read
+            resignation:read: resignation:read
+            convert_currency:read: convert_currency:read
+            employments: employments
+            probation_document:read: probation_document:read
+            company_admin: company_admin
+            payroll: payroll
+            help_center_article:read: help_center_article:read
+            timesheet:read: timesheet:read
+            custom_field_value:write: custom_field_value:write
+            company_currencies:read: company_currencies:read
+            payslip:read: payslip:read
+            pay_item:write: pay_item:write
+            resignation:write: resignation:write
+            custom_field:read: custom_field:read
+            payroll_calendar:read: payroll_calendar:read
+            contract_amendment:write: contract_amendment:write
+            offboarding:read: offboarding:read
+            timeoff:read: timeoff:read
+            probation_document:write: probation_document:write
+            country:read: country:read
+            webhook:read: webhook:read
+            company_department:write: company_department:write
+            company_manager:read: company_manager:read
+            pay_item:read: pay_item:read
+            contract_amendment:read: contract_amendment:read
+            company:read: company:read
+            sso_configuration:write: sso_configuration:write
+            benefit_offer:write: benefit_offer:write
+            contract_eligibility:write: contract_eligibility:write
+            benefit_renewal:read: benefit_renewal:read
+            background_check:read: background_check:read
+            custom_field_value:read: custom_field_value:read
+            expense:write: expense:write
+            identity_verification:read: identity_verification:read
+            address:read: address:read
+            document:write: document:write
+            time_and_attendance: time_and_attendance
+            employment_payments: employment_payments
+            form:read: form:read
+            work_authorization:read: work_authorization:read
+            invoices:read: invoices:read
+            incentive:write: incentive:write
+            employment:read: employment:read
+            contract:read: contract:read
+            company_manager:write: company_manager:write
+            travel_letter:read: travel_letter:read
+            document:read: document:read
+            sso_configuration:read: sso_configuration:read
+          tokenUrl: /auth/oauth2/token
+      type: oauth2
+    OAuth2ClientCredentials:
+      description: 'Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+
+        '
+      flows:
+        clientCredentials:
+          scopes:
+            company:read: company:read
+            company:write: company:write
+            company_admin: company_admin
+            company_management: company_management
+            convert_currency:read: convert_currency:read
+            country:read: country:read
+            employment_documents: employment_documents
+            employment_payments: employment_payments
+            employments: employments
+            help_center_article:read: help_center_article:read
+            invoices: invoices
+            payroll: payroll
+            payroll_calendar:read: payroll_calendar:read
+            pricing_plan:read: pricing_plan:read
+            pricing_plan:write: pricing_plan:write
+            time_and_attendance: time_and_attendance
+            webhook:read: webhook:read
+            webhook:write: webhook:write
+          tokenUrl: /auth/oauth2/token
+      type: oauth2

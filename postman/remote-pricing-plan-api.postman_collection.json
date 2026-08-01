@@ -1,0 +1,721 @@
+{
+  "info": {
+    "_postman_id": "377f3b2d-8dfb-4402-97d0-eb4b9e904967",
+    "name": "Remote Address Details Pricing Plan API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:36.000Z",
+    "updatedAt": "2026-07-28T02:47:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-377f3b2d-8dfb-4402-97d0-eb4b9e904967"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "pricing-plan-details",
+                  "item": [
+                    {
+                      "name": "Update pricing plan details",
+                      "id": "b0406707-9823-4ada-9164-1ccd42929a93",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "employments",
+                            ":employment_id",
+                            "pricing-plan-details"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the pricing_plan_details form schema",
+                              "key": "pricing_plan_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "920a125d-c6f4-49d6-a07f-32ba9f232a97",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates the pricing plan for an employment. The frequency determines how often Remote bills the\nemployer for management fees. Annual billing typically offers a discount.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "ad688406-f387-459e-963c-88d177126d17",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "pricing-plan-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the pricing_plan_details form schema",
+                                  "key": "pricing_plan_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"deleted\",\n      \"type\": \"direct_employee\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"active\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"provided_by_customer\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:47:36.000Z",
+                          "updatedAt": "2026-07-28T02:47:36.000Z",
+                          "uid": "35240-ad688406-f387-459e-963c-88d177126d17"
+                        },
+                        {
+                          "id": "05dc28cf-4a31-4f37-b592-5ad7c31ff0dd",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "pricing-plan-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the pricing_plan_details form schema",
+                                  "key": "pricing_plan_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:47:36.000Z",
+                          "updatedAt": "2026-07-28T02:47:36.000Z",
+                          "uid": "35240-05dc28cf-4a31-4f37-b592-5ad7c31ff0dd"
+                        },
+                        {
+                          "id": "a66de6e8-4c59-4770-8904-8bca076c1f6a",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "pricing-plan-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the pricing_plan_details form schema",
+                                  "key": "pricing_plan_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:47:36.000Z",
+                          "updatedAt": "2026-07-28T02:47:36.000Z",
+                          "uid": "35240-a66de6e8-4c59-4770-8904-8bca076c1f6a"
+                        },
+                        {
+                          "id": "1f00c74d-3b14-4290-a39a-f2aac80122bc",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "pricing-plan-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the pricing_plan_details form schema",
+                                  "key": "pricing_plan_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Forbidden\"\n}",
+                          "createdAt": "2026-07-28T02:47:36.000Z",
+                          "updatedAt": "2026-07-28T02:47:36.000Z",
+                          "uid": "35240-1f00c74d-3b14-4290-a39a-f2aac80122bc"
+                        },
+                        {
+                          "id": "27147e76-7a37-4179-9d23-9a396749718c",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "pricing-plan-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the pricing_plan_details form schema",
+                                  "key": "pricing_plan_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:47:36.000Z",
+                          "updatedAt": "2026-07-28T02:47:36.000Z",
+                          "uid": "35240-27147e76-7a37-4179-9d23-9a396749718c"
+                        },
+                        {
+                          "id": "37b7b4b2-aaf3-4f1e-8bd7-4d956eb0b5ba",
+                          "name": "Conflict",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "pricing-plan-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the pricing_plan_details form schema",
+                                  "key": "pricing_plan_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:47:36.000Z",
+                          "updatedAt": "2026-07-28T02:47:36.000Z",
+                          "uid": "35240-37b7b4b2-aaf3-4f1e-8bd7-4d956eb0b5ba"
+                        },
+                        {
+                          "id": "fa2b9115-25ff-43c9-a5da-5376f0e2d09f",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "pricing-plan-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the pricing_plan_details form schema",
+                                  "key": "pricing_plan_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:47:36.000Z",
+                          "updatedAt": "2026-07-28T02:47:36.000Z",
+                          "uid": "35240-fa2b9115-25ff-43c9-a5da-5376f0e2d09f"
+                        },
+                        {
+                          "id": "151a1b59-9b44-4ddc-a4dd-3963e4f081dc",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pricing_plan_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/pricing-plan-details?pricing_plan_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "pricing-plan-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the pricing_plan_details form schema",
+                                  "key": "pricing_plan_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:47:36.000Z",
+                          "updatedAt": "2026-07-28T02:47:36.000Z",
+                          "uid": "35240-151a1b59-9b44-4ddc-a4dd-3963e4f081dc"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:47:36.000Z",
+                      "updatedAt": "2026-07-28T02:47:36.000Z",
+                      "uid": "35240-b0406707-9823-4ada-9164-1ccd42929a93"
+                    }
+                  ],
+                  "id": "573fba03-35e5-4397-aa1b-e877bca73815",
+                  "createdAt": "2026-07-28T02:47:36.000Z",
+                  "updatedAt": "2026-07-28T02:47:36.000Z",
+                  "uid": "35240-573fba03-35e5-4397-aa1b-e877bca73815"
+                }
+              ],
+              "id": "47407330-46ce-472a-96e2-a5a06396addf",
+              "createdAt": "2026-07-28T02:47:36.000Z",
+              "updatedAt": "2026-07-28T02:47:36.000Z",
+              "uid": "35240-47407330-46ce-472a-96e2-a5a06396addf"
+            }
+          ],
+          "id": "5ea6db3a-0e5f-402a-9b4a-670b81eadc43",
+          "createdAt": "2026-07-28T02:47:36.000Z",
+          "updatedAt": "2026-07-28T02:47:36.000Z",
+          "uid": "35240-5ea6db3a-0e5f-402a-9b4a-670b81eadc43"
+        }
+      ],
+      "id": "c2aaa9c8-fdc2-42d1-acb2-17d6728e1c05",
+      "createdAt": "2026-07-28T02:47:36.000Z",
+      "updatedAt": "2026-07-28T02:47:36.000Z",
+      "uid": "35240-c2aaa9c8-fdc2-42d1-acb2-17d6728e1c05"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

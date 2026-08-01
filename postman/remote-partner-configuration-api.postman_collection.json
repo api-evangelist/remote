@@ -1,0 +1,2676 @@
+{
+  "info": {
+    "_postman_id": "0403b8b8-f1ca-4056-884b-b0443aff07d2",
+    "name": "Remote Address Details Partner Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:46:57.000Z",
+    "updatedAt": "2026-07-28T02:46:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0403b8b8-f1ca-4056-884b-b0443aff07d2"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "companies",
+          "item": [
+            {
+              "name": "{company_id}",
+              "item": [
+                {
+                  "name": "pricing-plans",
+                  "item": [
+                    {
+                      "name": "List pricing plans",
+                      "id": "f8aa0215-52bf-42b3-8c1d-a66eb477eb0f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "companies",
+                            ":company_id",
+                            "pricing-plans"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7ea2e271-9114-49cf-b3e5-f419d6552361",
+                              "key": "company_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Company ID"
+                            }
+                          ]
+                        },
+                        "description": "List all pricing plans for a company.\nCurrently the endpoint only returns the pricing plans for the EOR monthly product and the contractor products (Standard, Plus and COR).\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage companies (`company_management`) | View pricing plans (`pricing_plan:read`) | Manage pricing plans (`pricing_plan:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "5927ed41-7b9c-42b5-a8b7-8d260e02b75d",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "pricing-plans"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"pricing_plans\": [\n      {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"start_date\": \"<date>\",\n        \"end_date\": \"<date>\",\n        \"product\": {\n          \"name\": \"<string>\",\n          \"tier\": \"<string>\",\n          \"frequency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"features\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"identifier\": \"<string>\",\n          \"short_name\": \"<string>\"\n        },\n        \"price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        },\n        \"base_price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"start_date\": \"<date>\",\n        \"end_date\": \"<date>\",\n        \"product\": {\n          \"name\": \"<string>\",\n          \"tier\": \"<string>\",\n          \"frequency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"features\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"identifier\": \"<string>\",\n          \"short_name\": \"<string>\"\n        },\n        \"price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        },\n        \"base_price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        }\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-5927ed41-7b9c-42b5-a8b7-8d260e02b75d"
+                        },
+                        {
+                          "id": "d17b6a7b-70c8-4dcc-8594-fc36fa2d75db",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "pricing-plans"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-d17b6a7b-70c8-4dcc-8594-fc36fa2d75db"
+                        },
+                        {
+                          "id": "bf5b8b16-be81-4135-823c-6450b3aa9da1",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "pricing-plans"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-bf5b8b16-be81-4135-823c-6450b3aa9da1"
+                        },
+                        {
+                          "id": "6d8bf994-513e-413a-89e3-f569a63f562a",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "pricing-plans"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-6d8bf994-513e-413a-89e3-f569a63f562a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-f8aa0215-52bf-42b3-8c1d-a66eb477eb0f"
+                    },
+                    {
+                      "name": "Create a pricing plan for a company",
+                      "id": "ade44d9b-c6b5-40e9-8bd2-db355f8a3669",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"product_price_id\": \"<uuid>\",\n  \"currency_code\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "companies",
+                            ":company_id",
+                            "pricing-plans"
+                          ],
+                          "variable": [
+                            {
+                              "id": "cc7da051-a46e-4e5b-b031-ac7d1d5b66f9",
+                              "key": "company_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Company ID"
+                            }
+                          ]
+                        },
+                        "description": "Create a pricing plan for a company, in order to do that we have 2 ways:\n\n1. Create a pricing plan from a partner template\n2. Create a pricing plan from a product price\n\nThe pricing plan is always created in the company's desired currency.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage companies (`company_management`) | - | Manage pricing plans (`pricing_plan:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "75bbb45c-17ff-46c7-86ef-20905831df90",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"product_price_id\": \"<uuid>\",\n  \"currency_code\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "pricing-plans"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"pricing_plan\": {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"product\": {\n        \"name\": \"<string>\",\n        \"tier\": \"<string>\",\n        \"frequency\": \"<string>\",\n        \"description\": \"<string>\",\n        \"features\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"identifier\": \"<string>\",\n        \"short_name\": \"<string>\"\n      },\n      \"price\": {\n        \"currency\": {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"symbol\": \"<string>\"\n        },\n        \"amount\": \"<integer>\"\n      },\n      \"base_price\": {\n        \"currency\": {\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"symbol\": \"<string>\"\n        },\n        \"amount\": \"<integer>\"\n      }\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-75bbb45c-17ff-46c7-86ef-20905831df90"
+                        },
+                        {
+                          "id": "838d8d19-c7f4-496d-868c-450646cf2dcd",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"product_price_id\": \"<uuid>\",\n  \"currency_code\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "pricing-plans"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-838d8d19-c7f4-496d-868c-450646cf2dcd"
+                        },
+                        {
+                          "id": "deaa771d-7239-4fdd-b206-661a60ce7dd7",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"product_price_id\": \"<uuid>\",\n  \"currency_code\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "pricing-plans"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-deaa771d-7239-4fdd-b206-661a60ce7dd7"
+                        },
+                        {
+                          "id": "0f70681f-ef9e-4da3-a4a2-499d1a79834e",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"product_price_id\": \"<uuid>\",\n  \"currency_code\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/pricing-plans",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "pricing-plans"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-0f70681f-ef9e-4da3-a4a2-499d1a79834e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-ade44d9b-c6b5-40e9-8bd2-db355f8a3669"
+                    }
+                  ],
+                  "id": "492587b6-77b0-47c0-8f0c-8c4e96647420",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-492587b6-77b0-47c0-8f0c-8c4e96647420"
+                },
+                {
+                  "name": "product-prices",
+                  "item": [
+                    {
+                      "name": "Show product prices in the company's desired currency",
+                      "id": "2a9a9c57-5b9e-4ae3-a118-f68fefbd07c9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/companies/:company_id/product-prices",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "companies",
+                            ":company_id",
+                            "product-prices"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c140d05a-b3d7-4ac5-ab20-319739edb708",
+                              "key": "company_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Company ID"
+                            }
+                          ]
+                        },
+                        "description": "list product prices in the company's desired currency.\nthe endpoint currently only returns the product prices for the EOR monthly product and the contractor products (Standard, Plus and COR).\nthe product prices are then used to create a pricing plan for the company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage companies (`company_management`) | View pricing plans (`pricing_plan:read`) | Manage pricing plans (`pricing_plan:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "e7892ab9-0646-4b3e-98dc-9b7e175fa3bb",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/product-prices",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "product-prices"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"product_prices\": [\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"base_price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        }\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"base_price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        }\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-e7892ab9-0646-4b3e-98dc-9b7e175fa3bb"
+                        },
+                        {
+                          "id": "bd7c7bb8-94ea-4aec-895f-44c920aacb17",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/product-prices",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "product-prices"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-bd7c7bb8-94ea-4aec-895f-44c920aacb17"
+                        },
+                        {
+                          "id": "011d6b01-4d39-401c-b9fb-50ca65b73a8f",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/product-prices",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "product-prices"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-011d6b01-4d39-401c-b9fb-50ca65b73a8f"
+                        },
+                        {
+                          "id": "358ad396-71d1-4fe7-940e-cb5ce3ee4b7f",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/product-prices",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "product-prices"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-358ad396-71d1-4fe7-940e-cb5ce3ee4b7f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-2a9a9c57-5b9e-4ae3-a118-f68fefbd07c9"
+                    }
+                  ],
+                  "id": "23f6f668-7875-4734-b9d0-f7aba45b4393",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-23f6f668-7875-4734-b9d0-f7aba45b4393"
+                },
+                {
+                  "name": "create-token",
+                  "item": [
+                    {
+                      "name": "Create a new token for a company",
+                      "id": "11ac1773-cbcf-4ca7-8de1-4af5e9d4fe09",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "companies",
+                            ":company_id",
+                            "create-token"
+                          ],
+                          "query": [
+                            {
+                              "description": "The scope of the token",
+                              "key": "scope",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "6f0a9212-78c7-4a2a-a4ec-7fe5d7e52367",
+                              "key": "company_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the company"
+                            }
+                          ]
+                        },
+                        "description": "Creates new tokens for a given company"
+                      },
+                      "response": [
+                        {
+                          "id": "73668681-25bc-4828-9ea0-814361e33cb0",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "create-token"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The scope of the token",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"access_token\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-73668681-25bc-4828-9ea0-814361e33cb0"
+                        },
+                        {
+                          "id": "e394f58a-fcd9-44b3-8291-99f83128c3b8",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "create-token"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The scope of the token",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-e394f58a-fcd9-44b3-8291-99f83128c3b8"
+                        },
+                        {
+                          "id": "fa97aa78-0789-4d43-9162-eaa5c17ddbce",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "create-token"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The scope of the token",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-fa97aa78-0789-4d43-9162-eaa5c17ddbce"
+                        },
+                        {
+                          "id": "158c571e-d6e8-47bc-998c-cb4818b23e42",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "create-token"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The scope of the token",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:46:57.000Z",
+                          "updatedAt": "2026-07-28T02:46:57.000Z",
+                          "uid": "35240-158c571e-d6e8-47bc-998c-cb4818b23e42"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-11ac1773-cbcf-4ca7-8de1-4af5e9d4fe09"
+                    }
+                  ],
+                  "id": "74dbdb7e-ba28-4cee-85b0-8074b128748e",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-74dbdb7e-ba28-4cee-85b0-8074b128748e"
+                }
+              ],
+              "id": "c049dcd2-15e0-410a-863f-cdbc91521050",
+              "createdAt": "2026-07-28T02:46:57.000Z",
+              "updatedAt": "2026-07-28T02:46:57.000Z",
+              "uid": "35240-c049dcd2-15e0-410a-863f-cdbc91521050"
+            }
+          ],
+          "id": "449c3c95-b434-439f-b05a-3f0993dbecaa",
+          "createdAt": "2026-07-28T02:46:57.000Z",
+          "updatedAt": "2026-07-28T02:46:57.000Z",
+          "uid": "35240-449c3c95-b434-439f-b05a-3f0993dbecaa"
+        },
+        {
+          "name": "sso-configuration",
+          "item": [
+            {
+              "name": "details",
+              "item": [
+                {
+                  "name": "Show the SSO Configuration Details",
+                  "id": "21b5a170-cb47-4a85-8451-c84faf98ad11",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration/details",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration",
+                        "details"
+                      ]
+                    },
+                    "description": "Shows the SSO Configuration details for the company.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage SSO (`sso_configuration:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "ce53ee06-e82b-4d4f-811f-74f2f9180c46",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/sso-configuration/details",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "sso-configuration",
+                            "details"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"sso_url\": \"<string>\",\n    \"audience_uri\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-ce53ee06-e82b-4d4f-811f-74f2f9180c46"
+                    },
+                    {
+                      "id": "3f01c0de-dbf7-43d4-84d9-e981cae2d198",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/sso-configuration/details",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "sso-configuration",
+                            "details"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-3f01c0de-dbf7-43d4-84d9-e981cae2d198"
+                    },
+                    {
+                      "id": "81f43978-b11e-4d50-b6e1-10d7cc2bc055",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/sso-configuration/details",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "sso-configuration",
+                            "details"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-81f43978-b11e-4d50-b6e1-10d7cc2bc055"
+                    },
+                    {
+                      "id": "49cce50e-526a-46e3-9375-f46d1b688e6a",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/sso-configuration/details",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "sso-configuration",
+                            "details"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-49cce50e-526a-46e3-9375-f46d1b688e6a"
+                    },
+                    {
+                      "id": "09e90603-691c-4c4b-aa79-27b737b2949c",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/sso-configuration/details",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "sso-configuration",
+                            "details"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:46:57.000Z",
+                      "updatedAt": "2026-07-28T02:46:57.000Z",
+                      "uid": "35240-09e90603-691c-4c4b-aa79-27b737b2949c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-21b5a170-cb47-4a85-8451-c84faf98ad11"
+                }
+              ],
+              "id": "165e060f-6ba2-4379-abb1-46dab9c2720f",
+              "createdAt": "2026-07-28T02:46:57.000Z",
+              "updatedAt": "2026-07-28T02:46:57.000Z",
+              "uid": "35240-165e060f-6ba2-4379-abb1-46dab9c2720f"
+            },
+            {
+              "name": "Show the current SSO Configuration",
+              "id": "31f88af7-cb4a-42e0-b91a-e0e1f93b433c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/sso-configuration",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "sso-configuration"
+                  ]
+                },
+                "description": "Shows the current SSO Configuration for the company.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View SSO configuration (`sso_configuration:read`) | Manage SSO (`sso_configuration:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "d837a600-c44d-4af1-a804-b2e1238b908b",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"sso_url\": \"<string>\",\n    \"audience_uri\": \"<string>\",\n    \"domain\": \"<string>\",\n    \"identity_provider_url\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-d837a600-c44d-4af1-a804-b2e1238b908b"
+                },
+                {
+                  "id": "c6950e73-5479-4c31-9d58-5d46834715ba",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-c6950e73-5479-4c31-9d58-5d46834715ba"
+                },
+                {
+                  "id": "954c8d78-46bd-44de-9030-5d16614509ae",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-954c8d78-46bd-44de-9030-5d16614509ae"
+                },
+                {
+                  "id": "559b0853-fc63-48c5-91e6-540bafda53fb",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-559b0853-fc63-48c5-91e6-540bafda53fb"
+                },
+                {
+                  "id": "4ba0ff41-ed16-441a-8f21-0e4281de770f",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Too many requests\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-4ba0ff41-ed16-441a-8f21-0e4281de770f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:46:57.000Z",
+              "updatedAt": "2026-07-28T02:46:57.000Z",
+              "uid": "35240-31f88af7-cb4a-42e0-b91a-e0e1f93b433c"
+            },
+            {
+              "name": "Create the SSO Configuration",
+              "id": "d92a4ecc-0050-4c11-aa78-c8d0e6645cc1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"<string>\",\n  \"identity_provider_url\": \"<string>\",\n  \"certificate\": \"<binary>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/sso-configuration",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "sso-configuration"
+                  ]
+                },
+                "description": "Creates the SSO Configuration for the company.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage SSO (`sso_configuration:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "34d1d4ae-01cd-40cc-b156-2ff9cb1ff123",
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"domain\": \"<string>\",\n  \"identity_provider_url\": \"<string>\",\n  \"certificate\": \"<binary>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"sso_url\": \"<string>\",\n    \"audience_uri\": \"<string>\",\n    \"domain\": \"<string>\",\n    \"identity_provider_url\": \"<string>\",\n    \"certificate\": \"<binary>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-34d1d4ae-01cd-40cc-b156-2ff9cb1ff123"
+                },
+                {
+                  "id": "ac57e371-2250-437b-8b82-759c1ae8b433",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"domain\": \"<string>\",\n  \"identity_provider_url\": \"<string>\",\n  \"certificate\": \"<binary>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-ac57e371-2250-437b-8b82-759c1ae8b433"
+                },
+                {
+                  "id": "cf2f8d79-4a51-4a26-8e1c-7f5ab5397bf7",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"domain\": \"<string>\",\n  \"identity_provider_url\": \"<string>\",\n  \"certificate\": \"<binary>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-cf2f8d79-4a51-4a26-8e1c-7f5ab5397bf7"
+                },
+                {
+                  "id": "3efd4d2e-e64e-4e2a-a158-9d5c6f84a1e0",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"domain\": \"<string>\",\n  \"identity_provider_url\": \"<string>\",\n  \"certificate\": \"<binary>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-3efd4d2e-e64e-4e2a-a158-9d5c6f84a1e0"
+                },
+                {
+                  "id": "1550ac95-7312-47fd-a98c-2982cf252aa8",
+                  "name": "Conflict",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"domain\": \"<string>\",\n  \"identity_provider_url\": \"<string>\",\n  \"certificate\": \"<binary>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-1550ac95-7312-47fd-a98c-2982cf252aa8"
+                },
+                {
+                  "id": "e27fca23-f3f2-40f8-a1bc-633774ee0163",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"domain\": \"<string>\",\n  \"identity_provider_url\": \"<string>\",\n  \"certificate\": \"<binary>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-e27fca23-f3f2-40f8-a1bc-633774ee0163"
+                },
+                {
+                  "id": "5093564a-3d5e-4525-83d6-17bccbd8cf03",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"domain\": \"<string>\",\n  \"identity_provider_url\": \"<string>\",\n  \"certificate\": \"<binary>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/sso-configuration",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "sso-configuration"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Too many requests\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-5093564a-3d5e-4525-83d6-17bccbd8cf03"
+                }
+              ],
+              "createdAt": "2026-07-28T02:46:57.000Z",
+              "updatedAt": "2026-07-28T02:46:57.000Z",
+              "uid": "35240-d92a4ecc-0050-4c11-aa78-c8d0e6645cc1"
+            }
+          ],
+          "id": "e803eb0d-5482-45bc-b4e6-740ca87f7489",
+          "createdAt": "2026-07-28T02:46:57.000Z",
+          "updatedAt": "2026-07-28T02:46:57.000Z",
+          "uid": "35240-e803eb0d-5482-45bc-b4e6-740ca87f7489"
+        },
+        {
+          "name": "pricing-plan-partner-templates",
+          "item": [
+            {
+              "name": "List pricing plan partner templates",
+              "id": "37e1c976-88e2-4a09-86bb-e38493200bfd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "/auth/oauth2/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/pricing-plan-partner-templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "pricing-plan-partner-templates"
+                  ]
+                },
+                "description": "List all pricing plan partner templates.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage companies (`company_management`) | View pricing plans (`pricing_plan:read`) | Manage pricing plans (`pricing_plan:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "262c678a-3d58-4784-9e5a-8dea919cc436",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pricing-plan-partner-templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pricing-plan-partner-templates"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"pricing_plan_partner_templates\": [\n      {\n        \"id\": \"<string>\",\n        \"product\": {\n          \"name\": \"<string>\",\n          \"tier\": \"<string>\",\n          \"frequency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"features\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"identifier\": \"<string>\",\n          \"short_name\": \"<string>\"\n        },\n        \"price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        },\n        \"base_price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        },\n        \"period\": \"<integer>\",\n        \"unlimited\": \"<boolean>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"product\": {\n          \"name\": \"<string>\",\n          \"tier\": \"<string>\",\n          \"frequency\": \"<string>\",\n          \"description\": \"<string>\",\n          \"features\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"identifier\": \"<string>\",\n          \"short_name\": \"<string>\"\n        },\n        \"price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        },\n        \"base_price\": {\n          \"currency\": {\n            \"code\": \"<string>\",\n            \"name\": \"<string>\",\n            \"symbol\": \"<string>\"\n          },\n          \"amount\": \"<integer>\"\n        },\n        \"period\": \"<integer>\",\n        \"unlimited\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-262c678a-3d58-4784-9e5a-8dea919cc436"
+                },
+                {
+                  "id": "760010ed-ddbb-446e-9c09-a1e5054304cf",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pricing-plan-partner-templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pricing-plan-partner-templates"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-760010ed-ddbb-446e-9c09-a1e5054304cf"
+                },
+                {
+                  "id": "edaa81cd-1311-4103-a071-ff84999ad0d8",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pricing-plan-partner-templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pricing-plan-partner-templates"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-edaa81cd-1311-4103-a071-ff84999ad0d8"
+                },
+                {
+                  "id": "642b519e-6e43-4957-abe4-6626baa5801a",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pricing-plan-partner-templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pricing-plan-partner-templates"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-642b519e-6e43-4957-abe4-6626baa5801a"
+                }
+              ],
+              "createdAt": "2026-07-28T02:46:57.000Z",
+              "updatedAt": "2026-07-28T02:46:57.000Z",
+              "uid": "35240-37e1c976-88e2-4a09-86bb-e38493200bfd"
+            }
+          ],
+          "id": "85984eba-2ef0-4723-81e2-7dc66d9fc6e6",
+          "createdAt": "2026-07-28T02:46:57.000Z",
+          "updatedAt": "2026-07-28T02:46:57.000Z",
+          "uid": "35240-85984eba-2ef0-4723-81e2-7dc66d9fc6e6"
+        },
+        {
+          "name": "magic-link",
+          "item": [
+            {
+              "name": "Magic links generator",
+              "id": "35998cec-fff4-4e14-91a0-6cd731b78187",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+                      "type": "string"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "/auth/oauth2/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "/auth/oauth2/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "/auth/oauth2/authorize",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<uuid>\",\n  \"path\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/magic-link",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "magic-link"
+                  ]
+                },
+                "description": "Generates a magic link for a passwordless authentication.\nTo create a magic link for a company admin, you need to provide the `user_id` parameter.\nTo create a magic link for an employee, you need to provide the `employment_id` parameter.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Create magic links (`magic_link:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "7a555f2e-56bb-4b59-9b31-3f0c686ba6da",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<uuid>\",\n  \"path\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/magic-link",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "magic-link"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"url\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-7a555f2e-56bb-4b59-9b31-3f0c686ba6da"
+                },
+                {
+                  "id": "e8c8cbde-b266-498f-82b1-4060f2797ef8",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"user_id\": \"<uuid>\",\n  \"path\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/magic-link",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "magic-link"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:46:57.000Z",
+                  "updatedAt": "2026-07-28T02:46:57.000Z",
+                  "uid": "35240-e8c8cbde-b266-498f-82b1-4060f2797ef8"
+                }
+              ],
+              "createdAt": "2026-07-28T02:46:57.000Z",
+              "updatedAt": "2026-07-28T02:46:57.000Z",
+              "uid": "35240-35998cec-fff4-4e14-91a0-6cd731b78187"
+            }
+          ],
+          "id": "43b66b93-c15f-431f-935c-101f54f7c9fc",
+          "createdAt": "2026-07-28T02:46:57.000Z",
+          "updatedAt": "2026-07-28T02:46:57.000Z",
+          "uid": "35240-43b66b93-c15f-431f-935c-101f54f7c9fc"
+        }
+      ],
+      "id": "671957bc-0100-4e65-b471-7e0be199cb47",
+      "createdAt": "2026-07-28T02:46:57.000Z",
+      "updatedAt": "2026-07-28T02:46:57.000Z",
+      "uid": "35240-671957bc-0100-4e65-b471-7e0be199cb47"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

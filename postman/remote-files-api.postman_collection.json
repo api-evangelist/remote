@@ -1,0 +1,1091 @@
+{
+  "info": {
+    "_postman_id": "b41e201e-226d-4702-9b66-caf11fab7818",
+    "name": "Remote Address Details Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:46:23.000Z",
+    "updatedAt": "2026-07-28T02:46:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b41e201e-226d-4702-9b66-caf11fab7818"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "files",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Download file",
+                  "id": "0480f63c-a2a8-46a4-a658-f62a693da03a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/files/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "files",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c6156a0e-19a6-45d0-a0f6-521a80945b93",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) File ID"
+                        }
+                      ]
+                    },
+                    "description": "Downloads a file.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "6840362e-f1ed-4401-95a5-e8e34aa156b5",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/files/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "files",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"file\": {\n      \"content\": \"<binary>\",\n      \"id\": \"<string>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"sub_type\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:46:24.000Z",
+                      "updatedAt": "2026-07-28T02:46:24.000Z",
+                      "uid": "35240-6840362e-f1ed-4401-95a5-e8e34aa156b5"
+                    },
+                    {
+                      "id": "1e2a20c2-720c-4006-83d9-8d9248c83498",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/files/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "files",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:46:24.000Z",
+                      "updatedAt": "2026-07-28T02:46:24.000Z",
+                      "uid": "35240-1e2a20c2-720c-4006-83d9-8d9248c83498"
+                    },
+                    {
+                      "id": "b7c02a41-b9ed-45b4-bb14-40642fc5d82d",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/files/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "files",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:46:24.000Z",
+                      "updatedAt": "2026-07-28T02:46:24.000Z",
+                      "uid": "35240-b7c02a41-b9ed-45b4-bb14-40642fc5d82d"
+                    },
+                    {
+                      "id": "5d74f9b5-8e5d-4dcb-b42a-764cdc171b23",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/files/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "files",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:46:24.000Z",
+                      "updatedAt": "2026-07-28T02:46:24.000Z",
+                      "uid": "35240-5d74f9b5-8e5d-4dcb-b42a-764cdc171b23"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:46:24.000Z",
+                  "updatedAt": "2026-07-28T02:46:24.000Z",
+                  "uid": "35240-0480f63c-a2a8-46a4-a658-f62a693da03a"
+                }
+              ],
+              "id": "1be5b909-610b-414a-a9c8-3aff53281481",
+              "createdAt": "2026-07-28T02:46:24.000Z",
+              "updatedAt": "2026-07-28T02:46:24.000Z",
+              "uid": "35240-1be5b909-610b-414a-a9c8-3aff53281481"
+            }
+          ],
+          "id": "a462762b-fc45-4d31-b3fd-d785ecf93d8c",
+          "createdAt": "2026-07-28T02:46:24.000Z",
+          "updatedAt": "2026-07-28T02:46:24.000Z",
+          "uid": "35240-a462762b-fc45-4d31-b3fd-d785ecf93d8c"
+        },
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "files",
+                  "item": [
+                    {
+                      "name": "List employment files",
+                      "id": "45fb2857-1354-433b-9bdc-92d012266df0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employments/:employment_id/files?type=<string>&sub_type=<string>&page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employments",
+                            ":employment_id",
+                            "files"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by file type (optional)",
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by file sub_type (optional)",
+                              "key": "sub_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "1516f732-1655-48e7-b2a8-913988c86106",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Lists files associated with a specific employment.\n\nSupports filtering by file type and sub_type.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "97716b0a-b242-4e36-8bd0-951d11b47c63",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/files?type=<string>&sub_type=<string>&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by file type (optional)",
+                                  "key": "type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by file sub_type (optional)",
+                                  "key": "sub_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"files\": [\n      {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:46:24.000Z",
+                          "updatedAt": "2026-07-28T02:46:24.000Z",
+                          "uid": "35240-97716b0a-b242-4e36-8bd0-951d11b47c63"
+                        },
+                        {
+                          "id": "ae030124-2596-49a2-9eeb-54e7e38d4485",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/files?type=<string>&sub_type=<string>&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by file type (optional)",
+                                  "key": "type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by file sub_type (optional)",
+                                  "key": "sub_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:24.000Z",
+                          "updatedAt": "2026-07-28T02:46:24.000Z",
+                          "uid": "35240-ae030124-2596-49a2-9eeb-54e7e38d4485"
+                        },
+                        {
+                          "id": "2a6d8f88-f587-45f4-9d6a-0db880bf567a",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/files?type=<string>&sub_type=<string>&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by file type (optional)",
+                                  "key": "type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by file sub_type (optional)",
+                                  "key": "sub_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:24.000Z",
+                          "updatedAt": "2026-07-28T02:46:24.000Z",
+                          "uid": "35240-2a6d8f88-f587-45f4-9d6a-0db880bf567a"
+                        },
+                        {
+                          "id": "9330e473-4504-4f23-9960-f24189b05a3a",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/files?type=<string>&sub_type=<string>&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by file type (optional)",
+                                  "key": "type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by file sub_type (optional)",
+                                  "key": "sub_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:46:24.000Z",
+                          "updatedAt": "2026-07-28T02:46:24.000Z",
+                          "uid": "35240-9330e473-4504-4f23-9960-f24189b05a3a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:24.000Z",
+                      "updatedAt": "2026-07-28T02:46:24.000Z",
+                      "uid": "35240-45fb2857-1354-433b-9bdc-92d012266df0"
+                    }
+                  ],
+                  "id": "74ce17b7-caa2-4075-8b16-c2d4081c35ef",
+                  "createdAt": "2026-07-28T02:46:24.000Z",
+                  "updatedAt": "2026-07-28T02:46:24.000Z",
+                  "uid": "35240-74ce17b7-caa2-4075-8b16-c2d4081c35ef"
+                }
+              ],
+              "id": "55dd4d1c-fdec-4745-a9d3-dd59d9051455",
+              "createdAt": "2026-07-28T02:46:24.000Z",
+              "updatedAt": "2026-07-28T02:46:24.000Z",
+              "uid": "35240-55dd4d1c-fdec-4745-a9d3-dd59d9051455"
+            }
+          ],
+          "id": "aa302264-4bcf-479c-aa27-d16c7db2a181",
+          "createdAt": "2026-07-28T02:46:24.000Z",
+          "updatedAt": "2026-07-28T02:46:24.000Z",
+          "uid": "35240-aa302264-4bcf-479c-aa27-d16c7db2a181"
+        },
+        {
+          "name": "documents",
+          "item": [
+            {
+              "name": "Upload file",
+              "id": "0bc736cd-6330-4b8f-95de-e3847127173c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) The file content, base64-encoded.",
+                      "key": "file",
+                      "type": "file",
+                      "value": null
+                    },
+                    {
+                      "description": "(Required) The unique identifier (UUID) of the employment to attach this file to.",
+                      "key": "employment_id",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": "A more specific classification within the type (e.g., \"ir_35\" for a UK contractor tax determination).",
+                      "key": "sub_type",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": "The broad category of the file (e.g., \"contract\", \"id\", \"tax_form\").",
+                      "key": "type",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/documents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "documents"
+                  ]
+                },
+                "description": "Uploads a file associated with a specified employment.\n\nPlease contact api-support@remote.com to request access to this endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "3651fa99-1a16-49ea-b353-2684c270b836",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file content, base64-encoded.",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) The unique identifier (UUID) of the employment to attach this file to.",
+                          "key": "employment_id",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "A more specific classification within the type (e.g., \"ir_35\" for a UK contractor tax determination).",
+                          "key": "sub_type",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The broad category of the file (e.g., \"contract\", \"id\", \"tax_form\").",
+                          "key": "type",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"file\": {\n      \"id\": \"<string>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"sub_type\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:46:24.000Z",
+                  "updatedAt": "2026-07-28T02:46:24.000Z",
+                  "uid": "35240-3651fa99-1a16-49ea-b353-2684c270b836"
+                },
+                {
+                  "id": "f8fe7e1e-5c67-4720-a38e-6d0b1a257185",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file content, base64-encoded.",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) The unique identifier (UUID) of the employment to attach this file to.",
+                          "key": "employment_id",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "A more specific classification within the type (e.g., \"ir_35\" for a UK contractor tax determination).",
+                          "key": "sub_type",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The broad category of the file (e.g., \"contract\", \"id\", \"tax_form\").",
+                          "key": "type",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:46:24.000Z",
+                  "updatedAt": "2026-07-28T02:46:24.000Z",
+                  "uid": "35240-f8fe7e1e-5c67-4720-a38e-6d0b1a257185"
+                },
+                {
+                  "id": "99dd92ef-8c15-4c9a-81da-1f67912b6ee6",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file content, base64-encoded.",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) The unique identifier (UUID) of the employment to attach this file to.",
+                          "key": "employment_id",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "A more specific classification within the type (e.g., \"ir_35\" for a UK contractor tax determination).",
+                          "key": "sub_type",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The broad category of the file (e.g., \"contract\", \"id\", \"tax_form\").",
+                          "key": "type",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:46:24.000Z",
+                  "updatedAt": "2026-07-28T02:46:24.000Z",
+                  "uid": "35240-99dd92ef-8c15-4c9a-81da-1f67912b6ee6"
+                },
+                {
+                  "id": "8031a190-bbc8-4a1b-b50f-c7072bd1c046",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file content, base64-encoded.",
+                          "key": "file",
+                          "type": "file"
+                        },
+                        {
+                          "description": "(Required) The unique identifier (UUID) of the employment to attach this file to.",
+                          "key": "employment_id",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "A more specific classification within the type (e.g., \"ir_35\" for a UK contractor tax determination).",
+                          "key": "sub_type",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The broad category of the file (e.g., \"contract\", \"id\", \"tax_form\").",
+                          "key": "type",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "documents"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:46:24.000Z",
+                  "updatedAt": "2026-07-28T02:46:24.000Z",
+                  "uid": "35240-8031a190-bbc8-4a1b-b50f-c7072bd1c046"
+                }
+              ],
+              "createdAt": "2026-07-28T02:46:24.000Z",
+              "updatedAt": "2026-07-28T02:46:24.000Z",
+              "uid": "35240-0bc736cd-6330-4b8f-95de-e3847127173c"
+            }
+          ],
+          "id": "e567c807-84e8-4e6d-93fd-3bd06aacded4",
+          "createdAt": "2026-07-28T02:46:24.000Z",
+          "updatedAt": "2026-07-28T02:46:24.000Z",
+          "uid": "35240-e567c807-84e8-4e6d-93fd-3bd06aacded4"
+        }
+      ],
+      "id": "9772515a-fef9-4418-81e1-3e64fa763954",
+      "createdAt": "2026-07-28T02:46:24.000Z",
+      "updatedAt": "2026-07-28T02:46:24.000Z",
+      "uid": "35240-9772515a-fef9-4418-81e1-3e64fa763954"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

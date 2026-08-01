@@ -1,0 +1,377 @@
+{
+  "info": {
+    "_postman_id": "d8ebeec0-dfaf-436a-a4fc-45e7481a3ca5",
+    "name": "Remote Address Details Company Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:09.000Z",
+    "updatedAt": "2026-07-28T02:45:09.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d8ebeec0-dfaf-436a-a4fc-45e7481a3ca5"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "companies",
+          "item": [
+            {
+              "name": "{company_id}",
+              "item": [
+                {
+                  "name": "create-token",
+                  "item": [
+                    {
+                      "name": "Create a new token for a company",
+                      "id": "922dfe0d-1ad7-4f56-85cc-246e4437a9b2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "companies",
+                            ":company_id",
+                            "create-token"
+                          ],
+                          "query": [
+                            {
+                              "description": "The scope of the token",
+                              "key": "scope",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "6405527a-eaea-4dc7-a9d8-5165aa110b07",
+                              "key": "company_id",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the company"
+                            }
+                          ]
+                        },
+                        "description": "Creates new tokens for a given company"
+                      },
+                      "response": [
+                        {
+                          "id": "9cab9497-2f7e-417c-ab62-10e7ff213d63",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "create-token"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The scope of the token",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"access_token\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:45:10.000Z",
+                          "updatedAt": "2026-07-28T02:45:10.000Z",
+                          "uid": "35240-9cab9497-2f7e-417c-ab62-10e7ff213d63"
+                        },
+                        {
+                          "id": "59c6a128-6067-4513-b57f-9c9d6f3a53bb",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "create-token"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The scope of the token",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:10.000Z",
+                          "updatedAt": "2026-07-28T02:45:10.000Z",
+                          "uid": "35240-59c6a128-6067-4513-b57f-9c9d6f3a53bb"
+                        },
+                        {
+                          "id": "13fc7d25-85da-4d3e-8024-24ab753ed1fa",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "create-token"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The scope of the token",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:10.000Z",
+                          "updatedAt": "2026-07-28T02:45:10.000Z",
+                          "uid": "35240-13fc7d25-85da-4d3e-8024-24ab753ed1fa"
+                        },
+                        {
+                          "id": "07248f34-1d62-4d72-ba8e-2a2b9a2f7eba",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/companies/:company_id/create-token?scope=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "companies",
+                                ":company_id",
+                                "create-token"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The scope of the token",
+                                  "key": "scope",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "company_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:10.000Z",
+                          "updatedAt": "2026-07-28T02:45:10.000Z",
+                          "uid": "35240-07248f34-1d62-4d72-ba8e-2a2b9a2f7eba"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:10.000Z",
+                      "updatedAt": "2026-07-28T02:45:10.000Z",
+                      "uid": "35240-922dfe0d-1ad7-4f56-85cc-246e4437a9b2"
+                    }
+                  ],
+                  "id": "7665a69d-1668-43d6-8909-9a349fa8798e",
+                  "createdAt": "2026-07-28T02:45:10.000Z",
+                  "updatedAt": "2026-07-28T02:45:10.000Z",
+                  "uid": "35240-7665a69d-1668-43d6-8909-9a349fa8798e"
+                }
+              ],
+              "id": "4d592962-eb78-49bd-bca7-eaf8d67953fc",
+              "createdAt": "2026-07-28T02:45:10.000Z",
+              "updatedAt": "2026-07-28T02:45:10.000Z",
+              "uid": "35240-4d592962-eb78-49bd-bca7-eaf8d67953fc"
+            }
+          ],
+          "id": "92942abf-92ee-4bc8-8335-e3af2b1e041b",
+          "createdAt": "2026-07-28T02:45:10.000Z",
+          "updatedAt": "2026-07-28T02:45:10.000Z",
+          "uid": "35240-92942abf-92ee-4bc8-8335-e3af2b1e041b"
+        }
+      ],
+      "id": "73f8fc45-20ab-4edb-ac7a-0e8e99b36708",
+      "createdAt": "2026-07-28T02:45:10.000Z",
+      "updatedAt": "2026-07-28T02:45:10.000Z",
+      "uid": "35240-73f8fc45-20ab-4edb-ac7a-0e8e99b36708"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

@@ -1,0 +1,942 @@
+{
+  "info": {
+    "_postman_id": "335b4cc5-4a17-4928-b04c-af925ca9b4f8",
+    "name": "Remote Address Details Currency Conversion API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:25.000Z",
+    "updatedAt": "2026-07-28T02:45:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-335b4cc5-4a17-4928-b04c-af925ca9b4f8"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "currency-converter",
+          "item": [
+            {
+              "name": "raw",
+              "item": [
+                {
+                  "name": "Convert currency using flat rates",
+                  "id": "d2fd0937-c9ec-41e9-a2df-bed1f177eab3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/currency-converter/raw",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "currency-converter",
+                        "raw"
+                      ]
+                    },
+                    "description": "Convert currency using FX rates used in Remote\u2019s estimation tools.\n      These rates are not guaranteed to match final onboarding or contract rates.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | Convert currencies (`convert_currency:read`) | - |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "621e1e50-8594-4d3a-87ef-01e00efcce42",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/currency-converter/raw",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "currency-converter",
+                            "raw"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"conversion_data\": {\n      \"source_amount\": \"<integer>\",\n      \"source_currency\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      \"target_amount\": \"<integer>\",\n      \"target_currency\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      \"exchange_rate\": \"<number>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:25.000Z",
+                      "updatedAt": "2026-07-28T02:45:25.000Z",
+                      "uid": "35240-621e1e50-8594-4d3a-87ef-01e00efcce42"
+                    },
+                    {
+                      "id": "891de3ca-7599-4365-92c1-5fd33daf6da2",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/currency-converter/raw",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "currency-converter",
+                            "raw"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:25.000Z",
+                      "updatedAt": "2026-07-28T02:45:25.000Z",
+                      "uid": "35240-891de3ca-7599-4365-92c1-5fd33daf6da2"
+                    },
+                    {
+                      "id": "15a470f9-7447-4ca1-9a2d-7831de933c06",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/currency-converter/raw",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "currency-converter",
+                            "raw"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:25.000Z",
+                      "updatedAt": "2026-07-28T02:45:25.000Z",
+                      "uid": "35240-15a470f9-7447-4ca1-9a2d-7831de933c06"
+                    },
+                    {
+                      "id": "322c233f-4190-436f-9a93-98d2d8024eff",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/currency-converter/raw",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "currency-converter",
+                            "raw"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:25.000Z",
+                      "updatedAt": "2026-07-28T02:45:25.000Z",
+                      "uid": "35240-322c233f-4190-436f-9a93-98d2d8024eff"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:25.000Z",
+                  "updatedAt": "2026-07-28T02:45:25.000Z",
+                  "uid": "35240-d2fd0937-c9ec-41e9-a2df-bed1f177eab3"
+                }
+              ],
+              "id": "9dc48782-59c7-498c-b2b8-e53a9c1525b9",
+              "createdAt": "2026-07-28T02:45:25.000Z",
+              "updatedAt": "2026-07-28T02:45:25.000Z",
+              "uid": "35240-9dc48782-59c7-498c-b2b8-e53a9c1525b9"
+            },
+            {
+              "name": "effective",
+              "item": [
+                {
+                  "name": "Convert currency using dynamic rates",
+                  "id": "b9c79412-fb91-45b3-9e74-aa12be7dcafd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/currency-converter/effective",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "currency-converter",
+                        "effective"
+                      ]
+                    },
+                    "description": "Convert currency using the rates Remote applies during employment creation and invoicing.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | Convert currencies (`convert_currency:read`) | - |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "99ba66f4-9da5-466e-90ae-33fde4829662",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/currency-converter/effective",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "currency-converter",
+                            "effective"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"conversion_data\": {\n      \"source_amount\": \"<integer>\",\n      \"source_currency\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      \"target_amount\": \"<integer>\",\n      \"target_currency\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      \"exchange_rate\": \"<number>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:25.000Z",
+                      "updatedAt": "2026-07-28T02:45:25.000Z",
+                      "uid": "35240-99ba66f4-9da5-466e-90ae-33fde4829662"
+                    },
+                    {
+                      "id": "bab37615-bda2-4259-a46d-e39eeec55bf3",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/currency-converter/effective",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "currency-converter",
+                            "effective"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:25.000Z",
+                      "updatedAt": "2026-07-28T02:45:25.000Z",
+                      "uid": "35240-bab37615-bda2-4259-a46d-e39eeec55bf3"
+                    },
+                    {
+                      "id": "816390c2-3bd5-422e-a0f3-367be7f72665",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/currency-converter/effective",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "currency-converter",
+                            "effective"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:25.000Z",
+                      "updatedAt": "2026-07-28T02:45:25.000Z",
+                      "uid": "35240-816390c2-3bd5-422e-a0f3-367be7f72665"
+                    },
+                    {
+                      "id": "63ccda97-269c-48ca-860f-f22be938d5c3",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/currency-converter/effective",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "currency-converter",
+                            "effective"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:25.000Z",
+                      "updatedAt": "2026-07-28T02:45:25.000Z",
+                      "uid": "35240-63ccda97-269c-48ca-860f-f22be938d5c3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:25.000Z",
+                  "updatedAt": "2026-07-28T02:45:25.000Z",
+                  "uid": "35240-b9c79412-fb91-45b3-9e74-aa12be7dcafd"
+                }
+              ],
+              "id": "260db314-a676-436e-bbcb-3337a794a09f",
+              "createdAt": "2026-07-28T02:45:25.000Z",
+              "updatedAt": "2026-07-28T02:45:25.000Z",
+              "uid": "35240-260db314-a676-436e-bbcb-3337a794a09f"
+            },
+            {
+              "name": "Convert currency using dynamic rates",
+              "id": "0d7df951-0cb1-4b1e-93b3-f93797bd319b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/currency-converter",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "currency-converter"
+                  ]
+                },
+                "description": "Convert currency using the rates Remote applies during employment creation and invoicing.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | Convert currencies (`convert_currency:read`) | - |\n"
+              },
+              "response": [
+                {
+                  "id": "0cf3f267-66d7-46e3-9cb6-139dc45e3fbc",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/currency-converter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "currency-converter"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"conversion_data\": {\n      \"source_amount\": \"<integer>\",\n      \"source_currency\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      \"target_amount\": \"<integer>\",\n      \"target_currency\": {\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"symbol\": \"<string>\"\n      },\n      \"exchange_rate\": \"<number>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:45:25.000Z",
+                  "updatedAt": "2026-07-28T02:45:25.000Z",
+                  "uid": "35240-0cf3f267-66d7-46e3-9cb6-139dc45e3fbc"
+                },
+                {
+                  "id": "dbbbfd4c-cd37-43e0-83e5-4f75a41fae1c",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/currency-converter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "currency-converter"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:45:25.000Z",
+                  "updatedAt": "2026-07-28T02:45:25.000Z",
+                  "uid": "35240-dbbbfd4c-cd37-43e0-83e5-4f75a41fae1c"
+                },
+                {
+                  "id": "24b54248-beee-4336-bd1c-9ad2fc2d9b66",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/currency-converter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "currency-converter"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:45:25.000Z",
+                  "updatedAt": "2026-07-28T02:45:25.000Z",
+                  "uid": "35240-24b54248-beee-4336-bd1c-9ad2fc2d9b66"
+                },
+                {
+                  "id": "0109713a-3109-4378-8550-ef34db8be8b9",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"source_currency\": \"<string>\",\n  \"target_currency\": \"<string>\",\n  \"amount\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/currency-converter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "currency-converter"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:45:25.000Z",
+                  "updatedAt": "2026-07-28T02:45:25.000Z",
+                  "uid": "35240-0109713a-3109-4378-8550-ef34db8be8b9"
+                }
+              ],
+              "createdAt": "2026-07-28T02:45:25.000Z",
+              "updatedAt": "2026-07-28T02:45:25.000Z",
+              "uid": "35240-0d7df951-0cb1-4b1e-93b3-f93797bd319b"
+            }
+          ],
+          "id": "30649592-1bc2-47e9-ab83-4b0a2284faee",
+          "createdAt": "2026-07-28T02:45:25.000Z",
+          "updatedAt": "2026-07-28T02:45:25.000Z",
+          "uid": "35240-30649592-1bc2-47e9-ab83-4b0a2284faee"
+        }
+      ],
+      "id": "bfcf7287-eb1e-4314-87fa-0840a11f86f2",
+      "createdAt": "2026-07-28T02:45:25.000Z",
+      "updatedAt": "2026-07-28T02:45:25.000Z",
+      "uid": "35240-bfcf7287-eb1e-4314-87fa-0840a11f86f2"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

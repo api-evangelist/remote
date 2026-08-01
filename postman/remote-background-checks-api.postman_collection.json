@@ -1,0 +1,384 @@
+{
+  "info": {
+    "_postman_id": "f2203f13-f1d5-4341-b326-a43ec4710c89",
+    "name": "Remote Address Details Background Checks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:44:32.000Z",
+    "updatedAt": "2026-07-28T02:44:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f2203f13-f1d5-4341-b326-a43ec4710c89"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "background-checks",
+                  "item": [
+                    {
+                      "name": "{background_check_id}",
+                      "item": [
+                        {
+                          "name": "Show Background Check",
+                          "id": "0005174b-09f6-49bb-9b3d-98e197e8ea1d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "redirect_uri",
+                                  "value": "/auth/oauth2/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/auth/oauth2/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "authUrl",
+                                  "value": "/auth/oauth2/authorize",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "authorization_code",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/background-checks/:background_check_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "background-checks",
+                                ":background_check_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7b9175ea-1e86-49e6-a3ff-b50552780794",
+                                  "key": "employment_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Employment Id"
+                                },
+                                {
+                                  "id": "d66890ca-4ba0-465a-b5af-75c3faeef228",
+                                  "key": "background_check_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Background Check Id"
+                                }
+                              ]
+                            },
+                            "description": "Show Background Check details for a given employment and background check request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View background checks (`background_check:read`) | - |\n"
+                          },
+                          "response": [
+                            {
+                              "id": "01721c15-12c1-40bf-b845-05b609db2983",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employments/:employment_id/background-checks/:background_check_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employments",
+                                    ":employment_id",
+                                    "background-checks",
+                                    ":background_check_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    },
+                                    {
+                                      "key": "background_check_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"background_check\": {\n      \"id\": \"<string>\",\n      \"status\": \"employer_requested\",\n      \"employment_id\": \"<string>\",\n      \"created_at\": \"<string>\",\n      \"background_check_request_items\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"status\": \"needs_employer_review\",\n          \"title\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\",\n          \"status\": \"needs_employer_review\",\n          \"title\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:44:33.000Z",
+                              "updatedAt": "2026-07-28T02:44:33.000Z",
+                              "uid": "35240-01721c15-12c1-40bf-b845-05b609db2983"
+                            },
+                            {
+                              "id": "207b6267-0cad-47a8-8b5a-ef20ab1ad5c1",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employments/:employment_id/background-checks/:background_check_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employments",
+                                    ":employment_id",
+                                    "background-checks",
+                                    ":background_check_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    },
+                                    {
+                                      "key": "background_check_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                              "createdAt": "2026-07-28T02:44:33.000Z",
+                              "updatedAt": "2026-07-28T02:44:33.000Z",
+                              "uid": "35240-207b6267-0cad-47a8-8b5a-ef20ab1ad5c1"
+                            },
+                            {
+                              "id": "670f6ef8-1a86-4fd7-bddf-d665515fa2e2",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employments/:employment_id/background-checks/:background_check_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employments",
+                                    ":employment_id",
+                                    "background-checks",
+                                    ":background_check_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    },
+                                    {
+                                      "key": "background_check_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Not Found\"\n}",
+                              "createdAt": "2026-07-28T02:44:33.000Z",
+                              "updatedAt": "2026-07-28T02:44:33.000Z",
+                              "uid": "35240-670f6ef8-1a86-4fd7-bddf-d665515fa2e2"
+                            },
+                            {
+                              "id": "843cc2bd-a08d-4b22-a30a-4ad66db1d020",
+                              "name": "Unprocessable Entity",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employments/:employment_id/background-checks/:background_check_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employments",
+                                    ":employment_id",
+                                    "background-checks",
+                                    ":background_check_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    },
+                                    {
+                                      "key": "background_check_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": {}\n}",
+                              "createdAt": "2026-07-28T02:44:33.000Z",
+                              "updatedAt": "2026-07-28T02:44:33.000Z",
+                              "uid": "35240-843cc2bd-a08d-4b22-a30a-4ad66db1d020"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:44:33.000Z",
+                          "updatedAt": "2026-07-28T02:44:33.000Z",
+                          "uid": "35240-0005174b-09f6-49bb-9b3d-98e197e8ea1d"
+                        }
+                      ],
+                      "id": "0612e431-4556-468a-bc33-78da88c78b41",
+                      "createdAt": "2026-07-28T02:44:33.000Z",
+                      "updatedAt": "2026-07-28T02:44:33.000Z",
+                      "uid": "35240-0612e431-4556-468a-bc33-78da88c78b41"
+                    }
+                  ],
+                  "id": "182ef680-bd2c-45d4-b284-15eb5505ce2e",
+                  "createdAt": "2026-07-28T02:44:33.000Z",
+                  "updatedAt": "2026-07-28T02:44:33.000Z",
+                  "uid": "35240-182ef680-bd2c-45d4-b284-15eb5505ce2e"
+                }
+              ],
+              "id": "0fdf5ed4-4400-40e2-b4cf-4a0e8d4e86cf",
+              "createdAt": "2026-07-28T02:44:33.000Z",
+              "updatedAt": "2026-07-28T02:44:33.000Z",
+              "uid": "35240-0fdf5ed4-4400-40e2-b4cf-4a0e8d4e86cf"
+            }
+          ],
+          "id": "7cd3469c-5b79-40e5-bb58-60ac2b653178",
+          "createdAt": "2026-07-28T02:44:33.000Z",
+          "updatedAt": "2026-07-28T02:44:33.000Z",
+          "uid": "35240-7cd3469c-5b79-40e5-bb58-60ac2b653178"
+        }
+      ],
+      "id": "fa683be9-2234-4698-9dd9-e9cebefdd466",
+      "createdAt": "2026-07-28T02:44:33.000Z",
+      "updatedAt": "2026-07-28T02:44:33.000Z",
+      "uid": "35240-fa683be9-2234-4698-9dd9-e9cebefdd466"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

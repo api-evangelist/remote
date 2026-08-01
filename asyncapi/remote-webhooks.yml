@@ -1,0 +1,72 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.remote.com/docs/available-webhooks
+spec_type: Webhooks
+summary: >-
+  Remote publishes an event-driven webhook surface. Partners register callback
+  URLs (company-scoped) and subscribe to events; Remote POSTs the resource
+  identifier on each change. No published AsyncAPI document — this is the
+  documented webhook catalog.
+delivery:
+  register_endpoint: POST /v1/webhook-callbacks
+  scope: company (company-scoped access token required)
+  subscription: subscribed_events[] + unique callback url
+  identifier_only: true
+security:
+  signing: HMAC signature using per-callback signing_key returned at registration
+  headers:
+    - X-Remote-Signature
+    - X-Remote-Timestamp
+  timestamp: unix-milliseconds (first send attempt)
+  docs: https://developer.remote.com/docs/verifying-webhooks
+event_families:
+  - resource: company
+    events: [company.activated, company.archived, company.manager_created, company.manager_updated, company.manager_deleted]
+  - resource: company.eor_hiring
+    events:
+      - company.eor_hiring.additional_information_required
+      - company.eor_hiring.reserve_payment_requested
+      - company.eor_hiring.no_reserve_payment_requested
+      - company.eor_hiring.referred
+      - company.eor_hiring.verification_completed
+  - resource: contract_amendment
+    events: [contract_amendment.submitted, contract_amendment.review_started, contract_amendment.done, contract_amendment.canceled, contract_amendment.deleted]
+  - resource: employment
+    events:
+      - employment.account.updated
+      - employment.details.updated
+      - employment.work_email.updated
+      - employment.personal_information.updated
+      - employment.administrative_details.updated
+      - employment.start_date.changed
+      - employment.employment_agreement.available
+      - employment.onboarding.started
+      - employment.onboarding.completed
+      - employment.onboarding.cancelled
+      - employment.onboarding_task.completed
+      - employment.user_status.initiated
+      - employment.user_status.invited
+      - employment.user_status.activated
+      - employment.user_status.deactivated
+      - employment.probation_completion_letter.submitted
+      - employment.probation_completion_letter.completed
+      - employment.probation_completion_letter.cancelled
+      - employment.probation_period_extension.submitted
+      - employment.probation_period_extension.completed
+      - employment.probation_period_extension.cancelled
+  - resource: expense
+    events: [expense.created, expense.submitted, expense.approved, expense.declined, expense.reimbursed, expense.updated, expense.deleted]
+  - resource: incentive
+    events: [incentive.created, incentive.processing_started, incentive.paid, incentive.updated, incentive.deleted]
+  - resource: offboarding
+    events: [offboarding.submitted, offboarding.review_started, offboarding.submitted_to_payroll, offboarding.completed, offboarding.deleted]
+  - resource: timeoff
+    events: [timeoff.requested, timeoff.approved, timeoff.declined, timeoff.canceled, timeoff.cancellation_requested, timeoff.date_changed, timeoff.updated, timeoff.started]
+  - resource: identity_verification
+    events: [identity_verification.verification_required]
+  - resource: custom_field
+    events: [custom_field.value_updated]
+  - resource: payslip
+    events: [payslip.released]
+  - resource: sso_configuration
+    events: [sso_configuration.enabled, sso_configuration.updated, sso_configuration.disabled]

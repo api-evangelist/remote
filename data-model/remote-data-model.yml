@@ -1,0 +1,128 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/remote-openapi-original.json
+summary: >-
+  Entity-relationship graph derived from Remote's OpenAPI schemas. Company and
+  Employment are the two hub entities: employment_id (39 references) and
+  company_id (11 references) are the most common foreign keys across the model.
+entities:
+  - name: Company
+    domain: Companies
+    key: company_id
+    description: A customer organization managed on the Remote platform.
+  - name: Employment
+    domain: Employments
+    key: employment_id
+    description: An individual employee or contractor engagement within a company.
+    belongs_to: [Company]
+  - name: Contract
+    domain: Contracts
+    key: contract_id
+    belongs_to: [Employment]
+  - name: ContractAmendment
+    domain: Contracts
+    key: amendment_contract_id
+    belongs_to: [Contract, Employment]
+  - name: Offboarding
+    domain: Offboarding
+    key: offboarding_id
+    belongs_to: [Employment]
+  - name: TimeOff
+    domain: Time & Attendance
+    belongs_to: [Employment]
+    references: [leave_policy_variant_id]
+  - name: Timesheet
+    domain: Time & Attendance
+    belongs_to: [Employment]
+  - name: Expense
+    domain: Pay & Compensation
+    belongs_to: [Employment]
+  - name: Incentive
+    domain: Pay & Compensation
+    key: recurring_incentive_id
+    belongs_to: [Employment]
+  - name: PayrollRun
+    domain: Pay & Compensation
+    belongs_to: [Company]
+  - name: Payslip
+    domain: Pay & Compensation
+    key: payslip_id
+    belongs_to: [Employment]
+  - name: Invoice
+    domain: Billing
+    belongs_to: [Company]
+    references: [bill_to_legal_entity_id]
+  - name: CompanyManager
+    domain: Companies
+    key: manager_id
+    belongs_to: [Company]
+  - name: CompanyDepartment
+    domain: Companies
+    key: department_id
+    belongs_to: [Company]
+  - name: CustomField
+    domain: Companies
+    key: custom_field_id
+    belongs_to: [Company]
+  - name: WebhookCallback
+    domain: Integrations
+    belongs_to: [Company]
+  - name: SSOConfiguration
+    domain: Integrations
+    belongs_to: [Company]
+relationships:
+  - from: Employment
+    to: Company
+    type: belongs_to
+    via: company_id
+  - from: Contract
+    to: Employment
+    type: belongs_to
+    via: employment_id
+  - from: ContractAmendment
+    to: Contract
+    type: belongs_to
+    via: amendment_contract_id
+  - from: Offboarding
+    to: Employment
+    type: belongs_to
+    via: employment_id
+  - from: TimeOff
+    to: Employment
+    type: belongs_to
+    via: employment_id
+  - from: Expense
+    to: Employment
+    type: belongs_to
+    via: employment_id
+  - from: Incentive
+    to: Employment
+    type: belongs_to
+    via: employment_id
+  - from: Payslip
+    to: Employment
+    type: belongs_to
+    via: employment_id
+  - from: PayrollRun
+    to: Company
+    type: belongs_to
+    via: company_id
+  - from: Invoice
+    to: Company
+    type: belongs_to
+    via: company_id
+  - from: CompanyManager
+    to: Company
+    type: belongs_to
+    via: company_id
+  - from: WebhookCallback
+    to: Company
+    type: belongs_to
+    via: company_id
+id_reference_fields:
+  employment_id: 39
+  company_id: 11
+  leave_policy_variant_id: 5
+  department_id: 4
+  contract_id: 3
+  amendment_contract_id: 3

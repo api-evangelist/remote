@@ -1,0 +1,544 @@
+{
+  "info": {
+    "_postman_id": "3c41913f-31b1-4ca0-895c-c7482897e391",
+    "name": "Remote Address Details Employee Federal Taxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:51.000Z",
+    "updatedAt": "2026-07-28T02:45:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3c41913f-31b1-4ca0-895c-c7482897e391"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "federal-taxes",
+              "item": [
+                {
+                  "name": "Submit employee federal taxes",
+                  "id": "afd82dbc-34c7-4c59-ab49-387f4aeabc12",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"federal_taxes\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/federal-taxes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "federal-taxes"
+                      ]
+                    },
+                    "description": "Submits the authenticated employee's US federal tax (W-4) details.\n\nAvailable for US Global Payroll employees once they reach the\npost-enrollment state. Calls made before then return a 404.\n\nThis endpoint requires country-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `global_payroll_federal_taxes`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage personal details (`personal_detail:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "5c6b6565-1ff2-4a44-995f-2c3e55b71563",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"federal_taxes\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/federal-taxes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "federal-taxes"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"status\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:51.000Z",
+                      "updatedAt": "2026-07-28T02:45:51.000Z",
+                      "uid": "35240-5c6b6565-1ff2-4a44-995f-2c3e55b71563"
+                    },
+                    {
+                      "id": "69946006-b8df-4550-8499-36a2b3c3cefa",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"federal_taxes\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/federal-taxes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "federal-taxes"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:51.000Z",
+                      "updatedAt": "2026-07-28T02:45:51.000Z",
+                      "uid": "35240-69946006-b8df-4550-8499-36a2b3c3cefa"
+                    },
+                    {
+                      "id": "4244eec0-aadd-489a-a924-21cdbb0f6d3e",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"federal_taxes\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/federal-taxes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "federal-taxes"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:51.000Z",
+                      "updatedAt": "2026-07-28T02:45:51.000Z",
+                      "uid": "35240-4244eec0-aadd-489a-a924-21cdbb0f6d3e"
+                    },
+                    {
+                      "id": "d8a17612-2dd1-4e5f-a59f-9b37f8ee2f56",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"federal_taxes\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/federal-taxes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "federal-taxes"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:51.000Z",
+                      "updatedAt": "2026-07-28T02:45:51.000Z",
+                      "uid": "35240-d8a17612-2dd1-4e5f-a59f-9b37f8ee2f56"
+                    },
+                    {
+                      "id": "2a6285e7-c8b0-4e31-87fc-f61e18b2c452",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"federal_taxes\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/federal-taxes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "federal-taxes"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:51.000Z",
+                      "updatedAt": "2026-07-28T02:45:51.000Z",
+                      "uid": "35240-2a6285e7-c8b0-4e31-87fc-f61e18b2c452"
+                    },
+                    {
+                      "id": "5f49669d-7e02-4ed7-bfbd-d2235322b373",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"federal_taxes\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/federal-taxes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "federal-taxes"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:51.000Z",
+                      "updatedAt": "2026-07-28T02:45:51.000Z",
+                      "uid": "35240-5f49669d-7e02-4ed7-bfbd-d2235322b373"
+                    },
+                    {
+                      "id": "be80ba8b-a044-4fb0-be42-bf5314088edb",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"federal_taxes\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/federal-taxes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "federal-taxes"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:51.000Z",
+                      "updatedAt": "2026-07-28T02:45:51.000Z",
+                      "uid": "35240-be80ba8b-a044-4fb0-be42-bf5314088edb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:51.000Z",
+                  "updatedAt": "2026-07-28T02:45:51.000Z",
+                  "uid": "35240-afd82dbc-34c7-4c59-ab49-387f4aeabc12"
+                }
+              ],
+              "id": "7f8382c4-04d6-4a09-9a39-abb42ad64d9a",
+              "createdAt": "2026-07-28T02:45:51.000Z",
+              "updatedAt": "2026-07-28T02:45:51.000Z",
+              "uid": "35240-7f8382c4-04d6-4a09-9a39-abb42ad64d9a"
+            }
+          ],
+          "id": "b139b6f1-5029-4024-8d91-4741014b612f",
+          "createdAt": "2026-07-28T02:45:51.000Z",
+          "updatedAt": "2026-07-28T02:45:51.000Z",
+          "uid": "35240-b139b6f1-5029-4024-8d91-4741014b612f"
+        }
+      ],
+      "id": "4210a998-8a59-4230-b224-5ee4ace1d1f1",
+      "createdAt": "2026-07-28T02:45:51.000Z",
+      "updatedAt": "2026-07-28T02:45:51.000Z",
+      "uid": "35240-4210a998-8a59-4230-b224-5ee4ace1d1f1"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

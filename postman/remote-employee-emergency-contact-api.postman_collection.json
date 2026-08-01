@@ -1,0 +1,966 @@
+{
+  "info": {
+    "_postman_id": "67b0621e-8260-4b87-beab-662020cac145",
+    "name": "Remote Address Details Employee Emergency Contact API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:50.000Z",
+    "updatedAt": "2026-07-28T02:45:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-67b0621e-8260-4b87-beab-662020cac145"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "emergency-contact",
+              "item": [
+                {
+                  "name": "Show employee emergency contact",
+                  "id": "9614d6bd-280a-4e35-a2a3-a04f399592a4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "emergency-contact"
+                      ],
+                      "query": [
+                        {
+                          "description": "Version of the emergency_contact_details form schema",
+                          "key": "emergency_contact_details_json_schema_version",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Returns the authenticated employee's emergency contact.\n\nThe employment is derived from the access token's subject \u2014 there is no\nemployment id in the path.\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `emergency_contact_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View emergency contacts (`emergency_contact:read`) | Manage emergency contacts (`emergency_contact:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "e73808c3-b29c-4f18-9a26-79cb899b2bb3",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"created_reserve_paid\",\n      \"type\": \"contractor\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"active\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"custom_remote_contract\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-e73808c3-b29c-4f18-9a26-79cb899b2bb3"
+                    },
+                    {
+                      "id": "939283f5-62a4-4114-85ed-6694c4493103",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-939283f5-62a4-4114-85ed-6694c4493103"
+                    },
+                    {
+                      "id": "27daa80d-2eb3-4b26-8794-527fe53fb489",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-27daa80d-2eb3-4b26-8794-527fe53fb489"
+                    },
+                    {
+                      "id": "9f412000-19b5-45de-95de-38ec25b7ff2c",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-9f412000-19b5-45de-95de-38ec25b7ff2c"
+                    },
+                    {
+                      "id": "0f875733-f8f4-447d-8d2b-b9856623dab9",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-0f875733-f8f4-447d-8d2b-b9856623dab9"
+                    },
+                    {
+                      "id": "62db9ee4-0158-425b-96cb-cfb4aa480c6d",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-62db9ee4-0158-425b-96cb-cfb4aa480c6d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:50.000Z",
+                  "updatedAt": "2026-07-28T02:45:50.000Z",
+                  "uid": "35240-9614d6bd-280a-4e35-a2a3-a04f399592a4"
+                },
+                {
+                  "name": "Update employee emergency contact",
+                  "id": "825dc720-b8e4-4e9b-832e-6e76dceb5de5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"emergency_contact_details\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "emergency-contact"
+                      ],
+                      "query": [
+                        {
+                          "description": "Version of the emergency_contact_details form schema",
+                          "key": "emergency_contact_details_json_schema_version",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Updates the authenticated employee's emergency contact.\n\nThe employment is derived from the access token's subject \u2014 there is no\nemployment id in the path. The token must be an employee-role token\n(typically obtained via the OAuth2 assertion grant with subject\n`urn:remote-api:employee:employment:<employment_id>`).\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `emergency_contact_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage emergency contacts (`emergency_contact:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "857e2dea-36b0-406e-b67e-4a2d53769095",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emergency_contact_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"created_reserve_paid\",\n      \"type\": \"contractor\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"active\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"custom_remote_contract\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-857e2dea-36b0-406e-b67e-4a2d53769095"
+                    },
+                    {
+                      "id": "3a1ea9cc-2b83-4efd-b632-0d2e55a1071c",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emergency_contact_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-3a1ea9cc-2b83-4efd-b632-0d2e55a1071c"
+                    },
+                    {
+                      "id": "0d8e9b3a-16f1-4c13-97ae-13e8058bef65",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emergency_contact_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-0d8e9b3a-16f1-4c13-97ae-13e8058bef65"
+                    },
+                    {
+                      "id": "3ba3e406-5c2f-469b-802a-0b65d66bcfa4",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emergency_contact_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-3ba3e406-5c2f-469b-802a-0b65d66bcfa4"
+                    },
+                    {
+                      "id": "6b62cde1-b304-4841-8ed9-31b3c18e1dfe",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emergency_contact_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-6b62cde1-b304-4841-8ed9-31b3c18e1dfe"
+                    },
+                    {
+                      "id": "36b80803-edb4-4862-83a9-aed4bb547c1a",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emergency_contact_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-36b80803-edb4-4862-83a9-aed4bb547c1a"
+                    },
+                    {
+                      "id": "4d9f5553-40c6-4d93-b810-f89fe4e86ef6",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"emergency_contact_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/emergency-contact?emergency_contact_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "emergency-contact"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the emergency_contact_details form schema",
+                              "key": "emergency_contact_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:50.000Z",
+                      "updatedAt": "2026-07-28T02:45:50.000Z",
+                      "uid": "35240-4d9f5553-40c6-4d93-b810-f89fe4e86ef6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:50.000Z",
+                  "updatedAt": "2026-07-28T02:45:50.000Z",
+                  "uid": "35240-825dc720-b8e4-4e9b-832e-6e76dceb5de5"
+                }
+              ],
+              "id": "89a10f0d-1f84-416e-a6e6-1c628cca2f2a",
+              "createdAt": "2026-07-28T02:45:50.000Z",
+              "updatedAt": "2026-07-28T02:45:50.000Z",
+              "uid": "35240-89a10f0d-1f84-416e-a6e6-1c628cca2f2a"
+            }
+          ],
+          "id": "a3b342ce-d6db-4b60-8441-762d8027aadb",
+          "createdAt": "2026-07-28T02:45:50.000Z",
+          "updatedAt": "2026-07-28T02:45:50.000Z",
+          "uid": "35240-a3b342ce-d6db-4b60-8441-762d8027aadb"
+        }
+      ],
+      "id": "2539ca5b-2cc3-46c2-b051-7369b50dd416",
+      "createdAt": "2026-07-28T02:45:50.000Z",
+      "updatedAt": "2026-07-28T02:45:50.000Z",
+      "uid": "35240-2539ca5b-2cc3-46c2-b051-7369b50dd416"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

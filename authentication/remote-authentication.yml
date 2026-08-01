@@ -1,0 +1,71 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/remote-openapi-original.json
+docs: https://developer.remote.com/docs/authentication
+notes: >-
+  Remote supports several auth methods by use case. Partners: OAuth 2.0 Client
+  Credentials (act as themselves), OAuth 2.0 Authorization Code (act on behalf
+  of a consenting customer, storing the refresh_token), OAuth 2.0 Assertion
+  (jwt-bearer, act on behalf of an employee of an authorized company), Basic
+  Auth (CLIENT_ID/CLIENT_SECRET to mint tokens), and Client Token (bearer, for
+  marketing endpoints only — no PII). Access tokens are valid for 3600 seconds.
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: |-
+    Authenticate using the basic authentication for partners.
+
+    Use the CLIENT_ID as login and CLIENT_SECRET as password.
+  sources:
+  - openapi/remote-openapi-original.json
+- name: ClientToken
+  type: http
+  scheme: bearer
+  description: |-
+    Authenticate a partner using only the the provided `client_token`.
+
+    This authentication method only allows accessing marketing endpoints.
+  sources:
+  - openapi/remote-openapi-original.json
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /auth/oauth2/authorize
+    tokenUrl: /auth/oauth2/token
+    scopes: 73
+  - flow: clientCredentials
+    tokenUrl: /auth/oauth2/token
+    scopes: 18
+  description: Authenticate using OAuth 2.0 protocol.
+  sources:
+  - openapi/remote-openapi-original.json
+- name: OAuth2Assertion
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /auth/oauth2/token
+    scopes: 21
+  description: Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer`
+    grant in the OAuth2 protocol.
+  sources:
+  - openapi/remote-openapi-original.json
+- name: OAuth2AuthorizationCode
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /auth/oauth2/authorize
+    tokenUrl: /auth/oauth2/token
+    scopes: 73
+  description: Authenticate as the token authorizer using `authorization_code` / `refresh_token`
+    grants in the OAuth 2.0 protocol.
+  sources:
+  - openapi/remote-openapi-original.json

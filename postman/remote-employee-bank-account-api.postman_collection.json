@@ -1,0 +1,966 @@
+{
+  "info": {
+    "_postman_id": "0177ae9c-1c9e-4962-8cce-49ddd440a648",
+    "name": "Remote Address Details Employee Bank Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:40.000Z",
+    "updatedAt": "2026-07-28T02:45:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0177ae9c-1c9e-4962-8cce-49ddd440a648"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "bank-account",
+              "item": [
+                {
+                  "name": "Show employee bank account",
+                  "id": "e36cd116-dbeb-4a95-a425-472ec5eba37f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "bank-account"
+                      ],
+                      "query": [
+                        {
+                          "description": "Version of the bank_account_details form schema",
+                          "key": "bank_account_details_json_schema_version",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Returns the authenticated employee's bank account details.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View bank accounts (`bank_account:read`) | Manage bank accounts (`bank_account:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "0f354c9e-9042-4bcb-826f-ef8aab790fa8",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"pending\",\n      \"type\": \"direct_employee\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"initiated\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"custom_remote_contract\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-0f354c9e-9042-4bcb-826f-ef8aab790fa8"
+                    },
+                    {
+                      "id": "41d938e9-b923-4a31-ab11-0b351301f1fe",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-41d938e9-b923-4a31-ab11-0b351301f1fe"
+                    },
+                    {
+                      "id": "16383183-cab4-448f-9030-fc9828644ce2",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-16383183-cab4-448f-9030-fc9828644ce2"
+                    },
+                    {
+                      "id": "a44d6bf5-fcbf-4a43-af32-6f8acb3f54ea",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-a44d6bf5-fcbf-4a43-af32-6f8acb3f54ea"
+                    },
+                    {
+                      "id": "baf2786b-23e8-40a0-8c89-3c4b938b183e",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-baf2786b-23e8-40a0-8c89-3c4b938b183e"
+                    },
+                    {
+                      "id": "94ad010f-6698-41d9-8d5d-6d145779f79d",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-94ad010f-6698-41d9-8d5d-6d145779f79d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:41.000Z",
+                  "updatedAt": "2026-07-28T02:45:41.000Z",
+                  "uid": "35240-e36cd116-dbeb-4a95-a425-472ec5eba37f"
+                },
+                {
+                  "name": "Update employee bank account",
+                  "id": "d9f52a01-e2e8-4d37-9759-7e2dd23dfe27",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"bank_account_details\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "bank-account"
+                      ],
+                      "query": [
+                        {
+                          "description": "Version of the bank_account_details form schema",
+                          "key": "bank_account_details_json_schema_version",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Upserts the authenticated employee's bank account details.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage bank accounts (`bank_account:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "a039ddb1-6eff-49fc-b19f-f61947920f5f",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"bank_account_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"pending\",\n      \"type\": \"direct_employee\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"initiated\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"custom_remote_contract\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-a039ddb1-6eff-49fc-b19f-f61947920f5f"
+                    },
+                    {
+                      "id": "40a5dc85-45de-4fa6-9073-c8d2bdb75396",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"bank_account_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-40a5dc85-45de-4fa6-9073-c8d2bdb75396"
+                    },
+                    {
+                      "id": "50ab3b35-359f-4608-adfe-d4c872a189c5",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"bank_account_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-50ab3b35-359f-4608-adfe-d4c872a189c5"
+                    },
+                    {
+                      "id": "60b59d72-ad3f-48c4-ac26-7792dc4afc68",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"bank_account_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-60b59d72-ad3f-48c4-ac26-7792dc4afc68"
+                    },
+                    {
+                      "id": "3bb3628f-52c2-4dce-90e9-8b1f6f445306",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"bank_account_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-3bb3628f-52c2-4dce-90e9-8b1f6f445306"
+                    },
+                    {
+                      "id": "e0e21d9a-eb0d-497f-8a5f-6e1166ef1ad9",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"bank_account_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-e0e21d9a-eb0d-497f-8a5f-6e1166ef1ad9"
+                    },
+                    {
+                      "id": "12a4e5ed-c4b3-446c-9d17-658ab5393cd7",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"bank_account_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/bank-account?bank_account_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "bank-account"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the bank_account_details form schema",
+                              "key": "bank_account_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:41.000Z",
+                      "updatedAt": "2026-07-28T02:45:41.000Z",
+                      "uid": "35240-12a4e5ed-c4b3-446c-9d17-658ab5393cd7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:41.000Z",
+                  "updatedAt": "2026-07-28T02:45:41.000Z",
+                  "uid": "35240-d9f52a01-e2e8-4d37-9759-7e2dd23dfe27"
+                }
+              ],
+              "id": "1b3e27a1-c360-40a5-9c83-fa7eaae89457",
+              "createdAt": "2026-07-28T02:45:41.000Z",
+              "updatedAt": "2026-07-28T02:45:41.000Z",
+              "uid": "35240-1b3e27a1-c360-40a5-9c83-fa7eaae89457"
+            }
+          ],
+          "id": "0984bba5-1838-4fab-89f4-ecd4c11f73c1",
+          "createdAt": "2026-07-28T02:45:41.000Z",
+          "updatedAt": "2026-07-28T02:45:41.000Z",
+          "uid": "35240-0984bba5-1838-4fab-89f4-ecd4c11f73c1"
+        }
+      ],
+      "id": "91f4eedb-2cf9-491f-a0c1-959b2519d52a",
+      "createdAt": "2026-07-28T02:45:41.000Z",
+      "updatedAt": "2026-07-28T02:45:41.000Z",
+      "uid": "35240-91f4eedb-2cf9-491f-a0c1-959b2519d52a"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

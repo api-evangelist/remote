@@ -1,0 +1,721 @@
+{
+  "info": {
+    "_postman_id": "feb1193f-6980-43ea-b470-9b7a354940af",
+    "name": "Remote Address Details Billing Address Details API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:44:47.000Z",
+    "updatedAt": "2026-07-28T02:44:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-feb1193f-6980-43ea-b470-9b7a354940af"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "billing-address-details",
+                  "item": [
+                    {
+                      "name": "Update billing address details",
+                      "id": "29bc9d45-6318-409c-96df-3ed6b3b93708",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"billing_address_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "employments",
+                            ":employment_id",
+                            "billing-address-details"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the billing_address_details form schema",
+                              "key": "billing_address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "65163146-b214-45a5-895f-7665c559e3d5",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates employment's billing address details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-form) tool.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "89f73c50-eabd-4af6-a143-bc8487653705",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_address_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "billing-address-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the billing_address_details form schema",
+                                  "key": "billing_address_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"pending\",\n      \"type\": \"contractor\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"deleted\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"remote_contract\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:44:48.000Z",
+                          "updatedAt": "2026-07-28T02:44:48.000Z",
+                          "uid": "35240-89f73c50-eabd-4af6-a143-bc8487653705"
+                        },
+                        {
+                          "id": "93fdc214-cf29-4af4-a61c-5e445f0d7e47",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_address_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "billing-address-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the billing_address_details form schema",
+                                  "key": "billing_address_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:44:48.000Z",
+                          "updatedAt": "2026-07-28T02:44:48.000Z",
+                          "uid": "35240-93fdc214-cf29-4af4-a61c-5e445f0d7e47"
+                        },
+                        {
+                          "id": "21bb16f7-2eb2-42dc-bed7-994b282b7856",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_address_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "billing-address-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the billing_address_details form schema",
+                                  "key": "billing_address_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:44:48.000Z",
+                          "updatedAt": "2026-07-28T02:44:48.000Z",
+                          "uid": "35240-21bb16f7-2eb2-42dc-bed7-994b282b7856"
+                        },
+                        {
+                          "id": "2dce8d91-122a-4b4b-bbf0-2147cf82e2bf",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_address_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "billing-address-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the billing_address_details form schema",
+                                  "key": "billing_address_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Forbidden\"\n}",
+                          "createdAt": "2026-07-28T02:44:48.000Z",
+                          "updatedAt": "2026-07-28T02:44:48.000Z",
+                          "uid": "35240-2dce8d91-122a-4b4b-bbf0-2147cf82e2bf"
+                        },
+                        {
+                          "id": "28c4edd5-1026-4fb1-91d2-23869eed5680",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_address_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "billing-address-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the billing_address_details form schema",
+                                  "key": "billing_address_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:44:48.000Z",
+                          "updatedAt": "2026-07-28T02:44:48.000Z",
+                          "uid": "35240-28c4edd5-1026-4fb1-91d2-23869eed5680"
+                        },
+                        {
+                          "id": "76cb7f60-6c68-4ddf-b61a-09f3bbdbb501",
+                          "name": "Conflict",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_address_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "billing-address-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the billing_address_details form schema",
+                                  "key": "billing_address_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:44:48.000Z",
+                          "updatedAt": "2026-07-28T02:44:48.000Z",
+                          "uid": "35240-76cb7f60-6c68-4ddf-b61a-09f3bbdbb501"
+                        },
+                        {
+                          "id": "12f03514-f575-48bd-8cf9-1f5857f3d6dd",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_address_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "billing-address-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the billing_address_details form schema",
+                                  "key": "billing_address_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:44:48.000Z",
+                          "updatedAt": "2026-07-28T02:44:48.000Z",
+                          "uid": "35240-12f03514-f575-48bd-8cf9-1f5857f3d6dd"
+                        },
+                        {
+                          "id": "869cb2ba-160d-4131-b3df-5540e4b3408e",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"billing_address_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/billing-address-details?billing_address_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "billing-address-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the billing_address_details form schema",
+                                  "key": "billing_address_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:44:48.000Z",
+                          "updatedAt": "2026-07-28T02:44:48.000Z",
+                          "uid": "35240-869cb2ba-160d-4131-b3df-5540e4b3408e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:44:48.000Z",
+                      "updatedAt": "2026-07-28T02:44:48.000Z",
+                      "uid": "35240-29bc9d45-6318-409c-96df-3ed6b3b93708"
+                    }
+                  ],
+                  "id": "f7cc48cb-cc28-4066-bca1-ec1c457ac076",
+                  "createdAt": "2026-07-28T02:44:48.000Z",
+                  "updatedAt": "2026-07-28T02:44:48.000Z",
+                  "uid": "35240-f7cc48cb-cc28-4066-bca1-ec1c457ac076"
+                }
+              ],
+              "id": "905c59da-d653-4888-8306-05c842653382",
+              "createdAt": "2026-07-28T02:44:48.000Z",
+              "updatedAt": "2026-07-28T02:44:48.000Z",
+              "uid": "35240-905c59da-d653-4888-8306-05c842653382"
+            }
+          ],
+          "id": "9e792eaf-4ac3-4787-9119-052371cc7678",
+          "createdAt": "2026-07-28T02:44:48.000Z",
+          "updatedAt": "2026-07-28T02:44:48.000Z",
+          "uid": "35240-9e792eaf-4ac3-4787-9119-052371cc7678"
+        }
+      ],
+      "id": "1b43e854-f788-4903-9a01-782a999debb7",
+      "createdAt": "2026-07-28T02:44:48.000Z",
+      "updatedAt": "2026-07-28T02:44:48.000Z",
+      "uid": "35240-1b43e854-f788-4903-9a01-782a999debb7"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

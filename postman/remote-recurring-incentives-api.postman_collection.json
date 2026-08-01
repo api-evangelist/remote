@@ -1,0 +1,1333 @@
+{
+  "info": {
+    "_postman_id": "3f955cf5-5916-4930-937e-40dff8f441e7",
+    "name": "Remote Address Details Recurring Incentives API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:40.000Z",
+    "updatedAt": "2026-07-28T02:47:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3f955cf5-5916-4930-937e-40dff8f441e7"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "incentives",
+          "item": [
+            {
+              "name": "recurring",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete a Recurring Incentive",
+                      "id": "635b7da0-4587-4561-9e68-065fa77df2a1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0b6c6495-e571-4d8c-95c7-35d0c7f275c5",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Recurring Incentive ID"
+                            }
+                          ]
+                        },
+                        "description": "Delete a Recurring Incentive, that is, a monthly paid incentive.\n\nInternally, Remote schedules upcoming incentives. As such, when you attempt to\ndelete a recurring incentive, Remote will **ONLY** delete scheduled incentives\nwith the `pending` status.\n\nIncentives payments that are already scheduled and cannot be deleted will be\nincluded in the response, in case you need to reference them.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "7f9ca76b-3fdf-4367-9fec-96359ce47b25",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/incentives/recurring/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "incentives",
+                                "recurring",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"already_scheduled_incentives\": [\n      {\n        \"id\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"amount_tax_type\": \"gross\",\n        \"effective_date\": \"<date>\",\n        \"expected_payout_date\": \"<date>\",\n        \"note\": \"<string>\",\n        \"period_end\": \"<date>\",\n        \"period_start\": \"<date>\",\n        \"recurring_incentive_id\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"status\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"amount_tax_type\": \"net\",\n        \"effective_date\": \"<date>\",\n        \"expected_payout_date\": \"<date>\",\n        \"note\": \"<string>\",\n        \"period_end\": \"<date>\",\n        \"period_start\": \"<date>\",\n        \"recurring_incentive_id\": \"<string>\"\n      }\n    ],\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:47:41.000Z",
+                          "updatedAt": "2026-07-28T02:47:41.000Z",
+                          "uid": "35240-7f9ca76b-3fdf-4367-9fec-96359ce47b25"
+                        },
+                        {
+                          "id": "c2b58a3b-062f-4615-9428-d1ad3aad7fd5",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/incentives/recurring/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "incentives",
+                                "recurring",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:47:41.000Z",
+                          "updatedAt": "2026-07-28T02:47:41.000Z",
+                          "uid": "35240-c2b58a3b-062f-4615-9428-d1ad3aad7fd5"
+                        },
+                        {
+                          "id": "3b7067e4-8a16-4a68-9c0f-d49f2a342e2e",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/incentives/recurring/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "incentives",
+                                "recurring",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:47:41.000Z",
+                          "updatedAt": "2026-07-28T02:47:41.000Z",
+                          "uid": "35240-3b7067e4-8a16-4a68-9c0f-d49f2a342e2e"
+                        },
+                        {
+                          "id": "5bcf5af9-fe71-4c3a-802b-bd5427e4a68f",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/incentives/recurring/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "incentives",
+                                "recurring",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:47:41.000Z",
+                          "updatedAt": "2026-07-28T02:47:41.000Z",
+                          "uid": "35240-5bcf5af9-fe71-4c3a-802b-bd5427e4a68f"
+                        },
+                        {
+                          "id": "8bf24b17-9661-4ad7-b9ef-b94d46ffe47b",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/incentives/recurring/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "incentives",
+                                "recurring",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:47:41.000Z",
+                          "updatedAt": "2026-07-28T02:47:41.000Z",
+                          "uid": "35240-8bf24b17-9661-4ad7-b9ef-b94d46ffe47b"
+                        },
+                        {
+                          "id": "65e4b195-d1ef-4524-bf35-21ef9f91e3f7",
+                          "name": "Too many requests",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/incentives/recurring/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "incentives",
+                                "recurring",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:47:41.000Z",
+                          "updatedAt": "2026-07-28T02:47:41.000Z",
+                          "uid": "35240-65e4b195-d1ef-4524-bf35-21ef9f91e3f7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:47:40.000Z",
+                      "updatedAt": "2026-07-28T02:47:40.000Z",
+                      "uid": "35240-635b7da0-4587-4561-9e68-065fa77df2a1"
+                    }
+                  ],
+                  "id": "26338990-0860-41b7-ad5b-248a21791290",
+                  "createdAt": "2026-07-28T02:47:40.000Z",
+                  "updatedAt": "2026-07-28T02:47:40.000Z",
+                  "uid": "35240-26338990-0860-41b7-ad5b-248a21791290"
+                },
+                {
+                  "name": "List Recurring Incentive",
+                  "id": "fd1bd562-4995-42d3-be5d-209d392061b9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/incentives/recurring?status=<string>&type=<string>&note=<string>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "incentives",
+                        "recurring"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by recurring incentive status: active or deactive.",
+                          "key": "status",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by recurring incentive type.",
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by recurring incentives that contain the value in their notes.",
+                          "key": "note",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "List all Recurring Incentives of a company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View incentives (`incentive:read`) | Manage incentives (`incentive:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "631f6465-dfbc-4dee-9f53-6891c3225df4",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring?status=<string>&type=<string>&note=<string>&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by recurring incentive status: active or deactive.",
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentive type.",
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentives that contain the value in their notes.",
+                              "key": "note",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"recurring_incentives\": [\n      {\n        \"id\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"type\": \"overtime\",\n        \"status\": \"inactive\",\n        \"amount\": \"<integer>\",\n        \"amount_tax_type\": \"net\",\n        \"start_date\": \"<date>\",\n        \"end_date\": \"<date>\",\n        \"note\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"type\": \"phone_allowance\",\n        \"status\": \"active\",\n        \"amount\": \"<integer>\",\n        \"amount_tax_type\": \"net\",\n        \"start_date\": \"<date>\",\n        \"end_date\": \"<date>\",\n        \"note\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-631f6465-dfbc-4dee-9f53-6891c3225df4"
+                    },
+                    {
+                      "id": "da4c2d03-ba74-4300-b43b-2b3981acacf0",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring?status=<string>&type=<string>&note=<string>&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by recurring incentive status: active or deactive.",
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentive type.",
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentives that contain the value in their notes.",
+                              "key": "note",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-da4c2d03-ba74-4300-b43b-2b3981acacf0"
+                    },
+                    {
+                      "id": "184e7548-3e1b-4ab5-aebb-7794bb41e843",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring?status=<string>&type=<string>&note=<string>&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by recurring incentive status: active or deactive.",
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentive type.",
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentives that contain the value in their notes.",
+                              "key": "note",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-184e7548-3e1b-4ab5-aebb-7794bb41e843"
+                    },
+                    {
+                      "id": "b67dc41c-ac44-4566-90cb-d3226f474816",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring?status=<string>&type=<string>&note=<string>&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by recurring incentive status: active or deactive.",
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentive type.",
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentives that contain the value in their notes.",
+                              "key": "note",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-b67dc41c-ac44-4566-90cb-d3226f474816"
+                    },
+                    {
+                      "id": "d303258d-9f8a-434d-bac8-e95308011408",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring?status=<string>&type=<string>&note=<string>&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by recurring incentive status: active or deactive.",
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentive type.",
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentives that contain the value in their notes.",
+                              "key": "note",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-d303258d-9f8a-434d-bac8-e95308011408"
+                    },
+                    {
+                      "id": "9adf74f2-f346-4e46-a319-7109aa6accd0",
+                      "name": "Too many requests",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring?status=<string>&type=<string>&note=<string>&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by recurring incentive status: active or deactive.",
+                              "key": "status",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentive type.",
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by recurring incentives that contain the value in their notes.",
+                              "key": "note",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-9adf74f2-f346-4e46-a319-7109aa6accd0"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:40.000Z",
+                  "updatedAt": "2026-07-28T02:47:40.000Z",
+                  "uid": "35240-fd1bd562-4995-42d3-be5d-209d392061b9"
+                },
+                {
+                  "name": "Create Recurring Incentive",
+                  "id": "7463d46b-9413-4c64-84a4-871f1a236607",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"bonus\",\n  \"amount\": \"<integer>\",\n  \"amount_tax_type\": \"gross\",\n  \"employment_id\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"note\": \"<string>\",\n  \"duration_in_months\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/incentives/recurring",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "incentives",
+                        "recurring"
+                      ]
+                    },
+                    "description": "Create a Recurring Incentive, that is, a monthly paid incentive.\n\nIncentives use the currency of the employment specified provided in the `employment_id` field.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "d43259d3-d30e-4d5c-bf75-9803781efce4",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"bonus\",\n  \"amount\": \"<integer>\",\n  \"amount_tax_type\": \"gross\",\n  \"employment_id\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"note\": \"<string>\",\n  \"duration_in_months\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"recurring_incentive\": {\n      \"id\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"type\": \"commission\",\n      \"status\": \"inactive\",\n      \"amount\": \"<integer>\",\n      \"amount_tax_type\": \"gross\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"note\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-d43259d3-d30e-4d5c-bf75-9803781efce4"
+                    },
+                    {
+                      "id": "f8bd8197-0953-4e22-b35f-c119bfaf3b52",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"bonus\",\n  \"amount\": \"<integer>\",\n  \"amount_tax_type\": \"gross\",\n  \"employment_id\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"note\": \"<string>\",\n  \"duration_in_months\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-f8bd8197-0953-4e22-b35f-c119bfaf3b52"
+                    },
+                    {
+                      "id": "184982fa-c7f0-4a89-885a-c0dd8fdee6bc",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"bonus\",\n  \"amount\": \"<integer>\",\n  \"amount_tax_type\": \"gross\",\n  \"employment_id\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"note\": \"<string>\",\n  \"duration_in_months\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-184982fa-c7f0-4a89-885a-c0dd8fdee6bc"
+                    },
+                    {
+                      "id": "25d4dc28-f79c-4981-a6d4-1053fb370f80",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"bonus\",\n  \"amount\": \"<integer>\",\n  \"amount_tax_type\": \"gross\",\n  \"employment_id\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"note\": \"<string>\",\n  \"duration_in_months\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-25d4dc28-f79c-4981-a6d4-1053fb370f80"
+                    },
+                    {
+                      "id": "9645c02a-25e4-475c-b669-446d9be68ed9",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"bonus\",\n  \"amount\": \"<integer>\",\n  \"amount_tax_type\": \"gross\",\n  \"employment_id\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"note\": \"<string>\",\n  \"duration_in_months\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-9645c02a-25e4-475c-b669-446d9be68ed9"
+                    },
+                    {
+                      "id": "e786ac95-ba52-4282-a765-191529130699",
+                      "name": "Too many requests",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"bonus\",\n  \"amount\": \"<integer>\",\n  \"amount_tax_type\": \"gross\",\n  \"employment_id\": \"<string>\",\n  \"effective_date\": \"<date>\",\n  \"note\": \"<string>\",\n  \"duration_in_months\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/incentives/recurring",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "incentives",
+                            "recurring"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:47:41.000Z",
+                      "updatedAt": "2026-07-28T02:47:41.000Z",
+                      "uid": "35240-e786ac95-ba52-4282-a765-191529130699"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:40.000Z",
+                  "updatedAt": "2026-07-28T02:47:40.000Z",
+                  "uid": "35240-7463d46b-9413-4c64-84a4-871f1a236607"
+                }
+              ],
+              "id": "262a9dad-4324-4d67-8d73-b4b92b4eef50",
+              "createdAt": "2026-07-28T02:47:40.000Z",
+              "updatedAt": "2026-07-28T02:47:40.000Z",
+              "uid": "35240-262a9dad-4324-4d67-8d73-b4b92b4eef50"
+            }
+          ],
+          "id": "b69ab95f-b489-41ec-a333-9789c1ab589d",
+          "createdAt": "2026-07-28T02:47:40.000Z",
+          "updatedAt": "2026-07-28T02:47:40.000Z",
+          "uid": "35240-b69ab95f-b489-41ec-a333-9789c1ab589d"
+        }
+      ],
+      "id": "1e3e42d8-aca2-4b5a-b5e3-b94d7fb21e19",
+      "createdAt": "2026-07-28T02:47:40.000Z",
+      "updatedAt": "2026-07-28T02:47:40.000Z",
+      "uid": "35240-1e3e42d8-aca2-4b5a-b5e3-b94d7fb21e19"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

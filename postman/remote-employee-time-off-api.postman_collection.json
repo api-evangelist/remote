@@ -1,0 +1,2236 @@
+{
+  "info": {
+    "_postman_id": "18e8a00d-48cd-4826-8680-48b8b6eaba4f",
+    "name": "Remote Address Details Employee Time Off API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:55.000Z",
+    "updatedAt": "2026-07-28T02:45:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-18e8a00d-48cd-4826-8680-48b8b6eaba4f"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "timeoff",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "cancel",
+                      "item": [
+                        {
+                          "name": "Cancel Time Off as Employee",
+                          "id": "e33b17b0-636f-43fe-8249-7062c0f9317f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "/auth/oauth2/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "client_credentials",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"cancel_reason\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "02106182-c7c5-4443-bbc0-c2457f1baf2c",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) Timeoff ID"
+                                }
+                              ]
+                            },
+                            "description": "Cancels a Time Off record as Employee\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+                          },
+                          "response": [
+                            {
+                              "id": "e1e43412-5253-4d67-b868-417a78864aa4",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cancel_reason\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employee/timeoff/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employee",
+                                    "timeoff",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"status\": \"declined\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"timeoff_days\": [\n        {\n          \"day\": \"<date>\",\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        {\n          \"day\": \"<date>\",\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        }\n      ],\n      \"total_minutes\": \"<integer>\",\n      \"timeoff_type\": \"extended_leave\",\n      \"leave_policy\": {\n        \"name\": \"<string>\",\n        \"leave_type\": \"rtt\",\n        \"leave_policy_variant_slug\": \"<string>\"\n      },\n      \"timezone\": \"<string>\",\n      \"approved_at\": \"<dateTime>\",\n      \"approver_id\": \"<string>\",\n      \"automatic\": \"<boolean>\",\n      \"cancel_reason\": \"<string>\",\n      \"cancelled_at\": \"<string>\",\n      \"document\": {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      },\n      \"leave_policy_variant_id\": \"<uuid>\",\n      \"notes\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:45:56.000Z",
+                              "updatedAt": "2026-07-28T02:45:56.000Z",
+                              "uid": "35240-e1e43412-5253-4d67-b868-417a78864aa4"
+                            },
+                            {
+                              "id": "45e148c0-0999-4fda-bb99-a02769fb20f7",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cancel_reason\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employee/timeoff/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employee",
+                                    "timeoff",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:45:56.000Z",
+                              "updatedAt": "2026-07-28T02:45:56.000Z",
+                              "uid": "35240-45e148c0-0999-4fda-bb99-a02769fb20f7"
+                            },
+                            {
+                              "id": "27e8e2c9-bda9-44cc-bc29-bdf7e52950e7",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cancel_reason\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employee/timeoff/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employee",
+                                    "timeoff",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                              "createdAt": "2026-07-28T02:45:56.000Z",
+                              "updatedAt": "2026-07-28T02:45:56.000Z",
+                              "uid": "35240-27e8e2c9-bda9-44cc-bc29-bdf7e52950e7"
+                            },
+                            {
+                              "id": "f6c49dda-1214-49ff-88a7-30138f83b731",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cancel_reason\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employee/timeoff/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employee",
+                                    "timeoff",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Not Found\"\n}",
+                              "createdAt": "2026-07-28T02:45:56.000Z",
+                              "updatedAt": "2026-07-28T02:45:56.000Z",
+                              "uid": "35240-f6c49dda-1214-49ff-88a7-30138f83b731"
+                            },
+                            {
+                              "id": "310d17aa-93bd-4450-ad3a-ebcf4247afe6",
+                              "name": "Unprocessable Entity",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cancel_reason\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employee/timeoff/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employee",
+                                    "timeoff",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": {}\n}",
+                              "createdAt": "2026-07-28T02:45:56.000Z",
+                              "updatedAt": "2026-07-28T02:45:56.000Z",
+                              "uid": "35240-310d17aa-93bd-4450-ad3a-ebcf4247afe6"
+                            },
+                            {
+                              "id": "6f5ff420-e6ae-45c5-94b1-ffbb0eba3c5f",
+                              "name": "Unprocessable Entity",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cancel_reason\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/employee/timeoff/:id/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "employee",
+                                    "timeoff",
+                                    ":id",
+                                    "cancel"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Too many requests\"\n}",
+                              "createdAt": "2026-07-28T02:45:56.000Z",
+                              "updatedAt": "2026-07-28T02:45:56.000Z",
+                              "uid": "35240-6f5ff420-e6ae-45c5-94b1-ffbb0eba3c5f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-e33b17b0-636f-43fe-8249-7062c0f9317f"
+                        }
+                      ],
+                      "id": "8789531a-2efa-416a-acf8-b29432153737",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-8789531a-2efa-416a-acf8-b29432153737"
+                    },
+                    {
+                      "name": "Update Time Off as Employee",
+                      "id": "972680b1-a5c7-4cbd-b218-701402f2cf2e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "09136a8f-ed91-401b-9f3c-4eb33e6a794d",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Timeoff ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates a Time Off record as Employee\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "b9e43d0e-7fec-426f-b649-1afc303ef51b",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"status\": \"declined\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"timeoff_days\": [\n        {\n          \"day\": \"<date>\",\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        {\n          \"day\": \"<date>\",\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        }\n      ],\n      \"total_minutes\": \"<integer>\",\n      \"timeoff_type\": \"extended_leave\",\n      \"leave_policy\": {\n        \"name\": \"<string>\",\n        \"leave_type\": \"rtt\",\n        \"leave_policy_variant_slug\": \"<string>\"\n      },\n      \"timezone\": \"<string>\",\n      \"approved_at\": \"<dateTime>\",\n      \"approver_id\": \"<string>\",\n      \"automatic\": \"<boolean>\",\n      \"cancel_reason\": \"<string>\",\n      \"cancelled_at\": \"<string>\",\n      \"document\": {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      },\n      \"leave_policy_variant_id\": \"<uuid>\",\n      \"notes\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-b9e43d0e-7fec-426f-b649-1afc303ef51b"
+                        },
+                        {
+                          "id": "0f0443c3-1346-4082-be9a-a454ed0799d3",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-0f0443c3-1346-4082-be9a-a454ed0799d3"
+                        },
+                        {
+                          "id": "6ed80eb8-e80f-4228-aba0-a36214037334",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-6ed80eb8-e80f-4228-aba0-a36214037334"
+                        },
+                        {
+                          "id": "dbcee4c5-5a88-4cc5-8692-4722ae6cad27",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-dbcee4c5-5a88-4cc5-8692-4722ae6cad27"
+                        },
+                        {
+                          "id": "165fdd77-26c1-4048-936a-1eb687575eb6",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-165fdd77-26c1-4048-936a-1eb687575eb6"
+                        },
+                        {
+                          "id": "d1026813-583c-42ba-b8cb-36a23dbf1cda",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-d1026813-583c-42ba-b8cb-36a23dbf1cda"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-972680b1-a5c7-4cbd-b218-701402f2cf2e"
+                    },
+                    {
+                      "name": "Update Time Off as Employee",
+                      "id": "9487452d-f702-4c37-bd5b-ada7ee81cd6a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9a2e0e12-883a-49b1-b097-36e5f50b0d6d",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Timeoff ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates a Time Off record as Employee\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "ccee5c4b-40a0-4e52-b872-db0c0c60346b",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"status\": \"declined\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"timeoff_days\": [\n        {\n          \"day\": \"<date>\",\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        {\n          \"day\": \"<date>\",\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        }\n      ],\n      \"total_minutes\": \"<integer>\",\n      \"timeoff_type\": \"extended_leave\",\n      \"leave_policy\": {\n        \"name\": \"<string>\",\n        \"leave_type\": \"rtt\",\n        \"leave_policy_variant_slug\": \"<string>\"\n      },\n      \"timezone\": \"<string>\",\n      \"approved_at\": \"<dateTime>\",\n      \"approver_id\": \"<string>\",\n      \"automatic\": \"<boolean>\",\n      \"cancel_reason\": \"<string>\",\n      \"cancelled_at\": \"<string>\",\n      \"document\": {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      },\n      \"leave_policy_variant_id\": \"<uuid>\",\n      \"notes\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-ccee5c4b-40a0-4e52-b872-db0c0c60346b"
+                        },
+                        {
+                          "id": "12db70ec-c767-4785-a34d-6f59d4f77524",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-12db70ec-c767-4785-a34d-6f59d4f77524"
+                        },
+                        {
+                          "id": "8dee1bf6-6bf1-4fb7-a42d-75a12c7c3d94",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-8dee1bf6-6bf1-4fb7-a42d-75a12c7c3d94"
+                        },
+                        {
+                          "id": "570b5d82-0807-44fb-8f6e-b6cc716ec04d",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-570b5d82-0807-44fb-8f6e-b6cc716ec04d"
+                        },
+                        {
+                          "id": "15389b84-b18e-40ae-93fd-b99d3c07bf67",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-15389b84-b18e-40ae-93fd-b99d3c07bf67"
+                        },
+                        {
+                          "id": "b1f39204-265c-4ae4-bb20-2e052d96ce6f",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"edit_reason\": \"<string>\",\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"timezone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/timeoff/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "timeoff",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:45:56.000Z",
+                          "updatedAt": "2026-07-28T02:45:56.000Z",
+                          "uid": "35240-b1f39204-265c-4ae4-bb20-2e052d96ce6f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-9487452d-f702-4c37-bd5b-ada7ee81cd6a"
+                    }
+                  ],
+                  "id": "8420ef7d-aa0a-4d83-8c5b-8d1281cc7251",
+                  "createdAt": "2026-07-28T02:45:56.000Z",
+                  "updatedAt": "2026-07-28T02:45:56.000Z",
+                  "uid": "35240-8420ef7d-aa0a-4d83-8c5b-8d1281cc7251"
+                },
+                {
+                  "name": "List employee time offs",
+                  "id": "b42d098c-6e07-4f6a-ad1f-9b0c617bcf29",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/timeoff?page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "timeoff"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    },
+                    "description": "Lists the current employee's time off records\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "b00c478c-8c24-46aa-a9b2-34c98f3845c9",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"timeoffs\": [\n      {\n        \"id\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"status\": \"cancelled\",\n        \"start_date\": \"<date>\",\n        \"end_date\": \"<date>\",\n        \"timeoff_days\": [\n          {\n            \"day\": \"<date>\",\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          {\n            \"day\": \"<date>\",\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          }\n        ],\n        \"total_minutes\": \"<integer>\",\n        \"timeoff_type\": \"unpaid_leave\",\n        \"leave_policy\": {\n          \"name\": \"<string>\",\n          \"leave_type\": \"in_lieu_time\",\n          \"leave_policy_variant_slug\": \"<string>\"\n        },\n        \"timezone\": \"<string>\",\n        \"approved_at\": \"<dateTime>\",\n        \"approver_id\": \"<string>\",\n        \"automatic\": \"<boolean>\",\n        \"cancel_reason\": \"<string>\",\n        \"cancelled_at\": \"<string>\",\n        \"document\": {\n          \"id\": \"<string>\",\n          \"inserted_at\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"sub_type\": \"<string>\"\n        },\n        \"leave_policy_variant_id\": \"<uuid>\",\n        \"notes\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"status\": \"approved\",\n        \"start_date\": \"<date>\",\n        \"end_date\": \"<date>\",\n        \"timeoff_days\": [\n          {\n            \"day\": \"<date>\",\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          {\n            \"day\": \"<date>\",\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          }\n        ],\n        \"total_minutes\": \"<integer>\",\n        \"timeoff_type\": \"maternity_leave\",\n        \"leave_policy\": {\n          \"name\": \"<string>\",\n          \"leave_type\": \"paid_time_off\",\n          \"leave_policy_variant_slug\": \"<string>\"\n        },\n        \"timezone\": \"<string>\",\n        \"approved_at\": \"<dateTime>\",\n        \"approver_id\": \"<string>\",\n        \"automatic\": \"<boolean>\",\n        \"cancel_reason\": \"<string>\",\n        \"cancelled_at\": \"<string>\",\n        \"document\": {\n          \"id\": \"<string>\",\n          \"inserted_at\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"sub_type\": \"<string>\"\n        },\n        \"leave_policy_variant_id\": \"<uuid>\",\n        \"notes\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-b00c478c-8c24-46aa-a9b2-34c98f3845c9"
+                    },
+                    {
+                      "id": "2a68f1ca-39c5-41df-a26b-496e3a48e925",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-2a68f1ca-39c5-41df-a26b-496e3a48e925"
+                    },
+                    {
+                      "id": "efd4c6f1-b65c-4606-8a9a-935db1710799",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-efd4c6f1-b65c-4606-8a9a-935db1710799"
+                    },
+                    {
+                      "id": "db6ae15e-9f18-431b-afce-f8475990fc30",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-db6ae15e-9f18-431b-afce-f8475990fc30"
+                    },
+                    {
+                      "id": "e64d9c41-bfd8-4c50-8410-32c503780cfe",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-e64d9c41-bfd8-4c50-8410-32c503780cfe"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:56.000Z",
+                  "updatedAt": "2026-07-28T02:45:56.000Z",
+                  "uid": "35240-b42d098c-6e07-4f6a-ad1f-9b0c617bcf29"
+                },
+                {
+                  "name": "Create a Pending Time Off",
+                  "id": "7fe016f4-2087-42ae-968d-16bbda173545",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/timeoff",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "timeoff"
+                      ]
+                    },
+                    "description": "Creates a pending Time Off record\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "9815809a-4896-4e32-84b0-7015b1c0f094",
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"timeoff\": {\n      \"id\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"status\": \"declined\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"timeoff_days\": [\n        {\n          \"day\": \"<date>\",\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        {\n          \"day\": \"<date>\",\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        }\n      ],\n      \"total_minutes\": \"<integer>\",\n      \"timeoff_type\": \"extended_leave\",\n      \"leave_policy\": {\n        \"name\": \"<string>\",\n        \"leave_type\": \"rtt\",\n        \"leave_policy_variant_slug\": \"<string>\"\n      },\n      \"timezone\": \"<string>\",\n      \"approved_at\": \"<dateTime>\",\n      \"approver_id\": \"<string>\",\n      \"automatic\": \"<boolean>\",\n      \"cancel_reason\": \"<string>\",\n      \"cancelled_at\": \"<string>\",\n      \"document\": {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      },\n      \"leave_policy_variant_id\": \"<uuid>\",\n      \"notes\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-9815809a-4896-4e32-84b0-7015b1c0f094"
+                    },
+                    {
+                      "id": "ab22d898-3f41-405b-877a-e164457aae86",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-ab22d898-3f41-405b-877a-e164457aae86"
+                    },
+                    {
+                      "id": "7b10aaa8-d525-4d6f-82f1-a0dadf61ad75",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-7b10aaa8-d525-4d6f-82f1-a0dadf61ad75"
+                    },
+                    {
+                      "id": "ff6b19a0-9190-45d0-ae3e-d9216ab441ca",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-ff6b19a0-9190-45d0-ae3e-d9216ab441ca"
+                    },
+                    {
+                      "id": "4d3a351d-9b6b-4fb5-92f9-80aeaf7d7733",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-4d3a351d-9b6b-4fb5-92f9-80aeaf7d7733"
+                    },
+                    {
+                      "id": "34d3bfd1-fd99-44f2-aaff-a8b2df19a9bd",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"leave_policy_variant_id\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"timeoff_days\": [\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    },\n    {\n      \"day\": \"<date>\",\n      \"hours\": \"<integer>\"\n    }\n  ],\n  \"document\": {\n    \"content\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"notes\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timeoff",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timeoff"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:56.000Z",
+                      "updatedAt": "2026-07-28T02:45:56.000Z",
+                      "uid": "35240-34d3bfd1-fd99-44f2-aaff-a8b2df19a9bd"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:56.000Z",
+                  "updatedAt": "2026-07-28T02:45:56.000Z",
+                  "uid": "35240-7fe016f4-2087-42ae-968d-16bbda173545"
+                }
+              ],
+              "id": "8bf85f8d-573b-4993-8ea3-a587fcc1420b",
+              "createdAt": "2026-07-28T02:45:56.000Z",
+              "updatedAt": "2026-07-28T02:45:56.000Z",
+              "uid": "35240-8bf85f8d-573b-4993-8ea3-a587fcc1420b"
+            }
+          ],
+          "id": "3dffacf1-b51a-4347-ab86-0643ae34f73e",
+          "createdAt": "2026-07-28T02:45:56.000Z",
+          "updatedAt": "2026-07-28T02:45:56.000Z",
+          "uid": "35240-3dffacf1-b51a-4347-ab86-0643ae34f73e"
+        }
+      ],
+      "id": "03e7fab0-fccd-4000-b7b0-41b528df8abf",
+      "createdAt": "2026-07-28T02:45:56.000Z",
+      "updatedAt": "2026-07-28T02:45:56.000Z",
+      "uid": "35240-03e7fab0-fccd-4000-b7b0-41b528df8abf"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

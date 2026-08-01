@@ -1,0 +1,712 @@
+{
+  "info": {
+    "_postman_id": "7ac62711-2923-4d57-9c10-c93d3d534be8",
+    "name": "Remote Address Details Payroll Calendars API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:21.000Z",
+    "updatedAt": "2026-07-28T02:47:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7ac62711-2923-4d57-9c10-c93d3d534be8"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "payroll-calendars",
+          "item": [
+            {
+              "name": "{cycle}",
+              "item": [
+                {
+                  "name": "List Company Payroll Calendar",
+                  "id": "34bc8f62-8e25-4d04-9158-d995381f110e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-calendars/:cycle?page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-calendars",
+                        ":cycle"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "6766992e-c800-4bdc-a5e1-d0ea7948d9f3",
+                          "key": "cycle",
+                          "value": "<string>",
+                          "description": "(Required) The cycle for which to list the payroll calendars. Format: YYYY-MM"
+                        }
+                      ]
+                    },
+                    "description": "List all payroll calendars for the company within the requested cycle.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll calendars (`payroll_calendar:read`) | - |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "302d9176-5e28-4e0c-a161-412b3277d6ab",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-calendars/:cycle?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-calendars",
+                            ":cycle"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "cycle"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"payroll_calendars\": [\n      {\n        \"country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"plus\",\n            \"cor\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"owned_by_remote\": \"<boolean>\",\n        \"cycle_frequency\": \"weekly\",\n        \"cycles\": [\n          {\n            \"employee_inclusion_cutoff_date\": \"<date>\",\n            \"end_date\": \"<date>\",\n            \"input_cutoff_date\": \"<date>\",\n            \"payment_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          },\n          {\n            \"employee_inclusion_cutoff_date\": \"<date>\",\n            \"end_date\": \"<date>\",\n            \"input_cutoff_date\": \"<date>\",\n            \"payment_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          }\n        ]\n      },\n      {\n        \"country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"standard\",\n            \"cor\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"owned_by_remote\": \"<boolean>\",\n        \"cycle_frequency\": \"bi_monthly\",\n        \"cycles\": [\n          {\n            \"employee_inclusion_cutoff_date\": \"<date>\",\n            \"end_date\": \"<date>\",\n            \"input_cutoff_date\": \"<date>\",\n            \"payment_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          },\n          {\n            \"employee_inclusion_cutoff_date\": \"<date>\",\n            \"end_date\": \"<date>\",\n            \"input_cutoff_date\": \"<date>\",\n            \"payment_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          }\n        ]\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:21.000Z",
+                      "updatedAt": "2026-07-28T02:47:21.000Z",
+                      "uid": "35240-302d9176-5e28-4e0c-a161-412b3277d6ab"
+                    },
+                    {
+                      "id": "27c9c536-ca34-4a49-88fe-f22e49ad32d1",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-calendars/:cycle?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-calendars",
+                            ":cycle"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "cycle"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:47:21.000Z",
+                      "updatedAt": "2026-07-28T02:47:21.000Z",
+                      "uid": "35240-27c9c536-ca34-4a49-88fe-f22e49ad32d1"
+                    },
+                    {
+                      "id": "88ae0bb8-2b83-4779-ade2-4f7a10da565e",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-calendars/:cycle?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-calendars",
+                            ":cycle"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "cycle"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:47:21.000Z",
+                      "updatedAt": "2026-07-28T02:47:21.000Z",
+                      "uid": "35240-88ae0bb8-2b83-4779-ade2-4f7a10da565e"
+                    },
+                    {
+                      "id": "81a14fc5-18b9-4c95-af8c-bc82532b381c",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-calendars/:cycle?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-calendars",
+                            ":cycle"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "cycle"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:21.000Z",
+                      "updatedAt": "2026-07-28T02:47:21.000Z",
+                      "uid": "35240-81a14fc5-18b9-4c95-af8c-bc82532b381c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:21.000Z",
+                  "updatedAt": "2026-07-28T02:47:21.000Z",
+                  "uid": "35240-34bc8f62-8e25-4d04-9158-d995381f110e"
+                }
+              ],
+              "id": "4bdbbd1c-e4b9-4753-99d3-2d4acc2ee763",
+              "createdAt": "2026-07-28T02:47:21.000Z",
+              "updatedAt": "2026-07-28T02:47:21.000Z",
+              "uid": "35240-4bdbbd1c-e4b9-4753-99d3-2d4acc2ee763"
+            },
+            {
+              "name": "List EOR Payroll Calendar",
+              "id": "53bfed26-1397-439d-bc8c-387c8ac1ee77",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "/auth/oauth2/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/payroll-calendars?country_code=<string>&year=<string>&page=1&page_size=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "payroll-calendars"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter payroll calendars by country code",
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter payroll calendars by year",
+                      "key": "year",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "List all active payroll calendars for EOR.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll calendars (`payroll_calendar:read`) | - |\n"
+              },
+              "response": [
+                {
+                  "id": "61072196-b89c-40d8-90a8-952874b13925",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-calendars?country_code=<string>&year=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-calendars"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter payroll calendars by country code",
+                          "key": "country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter payroll calendars by year",
+                          "key": "year",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"payroll_calendars\": [\n      {\n        \"country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"plus\",\n            \"cor\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"cycle_frequency\": \"bi_monthly\",\n        \"cycles\": [\n          {\n            \"employee_inclusion_cutoff_date\": \"<date>\",\n            \"end_date\": \"<date>\",\n            \"input_cutoff_date\": \"<date>\",\n            \"payment_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          },\n          {\n            \"employee_inclusion_cutoff_date\": \"<date>\",\n            \"end_date\": \"<date>\",\n            \"input_cutoff_date\": \"<date>\",\n            \"payment_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          }\n        ],\n        \"id\": \"<string>\"\n      },\n      {\n        \"country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"plus\",\n            \"cor\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"cycle_frequency\": \"weekly\",\n        \"cycles\": [\n          {\n            \"employee_inclusion_cutoff_date\": \"<date>\",\n            \"end_date\": \"<date>\",\n            \"input_cutoff_date\": \"<date>\",\n            \"payment_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          },\n          {\n            \"employee_inclusion_cutoff_date\": \"<date>\",\n            \"end_date\": \"<date>\",\n            \"input_cutoff_date\": \"<date>\",\n            \"payment_date\": \"<date>\",\n            \"start_date\": \"<date>\"\n          }\n        ],\n        \"id\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:21.000Z",
+                  "updatedAt": "2026-07-28T02:47:21.000Z",
+                  "uid": "35240-61072196-b89c-40d8-90a8-952874b13925"
+                },
+                {
+                  "id": "c170be7f-1766-4f09-83fa-6247b7435891",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-calendars?country_code=<string>&year=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-calendars"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter payroll calendars by country code",
+                          "key": "country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter payroll calendars by year",
+                          "key": "year",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:47:21.000Z",
+                  "updatedAt": "2026-07-28T02:47:21.000Z",
+                  "uid": "35240-c170be7f-1766-4f09-83fa-6247b7435891"
+                },
+                {
+                  "id": "e9e4c0ea-796f-47c2-98a2-8dcc0ac661ca",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-calendars?country_code=<string>&year=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-calendars"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter payroll calendars by country code",
+                          "key": "country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter payroll calendars by year",
+                          "key": "year",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:47:21.000Z",
+                  "updatedAt": "2026-07-28T02:47:21.000Z",
+                  "uid": "35240-e9e4c0ea-796f-47c2-98a2-8dcc0ac661ca"
+                },
+                {
+                  "id": "2f64e476-2acc-4bcc-a77f-bf6236fc2b74",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-calendars?country_code=<string>&year=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-calendars"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter payroll calendars by country code",
+                          "key": "country_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter payroll calendars by year",
+                          "key": "year",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:47:21.000Z",
+                  "updatedAt": "2026-07-28T02:47:21.000Z",
+                  "uid": "35240-2f64e476-2acc-4bcc-a77f-bf6236fc2b74"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:21.000Z",
+              "updatedAt": "2026-07-28T02:47:21.000Z",
+              "uid": "35240-53bfed26-1397-439d-bc8c-387c8ac1ee77"
+            }
+          ],
+          "id": "f8af7690-5fb6-4d8d-a628-d9828ac81e16",
+          "createdAt": "2026-07-28T02:47:21.000Z",
+          "updatedAt": "2026-07-28T02:47:21.000Z",
+          "uid": "35240-f8af7690-5fb6-4d8d-a628-d9828ac81e16"
+        }
+      ],
+      "id": "3adbdfdd-1b3c-4a0d-a725-b28c81731139",
+      "createdAt": "2026-07-28T02:47:21.000Z",
+      "updatedAt": "2026-07-28T02:47:21.000Z",
+      "uid": "35240-3adbdfdd-1b3c-4a0d-a725-b28c81731139"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

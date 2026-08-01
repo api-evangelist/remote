@@ -1,0 +1,2068 @@
+{
+  "info": {
+    "_postman_id": "d090bf8f-29b4-4ac3-980d-c48365c025a4",
+    "name": "Remote Address Details Timesheets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:02.000Z",
+    "updatedAt": "2026-07-28T02:48:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d090bf8f-29b4-4ac3-980d-c48365c025a4"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "timesheets",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Show timesheet",
+                  "id": "10f7b582-36f0-4d10-92e3-4ec45ec9f8d7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/timesheets/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "timesheets",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3987f916-408f-4eb5-8728-ee2a40276708",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Timesheet ID"
+                        }
+                      ]
+                    },
+                    "description": "Shows a timesheet by its ID.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "77233dcf-fd1d-45f8-9fc7-a58a6ae43ed8",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timesheets/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timesheets",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"timesheet\": {\n      \"id\": \"<uuid>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"status\": \"approved\",\n      \"country_code\": \"<string>\",\n      \"employment_id\": \"<uuid>\",\n      \"submitted_at\": \"<string>\",\n      \"approval_required\": \"<boolean>\",\n      \"notes\": \"<string>\",\n      \"regular_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"total_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"break_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"unpaid_break_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"overtime_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"holiday_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"weekend_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"night_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"on_call_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"time_trackings\": [\n        {\n          \"type\": \"regular_hours\",\n          \"notes\": \"<string>\",\n          \"timezone\": \"<string>\",\n          \"clock_in\": \"<dateTime>\",\n          \"clock_out\": \"<dateTime>\",\n          \"total_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          \"night_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          \"weekend_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          \"holiday_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          \"has_night_hours\": \"<boolean>\",\n          \"has_weekend_hours\": \"<boolean>\",\n          \"has_holiday_hours\": \"<boolean>\",\n          \"time_breakdown\": {\n            \"day\": {\n              \"regular\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              },\n              \"weekend\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              },\n              \"holiday\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              }\n            },\n            \"night\": {\n              \"regular\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              },\n              \"weekend\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              },\n              \"holiday\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              }\n            }\n          }\n        },\n        {\n          \"type\": \"break\",\n          \"notes\": \"<string>\",\n          \"timezone\": \"<string>\",\n          \"clock_in\": \"<dateTime>\",\n          \"clock_out\": \"<dateTime>\",\n          \"total_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          \"night_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          \"weekend_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          \"holiday_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          },\n          \"has_night_hours\": \"<boolean>\",\n          \"has_weekend_hours\": \"<boolean>\",\n          \"has_holiday_hours\": \"<boolean>\",\n          \"time_breakdown\": {\n            \"day\": {\n              \"regular\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              },\n              \"weekend\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              },\n              \"holiday\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              }\n            },\n            \"night\": {\n              \"regular\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              },\n              \"weekend\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              },\n              \"holiday\": {\n                \"hours\": \"<integer>\",\n                \"minutes\": \"<integer>\"\n              }\n            }\n          }\n        }\n      ],\n      \"timeoff_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-77233dcf-fd1d-45f8-9fc7-a58a6ae43ed8"
+                    },
+                    {
+                      "id": "0473389d-27b9-4ce7-ad8b-f86f6834281c",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timesheets/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timesheets",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-0473389d-27b9-4ce7-ad8b-f86f6834281c"
+                    },
+                    {
+                      "id": "0b1a8760-c015-4a12-9049-872d4fa0e889",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timesheets/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timesheets",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-0b1a8760-c015-4a12-9049-872d4fa0e889"
+                    },
+                    {
+                      "id": "d26677e6-b832-4d6d-b3f0-92307a48c7fc",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timesheets/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timesheets",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-d26677e6-b832-4d6d-b3f0-92307a48c7fc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-10f7b582-36f0-4d10-92e3-4ec45ec9f8d7"
+                }
+              ],
+              "id": "b4809071-e9c8-4541-b638-8d9d3992ef9f",
+              "createdAt": "2026-07-28T02:48:03.000Z",
+              "updatedAt": "2026-07-28T02:48:03.000Z",
+              "uid": "35240-b4809071-e9c8-4541-b638-8d9d3992ef9f"
+            },
+            {
+              "name": "{timesheet_id}",
+              "item": [
+                {
+                  "name": "approve",
+                  "item": [
+                    {
+                      "name": "Approve timesheet",
+                      "id": "03b511a1-9631-4727-8d61-bc8b59c52af6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/approve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timesheets",
+                            ":timesheet_id",
+                            "approve"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f22c83aa-18df-41c6-9479-2899720f17f6",
+                              "key": "timesheet_id",
+                              "value": "<string>",
+                              "description": "(Required) Timesheet ID"
+                            }
+                          ]
+                        },
+                        "description": "Approves the given timesheet.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "d1182e52-e5a8-4c53-ae9d-8473dd872e7c",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/approve",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "timesheets",
+                                ":timesheet_id",
+                                "approve"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "timesheet_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"timesheet\": {\n      \"id\": \"<uuid>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"status\": \"in_calibration\",\n      \"country_code\": \"<string>\",\n      \"employment_id\": \"<uuid>\",\n      \"submitted_at\": \"<string>\",\n      \"approval_required\": \"<boolean>\",\n      \"notes\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-d1182e52-e5a8-4c53-ae9d-8473dd872e7c"
+                        },
+                        {
+                          "id": "02995b0b-4d48-4a0b-baa8-f96673830da5",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/approve",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "timesheets",
+                                ":timesheet_id",
+                                "approve"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "timesheet_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-02995b0b-4d48-4a0b-baa8-f96673830da5"
+                        },
+                        {
+                          "id": "944788d7-f43a-4dfc-a6e7-11862a364814",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/approve",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "timesheets",
+                                ":timesheet_id",
+                                "approve"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "timesheet_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-944788d7-f43a-4dfc-a6e7-11862a364814"
+                        },
+                        {
+                          "id": "1aee40f7-b169-4d2f-a757-b16718b76162",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/approve",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "timesheets",
+                                ":timesheet_id",
+                                "approve"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "timesheet_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-1aee40f7-b169-4d2f-a757-b16718b76162"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-03b511a1-9631-4727-8d61-bc8b59c52af6"
+                    }
+                  ],
+                  "id": "90dbb747-18df-4f4a-ade8-a3a074e84c89",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-90dbb747-18df-4f4a-ade8-a3a074e84c89"
+                },
+                {
+                  "name": "send-back",
+                  "item": [
+                    {
+                      "name": "Send back a timesheet for review or modification",
+                      "id": "85adcc86-9c73-453d-8d27-5f996d57478e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"sent_back_reason\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/send-back",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timesheets",
+                            ":timesheet_id",
+                            "send-back"
+                          ],
+                          "variable": [
+                            {
+                              "id": "95a381c9-1e87-4605-a34a-c292ceba3d9b",
+                              "key": "timesheet_id",
+                              "value": "<string>",
+                              "description": "(Required) Timesheet ID"
+                            }
+                          ]
+                        },
+                        "description": "Sends the given timesheet back to the employee for review or modification.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "e5b7936a-4b10-432e-a768-04978e01cdda",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"sent_back_reason\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/send-back",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "timesheets",
+                                ":timesheet_id",
+                                "send-back"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "timesheet_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"timesheet\": {\n      \"id\": \"<uuid>\",\n      \"status\": \"open\",\n      \"sent_back\": \"<boolean>\",\n      \"sent_back_reason\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-e5b7936a-4b10-432e-a768-04978e01cdda"
+                        },
+                        {
+                          "id": "fe1c6289-0823-4a97-8ffe-d844542355da",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"sent_back_reason\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/send-back",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "timesheets",
+                                ":timesheet_id",
+                                "send-back"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "timesheet_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-fe1c6289-0823-4a97-8ffe-d844542355da"
+                        },
+                        {
+                          "id": "8c27aadb-fdf4-42ae-ade9-17c932f8a60e",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"sent_back_reason\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/send-back",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "timesheets",
+                                ":timesheet_id",
+                                "send-back"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "timesheet_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-8c27aadb-fdf4-42ae-ade9-17c932f8a60e"
+                        },
+                        {
+                          "id": "08a242b5-1cf7-444e-88dd-3a68e939c7ab",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"sent_back_reason\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/timesheets/:timesheet_id/send-back",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "timesheets",
+                                ":timesheet_id",
+                                "send-back"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "timesheet_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-08a242b5-1cf7-444e-88dd-3a68e939c7ab"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-85adcc86-9c73-453d-8d27-5f996d57478e"
+                    }
+                  ],
+                  "id": "01ca7694-d3d7-412d-bbfe-4c9579de904e",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-01ca7694-d3d7-412d-bbfe-4c9579de904e"
+                }
+              ],
+              "id": "6854386d-2180-4fe2-aa41-19ffe3776230",
+              "createdAt": "2026-07-28T02:48:03.000Z",
+              "updatedAt": "2026-07-28T02:48:03.000Z",
+              "uid": "35240-6854386d-2180-4fe2-aa41-19ffe3776230"
+            },
+            {
+              "name": "List timesheets",
+              "id": "53f82e97-b701-458c-ac2b-07c6d11c067d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/timesheets?status=submitted&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "timesheets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter timesheets by their status",
+                      "key": "status",
+                      "value": "submitted"
+                    },
+                    {
+                      "description": "Sort order",
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "description": "Field to sort by",
+                      "key": "sort_by",
+                      "value": "submitted_at"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "Lists all timesheets.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "e49692a9-c38c-4113-b966-f639a3116195",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/timesheets?status=submitted&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "timesheets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter timesheets by their status",
+                          "key": "status",
+                          "value": "submitted"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"timesheets\": [\n      {\n        \"id\": \"<uuid>\",\n        \"start_date\": \"<date>\",\n        \"end_date\": \"<date>\",\n        \"status\": \"submitted\",\n        \"country_code\": \"<string>\",\n        \"employment_id\": \"<uuid>\",\n        \"submitted_at\": \"<string>\",\n        \"approval_required\": \"<boolean>\",\n        \"notes\": \"<string>\",\n        \"regular_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"total_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"break_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"unpaid_break_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"overtime_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"holiday_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"weekend_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"night_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"on_call_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"time_trackings\": [\n          {\n            \"type\": \"public_holiday\",\n            \"notes\": \"<string>\",\n            \"timezone\": \"<string>\",\n            \"clock_in\": \"<dateTime>\",\n            \"clock_out\": \"<dateTime>\",\n            \"total_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"night_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"weekend_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"holiday_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"has_night_hours\": \"<boolean>\",\n            \"has_weekend_hours\": \"<boolean>\",\n            \"has_holiday_hours\": \"<boolean>\",\n            \"time_breakdown\": {\n              \"day\": {\n                \"regular\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"weekend\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"holiday\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                }\n              },\n              \"night\": {\n                \"regular\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"weekend\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"holiday\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                }\n              }\n            }\n          },\n          {\n            \"type\": \"time_off\",\n            \"notes\": \"<string>\",\n            \"timezone\": \"<string>\",\n            \"clock_in\": \"<dateTime>\",\n            \"clock_out\": \"<dateTime>\",\n            \"total_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"night_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"weekend_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"holiday_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"has_night_hours\": \"<boolean>\",\n            \"has_weekend_hours\": \"<boolean>\",\n            \"has_holiday_hours\": \"<boolean>\",\n            \"time_breakdown\": {\n              \"day\": {\n                \"regular\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"weekend\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"holiday\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                }\n              },\n              \"night\": {\n                \"regular\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"weekend\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"holiday\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                }\n              }\n            }\n          }\n        ],\n        \"timeoff_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        }\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"start_date\": \"<date>\",\n        \"end_date\": \"<date>\",\n        \"status\": \"open\",\n        \"country_code\": \"<string>\",\n        \"employment_id\": \"<uuid>\",\n        \"submitted_at\": \"<string>\",\n        \"approval_required\": \"<boolean>\",\n        \"notes\": \"<string>\",\n        \"regular_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"total_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"break_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"unpaid_break_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"overtime_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"holiday_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"weekend_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"night_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"on_call_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        },\n        \"time_trackings\": [\n          {\n            \"type\": \"unpaid_break\",\n            \"notes\": \"<string>\",\n            \"timezone\": \"<string>\",\n            \"clock_in\": \"<dateTime>\",\n            \"clock_out\": \"<dateTime>\",\n            \"total_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"night_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"weekend_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"holiday_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"has_night_hours\": \"<boolean>\",\n            \"has_weekend_hours\": \"<boolean>\",\n            \"has_holiday_hours\": \"<boolean>\",\n            \"time_breakdown\": {\n              \"day\": {\n                \"regular\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"weekend\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"holiday\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                }\n              },\n              \"night\": {\n                \"regular\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"weekend\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"holiday\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                }\n              }\n            }\n          },\n          {\n            \"type\": \"break\",\n            \"notes\": \"<string>\",\n            \"timezone\": \"<string>\",\n            \"clock_in\": \"<dateTime>\",\n            \"clock_out\": \"<dateTime>\",\n            \"total_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"night_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"weekend_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"holiday_hours\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"has_night_hours\": \"<boolean>\",\n            \"has_weekend_hours\": \"<boolean>\",\n            \"has_holiday_hours\": \"<boolean>\",\n            \"time_breakdown\": {\n              \"day\": {\n                \"regular\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"weekend\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"holiday\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                }\n              },\n              \"night\": {\n                \"regular\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"weekend\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                },\n                \"holiday\": {\n                  \"hours\": \"<integer>\",\n                  \"minutes\": \"<integer>\"\n                }\n              }\n            }\n          }\n        ],\n        \"timeoff_hours\": {\n          \"hours\": \"<integer>\",\n          \"minutes\": \"<integer>\"\n        }\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-e49692a9-c38c-4113-b966-f639a3116195"
+                },
+                {
+                  "id": "c2d0afec-4e04-46e6-ae81-1cf1704dbc78",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/timesheets?status=submitted&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "timesheets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter timesheets by their status",
+                          "key": "status",
+                          "value": "submitted"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-c2d0afec-4e04-46e6-ae81-1cf1704dbc78"
+                },
+                {
+                  "id": "9a1d3141-3c6a-408f-89a9-a73f523622e8",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/timesheets?status=submitted&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "timesheets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter timesheets by their status",
+                          "key": "status",
+                          "value": "submitted"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-9a1d3141-3c6a-408f-89a9-a73f523622e8"
+                },
+                {
+                  "id": "b7e9808e-5eb6-4edf-877a-765a2ace624c",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/timesheets?status=submitted&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "timesheets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter timesheets by their status",
+                          "key": "status",
+                          "value": "submitted"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-b7e9808e-5eb6-4edf-877a-765a2ace624c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:03.000Z",
+              "updatedAt": "2026-07-28T02:48:03.000Z",
+              "uid": "35240-53f82e97-b701-458c-ac2b-07c6d11c067d"
+            }
+          ],
+          "id": "4cb3ed04-5fde-4a73-89ba-e2a185ddde3e",
+          "createdAt": "2026-07-28T02:48:03.000Z",
+          "updatedAt": "2026-07-28T02:48:03.000Z",
+          "uid": "35240-4cb3ed04-5fde-4a73-89ba-e2a185ddde3e"
+        },
+        {
+          "name": "contractors",
+          "item": [
+            {
+              "name": "employments",
+              "item": [
+                {
+                  "name": "{employment_id}",
+                  "item": [
+                    {
+                      "name": "timesheets",
+                      "item": [
+                        {
+                          "name": "Create a contractor timesheet",
+                          "id": "5275c9e0-5c1c-430d-a850-519f1015efc0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"time_trackings\": [\n    {\n      \"type\": \"break\",\n      \"timezone\": \"<string>\",\n      \"clock_in\": \"<dateTime>\",\n      \"clock_out\": \"<dateTime>\",\n      \"notes\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/timesheets",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "contractors",
+                                "employments",
+                                ":employment_id",
+                                "timesheets"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "07f5ae91-3c42-4250-8e4e-ec9c7179e652",
+                                  "key": "employment_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Contractor employment ID"
+                                }
+                              ]
+                            },
+                            "description": "Creates a timesheet on behalf of a contractor employment.\n\nThe submitted hours are immediately available to the contractor in the Remote UI for\nself-serve invoice creation (Invoices \u2192 Create invoice \u2192 \"Use Time Tracking\").\n\nThis endpoint is restricted to contractor employments. Calls against EOR or Global Payroll\nemployments are rejected with `422`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timesheets (`timesheet:write`) |\n"
+                          },
+                          "response": [
+                            {
+                              "id": "466123eb-4f0c-432a-94f9-5b20add25c88",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"time_trackings\": [\n    {\n      \"type\": \"break\",\n      \"timezone\": \"<string>\",\n      \"clock_in\": \"<dateTime>\",\n      \"clock_out\": \"<dateTime>\",\n      \"notes\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/timesheets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "timesheets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"timesheet\": {\n      \"id\": \"<uuid>\",\n      \"employment_id\": \"<uuid>\",\n      \"country_code\": \"<string>\",\n      \"start_date\": \"<date>\",\n      \"end_date\": \"<date>\",\n      \"submitted_at\": \"<string>\",\n      \"notes\": \"<string>\",\n      \"total_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"regular_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"on_call_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"break_hours\": {\n        \"hours\": \"<integer>\",\n        \"minutes\": \"<integer>\"\n      },\n      \"time_trackings\": [\n        {\n          \"type\": \"regular_hours\",\n          \"notes\": \"<string>\",\n          \"timezone\": \"<string>\",\n          \"clock_in\": \"<dateTime>\",\n          \"clock_out\": \"<dateTime>\",\n          \"total_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          }\n        },\n        {\n          \"type\": \"break\",\n          \"notes\": \"<string>\",\n          \"timezone\": \"<string>\",\n          \"clock_in\": \"<dateTime>\",\n          \"clock_out\": \"<dateTime>\",\n          \"total_hours\": {\n            \"hours\": \"<integer>\",\n            \"minutes\": \"<integer>\"\n          }\n        }\n      ]\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:48:03.000Z",
+                              "updatedAt": "2026-07-28T02:48:03.000Z",
+                              "uid": "35240-466123eb-4f0c-432a-94f9-5b20add25c88"
+                            },
+                            {
+                              "id": "d0dd2c71-0bba-446d-a406-f274e2e910ff",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"time_trackings\": [\n    {\n      \"type\": \"break\",\n      \"timezone\": \"<string>\",\n      \"clock_in\": \"<dateTime>\",\n      \"clock_out\": \"<dateTime>\",\n      \"notes\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/timesheets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "timesheets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T02:48:03.000Z",
+                              "updatedAt": "2026-07-28T02:48:03.000Z",
+                              "uid": "35240-d0dd2c71-0bba-446d-a406-f274e2e910ff"
+                            },
+                            {
+                              "id": "b2cdb12c-dd27-4105-ab78-88d71e8a91ff",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"time_trackings\": [\n    {\n      \"type\": \"break\",\n      \"timezone\": \"<string>\",\n      \"clock_in\": \"<dateTime>\",\n      \"clock_out\": \"<dateTime>\",\n      \"notes\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/timesheets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "timesheets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                              "createdAt": "2026-07-28T02:48:03.000Z",
+                              "updatedAt": "2026-07-28T02:48:03.000Z",
+                              "uid": "35240-b2cdb12c-dd27-4105-ab78-88d71e8a91ff"
+                            },
+                            {
+                              "id": "ab44a217-d9d9-440a-b615-236693b43148",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"time_trackings\": [\n    {\n      \"type\": \"break\",\n      \"timezone\": \"<string>\",\n      \"clock_in\": \"<dateTime>\",\n      \"clock_out\": \"<dateTime>\",\n      \"notes\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/timesheets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "timesheets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Forbidden\"\n}",
+                              "createdAt": "2026-07-28T02:48:03.000Z",
+                              "updatedAt": "2026-07-28T02:48:03.000Z",
+                              "uid": "35240-ab44a217-d9d9-440a-b615-236693b43148"
+                            },
+                            {
+                              "id": "7346b377-5821-4499-a096-0cd63ae4c2ae",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"time_trackings\": [\n    {\n      \"type\": \"break\",\n      \"timezone\": \"<string>\",\n      \"clock_in\": \"<dateTime>\",\n      \"clock_out\": \"<dateTime>\",\n      \"notes\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/timesheets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "timesheets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Not Found\"\n}",
+                              "createdAt": "2026-07-28T02:48:03.000Z",
+                              "updatedAt": "2026-07-28T02:48:03.000Z",
+                              "uid": "35240-7346b377-5821-4499-a096-0cd63ae4c2ae"
+                            },
+                            {
+                              "id": "b03a84c4-4708-4079-a00f-58762a970eae",
+                              "name": "Unprocessable Entity",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"time_trackings\": [\n    {\n      \"type\": \"break\",\n      \"timezone\": \"<string>\",\n      \"clock_in\": \"<dateTime>\",\n      \"clock_out\": \"<dateTime>\",\n      \"notes\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/timesheets",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "timesheets"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": {}\n}",
+                              "createdAt": "2026-07-28T02:48:03.000Z",
+                              "updatedAt": "2026-07-28T02:48:03.000Z",
+                              "uid": "35240-b03a84c4-4708-4079-a00f-58762a970eae"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:48:03.000Z",
+                          "updatedAt": "2026-07-28T02:48:03.000Z",
+                          "uid": "35240-5275c9e0-5c1c-430d-a850-519f1015efc0"
+                        }
+                      ],
+                      "id": "5a35aa35-f35e-4f2b-a3f0-fcdf93fc4faf",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-5a35aa35-f35e-4f2b-a3f0-fcdf93fc4faf"
+                    }
+                  ],
+                  "id": "c10a8743-139a-4f05-a4fd-e7aedbd56e9d",
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-c10a8743-139a-4f05-a4fd-e7aedbd56e9d"
+                }
+              ],
+              "id": "b612169b-6531-4ebc-bed6-2fa1e2ff67ab",
+              "createdAt": "2026-07-28T02:48:03.000Z",
+              "updatedAt": "2026-07-28T02:48:03.000Z",
+              "uid": "35240-b612169b-6531-4ebc-bed6-2fa1e2ff67ab"
+            }
+          ],
+          "id": "deb29c2f-2b20-46f8-9723-14f6f5a8ea6f",
+          "createdAt": "2026-07-28T02:48:03.000Z",
+          "updatedAt": "2026-07-28T02:48:03.000Z",
+          "uid": "35240-deb29c2f-2b20-46f8-9723-14f6f5a8ea6f"
+        },
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "timesheets",
+              "item": [
+                {
+                  "name": "List timesheets for the authenticated employee",
+                  "id": "e3356f96-171e-4e85-8da2-573ac97a61bc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/timesheets?page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "timesheets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    },
+                    "description": "Returns a paginated list of timesheets for the authenticated employee.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timesheets (`timesheet:read`) | Manage timesheets (`timesheet:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "ff5b8b98-96e1-407a-9ab9-ab975d9ac6c6",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timesheets?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timesheets"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"status\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-ff5b8b98-96e1-407a-9ab9-ab975d9ac6c6"
+                    },
+                    {
+                      "id": "c0d194e5-bf7b-40cf-86fd-bee4787652d4",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timesheets?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timesheets"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-c0d194e5-bf7b-40cf-86fd-bee4787652d4"
+                    },
+                    {
+                      "id": "3496422e-29aa-44d6-8b66-8180e9731045",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timesheets?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timesheets"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-3496422e-29aa-44d6-8b66-8180e9731045"
+                    },
+                    {
+                      "id": "3d6885ee-9bd8-48bc-b205-45f1892a5157",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/timesheets?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "timesheets"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:48:03.000Z",
+                      "updatedAt": "2026-07-28T02:48:03.000Z",
+                      "uid": "35240-3d6885ee-9bd8-48bc-b205-45f1892a5157"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:03.000Z",
+                  "updatedAt": "2026-07-28T02:48:03.000Z",
+                  "uid": "35240-e3356f96-171e-4e85-8da2-573ac97a61bc"
+                }
+              ],
+              "id": "1d86ed9f-044c-44ff-8685-a6d493903657",
+              "createdAt": "2026-07-28T02:48:03.000Z",
+              "updatedAt": "2026-07-28T02:48:03.000Z",
+              "uid": "35240-1d86ed9f-044c-44ff-8685-a6d493903657"
+            }
+          ],
+          "id": "356b84ab-1d78-4b04-aac1-b1e6b3f5a58e",
+          "createdAt": "2026-07-28T02:48:03.000Z",
+          "updatedAt": "2026-07-28T02:48:03.000Z",
+          "uid": "35240-356b84ab-1d78-4b04-aac1-b1e6b3f5a58e"
+        }
+      ],
+      "id": "2580b720-e800-4219-a180-7f6c6370400e",
+      "createdAt": "2026-07-28T02:48:03.000Z",
+      "updatedAt": "2026-07-28T02:48:03.000Z",
+      "uid": "35240-2580b720-e800-4219-a180-7f6c6370400e"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

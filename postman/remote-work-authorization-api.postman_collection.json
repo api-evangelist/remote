@@ -1,0 +1,1222 @@
+{
+  "info": {
+    "_postman_id": "ec174421-a9ad-43c3-a1f9-6d5857b84f6e",
+    "name": "Remote Address Details Work Authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:07.000Z",
+    "updatedAt": "2026-07-28T02:48:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ec174421-a9ad-43c3-a1f9-6d5857b84f6e"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "work-authorization-requests",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Show work authorization request",
+                  "id": "e0f5da06-977f-44d6-b663-0b32e8197270",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "work-authorization-requests",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "93499e4f-9e95-4c1f-ac0d-b2985cd15818",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) work authorization request ID"
+                        }
+                      ]
+                    },
+                    "description": "Show a single work authorization request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View work authorizations (`work_authorization:read`) | Manage work authorizations (`work_authorization:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "bc53aee3-c7c3-44b9-8de8-d9fe1e4947b2",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"work_authorization_request\": {\n      \"additional_information\": \"<string>\",\n      \"destination_country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"cor\",\n          \"plus\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"employer_approver\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"employer_special_instructions\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"reason\": \"<string>\",\n      \"status\": \"approved_by_remote\",\n      \"submitted_at\": \"<dateTime>\",\n      \"travel_date_end\": \"<date>\",\n      \"travel_date_start\": \"<date>\",\n      \"travel_document_number\": \"<string>\",\n      \"user\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"will_negotiate_or_sign_contracts\": \"<boolean>\",\n      \"work_location\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-bc53aee3-c7c3-44b9-8de8-d9fe1e4947b2"
+                    },
+                    {
+                      "id": "cbdbdc3d-f433-4b0b-bb58-ed2eb400d2f6",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-cbdbdc3d-f433-4b0b-bb58-ed2eb400d2f6"
+                    },
+                    {
+                      "id": "ced0c95a-bf44-4408-a03f-343c41aea14e",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-ced0c95a-bf44-4408-a03f-343c41aea14e"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:07.000Z",
+                  "updatedAt": "2026-07-28T02:48:07.000Z",
+                  "uid": "35240-e0f5da06-977f-44d6-b663-0b32e8197270"
+                },
+                {
+                  "name": "Update work authorization request",
+                  "id": "03f5ac54-22d5-4406-82c8-dc3eb69c3084",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "work-authorization-requests",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2e6369cf-942e-47db-9707-3231c1b7ca03",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) work authorization request ID"
+                        }
+                      ]
+                    },
+                    "description": "Updates a work authorization request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage work authorizations (`work_authorization:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "da175ae2-0910-4423-8ba0-adea46102739",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"work_authorization_request\": {\n      \"additional_information\": \"<string>\",\n      \"destination_country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"cor\",\n          \"plus\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"employer_approver\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"employer_special_instructions\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"reason\": \"<string>\",\n      \"status\": \"approved_by_remote\",\n      \"submitted_at\": \"<dateTime>\",\n      \"travel_date_end\": \"<date>\",\n      \"travel_date_start\": \"<date>\",\n      \"travel_document_number\": \"<string>\",\n      \"user\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"will_negotiate_or_sign_contracts\": \"<boolean>\",\n      \"work_location\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-da175ae2-0910-4423-8ba0-adea46102739"
+                    },
+                    {
+                      "id": "56555648-f03a-4627-802c-5da573e772ea",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-56555648-f03a-4627-802c-5da573e772ea"
+                    },
+                    {
+                      "id": "803796c7-b221-4db7-b850-2068c7b8740d",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-803796c7-b221-4db7-b850-2068c7b8740d"
+                    },
+                    {
+                      "id": "49f7b9e4-f3ca-42e4-9f62-d6431f343670",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-49f7b9e4-f3ca-42e4-9f62-d6431f343670"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:07.000Z",
+                  "updatedAt": "2026-07-28T02:48:07.000Z",
+                  "uid": "35240-03f5ac54-22d5-4406-82c8-dc3eb69c3084"
+                },
+                {
+                  "name": "Update work authorization request",
+                  "id": "76570439-975a-407d-b688-00bd40d93724",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "work-authorization-requests",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4376e118-1566-4d58-a0f5-9bc70a9cec44",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) work authorization request ID"
+                        }
+                      ]
+                    },
+                    "description": "Updates a work authorization request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage work authorizations (`work_authorization:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "3386d57a-ef0f-419f-861d-13d300c29929",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"work_authorization_request\": {\n      \"additional_information\": \"<string>\",\n      \"destination_country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"cor\",\n          \"plus\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"employer_approver\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"employer_special_instructions\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"reason\": \"<string>\",\n      \"status\": \"approved_by_remote\",\n      \"submitted_at\": \"<dateTime>\",\n      \"travel_date_end\": \"<date>\",\n      \"travel_date_start\": \"<date>\",\n      \"travel_document_number\": \"<string>\",\n      \"user\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"will_negotiate_or_sign_contracts\": \"<boolean>\",\n      \"work_location\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-3386d57a-ef0f-419f-861d-13d300c29929"
+                    },
+                    {
+                      "id": "4c42dd53-b548-4f0c-9e0d-f30659d48ef0",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-4c42dd53-b548-4f0c-9e0d-f30659d48ef0"
+                    },
+                    {
+                      "id": "b8d2a7de-3cb9-4452-87c3-f1c15f495753",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-b8d2a7de-3cb9-4452-87c3-f1c15f495753"
+                    },
+                    {
+                      "id": "bfb619e9-828b-4581-8b2b-fcb6ce758d18",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/work-authorization-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "work-authorization-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:48:07.000Z",
+                      "updatedAt": "2026-07-28T02:48:07.000Z",
+                      "uid": "35240-bfb619e9-828b-4581-8b2b-fcb6ce758d18"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:07.000Z",
+                  "updatedAt": "2026-07-28T02:48:07.000Z",
+                  "uid": "35240-76570439-975a-407d-b688-00bd40d93724"
+                }
+              ],
+              "id": "8b2c4f6b-c0fb-4777-9bcf-499e46310ae9",
+              "createdAt": "2026-07-28T02:48:07.000Z",
+              "updatedAt": "2026-07-28T02:48:07.000Z",
+              "uid": "35240-8b2c4f6b-c0fb-4777-9bcf-499e46310ae9"
+            },
+            {
+              "name": "List work authorization requests",
+              "id": "51af76f3-2121-46df-84ba-bd5de9e1e3be",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/work-authorization-requests?status=approved_by_manager&employment_id=<string>&employee_name=<string>&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "work-authorization-requests"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results on the given status",
+                      "key": "status",
+                      "value": "approved_by_manager"
+                    },
+                    {
+                      "description": "Filter results on the given employment slug",
+                      "key": "employment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results on the given employee name",
+                      "key": "employee_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort order",
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "description": "Field to sort by",
+                      "key": "sort_by",
+                      "value": "submitted_at"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "List work authorization requests.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View work authorizations (`work_authorization:read`) | Manage work authorizations (`work_authorization:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "364c931e-e749-4e19-942c-e9cdb2aaf000",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/work-authorization-requests?status=approved_by_manager&employment_id=<string>&employee_name=<string>&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "work-authorization-requests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results on the given status",
+                          "key": "status",
+                          "value": "approved_by_manager"
+                        },
+                        {
+                          "description": "Filter results on the given employment slug",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter results on the given employee name",
+                          "key": "employee_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\",\n    \"work_authorization_requests\": [\n      {\n        \"additional_information\": \"<string>\",\n        \"destination_country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"standard\",\n            \"standard\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"employer_approver\": {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"id\": \"<uuid>\"\n        },\n        \"employer_special_instructions\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"reason\": \"<string>\",\n        \"status\": \"declined_by_manager\",\n        \"submitted_at\": \"<dateTime>\",\n        \"travel_date_end\": \"<date>\",\n        \"travel_date_start\": \"<date>\",\n        \"travel_document_number\": \"<string>\",\n        \"user\": {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"id\": \"<uuid>\"\n        },\n        \"will_negotiate_or_sign_contracts\": \"<boolean>\",\n        \"work_location\": \"<string>\"\n      },\n      {\n        \"additional_information\": \"<string>\",\n        \"destination_country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"plus\",\n            \"plus\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"employer_approver\": {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"id\": \"<uuid>\"\n        },\n        \"employer_special_instructions\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"reason\": \"<string>\",\n        \"status\": \"approved_by_remote\",\n        \"submitted_at\": \"<dateTime>\",\n        \"travel_date_end\": \"<date>\",\n        \"travel_date_start\": \"<date>\",\n        \"travel_document_number\": \"<string>\",\n        \"user\": {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"id\": \"<uuid>\"\n        },\n        \"will_negotiate_or_sign_contracts\": \"<boolean>\",\n        \"work_location\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:48:07.000Z",
+                  "updatedAt": "2026-07-28T02:48:07.000Z",
+                  "uid": "35240-364c931e-e749-4e19-942c-e9cdb2aaf000"
+                },
+                {
+                  "id": "5ccc4f63-04c1-4062-8837-ce599cc83a90",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/work-authorization-requests?status=approved_by_manager&employment_id=<string>&employee_name=<string>&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "work-authorization-requests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results on the given status",
+                          "key": "status",
+                          "value": "approved_by_manager"
+                        },
+                        {
+                          "description": "Filter results on the given employment slug",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter results on the given employee name",
+                          "key": "employee_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:48:07.000Z",
+                  "updatedAt": "2026-07-28T02:48:07.000Z",
+                  "uid": "35240-5ccc4f63-04c1-4062-8837-ce599cc83a90"
+                },
+                {
+                  "id": "6ea0a090-8b60-49fa-a7ae-00512d50534c",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/work-authorization-requests?status=approved_by_manager&employment_id=<string>&employee_name=<string>&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "work-authorization-requests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results on the given status",
+                          "key": "status",
+                          "value": "approved_by_manager"
+                        },
+                        {
+                          "description": "Filter results on the given employment slug",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter results on the given employee name",
+                          "key": "employee_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:48:07.000Z",
+                  "updatedAt": "2026-07-28T02:48:07.000Z",
+                  "uid": "35240-6ea0a090-8b60-49fa-a7ae-00512d50534c"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:07.000Z",
+              "updatedAt": "2026-07-28T02:48:07.000Z",
+              "uid": "35240-51af76f3-2121-46df-84ba-bd5de9e1e3be"
+            }
+          ],
+          "id": "044f777e-3db6-4e0f-bed0-585d79552fa3",
+          "createdAt": "2026-07-28T02:48:07.000Z",
+          "updatedAt": "2026-07-28T02:48:07.000Z",
+          "uid": "35240-044f777e-3db6-4e0f-bed0-585d79552fa3"
+        }
+      ],
+      "id": "7caf7817-9a5f-49c7-90e7-6d460814e200",
+      "createdAt": "2026-07-28T02:48:07.000Z",
+      "updatedAt": "2026-07-28T02:48:07.000Z",
+      "uid": "35240-7caf7817-9a5f-49c7-90e7-6d460814e200"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

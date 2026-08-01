@@ -1,0 +1,966 @@
+{
+  "info": {
+    "_postman_id": "e06eb803-fd02-425e-8591-4d0b6ff55184",
+    "name": "Remote Address Details Employee Address API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:39.000Z",
+    "updatedAt": "2026-07-28T02:45:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e06eb803-fd02-425e-8591-4d0b6ff55184"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "address",
+              "item": [
+                {
+                  "name": "Show employee address",
+                  "id": "8a6d0f39-2186-4cce-9f9a-db261551fd91",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "address"
+                      ],
+                      "query": [
+                        {
+                          "description": "Version of the address_details form schema",
+                          "key": "address_details_json_schema_version",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Returns the authenticated employee's residential address.\n\nThe employment is derived from the access token's subject \u2014 there is no\nemployment id in the path.\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `address_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View addresses (`address:read`) | Manage addresses (`address:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "2404505b-4d75-421c-a684-1ca7621d186f",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"archived\",\n      \"type\": \"direct_employee\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"created\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"provided_by_customer\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-2404505b-4d75-421c-a684-1ca7621d186f"
+                    },
+                    {
+                      "id": "247b94f2-0730-41d3-912b-2b4606ffb39d",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-247b94f2-0730-41d3-912b-2b4606ffb39d"
+                    },
+                    {
+                      "id": "5b9418e0-5efd-4114-8e62-b977229bb363",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-5b9418e0-5efd-4114-8e62-b977229bb363"
+                    },
+                    {
+                      "id": "e2dca203-7778-42bb-a752-35828c1311ce",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-e2dca203-7778-42bb-a752-35828c1311ce"
+                    },
+                    {
+                      "id": "e5610b0a-b70c-4529-bb1b-d96fcf2440da",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-e5610b0a-b70c-4529-bb1b-d96fcf2440da"
+                    },
+                    {
+                      "id": "c166b0ee-859a-40ec-95c0-b9e065321265",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-c166b0ee-859a-40ec-95c0-b9e065321265"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:39.000Z",
+                  "updatedAt": "2026-07-28T02:45:39.000Z",
+                  "uid": "35240-8a6d0f39-2186-4cce-9f9a-db261551fd91"
+                },
+                {
+                  "name": "Update employee address",
+                  "id": "d1e3dcd6-d33e-4af4-8bca-30d9b98158ee",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"address_details\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "address"
+                      ],
+                      "query": [
+                        {
+                          "description": "Version of the address_details form schema",
+                          "key": "address_details_json_schema_version",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "description": "Updates the authenticated employee's residential address.\n\nThe employment is derived from the access token's subject \u2014 there is no\nemployment id in the path. The token must be an employee-role token\n(typically obtained via the OAuth2 assertion grant with subject\n`urn:remote-api:employee:employment:<employment_id>`).\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `address_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage addresses (`address:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "43f693f4-ffda-412b-9823-a94a1fb743c9",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"address_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"archived\",\n      \"type\": \"direct_employee\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"created\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"provided_by_customer\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-43f693f4-ffda-412b-9823-a94a1fb743c9"
+                    },
+                    {
+                      "id": "e9c8c77b-8096-4343-ae17-041e52f6b3a3",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"address_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-e9c8c77b-8096-4343-ae17-041e52f6b3a3"
+                    },
+                    {
+                      "id": "3baf4f8f-34b0-4ce0-99a0-13a318af1112",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"address_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-3baf4f8f-34b0-4ce0-99a0-13a318af1112"
+                    },
+                    {
+                      "id": "07e1487e-d807-4ad3-b50a-11b550ac6392",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"address_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-07e1487e-d807-4ad3-b50a-11b550ac6392"
+                    },
+                    {
+                      "id": "b67ea9b3-2ac1-4f06-a0ad-3e47fe704ff1",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"address_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-b67ea9b3-2ac1-4f06-a0ad-3e47fe704ff1"
+                    },
+                    {
+                      "id": "c8c8c0c3-0592-4c44-ba2b-a5b81d106fb4",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"address_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-c8c8c0c3-0592-4c44-ba2b-a5b81d106fb4"
+                    },
+                    {
+                      "id": "0f9cadd9-0a58-4de4-949e-8329d08cb12b",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"address_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/address?address_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "address"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the address_details form schema",
+                              "key": "address_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:40.000Z",
+                      "updatedAt": "2026-07-28T02:45:40.000Z",
+                      "uid": "35240-0f9cadd9-0a58-4de4-949e-8329d08cb12b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:39.000Z",
+                  "updatedAt": "2026-07-28T02:45:39.000Z",
+                  "uid": "35240-d1e3dcd6-d33e-4af4-8bca-30d9b98158ee"
+                }
+              ],
+              "id": "dddd14dc-4ba0-4425-853d-949890e106e7",
+              "createdAt": "2026-07-28T02:45:39.000Z",
+              "updatedAt": "2026-07-28T02:45:39.000Z",
+              "uid": "35240-dddd14dc-4ba0-4425-853d-949890e106e7"
+            }
+          ],
+          "id": "8feae68e-d7ff-48bd-bb42-98ce480217ad",
+          "createdAt": "2026-07-28T02:45:39.000Z",
+          "updatedAt": "2026-07-28T02:45:39.000Z",
+          "uid": "35240-8feae68e-d7ff-48bd-bb42-98ce480217ad"
+        }
+      ],
+      "id": "31a85e90-9aec-49e6-b388-e123dca3e068",
+      "createdAt": "2026-07-28T02:45:39.000Z",
+      "updatedAt": "2026-07-28T02:45:39.000Z",
+      "uid": "35240-31a85e90-9aec-49e6-b388-e123dca3e068"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

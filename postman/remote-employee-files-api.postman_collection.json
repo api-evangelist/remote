@@ -1,0 +1,571 @@
+{
+  "info": {
+    "_postman_id": "3f018ba4-12eb-4ed6-8100-64740c832b6d",
+    "name": "Remote Address Details Employee Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:52.000Z",
+    "updatedAt": "2026-07-28T02:45:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3f018ba4-12eb-4ed6-8100-64740c832b6d"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "documents",
+              "item": [
+                {
+                  "name": "Upload employee file",
+                  "id": "aeb7415c-b127-4777-82eb-63299a9e5ab9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file content, base64-encoded.",
+                          "key": "file",
+                          "type": "file",
+                          "value": null
+                        },
+                        {
+                          "description": "A more specific classification within the type.",
+                          "key": "sub_type",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The broad category of the file (e.g., \"id\", \"tax_form\").",
+                          "key": "type",
+                          "value": "<string>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/documents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "documents"
+                      ]
+                    },
+                    "description": "Uploads a file owned by the authenticated employee, for example\nidentity documents or tax forms.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "637cb46e-cbf1-404b-828c-299cb03793b5",
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file content, base64-encoded.",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "A more specific classification within the type.",
+                              "key": "sub_type",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "The broad category of the file (e.g., \"id\", \"tax_form\").",
+                              "key": "type",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"file\": {\n      \"id\": \"<string>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"sub_type\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:52.000Z",
+                      "updatedAt": "2026-07-28T02:45:52.000Z",
+                      "uid": "35240-637cb46e-cbf1-404b-828c-299cb03793b5"
+                    },
+                    {
+                      "id": "1ab4f938-dbeb-4b52-9037-e102c00d5a3c",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file content, base64-encoded.",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "A more specific classification within the type.",
+                              "key": "sub_type",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "The broad category of the file (e.g., \"id\", \"tax_form\").",
+                              "key": "type",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:52.000Z",
+                      "updatedAt": "2026-07-28T02:45:52.000Z",
+                      "uid": "35240-1ab4f938-dbeb-4b52-9037-e102c00d5a3c"
+                    },
+                    {
+                      "id": "a649ce1f-5c7a-46ef-9147-2c7c9b7de7fc",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file content, base64-encoded.",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "A more specific classification within the type.",
+                              "key": "sub_type",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "The broad category of the file (e.g., \"id\", \"tax_form\").",
+                              "key": "type",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:52.000Z",
+                      "updatedAt": "2026-07-28T02:45:52.000Z",
+                      "uid": "35240-a649ce1f-5c7a-46ef-9147-2c7c9b7de7fc"
+                    },
+                    {
+                      "id": "5c633b87-ba9a-439c-b810-821059e1f0c3",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file content, base64-encoded.",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "A more specific classification within the type.",
+                              "key": "sub_type",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "The broad category of the file (e.g., \"id\", \"tax_form\").",
+                              "key": "type",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:52.000Z",
+                      "updatedAt": "2026-07-28T02:45:52.000Z",
+                      "uid": "35240-5c633b87-ba9a-439c-b810-821059e1f0c3"
+                    },
+                    {
+                      "id": "0ac31264-b50a-486f-88e5-de128cf6aec1",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file content, base64-encoded.",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "A more specific classification within the type.",
+                              "key": "sub_type",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "The broad category of the file (e.g., \"id\", \"tax_form\").",
+                              "key": "type",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:52.000Z",
+                      "updatedAt": "2026-07-28T02:45:52.000Z",
+                      "uid": "35240-0ac31264-b50a-486f-88e5-de128cf6aec1"
+                    },
+                    {
+                      "id": "7f7b70ae-d3d9-44e6-87a9-538e43143c63",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file content, base64-encoded.",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "A more specific classification within the type.",
+                              "key": "sub_type",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "The broad category of the file (e.g., \"id\", \"tax_form\").",
+                              "key": "type",
+                              "value": "<string>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:52.000Z",
+                      "updatedAt": "2026-07-28T02:45:52.000Z",
+                      "uid": "35240-7f7b70ae-d3d9-44e6-87a9-538e43143c63"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:52.000Z",
+                  "updatedAt": "2026-07-28T02:45:52.000Z",
+                  "uid": "35240-aeb7415c-b127-4777-82eb-63299a9e5ab9"
+                }
+              ],
+              "id": "ce908867-639b-4957-a96f-e1682279f510",
+              "createdAt": "2026-07-28T02:45:52.000Z",
+              "updatedAt": "2026-07-28T02:45:52.000Z",
+              "uid": "35240-ce908867-639b-4957-a96f-e1682279f510"
+            }
+          ],
+          "id": "7713d167-10b1-4c67-b1ca-937cc7b26a5f",
+          "createdAt": "2026-07-28T02:45:52.000Z",
+          "updatedAt": "2026-07-28T02:45:52.000Z",
+          "uid": "35240-7713d167-10b1-4c67-b1ca-937cc7b26a5f"
+        }
+      ],
+      "id": "c5d43702-b06b-4838-b8a6-c29e4235638b",
+      "createdAt": "2026-07-28T02:45:52.000Z",
+      "updatedAt": "2026-07-28T02:45:52.000Z",
+      "uid": "35240-c5d43702-b06b-4838-b8a6-c29e4235638b"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

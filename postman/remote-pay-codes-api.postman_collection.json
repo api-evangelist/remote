@@ -1,0 +1,458 @@
+{
+  "info": {
+    "_postman_id": "37ab6954-a703-4d02-be15-cfb62235a862",
+    "name": "Remote Address Details Pay Codes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:46:58.000Z",
+    "updatedAt": "2026-07-28T02:46:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-37ab6954-a703-4d02-be15-cfb62235a862"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "companies",
+          "item": [
+            {
+              "name": "{company_id}",
+              "item": [
+                {
+                  "name": "legal-entities",
+                  "item": [
+                    {
+                      "name": "{legal_entity_id}",
+                      "item": [
+                        {
+                          "name": "pay-codes",
+                          "item": [
+                            {
+                              "name": "List Pay Codes",
+                              "id": "d23e1b45-c3bb-4394-8f83-39c620874b17",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "oauth2",
+                                  "oauth2": [
+                                    {
+                                      "key": "scope",
+                                      "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "redirect_uri",
+                                      "value": "/auth/oauth2/token",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "accessTokenUrl",
+                                      "value": "/auth/oauth2/token",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "authUrl",
+                                      "value": "/auth/oauth2/authorize",
+                                      "type": "string"
+                                    },
+                                    {
+                                      "key": "grant_type",
+                                      "value": "authorization_code",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes?page=1&page_size=20",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "companies",
+                                    ":company_id",
+                                    "legal-entities",
+                                    ":legal_entity_id",
+                                    "pay-codes"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Starts fetching records after the given page",
+                                      "key": "page",
+                                      "value": "1"
+                                    },
+                                    {
+                                      "description": "Number of items per page",
+                                      "key": "page_size",
+                                      "value": "20"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "20e7c0b2-cd54-46ce-8424-15451ae45ba9",
+                                      "key": "company_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Company ID"
+                                    },
+                                    {
+                                      "id": "2f80b09a-e3bd-46ea-a0d4-9246e177c5e1",
+                                      "key": "legal_entity_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Legal entity ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Lists pay codes available for a legal entity.\nPay codes represent the allowed pay element types that can be submitted via `POST /v1/pay-items/bulk`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "49348abc-cc03-4ae8-a88c-bd863cfc9936",
+                                  "name": "Success",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes?page=1&page_size=20",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "companies",
+                                        ":company_id",
+                                        "legal-entities",
+                                        ":legal_entity_id",
+                                        "pay-codes"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Starts fetching records after the given page",
+                                          "key": "page",
+                                          "value": "1"
+                                        },
+                                        {
+                                          "description": "Number of items per page",
+                                          "key": "page_size",
+                                          "value": "20"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "company_id"
+                                        },
+                                        {
+                                          "key": "legal_entity_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"pay_codes\": [\n      {\n        \"slug\": \"<uuid>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"category\": \"<string>\",\n        \"description\": \"<string>\",\n        \"external_import_code\": \"<string>\"\n      },\n      {\n        \"slug\": \"<uuid>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"category\": \"<string>\",\n        \"description\": \"<string>\",\n        \"external_import_code\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T02:46:59.000Z",
+                                  "updatedAt": "2026-07-28T02:46:59.000Z",
+                                  "uid": "35240-49348abc-cc03-4ae8-a88c-bd863cfc9936"
+                                },
+                                {
+                                  "id": "42ecc617-6418-48b1-af5f-24e4e6420252",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes?page=1&page_size=20",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "companies",
+                                        ":company_id",
+                                        "legal-entities",
+                                        ":legal_entity_id",
+                                        "pay-codes"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Starts fetching records after the given page",
+                                          "key": "page",
+                                          "value": "1"
+                                        },
+                                        {
+                                          "description": "Number of items per page",
+                                          "key": "page_size",
+                                          "value": "20"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "company_id"
+                                        },
+                                        {
+                                          "key": "legal_entity_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                                  "createdAt": "2026-07-28T02:46:59.000Z",
+                                  "updatedAt": "2026-07-28T02:46:59.000Z",
+                                  "uid": "35240-42ecc617-6418-48b1-af5f-24e4e6420252"
+                                },
+                                {
+                                  "id": "74218517-a95e-4f49-9109-f49bf256e89c",
+                                  "name": "Forbidden",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes?page=1&page_size=20",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "companies",
+                                        ":company_id",
+                                        "legal-entities",
+                                        ":legal_entity_id",
+                                        "pay-codes"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Starts fetching records after the given page",
+                                          "key": "page",
+                                          "value": "1"
+                                        },
+                                        {
+                                          "description": "Number of items per page",
+                                          "key": "page_size",
+                                          "value": "20"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "company_id"
+                                        },
+                                        {
+                                          "key": "legal_entity_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"Forbidden\"\n}",
+                                  "createdAt": "2026-07-28T02:46:59.000Z",
+                                  "updatedAt": "2026-07-28T02:46:59.000Z",
+                                  "uid": "35240-74218517-a95e-4f49-9109-f49bf256e89c"
+                                },
+                                {
+                                  "id": "1bff883d-b9cd-4167-be72-d1d784f32811",
+                                  "name": "Not Found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: oauth2",
+                                        "key": "Authorization",
+                                        "value": "<token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes?page=1&page_size=20",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "companies",
+                                        ":company_id",
+                                        "legal-entities",
+                                        ":legal_entity_id",
+                                        "pay-codes"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Starts fetching records after the given page",
+                                          "key": "page",
+                                          "value": "1"
+                                        },
+                                        {
+                                          "description": "Number of items per page",
+                                          "key": "page_size",
+                                          "value": "20"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "company_id"
+                                        },
+                                        {
+                                          "key": "legal_entity_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                                  "createdAt": "2026-07-28T02:46:59.000Z",
+                                  "updatedAt": "2026-07-28T02:46:59.000Z",
+                                  "uid": "35240-1bff883d-b9cd-4167-be72-d1d784f32811"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:46:59.000Z",
+                              "updatedAt": "2026-07-28T02:46:59.000Z",
+                              "uid": "35240-d23e1b45-c3bb-4394-8f83-39c620874b17"
+                            }
+                          ],
+                          "id": "433e7ddc-9b9c-40fa-8490-266b0c5d4fd6",
+                          "createdAt": "2026-07-28T02:46:59.000Z",
+                          "updatedAt": "2026-07-28T02:46:59.000Z",
+                          "uid": "35240-433e7ddc-9b9c-40fa-8490-266b0c5d4fd6"
+                        }
+                      ],
+                      "id": "d17874b5-0665-46a5-98e7-5a65d283e3be",
+                      "createdAt": "2026-07-28T02:46:59.000Z",
+                      "updatedAt": "2026-07-28T02:46:59.000Z",
+                      "uid": "35240-d17874b5-0665-46a5-98e7-5a65d283e3be"
+                    }
+                  ],
+                  "id": "8629b83c-b7c6-4d54-b5ea-3cb1bb59c71d",
+                  "createdAt": "2026-07-28T02:46:59.000Z",
+                  "updatedAt": "2026-07-28T02:46:59.000Z",
+                  "uid": "35240-8629b83c-b7c6-4d54-b5ea-3cb1bb59c71d"
+                }
+              ],
+              "id": "087707df-761b-4d08-bcef-eadf09f2057e",
+              "createdAt": "2026-07-28T02:46:59.000Z",
+              "updatedAt": "2026-07-28T02:46:59.000Z",
+              "uid": "35240-087707df-761b-4d08-bcef-eadf09f2057e"
+            }
+          ],
+          "id": "888c72bb-ce89-4c4b-b8f6-ba533cf52441",
+          "createdAt": "2026-07-28T02:46:59.000Z",
+          "updatedAt": "2026-07-28T02:46:59.000Z",
+          "uid": "35240-888c72bb-ce89-4c4b-b8f6-ba533cf52441"
+        }
+      ],
+      "id": "88f409c4-93b4-4658-9313-18d5c5160b4e",
+      "createdAt": "2026-07-28T02:46:59.000Z",
+      "updatedAt": "2026-07-28T02:46:59.000Z",
+      "uid": "35240-88f409c4-93b4-4658-9313-18d5c5160b4e"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

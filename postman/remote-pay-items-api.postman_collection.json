@@ -1,0 +1,895 @@
+{
+  "info": {
+    "_postman_id": "bccf923d-89f9-4c3e-8064-45c858b01673",
+    "name": "Remote Address Details Pay Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:07.000Z",
+    "updatedAt": "2026-07-28T02:47:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-bccf923d-89f9-4c3e-8064-45c858b01673"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "pay-items",
+          "item": [
+            {
+              "name": "bulk",
+              "item": [
+                {
+                  "name": "Bulk Create Pay Items",
+                  "id": "7a5e37ad-140f-4365-8b76-6bf08eb31463",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pay_items\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"code\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"provider_data\": {\n        \"adjustment_effective_date\": \"<date>\",\n        \"hourly_rate\": \"<integer>\",\n        \"hourly_rate_currency_code\": \"<string>\",\n        \"is_deduction\": \"<boolean>\",\n        \"pay_rate\": \"<number>\",\n        \"payout_amount\": \"<integer>\",\n        \"payout_currency_code\": \"<string>\",\n        \"shift_code\": \"<string>\",\n        \"work_day_duration\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pay-items/bulk",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pay-items",
+                        "bulk"
+                      ]
+                    },
+                    "description": "Bulk creates pay items for employments. Supports up to 500 items per request.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "a840a0a7-440f-4b93-a664-bb1b94e72c07",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_items\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"code\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"provider_data\": {\n        \"adjustment_effective_date\": \"<date>\",\n        \"hourly_rate\": \"<integer>\",\n        \"hourly_rate_currency_code\": \"<string>\",\n        \"is_deduction\": \"<boolean>\",\n        \"pay_rate\": \"<number>\",\n        \"payout_amount\": \"<integer>\",\n        \"payout_currency_code\": \"<string>\",\n        \"shift_code\": \"<string>\",\n        \"work_day_duration\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/pay-items/bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "pay-items",
+                            "bulk"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"successes\": [\n      {\n        \"row_number\": \"<integer>\",\n        \"pay_item\": {\n          \"employment_id\": \"<uuid>\",\n          \"effective_date\": \"<date>\",\n          \"code\": \"<string>\",\n          \"amount\": \"<integer>\",\n          \"provider_data\": {\n            \"adjustment_effective_date\": \"<date>\",\n            \"hourly_rate\": \"<integer>\",\n            \"hourly_rate_currency_code\": \"<string>\",\n            \"is_deduction\": \"<boolean>\",\n            \"pay_rate\": \"<number>\",\n            \"payout_amount\": \"<integer>\",\n            \"payout_currency_code\": \"<string>\",\n            \"shift_code\": \"<string>\",\n            \"work_day_duration\": \"<integer>\"\n          }\n        }\n      },\n      {\n        \"row_number\": \"<integer>\",\n        \"pay_item\": {\n          \"employment_id\": \"<uuid>\",\n          \"effective_date\": \"<date>\",\n          \"code\": \"<string>\",\n          \"amount\": \"<integer>\",\n          \"provider_data\": {\n            \"adjustment_effective_date\": \"<date>\",\n            \"hourly_rate\": \"<integer>\",\n            \"hourly_rate_currency_code\": \"<string>\",\n            \"is_deduction\": \"<boolean>\",\n            \"pay_rate\": \"<number>\",\n            \"payout_amount\": \"<integer>\",\n            \"payout_currency_code\": \"<string>\",\n            \"shift_code\": \"<string>\",\n            \"work_day_duration\": \"<integer>\"\n          }\n        }\n      }\n    ],\n    \"failures\": [\n      {\n        \"error\": \"<string>\",\n        \"row_number\": \"<integer>\"\n      },\n      {\n        \"error\": \"<string>\",\n        \"row_number\": \"<integer>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:07.000Z",
+                      "updatedAt": "2026-07-28T02:47:07.000Z",
+                      "uid": "35240-a840a0a7-440f-4b93-a664-bb1b94e72c07"
+                    },
+                    {
+                      "id": "f4a42804-2a1e-40e5-8f34-659709d9e299",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_items\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"code\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"provider_data\": {\n        \"adjustment_effective_date\": \"<date>\",\n        \"hourly_rate\": \"<integer>\",\n        \"hourly_rate_currency_code\": \"<string>\",\n        \"is_deduction\": \"<boolean>\",\n        \"pay_rate\": \"<number>\",\n        \"payout_amount\": \"<integer>\",\n        \"payout_currency_code\": \"<string>\",\n        \"shift_code\": \"<string>\",\n        \"work_day_duration\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/pay-items/bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "pay-items",
+                            "bulk"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:07.000Z",
+                      "updatedAt": "2026-07-28T02:47:07.000Z",
+                      "uid": "35240-f4a42804-2a1e-40e5-8f34-659709d9e299"
+                    },
+                    {
+                      "id": "09415e53-b4c1-4d69-a404-77883d821b13",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_items\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"code\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"provider_data\": {\n        \"adjustment_effective_date\": \"<date>\",\n        \"hourly_rate\": \"<integer>\",\n        \"hourly_rate_currency_code\": \"<string>\",\n        \"is_deduction\": \"<boolean>\",\n        \"pay_rate\": \"<number>\",\n        \"payout_amount\": \"<integer>\",\n        \"payout_currency_code\": \"<string>\",\n        \"shift_code\": \"<string>\",\n        \"work_day_duration\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/pay-items/bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "pay-items",
+                            "bulk"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:47:07.000Z",
+                      "updatedAt": "2026-07-28T02:47:07.000Z",
+                      "uid": "35240-09415e53-b4c1-4d69-a404-77883d821b13"
+                    },
+                    {
+                      "id": "9140d5cc-668c-4e76-9b4f-3237246be152",
+                      "name": "Conflict",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_items\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"code\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"provider_data\": {\n        \"adjustment_effective_date\": \"<date>\",\n        \"hourly_rate\": \"<integer>\",\n        \"hourly_rate_currency_code\": \"<string>\",\n        \"is_deduction\": \"<boolean>\",\n        \"pay_rate\": \"<number>\",\n        \"payout_amount\": \"<integer>\",\n        \"payout_currency_code\": \"<string>\",\n        \"shift_code\": \"<string>\",\n        \"work_day_duration\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/pay-items/bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "pay-items",
+                            "bulk"
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:07.000Z",
+                      "updatedAt": "2026-07-28T02:47:07.000Z",
+                      "uid": "35240-9140d5cc-668c-4e76-9b4f-3237246be152"
+                    },
+                    {
+                      "id": "da349121-25ea-4179-8a5f-5614789ebc62",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_items\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"code\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"provider_data\": {\n        \"adjustment_effective_date\": \"<date>\",\n        \"hourly_rate\": \"<integer>\",\n        \"hourly_rate_currency_code\": \"<string>\",\n        \"is_deduction\": \"<boolean>\",\n        \"pay_rate\": \"<number>\",\n        \"payout_amount\": \"<integer>\",\n        \"payout_currency_code\": \"<string>\",\n        \"shift_code\": \"<string>\",\n        \"work_day_duration\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/pay-items/bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "pay-items",
+                            "bulk"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:07.000Z",
+                      "updatedAt": "2026-07-28T02:47:07.000Z",
+                      "uid": "35240-da349121-25ea-4179-8a5f-5614789ebc62"
+                    },
+                    {
+                      "id": "a2023f2f-dfca-43d5-b104-7a2ce56be39c",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"pay_items\": [\n    {\n      \"employment_id\": \"<uuid>\",\n      \"effective_date\": \"<date>\",\n      \"code\": \"<string>\",\n      \"amount\": \"<integer>\",\n      \"provider_data\": {\n        \"adjustment_effective_date\": \"<date>\",\n        \"hourly_rate\": \"<integer>\",\n        \"hourly_rate_currency_code\": \"<string>\",\n        \"is_deduction\": \"<boolean>\",\n        \"pay_rate\": \"<number>\",\n        \"payout_amount\": \"<integer>\",\n        \"payout_currency_code\": \"<string>\",\n        \"shift_code\": \"<string>\",\n        \"work_day_duration\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/pay-items/bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "pay-items",
+                            "bulk"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:47:07.000Z",
+                      "updatedAt": "2026-07-28T02:47:07.000Z",
+                      "uid": "35240-a2023f2f-dfca-43d5-b104-7a2ce56be39c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:07.000Z",
+                  "updatedAt": "2026-07-28T02:47:07.000Z",
+                  "uid": "35240-7a5e37ad-140f-4365-8b76-6bf08eb31463"
+                }
+              ],
+              "id": "a03cfad7-6846-4b9d-9ab0-636851be2ba0",
+              "createdAt": "2026-07-28T02:47:07.000Z",
+              "updatedAt": "2026-07-28T02:47:07.000Z",
+              "uid": "35240-a03cfad7-6846-4b9d-9ab0-636851be2ba0"
+            },
+            {
+              "name": "List Pay Items",
+              "id": "3673372e-d555-482a-bb9f-0097473c6d85",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/pay-items?employment_slug=<uuid>&effective_from=<date>&effective_to=<date>&page=1&page_size=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "pay-items"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by employment slug",
+                      "key": "employment_slug",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Filter pay items with effective_date >= given date (YYYY-MM-DD)",
+                      "key": "effective_from",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Filter pay items with effective_date <= given date (YYYY-MM-DD)",
+                      "key": "effective_to",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "Lists pay items for a company with optional filtering by employment, date range, and pagination.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "4a60c2bc-4fba-429c-a0e8-76b4fc5df6c9",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pay-items?employment_slug=<uuid>&effective_from=<date>&effective_to=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pay-items"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by employment slug",
+                          "key": "employment_slug",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date >= given date (YYYY-MM-DD)",
+                          "key": "effective_from",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date <= given date (YYYY-MM-DD)",
+                          "key": "effective_to",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"data\": [\n      {\n        \"employment_id\": \"<uuid>\",\n        \"effective_date\": \"<date>\",\n        \"code\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"provider_data\": {\n          \"adjustment_effective_date\": \"<date>\",\n          \"hourly_rate\": \"<integer>\",\n          \"hourly_rate_currency_code\": \"<string>\",\n          \"is_deduction\": \"<boolean>\",\n          \"pay_rate\": \"<number>\",\n          \"payout_amount\": \"<integer>\",\n          \"payout_currency_code\": \"<string>\",\n          \"shift_code\": \"<string>\",\n          \"work_day_duration\": \"<integer>\"\n        }\n      },\n      {\n        \"employment_id\": \"<uuid>\",\n        \"effective_date\": \"<date>\",\n        \"code\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"provider_data\": {\n          \"adjustment_effective_date\": \"<date>\",\n          \"hourly_rate\": \"<integer>\",\n          \"hourly_rate_currency_code\": \"<string>\",\n          \"is_deduction\": \"<boolean>\",\n          \"pay_rate\": \"<number>\",\n          \"payout_amount\": \"<integer>\",\n          \"payout_currency_code\": \"<string>\",\n          \"shift_code\": \"<string>\",\n          \"work_day_duration\": \"<integer>\"\n        }\n      }\n    ],\n    \"current_page\": \"<integer>\",\n    \"total_pages\": \"<integer>\",\n    \"total_count\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:07.000Z",
+                  "updatedAt": "2026-07-28T02:47:07.000Z",
+                  "uid": "35240-4a60c2bc-4fba-429c-a0e8-76b4fc5df6c9"
+                },
+                {
+                  "id": "4099ebd8-5451-4797-b0b1-733650f9929c",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pay-items?employment_slug=<uuid>&effective_from=<date>&effective_to=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pay-items"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by employment slug",
+                          "key": "employment_slug",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date >= given date (YYYY-MM-DD)",
+                          "key": "effective_from",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date <= given date (YYYY-MM-DD)",
+                          "key": "effective_to",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:47:07.000Z",
+                  "updatedAt": "2026-07-28T02:47:07.000Z",
+                  "uid": "35240-4099ebd8-5451-4797-b0b1-733650f9929c"
+                },
+                {
+                  "id": "efc94281-c0d1-4f2f-94ca-c25c36ede43d",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pay-items?employment_slug=<uuid>&effective_from=<date>&effective_to=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pay-items"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by employment slug",
+                          "key": "employment_slug",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date >= given date (YYYY-MM-DD)",
+                          "key": "effective_from",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date <= given date (YYYY-MM-DD)",
+                          "key": "effective_to",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Forbidden\"\n}",
+                  "createdAt": "2026-07-28T02:47:07.000Z",
+                  "updatedAt": "2026-07-28T02:47:07.000Z",
+                  "uid": "35240-efc94281-c0d1-4f2f-94ca-c25c36ede43d"
+                },
+                {
+                  "id": "de00bd36-42bb-4cfb-bf5f-6a95284998d0",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pay-items?employment_slug=<uuid>&effective_from=<date>&effective_to=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pay-items"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by employment slug",
+                          "key": "employment_slug",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date >= given date (YYYY-MM-DD)",
+                          "key": "effective_from",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date <= given date (YYYY-MM-DD)",
+                          "key": "effective_to",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:47:07.000Z",
+                  "updatedAt": "2026-07-28T02:47:07.000Z",
+                  "uid": "35240-de00bd36-42bb-4cfb-bf5f-6a95284998d0"
+                },
+                {
+                  "id": "3c39a35d-714c-4a71-9ba7-536d113b0777",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/pay-items?employment_slug=<uuid>&effective_from=<date>&effective_to=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "pay-items"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by employment slug",
+                          "key": "employment_slug",
+                          "value": "<uuid>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date >= given date (YYYY-MM-DD)",
+                          "key": "effective_from",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter pay items with effective_date <= given date (YYYY-MM-DD)",
+                          "key": "effective_to",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:47:07.000Z",
+                  "updatedAt": "2026-07-28T02:47:07.000Z",
+                  "uid": "35240-3c39a35d-714c-4a71-9ba7-536d113b0777"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:07.000Z",
+              "updatedAt": "2026-07-28T02:47:07.000Z",
+              "uid": "35240-3673372e-d555-482a-bb9f-0097473c6d85"
+            }
+          ],
+          "id": "e10c8e9f-be80-4bd3-b488-0b23dec60cf3",
+          "createdAt": "2026-07-28T02:47:07.000Z",
+          "updatedAt": "2026-07-28T02:47:07.000Z",
+          "uid": "35240-e10c8e9f-be80-4bd3-b488-0b23dec60cf3"
+        }
+      ],
+      "id": "63e1bb81-cb8b-45f8-baad-eb2f54262e43",
+      "createdAt": "2026-07-28T02:47:07.000Z",
+      "updatedAt": "2026-07-28T02:47:07.000Z",
+      "uid": "35240-63e1bb81-cb8b-45f8-baad-eb2f54262e43"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

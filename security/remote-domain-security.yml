@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: gateway.remote.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 24 23:59:59 2026 GMT
+  hsts: null
+- host: gateway.remote-sandbox.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 17 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: remote.com
+  dnssec: false
+  caa:
+  - 0 issuewild "letsencrypt.org"
+  - 0 iodef "mailto:sre-team@remote.com"
+  - 0 issue "amazontrust.com"
+  - 0 issue "godaddy.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+- domain: remote-sandbox.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

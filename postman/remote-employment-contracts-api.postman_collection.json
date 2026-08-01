@@ -1,0 +1,1110 @@
+{
+  "info": {
+    "_postman_id": "35dfcd40-6aaf-4e75-b702-ced62e2dce6b",
+    "name": "Remote Address Details Employment Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:57.000Z",
+    "updatedAt": "2026-07-28T02:45:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-35dfcd40-6aaf-4e75-b702-ced62e2dce6b"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "contract-documents",
+                  "item": [
+                    {
+                      "name": "List contract documents for an employment",
+                      "id": "0d8b64b5-d2a7-4eea-b0f2-c709eae7f5ed",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employments/:employment_id/contract-documents?statuses=awaiting_signatures&statuses=awaiting_signatures&except_statuses=awaiting_signatures&except_statuses=awaiting_signatures&page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employments",
+                            ":employment_id",
+                            "contract-documents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by contract document statuses",
+                              "key": "statuses",
+                              "value": "awaiting_signatures"
+                            },
+                            {
+                              "description": "Filter by contract document statuses",
+                              "key": "statuses",
+                              "value": "awaiting_signatures"
+                            },
+                            {
+                              "description": "Exclude contract documents with specific statuses",
+                              "key": "except_statuses",
+                              "value": "awaiting_signatures"
+                            },
+                            {
+                              "description": "Exclude contract documents with specific statuses",
+                              "key": "except_statuses",
+                              "value": "awaiting_signatures"
+                            },
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "1dc10ff3-99f6-46c8-ba2c-839c20adace1",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Only contractor employment types are supported. Lists contract documents for a specific employment with pagination, filtering by status, and sorted by updated_at descending (latest first).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "31e1cdeb-6a99-441d-a8e0-793d2075628f",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/contract-documents?statuses=awaiting_signatures&except_statuses=awaiting_signatures&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "contract-documents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by contract document statuses",
+                                  "key": "statuses",
+                                  "value": "awaiting_signatures"
+                                },
+                                {
+                                  "description": "Exclude contract documents with specific statuses",
+                                  "key": "except_statuses",
+                                  "value": "awaiting_signatures"
+                                },
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"contract_documents\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"draft\",\n        \"type\": \"<string>\",\n        \"inserted_at\": \"<string>\",\n        \"updated_at\": \"<string>\",\n        \"signatories\": [\n          {\n            \"type\": \"admin\",\n            \"status\": \"signed\",\n            \"email\": \"<string>\",\n            \"name\": \"<string>\",\n            \"signature_method\": \"in_platform\",\n            \"signature_type\": \"qes\",\n            \"signed_at\": \"<dateTime>\",\n            \"user_id\": \"<string>\"\n          },\n          {\n            \"type\": \"external\",\n            \"status\": \"signed\",\n            \"email\": \"<string>\",\n            \"name\": \"<string>\",\n            \"signature_method\": \"in_platform\",\n            \"signature_type\": \"ses\",\n            \"signed_at\": \"<dateTime>\",\n            \"user_id\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"status\": \"finished\",\n        \"type\": \"<string>\",\n        \"inserted_at\": \"<string>\",\n        \"updated_at\": \"<string>\",\n        \"signatories\": [\n          {\n            \"type\": \"admin\",\n            \"status\": \"signed\",\n            \"email\": \"<string>\",\n            \"name\": \"<string>\",\n            \"signature_method\": \"docusign\",\n            \"signature_type\": \"qes\",\n            \"signed_at\": \"<dateTime>\",\n            \"user_id\": \"<string>\"\n          },\n          {\n            \"type\": \"company\",\n            \"status\": \"unassigned\",\n            \"email\": \"<string>\",\n            \"name\": \"<string>\",\n            \"signature_method\": \"in_platform\",\n            \"signature_type\": \"ses\",\n            \"signed_at\": \"<dateTime>\",\n            \"user_id\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"current_page\": \"<integer>\",\n    \"total_pages\": \"<integer>\",\n    \"total_count\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-31e1cdeb-6a99-441d-a8e0-793d2075628f"
+                        },
+                        {
+                          "id": "7ca8710d-9744-4e8a-9d09-e9b94656851a",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/contract-documents?statuses=awaiting_signatures&except_statuses=awaiting_signatures&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "contract-documents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by contract document statuses",
+                                  "key": "statuses",
+                                  "value": "awaiting_signatures"
+                                },
+                                {
+                                  "description": "Exclude contract documents with specific statuses",
+                                  "key": "except_statuses",
+                                  "value": "awaiting_signatures"
+                                },
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-7ca8710d-9744-4e8a-9d09-e9b94656851a"
+                        },
+                        {
+                          "id": "672f7a0a-5f81-4d5a-a7c4-9c0031bc3fa9",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/contract-documents?statuses=awaiting_signatures&except_statuses=awaiting_signatures&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "contract-documents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by contract document statuses",
+                                  "key": "statuses",
+                                  "value": "awaiting_signatures"
+                                },
+                                {
+                                  "description": "Exclude contract documents with specific statuses",
+                                  "key": "except_statuses",
+                                  "value": "awaiting_signatures"
+                                },
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-672f7a0a-5f81-4d5a-a7c4-9c0031bc3fa9"
+                        },
+                        {
+                          "id": "d19b74ab-9983-4d63-b8d0-cc58c39eeaff",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/contract-documents?statuses=awaiting_signatures&except_statuses=awaiting_signatures&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "contract-documents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by contract document statuses",
+                                  "key": "statuses",
+                                  "value": "awaiting_signatures"
+                                },
+                                {
+                                  "description": "Exclude contract documents with specific statuses",
+                                  "key": "except_statuses",
+                                  "value": "awaiting_signatures"
+                                },
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-d19b74ab-9983-4d63-b8d0-cc58c39eeaff"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:58.000Z",
+                      "updatedAt": "2026-07-28T02:45:58.000Z",
+                      "uid": "35240-0d8b64b5-d2a7-4eea-b0f2-c709eae7f5ed"
+                    }
+                  ],
+                  "id": "77b1374b-1328-4212-b7af-b03bfddbd24d",
+                  "createdAt": "2026-07-28T02:45:58.000Z",
+                  "updatedAt": "2026-07-28T02:45:58.000Z",
+                  "uid": "35240-77b1374b-1328-4212-b7af-b03bfddbd24d"
+                }
+              ],
+              "id": "931feae2-8124-4995-b341-c62c7a059d19",
+              "createdAt": "2026-07-28T02:45:58.000Z",
+              "updatedAt": "2026-07-28T02:45:58.000Z",
+              "uid": "35240-931feae2-8124-4995-b341-c62c7a059d19"
+            }
+          ],
+          "id": "d8e92abc-efde-4a87-91c4-896b2d7ead7b",
+          "createdAt": "2026-07-28T02:45:58.000Z",
+          "updatedAt": "2026-07-28T02:45:58.000Z",
+          "uid": "35240-d8e92abc-efde-4a87-91c4-896b2d7ead7b"
+        },
+        {
+          "name": "employment-contracts",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "pending-changes",
+                  "item": [
+                    {
+                      "name": "Get employment contract pending changes",
+                      "id": "abc562d6-3a6e-4512-94d9-623b35a5c517",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employment-contracts/:employment_id/pending-changes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employment-contracts",
+                            ":employment_id",
+                            "pending-changes"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8629d603-72e2-46fb-85ee-069dd3fa9aa2",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Get all the pending changes (waiting for aproval or signature) for the employment contract.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View contracts (`contract:read`) | - |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "02431816-2c32-4286-a1f2-0862659aaa59",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employment-contracts/:employment_id/pending-changes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employment-contracts",
+                                ":employment_id",
+                                "pending-changes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"pending_changes\": [\n      {\n        \"effective_at\": \"<dateTime>\",\n        \"contract_id\": \"<string>\",\n        \"changes\": {},\n        \"pending_action_for_activation\": \"<boolean>\"\n      },\n      {\n        \"effective_at\": \"<dateTime>\",\n        \"contract_id\": \"<string>\",\n        \"changes\": {},\n        \"pending_action_for_activation\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-02431816-2c32-4286-a1f2-0862659aaa59"
+                        },
+                        {
+                          "id": "ee12fd76-7a5f-4cdc-a26f-b2d2f262048e",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employment-contracts/:employment_id/pending-changes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employment-contracts",
+                                ":employment_id",
+                                "pending-changes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-ee12fd76-7a5f-4cdc-a26f-b2d2f262048e"
+                        },
+                        {
+                          "id": "4fb7e0a1-950f-402b-a2d9-bd18b1a899ad",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employment-contracts/:employment_id/pending-changes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employment-contracts",
+                                ":employment_id",
+                                "pending-changes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Forbidden\"\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-4fb7e0a1-950f-402b-a2d9-bd18b1a899ad"
+                        },
+                        {
+                          "id": "4fe354fe-9396-4adc-9dca-5ecdeb470a2c",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employment-contracts/:employment_id/pending-changes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employment-contracts",
+                                ":employment_id",
+                                "pending-changes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-4fe354fe-9396-4adc-9dca-5ecdeb470a2c"
+                        },
+                        {
+                          "id": "04284541-3258-413f-a18e-6abf3524de4a",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employment-contracts/:employment_id/pending-changes",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employment-contracts",
+                                ":employment_id",
+                                "pending-changes"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:58.000Z",
+                          "updatedAt": "2026-07-28T02:45:58.000Z",
+                          "uid": "35240-04284541-3258-413f-a18e-6abf3524de4a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:58.000Z",
+                      "updatedAt": "2026-07-28T02:45:58.000Z",
+                      "uid": "35240-abc562d6-3a6e-4512-94d9-623b35a5c517"
+                    }
+                  ],
+                  "id": "deddadb2-8711-4ea8-8f36-185ee9fb3fd7",
+                  "createdAt": "2026-07-28T02:45:58.000Z",
+                  "updatedAt": "2026-07-28T02:45:58.000Z",
+                  "uid": "35240-deddadb2-8711-4ea8-8f36-185ee9fb3fd7"
+                }
+              ],
+              "id": "964ee899-7fea-4acd-a913-4bbe049ee040",
+              "createdAt": "2026-07-28T02:45:58.000Z",
+              "updatedAt": "2026-07-28T02:45:58.000Z",
+              "uid": "35240-964ee899-7fea-4acd-a913-4bbe049ee040"
+            },
+            {
+              "name": "List Employment Contract.",
+              "id": "0b37ad1f-6474-4f1f-9b3e-e352c93c78f4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/employment-contracts?employment_id=<string>&only_active=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "employment-contracts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Employment ID",
+                      "key": "employment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Only Active",
+                      "key": "only_active",
+                      "value": "<boolean>"
+                    }
+                  ]
+                },
+                "description": "Get the employment contract history for a given employment. If `only_active` is true, it will return only the active or last active contract.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View contracts (`contract:read`) | - |\n"
+              },
+              "response": [
+                {
+                  "id": "e1435890-dadd-44d9-b1fa-7c43b4282019",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employment-contracts?employment_id=<string>&only_active=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employment-contracts"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Only Active",
+                          "key": "only_active",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"employment_contracts\": [\n      {\n        \"contract_id\": \"<string>\",\n        \"amendment_contract_id\": \"<string>\",\n        \"country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"standard\",\n            \"cor\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"contract_details\": {},\n        \"compensation\": {\n          \"amount\": \"<integer>\",\n          \"currency_code\": \"<string>\",\n          \"wage_type\": \"salary\"\n        },\n        \"job_title\": \"<string>\",\n        \"status\": \"pending\",\n        \"activated_at\": \"<dateTime>\",\n        \"effective_at\": \"<dateTime>\"\n      },\n      {\n        \"contract_id\": \"<string>\",\n        \"amendment_contract_id\": \"<string>\",\n        \"country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"cor\",\n            \"cor\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"contract_details\": {},\n        \"compensation\": {\n          \"amount\": \"<integer>\",\n          \"currency_code\": \"<string>\",\n          \"wage_type\": \"hourly\"\n        },\n        \"job_title\": \"<string>\",\n        \"status\": \"active\",\n        \"activated_at\": \"<dateTime>\",\n        \"effective_at\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:45:58.000Z",
+                  "updatedAt": "2026-07-28T02:45:58.000Z",
+                  "uid": "35240-e1435890-dadd-44d9-b1fa-7c43b4282019"
+                },
+                {
+                  "id": "ffa12285-11f8-40cb-83da-c42283944d5d",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employment-contracts?employment_id=<string>&only_active=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employment-contracts"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Only Active",
+                          "key": "only_active",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:45:58.000Z",
+                  "updatedAt": "2026-07-28T02:45:58.000Z",
+                  "uid": "35240-ffa12285-11f8-40cb-83da-c42283944d5d"
+                },
+                {
+                  "id": "02e0e47d-af95-4c2c-9bcd-1040ed0f59e1",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employment-contracts?employment_id=<string>&only_active=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employment-contracts"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Only Active",
+                          "key": "only_active",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Forbidden\"\n}",
+                  "createdAt": "2026-07-28T02:45:58.000Z",
+                  "updatedAt": "2026-07-28T02:45:58.000Z",
+                  "uid": "35240-02e0e47d-af95-4c2c-9bcd-1040ed0f59e1"
+                },
+                {
+                  "id": "1aec7794-ca93-4c5b-94dd-e0902456c9f4",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employment-contracts?employment_id=<string>&only_active=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employment-contracts"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Only Active",
+                          "key": "only_active",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:45:58.000Z",
+                  "updatedAt": "2026-07-28T02:45:58.000Z",
+                  "uid": "35240-1aec7794-ca93-4c5b-94dd-e0902456c9f4"
+                },
+                {
+                  "id": "f0496318-9c65-4061-b549-ef971e88f3b9",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employment-contracts?employment_id=<string>&only_active=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employment-contracts"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Only Active",
+                          "key": "only_active",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:45:58.000Z",
+                  "updatedAt": "2026-07-28T02:45:58.000Z",
+                  "uid": "35240-f0496318-9c65-4061-b549-ef971e88f3b9"
+                }
+              ],
+              "createdAt": "2026-07-28T02:45:58.000Z",
+              "updatedAt": "2026-07-28T02:45:58.000Z",
+              "uid": "35240-0b37ad1f-6474-4f1f-9b3e-e352c93c78f4"
+            }
+          ],
+          "id": "cdefba68-460a-420a-9897-ebddf1e2635b",
+          "createdAt": "2026-07-28T02:45:58.000Z",
+          "updatedAt": "2026-07-28T02:45:58.000Z",
+          "uid": "35240-cdefba68-460a-420a-9897-ebddf1e2635b"
+        }
+      ],
+      "id": "0063f71d-b5ff-455e-a49b-22303a80ef2e",
+      "createdAt": "2026-07-28T02:45:58.000Z",
+      "updatedAt": "2026-07-28T02:45:58.000Z",
+      "uid": "35240-0063f71d-b5ff-455e-a49b-22303a80ef2e"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

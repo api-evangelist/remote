@@ -1,0 +1,416 @@
+{
+  "info": {
+    "_postman_id": "a6281470-7102-41ff-8256-d964f1db5f32",
+    "name": "Remote Address Details Time Off Balances API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:01.000Z",
+    "updatedAt": "2026-07-28T02:48:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a6281470-7102-41ff-8256-d964f1db5f32"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "timeoff-balances",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "Show Time Off Balance",
+                  "id": "25d22834-5ca4-4983-a159-7be76359a2ae",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/timeoff-balances/:employment_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "timeoff-balances",
+                        ":employment_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e10625ff-aab2-49fc-9dbd-ada7e7f2ed1f",
+                          "key": "employment_id",
+                          "value": "<string>",
+                          "description": "(Required) Employment ID for which to show the time off balance"
+                        }
+                      ]
+                    },
+                    "description": "Shows the time off balance for the given employment_id.\n\nDeprecated since February 2025 in favour of **[List Leave Policies Summary](#tag/Leave-Policies/operation/get_index_leave_policies_summary)** endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "7328a83c-b8d8-43d4-bb73-6b8025c309d4",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timeoff-balances/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timeoff-balances",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"timeoff_balance\": {\n      \"timeoff_entitlements\": [\n        {\n          \"name\": \"<string>\",\n          \"expiry_date\": \"<date>\",\n          \"can_expire\": \"<boolean>\",\n          \"entitled\": {\n            \"days\": \"<integer>\",\n            \"hours\": \"<integer>\"\n          },\n          \"taken\": {\n            \"days\": \"<integer>\",\n            \"hours\": \"<integer>\"\n          },\n          \"remaining\": {\n            \"days\": \"<integer>\",\n            \"hours\": \"<integer>\"\n          },\n          \"type\": \"additional_pto\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"expiry_date\": \"<date>\",\n          \"can_expire\": \"<boolean>\",\n          \"entitled\": {\n            \"days\": \"<integer>\",\n            \"hours\": \"<integer>\"\n          },\n          \"taken\": {\n            \"days\": \"<integer>\",\n            \"hours\": \"<integer>\"\n          },\n          \"remaining\": {\n            \"days\": \"<integer>\",\n            \"hours\": \"<integer>\"\n          },\n          \"type\": \"annual_paid_timeoff\"\n        }\n      ],\n      \"taken\": {\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"upcoming_approved\": {\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"upcoming_requested\": {\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"working_hours_per_day\": \"<integer>\",\n      \"contractual_leave_entitlement_type\": \"<string>\",\n      \"contractual_entitled\": \"<integer>\",\n      \"total_entitled_days\": \"<integer>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:02.000Z",
+                      "updatedAt": "2026-07-28T02:48:02.000Z",
+                      "uid": "35240-7328a83c-b8d8-43d4-bb73-6b8025c309d4"
+                    },
+                    {
+                      "id": "9ffcb4bc-b167-4166-9a21-afc4af8889fa",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timeoff-balances/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timeoff-balances",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:48:02.000Z",
+                      "updatedAt": "2026-07-28T02:48:02.000Z",
+                      "uid": "35240-9ffcb4bc-b167-4166-9a21-afc4af8889fa"
+                    },
+                    {
+                      "id": "3bbae5af-356a-4320-9745-3a4f452e3a37",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timeoff-balances/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timeoff-balances",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:48:02.000Z",
+                      "updatedAt": "2026-07-28T02:48:02.000Z",
+                      "uid": "35240-3bbae5af-356a-4320-9745-3a4f452e3a37"
+                    },
+                    {
+                      "id": "81d253ba-08e0-4200-a402-a36189890fa6",
+                      "name": "TimeoffBalanceNotFoundResponse",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timeoff-balances/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timeoff-balances",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": {\n    \"code\": \"parameter_required_missing\",\n    \"message\": \"<string>\",\n    \"resource_id\": \"<string>\",\n    \"resource_type\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:02.000Z",
+                      "updatedAt": "2026-07-28T02:48:02.000Z",
+                      "uid": "35240-81d253ba-08e0-4200-a402-a36189890fa6"
+                    },
+                    {
+                      "id": "bdd37278-e25b-40b8-90e4-fb398f1ed6d6",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timeoff-balances/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timeoff-balances",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:48:02.000Z",
+                      "updatedAt": "2026-07-28T02:48:02.000Z",
+                      "uid": "35240-bdd37278-e25b-40b8-90e4-fb398f1ed6d6"
+                    },
+                    {
+                      "id": "a373697b-9ee9-4273-8158-abc7d65fce1b",
+                      "name": "Too many requests",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/timeoff-balances/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "timeoff-balances",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:48:02.000Z",
+                      "updatedAt": "2026-07-28T02:48:02.000Z",
+                      "uid": "35240-a373697b-9ee9-4273-8158-abc7d65fce1b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:02.000Z",
+                  "updatedAt": "2026-07-28T02:48:02.000Z",
+                  "uid": "35240-25d22834-5ca4-4983-a159-7be76359a2ae"
+                }
+              ],
+              "id": "30fcf212-c686-43c2-bb0d-74a7a51639cd",
+              "createdAt": "2026-07-28T02:48:02.000Z",
+              "updatedAt": "2026-07-28T02:48:02.000Z",
+              "uid": "35240-30fcf212-c686-43c2-bb0d-74a7a51639cd"
+            }
+          ],
+          "id": "6f8ed9d0-27f6-412a-a53b-ac3e3fb98a30",
+          "createdAt": "2026-07-28T02:48:02.000Z",
+          "updatedAt": "2026-07-28T02:48:02.000Z",
+          "uid": "35240-6f8ed9d0-27f6-412a-a53b-ac3e3fb98a30"
+        }
+      ],
+      "id": "bdcf3b50-0e3f-4c2c-83ef-b723ed8e8445",
+      "createdAt": "2026-07-28T02:48:02.000Z",
+      "updatedAt": "2026-07-28T02:48:02.000Z",
+      "uid": "35240-bdcf3b50-0e3f-4c2c-83ef-b723ed8e8445"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

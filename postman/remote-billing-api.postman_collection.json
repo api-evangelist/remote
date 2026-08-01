@@ -1,0 +1,1435 @@
+{
+  "info": {
+    "_postman_id": "1b0fff18-6356-4736-8987-889d36062969",
+    "name": "Remote Address Details Billing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:03.000Z",
+    "updatedAt": "2026-07-28T02:45:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1b0fff18-6356-4736-8987-889d36062969"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "billing-documents",
+          "item": [
+            {
+              "name": "{billing_document_id}",
+              "item": [
+                {
+                  "name": "breakdown",
+                  "item": [
+                    {
+                      "name": "Get Billing Document Breakdown",
+                      "id": "a6825a4f-5f2e-43ac-8364-a7fd3b02e058",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/breakdown?type=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "billing-documents",
+                            ":billing_document_id",
+                            "breakdown"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filters the results by the type of the billing breakdown item.",
+                              "key": "type",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e6d46e0a-58c1-4ee3-94c2-064f7fb06327",
+                              "key": "billing_document_id",
+                              "value": "<string>",
+                              "description": "(Required) The billing document's ID"
+                            }
+                          ]
+                        },
+                        "description": "Get billing document breakdown\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "8031ec85-3087-47a0-b986-d377ec4081d6",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/breakdown?type=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "breakdown"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filters the results by the type of the billing breakdown item.",
+                                  "key": "type",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"billing_document_breakdown\": [\n      {\n        \"employment_id\": \"<uuid>\",\n        \"invoice_number\": \"<string>\",\n        \"invoice_period\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"type\": \"<string>\",\n        \"description\": \"<string>\",\n        \"invoice_amount\": \"<integer>\",\n        \"invoice_currency\": \"<string>\",\n        \"source_amount\": \"<integer>\",\n        \"source_currency\": \"<string>\",\n        \"variance_from_invoice\": \"<string>\",\n        \"variance_from_invoice_amount\": \"<integer>\",\n        \"fx_rate\": \"<string>\"\n      },\n      {\n        \"employment_id\": \"<uuid>\",\n        \"invoice_number\": \"<string>\",\n        \"invoice_period\": \"<string>\",\n        \"country_code\": \"<string>\",\n        \"type\": \"<string>\",\n        \"description\": \"<string>\",\n        \"invoice_amount\": \"<integer>\",\n        \"invoice_currency\": \"<string>\",\n        \"source_amount\": \"<integer>\",\n        \"source_currency\": \"<string>\",\n        \"variance_from_invoice\": \"<string>\",\n        \"variance_from_invoice_amount\": \"<integer>\",\n        \"fx_rate\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-8031ec85-3087-47a0-b986-d377ec4081d6"
+                        },
+                        {
+                          "id": "e7aa95ff-6c0f-44d1-9148-f8559e943ea6",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/breakdown?type=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "breakdown"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filters the results by the type of the billing breakdown item.",
+                                  "key": "type",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-e7aa95ff-6c0f-44d1-9148-f8559e943ea6"
+                        },
+                        {
+                          "id": "ba1fb4f1-0ab2-44bc-a543-6e2f57c6c582",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/breakdown?type=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "breakdown"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filters the results by the type of the billing breakdown item.",
+                                  "key": "type",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-ba1fb4f1-0ab2-44bc-a543-6e2f57c6c582"
+                        },
+                        {
+                          "id": "7f53f921-dc19-4ab0-99ad-47d0dbc38363",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/breakdown?type=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "breakdown"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filters the results by the type of the billing breakdown item.",
+                                  "key": "type",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-7f53f921-dc19-4ab0-99ad-47d0dbc38363"
+                        },
+                        {
+                          "id": "e11c289b-b346-4c3f-a284-e994bf01aedf",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/breakdown?type=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "breakdown"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filters the results by the type of the billing breakdown item.",
+                                  "key": "type",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-e11c289b-b346-4c3f-a284-e994bf01aedf"
+                        },
+                        {
+                          "id": "683fcdd3-98ec-4920-aa2c-846ebe2725c4",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/breakdown?type=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "breakdown"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filters the results by the type of the billing breakdown item.",
+                                  "key": "type",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-683fcdd3-98ec-4920-aa2c-846ebe2725c4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:03.000Z",
+                      "updatedAt": "2026-07-28T02:45:03.000Z",
+                      "uid": "35240-a6825a4f-5f2e-43ac-8364-a7fd3b02e058"
+                    }
+                  ],
+                  "id": "0b7543c2-839c-4654-a08b-3a5230d7277f",
+                  "createdAt": "2026-07-28T02:45:03.000Z",
+                  "updatedAt": "2026-07-28T02:45:03.000Z",
+                  "uid": "35240-0b7543c2-839c-4654-a08b-3a5230d7277f"
+                },
+                {
+                  "name": "pdf",
+                  "item": [
+                    {
+                      "name": "Download a billing document PDF",
+                      "id": "7b6d13a2-e496-4e98-8ae5-ca21c647731f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/pdf",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "billing-documents",
+                            ":billing_document_id",
+                            "pdf"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fdaf06c8-e100-467d-b839-0dfc2e1b4810",
+                              "key": "billing_document_id",
+                              "value": "<string>",
+                              "description": "(Required) The billing document's ID"
+                            }
+                          ]
+                        },
+                        "description": "Downloads a billing document PDF\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "56dadc30-9b38-402b-bcef-2eb69debdf5e",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/pdf",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "pdf"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<binary>",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-56dadc30-9b38-402b-bcef-2eb69debdf5e"
+                        },
+                        {
+                          "id": "e298fdcc-fe21-465b-b33e-fe5d0f07a0ff",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/pdf",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "pdf"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-e298fdcc-fe21-465b-b33e-fe5d0f07a0ff"
+                        },
+                        {
+                          "id": "a6db8fce-4f5f-49b6-a1e8-95b4d200782c",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/pdf",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "pdf"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-a6db8fce-4f5f-49b6-a1e8-95b4d200782c"
+                        },
+                        {
+                          "id": "f3d1af7e-3100-48b9-948c-2ee98527ec14",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id/pdf",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "billing-documents",
+                                ":billing_document_id",
+                                "pdf"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "billing_document_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:03.000Z",
+                          "updatedAt": "2026-07-28T02:45:03.000Z",
+                          "uid": "35240-f3d1af7e-3100-48b9-948c-2ee98527ec14"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:03.000Z",
+                      "updatedAt": "2026-07-28T02:45:03.000Z",
+                      "uid": "35240-7b6d13a2-e496-4e98-8ae5-ca21c647731f"
+                    }
+                  ],
+                  "id": "9a808fc7-2028-4126-acb8-5e77d0e6b646",
+                  "createdAt": "2026-07-28T02:45:03.000Z",
+                  "updatedAt": "2026-07-28T02:45:03.000Z",
+                  "uid": "35240-9a808fc7-2028-4126-acb8-5e77d0e6b646"
+                },
+                {
+                  "name": "Show Billing Document",
+                  "id": "d830c167-5e67-4c4f-ae06-de60a05a8e37",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id?include_unrecognized_types=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "billing-documents",
+                        ":billing_document_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
+                          "key": "include_unrecognized_types",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "8d8b32e1-055d-44a0-a3fd-958d18a8098b",
+                          "key": "billing_document_id",
+                          "value": "<string>",
+                          "description": "(Required) The billing document's ID"
+                        }
+                      ]
+                    },
+                    "description": "Shows a billing document details.\n\nPlease contact api-support@remote.com to request access to this endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "bc7079b6-1969-4d6d-88d3-5e750a66927e",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id?include_unrecognized_types=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "billing-documents",
+                            ":billing_document_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
+                              "key": "include_unrecognized_types",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "billing_document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"billing_document\": {\n      \"id\": \"<string>\",\n      \"billing_document_period\": \"<string>\",\n      \"billing_document_number\": \"<string>\",\n      \"billing_document_type\": \"<string>\",\n      \"company_id\": \"<string>\",\n      \"issued_date\": \"<string>\",\n      \"billing_document_currency\": \"<string>\",\n      \"total\": \"<integer>\",\n      \"items\": [\n        {\n          \"type\": \"<string>\",\n          \"billing_document_amount\": \"<integer>\",\n          \"billing_document_currency\": \"<string>\",\n          \"employment_id\": \"<string>\",\n          \"source_amount\": \"<integer>\",\n          \"source_currency\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"billing_document_amount\": \"<integer>\",\n          \"billing_document_currency\": \"<string>\",\n          \"employment_id\": \"<string>\",\n          \"source_amount\": \"<integer>\",\n          \"source_currency\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:03.000Z",
+                      "updatedAt": "2026-07-28T02:45:03.000Z",
+                      "uid": "35240-bc7079b6-1969-4d6d-88d3-5e750a66927e"
+                    },
+                    {
+                      "id": "a6d9707f-c3e5-40b7-9e86-fe3ecc1c5d8e",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id?include_unrecognized_types=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "billing-documents",
+                            ":billing_document_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
+                              "key": "include_unrecognized_types",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "billing_document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:45:03.000Z",
+                      "updatedAt": "2026-07-28T02:45:03.000Z",
+                      "uid": "35240-a6d9707f-c3e5-40b7-9e86-fe3ecc1c5d8e"
+                    },
+                    {
+                      "id": "151f02a4-47c2-4343-842e-7fa84355796a",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id?include_unrecognized_types=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "billing-documents",
+                            ":billing_document_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
+                              "key": "include_unrecognized_types",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "billing_document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:45:03.000Z",
+                      "updatedAt": "2026-07-28T02:45:03.000Z",
+                      "uid": "35240-151f02a4-47c2-4343-842e-7fa84355796a"
+                    },
+                    {
+                      "id": "e67e5fc2-e4e8-4f2d-8f75-fd2a08ac5a0d",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id?include_unrecognized_types=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "billing-documents",
+                            ":billing_document_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
+                              "key": "include_unrecognized_types",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "billing_document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:03.000Z",
+                      "updatedAt": "2026-07-28T02:45:03.000Z",
+                      "uid": "35240-e67e5fc2-e4e8-4f2d-8f75-fd2a08ac5a0d"
+                    },
+                    {
+                      "id": "11e382a0-f714-49d8-a630-7d4b0ba3e9be",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id?include_unrecognized_types=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "billing-documents",
+                            ":billing_document_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
+                              "key": "include_unrecognized_types",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "billing_document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:45:03.000Z",
+                      "updatedAt": "2026-07-28T02:45:03.000Z",
+                      "uid": "35240-11e382a0-f714-49d8-a630-7d4b0ba3e9be"
+                    },
+                    {
+                      "id": "21aa56e4-9988-49a5-99db-367295dda04b",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/billing-documents/:billing_document_id?include_unrecognized_types=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "billing-documents",
+                            ":billing_document_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "When true, includes billing document items whose type is not part of the standard set for the invoice type.",
+                              "key": "include_unrecognized_types",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "billing_document_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:45:03.000Z",
+                      "updatedAt": "2026-07-28T02:45:03.000Z",
+                      "uid": "35240-21aa56e4-9988-49a5-99db-367295dda04b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:03.000Z",
+                  "updatedAt": "2026-07-28T02:45:03.000Z",
+                  "uid": "35240-d830c167-5e67-4c4f-ae06-de60a05a8e37"
+                }
+              ],
+              "id": "9d6b3fed-0f48-43ad-aaf3-16f5ed1fc40a",
+              "createdAt": "2026-07-28T02:45:03.000Z",
+              "updatedAt": "2026-07-28T02:45:03.000Z",
+              "uid": "35240-9d6b3fed-0f48-43ad-aaf3-16f5ed1fc40a"
+            },
+            {
+              "name": "List Billing Documents",
+              "id": "77498c8a-413f-4596-a833-ddead18df41a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/billing-documents?period=<string>&page=1&page_size=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "billing-documents"
+                  ],
+                  "query": [
+                    {
+                      "description": "The month for the billing documents (in ISO-8601 format)",
+                      "key": "period",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "List billing documents for a company\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "20ee4a5a-3432-4138-b67c-f5095329df21",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/billing-documents?period=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "billing-documents"
+                      ],
+                      "query": [
+                        {
+                          "description": "The month for the billing documents (in ISO-8601 format)",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"billing_documents\": [\n      {\n        \"bill_from\": \"<string>\",\n        \"billing_document_period\": \"<string>\",\n        \"billing_document_type\": \"supplemental_service_invoice\",\n        \"id\": \"<string>\"\n      },\n      {\n        \"bill_from\": \"<string>\",\n        \"billing_document_period\": \"<string>\",\n        \"billing_document_type\": \"supplemental_service_invoice\",\n        \"id\": \"<string>\"\n      }\n    ],\n    \"current_page\": \"<integer>\",\n    \"total_pages\": \"<integer>\",\n    \"total_count\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:45:03.000Z",
+                  "updatedAt": "2026-07-28T02:45:03.000Z",
+                  "uid": "35240-20ee4a5a-3432-4138-b67c-f5095329df21"
+                },
+                {
+                  "id": "34afbebc-2545-4495-8a9d-6d3750808dd6",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/billing-documents?period=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "billing-documents"
+                      ],
+                      "query": [
+                        {
+                          "description": "The month for the billing documents (in ISO-8601 format)",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:45:03.000Z",
+                  "updatedAt": "2026-07-28T02:45:03.000Z",
+                  "uid": "35240-34afbebc-2545-4495-8a9d-6d3750808dd6"
+                },
+                {
+                  "id": "bf1a364c-f9b7-420e-ad5c-bb05cc0574a1",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/billing-documents?period=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "billing-documents"
+                      ],
+                      "query": [
+                        {
+                          "description": "The month for the billing documents (in ISO-8601 format)",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:45:03.000Z",
+                  "updatedAt": "2026-07-28T02:45:03.000Z",
+                  "uid": "35240-bf1a364c-f9b7-420e-ad5c-bb05cc0574a1"
+                },
+                {
+                  "id": "7790ef9f-3f58-406d-8720-f9e06fbe1d41",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/billing-documents?period=<string>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "billing-documents"
+                      ],
+                      "query": [
+                        {
+                          "description": "The month for the billing documents (in ISO-8601 format)",
+                          "key": "period",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:45:03.000Z",
+                  "updatedAt": "2026-07-28T02:45:03.000Z",
+                  "uid": "35240-7790ef9f-3f58-406d-8720-f9e06fbe1d41"
+                }
+              ],
+              "createdAt": "2026-07-28T02:45:03.000Z",
+              "updatedAt": "2026-07-28T02:45:03.000Z",
+              "uid": "35240-77498c8a-413f-4596-a833-ddead18df41a"
+            }
+          ],
+          "id": "ad784efe-f12e-43cd-988b-5a9dfa25ce08",
+          "createdAt": "2026-07-28T02:45:03.000Z",
+          "updatedAt": "2026-07-28T02:45:03.000Z",
+          "uid": "35240-ad784efe-f12e-43cd-988b-5a9dfa25ce08"
+        }
+      ],
+      "id": "a6aebc05-30ee-43a5-948f-70fe65e5cdcd",
+      "createdAt": "2026-07-28T02:45:03.000Z",
+      "updatedAt": "2026-07-28T02:45:03.000Z",
+      "uid": "35240-a6aebc05-30ee-43a5-948f-70fe65e5cdcd"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

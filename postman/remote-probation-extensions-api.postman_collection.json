@@ -1,0 +1,659 @@
+{
+  "info": {
+    "_postman_id": "063728eb-b5c5-4d7d-92ff-45a1fd590b52",
+    "name": "Remote Address Details Probation Extensions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:38.000Z",
+    "updatedAt": "2026-07-28T02:47:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-063728eb-b5c5-4d7d-92ff-45a1fd590b52"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "probation-extensions",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Show Probation Extension",
+                  "id": "3c4a5bd3-51b4-4f59-9ff8-5cd6ae5a6f17",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-extensions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-extensions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c04551d2-3e12-4740-97b8-ac5b8ff2c2ee",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Probation Extension Request ID"
+                        }
+                      ]
+                    },
+                    "description": "Shows a Probation Extension Request.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View probation documents (`probation_document:read`) | Manage probation documents (`probation_document:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "cda0846f-4654-43cf-a3ec-43bd8de7ea14",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/probation-extensions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "probation-extensions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"probation_extension\": {\n      \"id\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"status\": \"done\",\n      \"submitted_at\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"zendesk_ticket_url\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:38.000Z",
+                      "updatedAt": "2026-07-28T02:47:38.000Z",
+                      "uid": "35240-cda0846f-4654-43cf-a3ec-43bd8de7ea14"
+                    },
+                    {
+                      "id": "d8bbe6a4-a27f-47cb-953b-c3c94a65845b",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/probation-extensions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "probation-extensions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:47:38.000Z",
+                      "updatedAt": "2026-07-28T02:47:38.000Z",
+                      "uid": "35240-d8bbe6a4-a27f-47cb-953b-c3c94a65845b"
+                    },
+                    {
+                      "id": "5831b94e-a31c-4acf-82dc-476e5553318b",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/probation-extensions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "probation-extensions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:47:38.000Z",
+                      "updatedAt": "2026-07-28T02:47:38.000Z",
+                      "uid": "35240-5831b94e-a31c-4acf-82dc-476e5553318b"
+                    },
+                    {
+                      "id": "bd932fc3-d1a6-42e8-8fd1-c414628b727b",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/probation-extensions/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "probation-extensions",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:38.000Z",
+                      "updatedAt": "2026-07-28T02:47:38.000Z",
+                      "uid": "35240-bd932fc3-d1a6-42e8-8fd1-c414628b727b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:38.000Z",
+                  "updatedAt": "2026-07-28T02:47:38.000Z",
+                  "uid": "35240-3c4a5bd3-51b4-4f59-9ff8-5cd6ae5a6f17"
+                }
+              ],
+              "id": "17f47f77-1225-4f87-ae7f-7ba88fc5e54c",
+              "createdAt": "2026-07-28T02:47:38.000Z",
+              "updatedAt": "2026-07-28T02:47:38.000Z",
+              "uid": "35240-17f47f77-1225-4f87-ae7f-7ba88fc5e54c"
+            },
+            {
+              "name": "Create Probation Extension",
+              "id": "d6bb8742-74b4-4be6-92f9-d8c1b9933b33",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<string>\",\n  \"duration_of_extension_in_days\": \"<integer>\",\n  \"reason_for_extension\": \"<string>\",\n  \"was_employee_informed\": \"<boolean>\",\n  \"additional_details\": \"<string>\",\n  \"date_of_discussion_with_employee\": \"<date>\",\n  \"supporting_document\": {\n    \"name\": \"<string>\",\n    \"content\": \"<binary>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/probation-extensions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "probation-extensions"
+                  ]
+                },
+                "description": "Create a probation extension request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage probation documents (`probation_document:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "9be40e3a-9a4a-4f5b-a276-740288c9c9c1",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\",\n  \"duration_of_extension_in_days\": \"<integer>\",\n  \"reason_for_extension\": \"<string>\",\n  \"was_employee_informed\": \"<boolean>\",\n  \"additional_details\": \"<string>\",\n  \"date_of_discussion_with_employee\": \"<date>\",\n  \"supporting_document\": {\n    \"name\": \"<string>\",\n    \"content\": \"<binary>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-extensions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-extensions"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"probation_extension\": {\n      \"id\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"status\": \"done\",\n      \"submitted_at\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"zendesk_ticket_url\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:38.000Z",
+                  "updatedAt": "2026-07-28T02:47:38.000Z",
+                  "uid": "35240-9be40e3a-9a4a-4f5b-a276-740288c9c9c1"
+                },
+                {
+                  "id": "efe1c95e-e6c0-46bd-92c9-306aff0d943b",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\",\n  \"duration_of_extension_in_days\": \"<integer>\",\n  \"reason_for_extension\": \"<string>\",\n  \"was_employee_informed\": \"<boolean>\",\n  \"additional_details\": \"<string>\",\n  \"date_of_discussion_with_employee\": \"<date>\",\n  \"supporting_document\": {\n    \"name\": \"<string>\",\n    \"content\": \"<binary>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-extensions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-extensions"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:38.000Z",
+                  "updatedAt": "2026-07-28T02:47:38.000Z",
+                  "uid": "35240-efe1c95e-e6c0-46bd-92c9-306aff0d943b"
+                },
+                {
+                  "id": "2fc6f365-0951-4f3c-b79b-29c190a80489",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\",\n  \"duration_of_extension_in_days\": \"<integer>\",\n  \"reason_for_extension\": \"<string>\",\n  \"was_employee_informed\": \"<boolean>\",\n  \"additional_details\": \"<string>\",\n  \"date_of_discussion_with_employee\": \"<date>\",\n  \"supporting_document\": {\n    \"name\": \"<string>\",\n    \"content\": \"<binary>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-extensions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-extensions"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:47:38.000Z",
+                  "updatedAt": "2026-07-28T02:47:38.000Z",
+                  "uid": "35240-2fc6f365-0951-4f3c-b79b-29c190a80489"
+                },
+                {
+                  "id": "d1acecb9-0bc6-4992-86b4-080f0b023372",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\",\n  \"duration_of_extension_in_days\": \"<integer>\",\n  \"reason_for_extension\": \"<string>\",\n  \"was_employee_informed\": \"<boolean>\",\n  \"additional_details\": \"<string>\",\n  \"date_of_discussion_with_employee\": \"<date>\",\n  \"supporting_document\": {\n    \"name\": \"<string>\",\n    \"content\": \"<binary>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-extensions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-extensions"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:47:38.000Z",
+                  "updatedAt": "2026-07-28T02:47:38.000Z",
+                  "uid": "35240-d1acecb9-0bc6-4992-86b4-080f0b023372"
+                },
+                {
+                  "id": "dcb8da64-7e98-4a00-9372-0e01af17b258",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\",\n  \"duration_of_extension_in_days\": \"<integer>\",\n  \"reason_for_extension\": \"<string>\",\n  \"was_employee_informed\": \"<boolean>\",\n  \"additional_details\": \"<string>\",\n  \"date_of_discussion_with_employee\": \"<date>\",\n  \"supporting_document\": {\n    \"name\": \"<string>\",\n    \"content\": \"<binary>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-extensions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-extensions"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:47:38.000Z",
+                  "updatedAt": "2026-07-28T02:47:38.000Z",
+                  "uid": "35240-dcb8da64-7e98-4a00-9372-0e01af17b258"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:38.000Z",
+              "updatedAt": "2026-07-28T02:47:38.000Z",
+              "uid": "35240-d6bb8742-74b4-4be6-92f9-d8c1b9933b33"
+            }
+          ],
+          "id": "8ad27722-456a-4ee4-a24c-1cf5e354f29a",
+          "createdAt": "2026-07-28T02:47:38.000Z",
+          "updatedAt": "2026-07-28T02:47:38.000Z",
+          "uid": "35240-8ad27722-456a-4ee4-a24c-1cf5e354f29a"
+        }
+      ],
+      "id": "60b3a354-6564-4720-8034-a4d4663c29c4",
+      "createdAt": "2026-07-28T02:47:38.000Z",
+      "updatedAt": "2026-07-28T02:47:38.000Z",
+      "uid": "35240-60b3a354-6564-4720-8034-a4d4663c29c4"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

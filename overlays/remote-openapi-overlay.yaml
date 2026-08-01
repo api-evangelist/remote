@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Remote API
+  version: 1.0.0
+extends: openapi/remote-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: remote
+      x-apievangelist-category: [hr, payroll, employment, eor]
+      x-apievangelist-conventions: conventions/remote-conventions.yml
+      x-apievangelist-authentication: authentication/remote-authentication.yml
+      x-apievangelist-webhooks: asyncapi/remote-webhooks.yml
+      x-apievangelist-rate-limit: rate-limits/remote-rate-limits.yml
+      x-apievangelist-sandbox: sandbox/remote-sandbox.yml
+      x-apievangelist-mcp: mcp/remote-mcp.yml
+  - target: $.info
+    update:
+      description: >-
+        The Remote API is a RESTful, JSON-only, OAuth 2.0-protected API for
+        global employment — hiring, onboarding, payroll, time off, expenses,
+        contracts, and offboarding across 60+ countries. 300 req/min per
+        company; page-based pagination; HMAC-signed webhooks; sandbox at
+        gateway.remote-sandbox.com.

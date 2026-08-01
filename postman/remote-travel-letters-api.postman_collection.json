@@ -1,0 +1,1271 @@
+{
+  "info": {
+    "_postman_id": "91243f78-e8ec-44cd-a881-f38110224de6",
+    "name": "Remote Address Details Travel Letters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:48:04.000Z",
+    "updatedAt": "2026-07-28T02:48:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-91243f78-e8ec-44cd-a881-f38110224de6"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "travel-letter-requests",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Show travel letter request",
+                  "id": "a0c4574e-42a1-4e9e-8ffe-09d35a37a28b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "travel-letter-requests",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1e251b34-15ca-4717-bfd2-0d2bf9541d6c",
+                          "key": "id",
+                          "value": "<uuid>",
+                          "description": "(Required) travel letter request ID"
+                        }
+                      ]
+                    },
+                    "description": "Show a single travel letter request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View travel letters (`travel_letter:read`) | Manage travel letters (`travel_letter:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "aa66ad1c-dbd5-488f-997c-3fc8c754bf67",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"additional_information\": \"<string>\",\n      \"destination_country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"plus\",\n          \"cor\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"embassy_address\": \"<string>\",\n      \"employer_approver\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"employer_special_instructions\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"reason\": \"<string>\",\n      \"requires_travel_address\": \"<boolean>\",\n      \"responsible_for_accommodation_cost\": \"employer\",\n      \"responsible_for_meal_cost\": \"employer\",\n      \"responsible_for_travel_cost\": \"employee\",\n      \"status\": \"declined_by_remote\",\n      \"submitted_at\": \"<dateTime>\",\n      \"travel_address\": \"<string>\",\n      \"travel_date_end\": \"<date>\",\n      \"travel_date_start\": \"<date>\",\n      \"travel_document_number\": \"<string>\",\n      \"travel_reason\": \"<string>\",\n      \"travel_reason_details\": \"<string>\",\n      \"user\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-aa66ad1c-dbd5-488f-997c-3fc8c754bf67"
+                    },
+                    {
+                      "id": "d994d17a-c7f0-4b78-aa3a-ea9fb447e126",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-d994d17a-c7f0-4b78-aa3a-ea9fb447e126"
+                    },
+                    {
+                      "id": "10dc1d05-0614-4492-a5b2-4e8ec6063d22",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-10dc1d05-0614-4492-a5b2-4e8ec6063d22"
+                    },
+                    {
+                      "id": "ba01816d-438f-4ac9-b70e-8f960e1bc8a3",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-ba01816d-438f-4ac9-b70e-8f960e1bc8a3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-a0c4574e-42a1-4e9e-8ffe-09d35a37a28b"
+                },
+                {
+                  "name": "Updates a travel letter request",
+                  "id": "f862fc1c-f4fc-44f3-9d98-f9830b9ca255",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "travel-letter-requests",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "da4a1c39-6475-4288-972e-471ff2b9818d",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Travel letter Request ID"
+                        }
+                      ]
+                    },
+                    "description": "Updates a travel letter request\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage travel letters (`travel_letter:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "fc247762-8e2f-4e76-94f9-0d8687a6bb5c",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"additional_information\": \"<string>\",\n      \"destination_country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"plus\",\n          \"cor\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"embassy_address\": \"<string>\",\n      \"employer_approver\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"employer_special_instructions\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"reason\": \"<string>\",\n      \"requires_travel_address\": \"<boolean>\",\n      \"responsible_for_accommodation_cost\": \"employer\",\n      \"responsible_for_meal_cost\": \"employer\",\n      \"responsible_for_travel_cost\": \"employee\",\n      \"status\": \"declined_by_remote\",\n      \"submitted_at\": \"<dateTime>\",\n      \"travel_address\": \"<string>\",\n      \"travel_date_end\": \"<date>\",\n      \"travel_date_start\": \"<date>\",\n      \"travel_document_number\": \"<string>\",\n      \"travel_reason\": \"<string>\",\n      \"travel_reason_details\": \"<string>\",\n      \"user\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-fc247762-8e2f-4e76-94f9-0d8687a6bb5c"
+                    },
+                    {
+                      "id": "9f8159c3-7cb7-42c3-859f-2e1e6fc300f5",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-9f8159c3-7cb7-42c3-859f-2e1e6fc300f5"
+                    },
+                    {
+                      "id": "100673c4-9f08-4152-84e3-cec5c9befa2c",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-100673c4-9f08-4152-84e3-cec5c9befa2c"
+                    },
+                    {
+                      "id": "eddec420-d885-4e62-9786-726dfff4a977",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-eddec420-d885-4e62-9786-726dfff4a977"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-f862fc1c-f4fc-44f3-9d98-f9830b9ca255"
+                },
+                {
+                  "name": "Updates a travel letter request",
+                  "id": "27ffb8f9-5387-4a9e-9e96-dc86da890a1f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "travel-letter-requests",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1f4768cb-322c-49af-9bd2-6a55ed583b8a",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Travel letter Request ID"
+                        }
+                      ]
+                    },
+                    "description": "Updates a travel letter request\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage travel letters (`travel_letter:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "57d600a4-e595-453a-813a-436ee52e81c1",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"travel_letter_request\": {\n      \"additional_information\": \"<string>\",\n      \"destination_country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"plus\",\n          \"cor\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"embassy_address\": \"<string>\",\n      \"employer_approver\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      },\n      \"employer_special_instructions\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"reason\": \"<string>\",\n      \"requires_travel_address\": \"<boolean>\",\n      \"responsible_for_accommodation_cost\": \"employer\",\n      \"responsible_for_meal_cost\": \"employer\",\n      \"responsible_for_travel_cost\": \"employee\",\n      \"status\": \"declined_by_remote\",\n      \"submitted_at\": \"<dateTime>\",\n      \"travel_address\": \"<string>\",\n      \"travel_date_end\": \"<date>\",\n      \"travel_date_start\": \"<date>\",\n      \"travel_document_number\": \"<string>\",\n      \"travel_reason\": \"<string>\",\n      \"travel_reason_details\": \"<string>\",\n      \"user\": {\n        \"email\": \"<string>\",\n        \"name\": \"<string>\",\n        \"id\": \"<uuid>\"\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-57d600a4-e595-453a-813a-436ee52e81c1"
+                    },
+                    {
+                      "id": "e3b7258b-abf3-4f29-a9b6-9f4a03bade47",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-e3b7258b-abf3-4f29-a9b6-9f4a03bade47"
+                    },
+                    {
+                      "id": "d5c17c5e-aa20-4a2d-9d61-f4fa08c09ddb",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-d5c17c5e-aa20-4a2d-9d61-f4fa08c09ddb"
+                    },
+                    {
+                      "id": "5a54da66-34cc-488b-a2c7-e04046b1baf8",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"status\": \"approved_by_manager\",\n  \"responsible_for_accommodation_cost\": \"employer\",\n  \"responsible_for_travel_cost\": \"employee\",\n  \"responsible_for_meal_cost\": \"employer\",\n  \"employer_special_instructions\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/travel-letter-requests/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "travel-letter-requests",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:48:04.000Z",
+                      "updatedAt": "2026-07-28T02:48:04.000Z",
+                      "uid": "35240-5a54da66-34cc-488b-a2c7-e04046b1baf8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-27ffb8f9-5387-4a9e-9e96-dc86da890a1f"
+                }
+              ],
+              "id": "66cb6a8b-e7e3-44c7-a198-f189e2efbd1e",
+              "createdAt": "2026-07-28T02:48:04.000Z",
+              "updatedAt": "2026-07-28T02:48:04.000Z",
+              "uid": "35240-66cb6a8b-e7e3-44c7-a198-f189e2efbd1e"
+            },
+            {
+              "name": "List travel letter requests",
+              "id": "74aa6490-2f71-4351-9883-4f0968640ddd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/travel-letter-requests?status=approved_by_remote&employment_id=<string>&employee_name=<string>&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "travel-letter-requests"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter results on the given status",
+                      "key": "status",
+                      "value": "approved_by_remote"
+                    },
+                    {
+                      "description": "Filter results on the given employment slug",
+                      "key": "employment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter results on the given employee name",
+                      "key": "employee_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort order",
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "description": "Field to sort by",
+                      "key": "sort_by",
+                      "value": "submitted_at"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "List travel letter requests.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View travel letters (`travel_letter:read`) | Manage travel letters (`travel_letter:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "182511fa-3dc7-463e-9663-80502f3639cf",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/travel-letter-requests?status=approved_by_remote&employment_id=<string>&employee_name=<string>&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "travel-letter-requests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results on the given status",
+                          "key": "status",
+                          "value": "approved_by_remote"
+                        },
+                        {
+                          "description": "Filter results on the given employment slug",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter results on the given employee name",
+                          "key": "employee_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\",\n    \"travel_letter_requests\": [\n      {\n        \"additional_information\": \"<string>\",\n        \"destination_country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"standard\",\n            \"cor\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"embassy_address\": \"<string>\",\n        \"employer_approver\": {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"id\": \"<uuid>\"\n        },\n        \"employer_special_instructions\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"reason\": \"<string>\",\n        \"requires_travel_address\": \"<boolean>\",\n        \"responsible_for_accommodation_cost\": \"employer\",\n        \"responsible_for_meal_cost\": \"employee\",\n        \"responsible_for_travel_cost\": \"employee\",\n        \"status\": \"pending\",\n        \"submitted_at\": \"<dateTime>\",\n        \"travel_address\": \"<string>\",\n        \"travel_date_end\": \"<date>\",\n        \"travel_date_start\": \"<date>\",\n        \"travel_document_number\": \"<string>\",\n        \"travel_reason\": \"<string>\",\n        \"travel_reason_details\": \"<string>\",\n        \"user\": {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"id\": \"<uuid>\"\n        }\n      },\n      {\n        \"additional_information\": \"<string>\",\n        \"destination_country\": {\n          \"alpha_2_code\": \"<string>\",\n          \"code\": \"<string>\",\n          \"name\": \"<string>\",\n          \"contractor_products_available\": [\n            \"standard\",\n            \"plus\"\n          ],\n          \"country_subdivisions\": [\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"code\": \"<string>\",\n              \"subdivision_type\": \"<string>\"\n            }\n          ],\n          \"employment_agreement_preview_available\": \"<boolean>\",\n          \"eor_onboarding\": \"<boolean>\",\n          \"locked_benefits\": \"<string>\",\n          \"region\": \"<string>\",\n          \"subregion\": \"<string>\",\n          \"supported_json_schemas\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"embassy_address\": \"<string>\",\n        \"employer_approver\": {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"id\": \"<uuid>\"\n        },\n        \"employer_special_instructions\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"reason\": \"<string>\",\n        \"requires_travel_address\": \"<boolean>\",\n        \"responsible_for_accommodation_cost\": \"employee\",\n        \"responsible_for_meal_cost\": \"employer\",\n        \"responsible_for_travel_cost\": \"employee\",\n        \"status\": \"pending\",\n        \"submitted_at\": \"<dateTime>\",\n        \"travel_address\": \"<string>\",\n        \"travel_date_end\": \"<date>\",\n        \"travel_date_start\": \"<date>\",\n        \"travel_document_number\": \"<string>\",\n        \"travel_reason\": \"<string>\",\n        \"travel_reason_details\": \"<string>\",\n        \"user\": {\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"id\": \"<uuid>\"\n        }\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-182511fa-3dc7-463e-9663-80502f3639cf"
+                },
+                {
+                  "id": "0c5bcd13-72d9-4b1b-adca-5187a7f1ba16",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/travel-letter-requests?status=approved_by_remote&employment_id=<string>&employee_name=<string>&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "travel-letter-requests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results on the given status",
+                          "key": "status",
+                          "value": "approved_by_remote"
+                        },
+                        {
+                          "description": "Filter results on the given employment slug",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter results on the given employee name",
+                          "key": "employee_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-0c5bcd13-72d9-4b1b-adca-5187a7f1ba16"
+                },
+                {
+                  "id": "fc9dfb2f-ffa9-4fc1-973b-6bd85ed2738b",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/travel-letter-requests?status=approved_by_remote&employment_id=<string>&employee_name=<string>&order=asc&sort_by=submitted_at&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "travel-letter-requests"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter results on the given status",
+                          "key": "status",
+                          "value": "approved_by_remote"
+                        },
+                        {
+                          "description": "Filter results on the given employment slug",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter results on the given employee name",
+                          "key": "employee_name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "submitted_at"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:48:04.000Z",
+                  "updatedAt": "2026-07-28T02:48:04.000Z",
+                  "uid": "35240-fc9dfb2f-ffa9-4fc1-973b-6bd85ed2738b"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:04.000Z",
+              "updatedAt": "2026-07-28T02:48:04.000Z",
+              "uid": "35240-74aa6490-2f71-4351-9883-4f0968640ddd"
+            }
+          ],
+          "id": "61f3feee-a9c6-4caf-8588-333419c7ae00",
+          "createdAt": "2026-07-28T02:48:04.000Z",
+          "updatedAt": "2026-07-28T02:48:04.000Z",
+          "uid": "35240-61f3feee-a9c6-4caf-8588-333419c7ae00"
+        }
+      ],
+      "id": "36e1c31b-4298-40f7-94a5-b5bf1a02c41d",
+      "createdAt": "2026-07-28T02:48:04.000Z",
+      "updatedAt": "2026-07-28T02:48:04.000Z",
+      "uid": "35240-36e1c31b-4298-40f7-94a5-b5bf1a02c41d"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

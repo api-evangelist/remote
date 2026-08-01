@@ -1,0 +1,675 @@
+{
+  "info": {
+    "_postman_id": "6060c33e-4bb3-4e18-8553-c38c15c7486d",
+    "name": "Remote Address Details Employee Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:41.000Z",
+    "updatedAt": "2026-07-28T02:45:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6060c33e-4bb3-4e18-8553-c38c15c7486d"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "documents",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Download a document for the employee",
+                      "id": "4eba02b5-b54f-42db-a2f0-4bb5c526662b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "22aa855c-5838-4220-a3fa-9015f8ce36fd",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Document ID"
+                            }
+                          ]
+                        },
+                        "description": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "f6bd5f4d-5b4c-4546-a7fe-ec59d8072f49",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/documents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "documents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"document\": {\n      \"content\": \"<binary>\",\n      \"id\": \"<string>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"sub_type\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:45:42.000Z",
+                          "updatedAt": "2026-07-28T02:45:42.000Z",
+                          "uid": "35240-f6bd5f4d-5b4c-4546-a7fe-ec59d8072f49"
+                        },
+                        {
+                          "id": "acb3d96d-b146-4836-bd86-06124106a6a0",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/documents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "documents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:42.000Z",
+                          "updatedAt": "2026-07-28T02:45:42.000Z",
+                          "uid": "35240-acb3d96d-b146-4836-bd86-06124106a6a0"
+                        },
+                        {
+                          "id": "d98046be-f37a-44a7-beca-41875b683483",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/documents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "documents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:42.000Z",
+                          "updatedAt": "2026-07-28T02:45:42.000Z",
+                          "uid": "35240-d98046be-f37a-44a7-beca-41875b683483"
+                        },
+                        {
+                          "id": "6faf8360-1938-4f1a-a5fc-92614f87f110",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/documents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "documents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:42.000Z",
+                          "updatedAt": "2026-07-28T02:45:42.000Z",
+                          "uid": "35240-6faf8360-1938-4f1a-a5fc-92614f87f110"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:42.000Z",
+                      "updatedAt": "2026-07-28T02:45:42.000Z",
+                      "uid": "35240-4eba02b5-b54f-42db-a2f0-4bb5c526662b"
+                    }
+                  ],
+                  "id": "00a165de-737e-49a2-9481-6184ec8e2eb9",
+                  "createdAt": "2026-07-28T02:45:42.000Z",
+                  "updatedAt": "2026-07-28T02:45:42.000Z",
+                  "uid": "35240-00a165de-737e-49a2-9481-6184ec8e2eb9"
+                },
+                {
+                  "name": "Indexes all the documents for the employee",
+                  "id": "0debfe94-5444-4450-8731-88cf54da4a8d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/documents?page=1&page_size=20&name=<string>&inserted_after=<date>&inserted_before=<date>&sort_by=related_to&order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "documents"
+                      ],
+                      "query": [
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Filter documents by their description or file name, accepts full and partial case insensitive matches",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filters the results that were uploaded on or after a given date",
+                          "key": "inserted_after",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filters the results that were uploaded before a given date",
+                          "key": "inserted_before",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Field to sort by",
+                          "key": "sort_by",
+                          "value": "related_to"
+                        },
+                        {
+                          "description": "Sort order",
+                          "key": "order",
+                          "value": "desc"
+                        }
+                      ]
+                    },
+                    "description": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "b221a405-47f5-40e5-8a5e-b4e07e79b076",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents?page=1&page_size=20&name=<string>&inserted_after=<date>&inserted_before=<date>&sort_by=related_to&order=desc",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Filter documents by their description or file name, accepts full and partial case insensitive matches",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filters the results that were uploaded on or after a given date",
+                              "key": "inserted_after",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Filters the results that were uploaded before a given date",
+                              "key": "inserted_before",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Field to sort by",
+                              "key": "sort_by",
+                              "value": "related_to"
+                            },
+                            {
+                              "description": "Sort order",
+                              "key": "order",
+                              "value": "desc"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"documents\": [\n      {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:45:42.000Z",
+                      "updatedAt": "2026-07-28T02:45:42.000Z",
+                      "uid": "35240-b221a405-47f5-40e5-8a5e-b4e07e79b076"
+                    },
+                    {
+                      "id": "738fd73a-ad8b-4f30-8874-c147fb446aa1",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents?page=1&page_size=20&name=<string>&inserted_after=<date>&inserted_before=<date>&sort_by=related_to&order=desc",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Filter documents by their description or file name, accepts full and partial case insensitive matches",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filters the results that were uploaded on or after a given date",
+                              "key": "inserted_after",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Filters the results that were uploaded before a given date",
+                              "key": "inserted_before",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Field to sort by",
+                              "key": "sort_by",
+                              "value": "related_to"
+                            },
+                            {
+                              "description": "Sort order",
+                              "key": "order",
+                              "value": "desc"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:45:42.000Z",
+                      "updatedAt": "2026-07-28T02:45:42.000Z",
+                      "uid": "35240-738fd73a-ad8b-4f30-8874-c147fb446aa1"
+                    },
+                    {
+                      "id": "0eedc8b2-fd45-4ae3-b785-1b6f2a218a75",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/documents?page=1&page_size=20&name=<string>&inserted_after=<date>&inserted_before=<date>&sort_by=related_to&order=desc",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "documents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Filter documents by their description or file name, accepts full and partial case insensitive matches",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filters the results that were uploaded on or after a given date",
+                              "key": "inserted_after",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Filters the results that were uploaded before a given date",
+                              "key": "inserted_before",
+                              "value": "<date>"
+                            },
+                            {
+                              "description": "Field to sort by",
+                              "key": "sort_by",
+                              "value": "related_to"
+                            },
+                            {
+                              "description": "Sort order",
+                              "key": "order",
+                              "value": "desc"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:45:42.000Z",
+                      "updatedAt": "2026-07-28T02:45:42.000Z",
+                      "uid": "35240-0eedc8b2-fd45-4ae3-b785-1b6f2a218a75"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:45:42.000Z",
+                  "updatedAt": "2026-07-28T02:45:42.000Z",
+                  "uid": "35240-0debfe94-5444-4450-8731-88cf54da4a8d"
+                }
+              ],
+              "id": "c122c0cc-a281-48b7-8992-dba204c43ac3",
+              "createdAt": "2026-07-28T02:45:42.000Z",
+              "updatedAt": "2026-07-28T02:45:42.000Z",
+              "uid": "35240-c122c0cc-a281-48b7-8992-dba204c43ac3"
+            }
+          ],
+          "id": "8768ac57-3e62-468d-9134-1abab8e9ac80",
+          "createdAt": "2026-07-28T02:45:42.000Z",
+          "updatedAt": "2026-07-28T02:45:42.000Z",
+          "uid": "35240-8768ac57-3e62-468d-9134-1abab8e9ac80"
+        }
+      ],
+      "id": "bd9b7987-c5e3-4237-a6f5-08bab548b8cc",
+      "createdAt": "2026-07-28T02:45:42.000Z",
+      "updatedAt": "2026-07-28T02:45:42.000Z",
+      "uid": "35240-bd9b7987-c5e3-4237-a6f5-08bab548b8cc"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

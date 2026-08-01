@@ -1,0 +1,1003 @@
+{
+  "info": {
+    "_postman_id": "f6c672a4-fa2d-4776-9245-3618db5c2ab1",
+    "name": "Remote Address Details Leave Policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:46:45.000Z",
+    "updatedAt": "2026-07-28T02:46:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f6c672a4-fa2d-4776-9245-3618db5c2ab1"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "leave-policies",
+              "item": [
+                {
+                  "name": "summary",
+                  "item": [
+                    {
+                      "name": "List Employee Leave Policies Summary",
+                      "id": "c7fa03aa-9cea-415a-826b-5902660c8f64",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/leave-policies/summary",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "leave-policies",
+                            "summary"
+                          ]
+                        },
+                        "description": "List the leave policies summary (balances and entitlements) for the current employee\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "6a3a1691-9be7-45ba-b4da-f4cb5747d882",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/leave-policies/summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "leave-policies",
+                                "summary"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"leave_policy\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"unit\": \"hours\",\n        \"leave_type\": \"bereavement\"\n      },\n      \"annual_entitlement\": {\n        \"type\": \"unlimited\"\n      },\n      \"annual_balance\": {\n        \"type\": \"unlimited\"\n      },\n      \"current_entitlement\": {\n        \"type\": \"unlimited\"\n      },\n      \"balance\": {\n        \"type\": \"unlimited\"\n      },\n      \"upcoming_approved\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"upcoming_requested\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"pending_approval\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"taken\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"used\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"booked\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"working_hours_per_day\": \"<integer>\"\n    },\n    {\n      \"leave_policy\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"unit\": \"hours\",\n        \"leave_type\": \"parental_leave\"\n      },\n      \"annual_entitlement\": {\n        \"type\": \"unlimited\"\n      },\n      \"annual_balance\": {\n        \"type\": \"unlimited\"\n      },\n      \"current_entitlement\": {\n        \"type\": \"unlimited\"\n      },\n      \"balance\": {\n        \"type\": \"unlimited\"\n      },\n      \"upcoming_approved\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"upcoming_requested\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"pending_approval\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"taken\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"used\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"booked\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"working_hours_per_day\": \"<integer>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-6a3a1691-9be7-45ba-b4da-f4cb5747d882"
+                        },
+                        {
+                          "id": "b9ba8d04-8b02-4435-a22c-de58d9b4d322",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/leave-policies/summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "leave-policies",
+                                "summary"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-b9ba8d04-8b02-4435-a22c-de58d9b4d322"
+                        },
+                        {
+                          "id": "e9b3e999-f33c-48c2-a1eb-0cec5844f656",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/leave-policies/summary",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "leave-policies",
+                                "summary"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-e9b3e999-f33c-48c2-a1eb-0cec5844f656"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:45.000Z",
+                      "updatedAt": "2026-07-28T02:46:45.000Z",
+                      "uid": "35240-c7fa03aa-9cea-415a-826b-5902660c8f64"
+                    }
+                  ],
+                  "id": "29a5fe7d-629e-446b-beb4-aec182234bd9",
+                  "createdAt": "2026-07-28T02:46:45.000Z",
+                  "updatedAt": "2026-07-28T02:46:45.000Z",
+                  "uid": "35240-29a5fe7d-629e-446b-beb4-aec182234bd9"
+                },
+                {
+                  "name": "List Employee Leave Policies",
+                  "id": "d2ba06bc-bbfa-4afe-b7f5-6be7ec4c2dde",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/leave-policies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "leave-policies"
+                      ]
+                    },
+                    "description": "List the leave policies for the current employee\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "d48e3c3d-9ad0-46a5-bdfd-d1122800c348",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/leave-policies",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "leave-policies"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"leave_policy_variant_id\": \"<uuid>\",\n      \"custom\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"uses_accrual_as_balance\": \"<boolean>\"\n    },\n    {\n      \"leave_policy_variant_id\": \"<uuid>\",\n      \"custom\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"uses_accrual_as_balance\": \"<boolean>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:46:45.000Z",
+                      "updatedAt": "2026-07-28T02:46:45.000Z",
+                      "uid": "35240-d48e3c3d-9ad0-46a5-bdfd-d1122800c348"
+                    },
+                    {
+                      "id": "354b7142-ad79-4e63-b7d3-6914c0264a99",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/leave-policies",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "leave-policies"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:46:45.000Z",
+                      "updatedAt": "2026-07-28T02:46:45.000Z",
+                      "uid": "35240-354b7142-ad79-4e63-b7d3-6914c0264a99"
+                    },
+                    {
+                      "id": "4d11e9d2-3d3f-45b9-88cc-a488bb92557f",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/leave-policies",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "leave-policies"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:46:45.000Z",
+                      "updatedAt": "2026-07-28T02:46:45.000Z",
+                      "uid": "35240-4d11e9d2-3d3f-45b9-88cc-a488bb92557f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:46:45.000Z",
+                  "updatedAt": "2026-07-28T02:46:45.000Z",
+                  "uid": "35240-d2ba06bc-bbfa-4afe-b7f5-6be7ec4c2dde"
+                }
+              ],
+              "id": "a6670162-ada7-44eb-8a48-6931ee99cf12",
+              "createdAt": "2026-07-28T02:46:45.000Z",
+              "updatedAt": "2026-07-28T02:46:45.000Z",
+              "uid": "35240-a6670162-ada7-44eb-8a48-6931ee99cf12"
+            }
+          ],
+          "id": "9b454696-aa3d-4935-b47f-1aed1c18f800",
+          "createdAt": "2026-07-28T02:46:45.000Z",
+          "updatedAt": "2026-07-28T02:46:45.000Z",
+          "uid": "35240-9b454696-aa3d-4935-b47f-1aed1c18f800"
+        },
+        {
+          "name": "leave-policies",
+          "item": [
+            {
+              "name": "summary",
+              "item": [
+                {
+                  "name": "{employment_id}",
+                  "item": [
+                    {
+                      "name": "List Leave Policies Summary",
+                      "id": "a3fb4d62-f6d0-4ca1-8f12-47dc3ce27676",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leave-policies/summary/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leave-policies",
+                            "summary",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c48f3d3d-a0d6-44c2-b69c-e982126286c9",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "List all the data related to time off for a given employment\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "0e2558c1-5e84-44e2-8722-6cb1ab39762c",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/leave-policies/summary/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "leave-policies",
+                                "summary",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"leave_policy\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"unit\": \"hours\",\n        \"leave_type\": \"bereavement\"\n      },\n      \"annual_entitlement\": {\n        \"type\": \"unlimited\"\n      },\n      \"annual_balance\": {\n        \"type\": \"unlimited\"\n      },\n      \"current_entitlement\": {\n        \"type\": \"unlimited\"\n      },\n      \"balance\": {\n        \"type\": \"unlimited\"\n      },\n      \"upcoming_approved\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"upcoming_requested\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"pending_approval\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"taken\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"used\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"booked\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"working_hours_per_day\": \"<integer>\"\n    },\n    {\n      \"leave_policy\": {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"unit\": \"hours\",\n        \"leave_type\": \"parental_leave\"\n      },\n      \"annual_entitlement\": {\n        \"type\": \"unlimited\"\n      },\n      \"annual_balance\": {\n        \"type\": \"unlimited\"\n      },\n      \"current_entitlement\": {\n        \"type\": \"unlimited\"\n      },\n      \"balance\": {\n        \"type\": \"unlimited\"\n      },\n      \"upcoming_approved\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"upcoming_requested\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"pending_approval\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"taken\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"used\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"booked\": {\n        \"type\": \"limited\",\n        \"days\": \"<integer>\",\n        \"hours\": \"<integer>\"\n      },\n      \"working_hours_per_day\": \"<integer>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-0e2558c1-5e84-44e2-8722-6cb1ab39762c"
+                        },
+                        {
+                          "id": "97a45777-b3d5-44cb-ab14-1f413941a619",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/leave-policies/summary/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "leave-policies",
+                                "summary",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-97a45777-b3d5-44cb-ab14-1f413941a619"
+                        },
+                        {
+                          "id": "94cc0c8d-cc07-4afe-98cc-36d4d3c7e059",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/leave-policies/summary/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "leave-policies",
+                                "summary",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-94cc0c8d-cc07-4afe-98cc-36d4d3c7e059"
+                        },
+                        {
+                          "id": "9cb37d2a-f600-4c09-a347-5d827ed786e7",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/leave-policies/summary/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "leave-policies",
+                                "summary",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-9cb37d2a-f600-4c09-a347-5d827ed786e7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:45.000Z",
+                      "updatedAt": "2026-07-28T02:46:45.000Z",
+                      "uid": "35240-a3fb4d62-f6d0-4ca1-8f12-47dc3ce27676"
+                    }
+                  ],
+                  "id": "17c7c02f-f217-49e8-a432-4a2a5d29e57c",
+                  "createdAt": "2026-07-28T02:46:45.000Z",
+                  "updatedAt": "2026-07-28T02:46:45.000Z",
+                  "uid": "35240-17c7c02f-f217-49e8-a432-4a2a5d29e57c"
+                }
+              ],
+              "id": "798d50a1-33e6-4b74-b826-80c334c69251",
+              "createdAt": "2026-07-28T02:46:45.000Z",
+              "updatedAt": "2026-07-28T02:46:45.000Z",
+              "uid": "35240-798d50a1-33e6-4b74-b826-80c334c69251"
+            },
+            {
+              "name": "details",
+              "item": [
+                {
+                  "name": "{employment_id}",
+                  "item": [
+                    {
+                      "name": "List Leave Policies Details",
+                      "id": "614bce3d-9390-46e3-9ae7-35856480d36d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/leave-policies/details/:employment_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "leave-policies",
+                            "details",
+                            ":employment_id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "631db59a-d9ec-4ef1-9072-198bffaed624",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Describe the leave policies (custom or not) for a given employment\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "8eb3aea0-b74b-4dc1-80c9-5c981a396f53",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/leave-policies/details/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "leave-policies",
+                                "details",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"leave_policy_variant_id\": \"<uuid>\",\n      \"custom\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"uses_accrual_as_balance\": \"<boolean>\"\n    },\n    {\n      \"leave_policy_variant_id\": \"<uuid>\",\n      \"custom\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"uses_accrual_as_balance\": \"<boolean>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-8eb3aea0-b74b-4dc1-80c9-5c981a396f53"
+                        },
+                        {
+                          "id": "38144481-ef14-415d-bd8b-941dc38709be",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/leave-policies/details/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "leave-policies",
+                                "details",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-38144481-ef14-415d-bd8b-941dc38709be"
+                        },
+                        {
+                          "id": "9d626140-7184-43dd-83f5-cee645db51a6",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/leave-policies/details/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "leave-policies",
+                                "details",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-9d626140-7184-43dd-83f5-cee645db51a6"
+                        },
+                        {
+                          "id": "28133faf-180a-4c27-8043-ab7cfc7f6062",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/leave-policies/details/:employment_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "leave-policies",
+                                "details",
+                                ":employment_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:46:45.000Z",
+                          "updatedAt": "2026-07-28T02:46:45.000Z",
+                          "uid": "35240-28133faf-180a-4c27-8043-ab7cfc7f6062"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:45.000Z",
+                      "updatedAt": "2026-07-28T02:46:45.000Z",
+                      "uid": "35240-614bce3d-9390-46e3-9ae7-35856480d36d"
+                    }
+                  ],
+                  "id": "145cd676-a562-4a00-8ed1-e65909e4a999",
+                  "createdAt": "2026-07-28T02:46:45.000Z",
+                  "updatedAt": "2026-07-28T02:46:45.000Z",
+                  "uid": "35240-145cd676-a562-4a00-8ed1-e65909e4a999"
+                }
+              ],
+              "id": "97ebda8a-f9ca-44bc-8ecb-31720df68c99",
+              "createdAt": "2026-07-28T02:46:45.000Z",
+              "updatedAt": "2026-07-28T02:46:45.000Z",
+              "uid": "35240-97ebda8a-f9ca-44bc-8ecb-31720df68c99"
+            }
+          ],
+          "id": "ed4bfb42-a7eb-48e9-842f-632e1b7596ce",
+          "createdAt": "2026-07-28T02:46:45.000Z",
+          "updatedAt": "2026-07-28T02:46:45.000Z",
+          "uid": "35240-ed4bfb42-a7eb-48e9-842f-632e1b7596ce"
+        }
+      ],
+      "id": "c7d4531b-053d-40c3-bace-40761aeab247",
+      "createdAt": "2026-07-28T02:46:45.000Z",
+      "updatedAt": "2026-07-28T02:46:45.000Z",
+      "uid": "35240-c7d4531b-053d-40c3-bace-40761aeab247"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

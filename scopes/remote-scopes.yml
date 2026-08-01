@@ -1,0 +1,569 @@
+generated: '2026-07-20'
+method: searched
+source: openapi/remote-openapi-original.json
+docs: https://developer.remote.com/docs/authentication
+notes: >-
+  86 OAuth 2.0 scopes across authorization_code, client_credentials, and
+  jwt-bearer assertion flows, following a resource:action naming convention
+  (e.g. employment:read, timeoff:write, webhook:write, payroll, invoices).
+schemes:
+- name: OAuth2
+  source: openapi/remote-openapi-original.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /auth/oauth2/authorize
+    tokenUrl: /auth/oauth2/token
+  - flow: clientCredentials
+    tokenUrl: /auth/oauth2/token
+  description: Authenticate using OAuth 2.0 protocol.
+- name: OAuth2Assertion
+  source: openapi/remote-openapi-original.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /auth/oauth2/token
+  description: Authenticate as the employee using the `urn:ietf:params:oauth:grant-type:jwt-bearer`
+    grant in the OAuth2 protocol.
+- name: OAuth2AuthorizationCode
+  source: openapi/remote-openapi-original.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /auth/oauth2/authorize
+    tokenUrl: /auth/oauth2/token
+  description: Authenticate as the token authorizer using `authorization_code` / `refresh_token`
+    grants in the OAuth 2.0 protocol.
+- name: OAuth2ClientCredentials
+  source: openapi/remote-openapi-original.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /auth/oauth2/token
+  description: Authenticate using `client_credentials` grant in the OAuth 2.0 protocol.
+scopes:
+- scope: address:read
+  description: address:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: address:write
+  description: address:write
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: all:read
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: all:write
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: background_check:read
+  description: background_check:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: bank_account:read
+  description: bank_account:read
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: bank_account:write
+  description: bank_account:write
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: benefit_offer:read
+  description: benefit_offer:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: benefit_offer:write
+  description: benefit_offer:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: benefit_renewal:read
+  description: benefit_renewal:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: benefit_renewal:write
+  description: benefit_renewal:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company:read
+  description: company:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company:write
+  description: company:write
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company_admin
+  description: company_admin
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company_currencies:read
+  description: company_currencies:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company_department:read
+  description: company_department:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company_department:write
+  description: company_department:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company_management
+  description: company_management
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company_manager:read
+  description: company_manager:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company_manager:write
+  description: company_manager:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: company_structure:read
+  description: company_structure:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: contract:read
+  description: contract:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: contract_amendment:read
+  description: contract_amendment:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: contract_amendment:write
+  description: contract_amendment:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: contract_eligibility:write
+  description: contract_eligibility:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: convert_currency:read
+  description: convert_currency:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: country:read
+  description: country:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: custom_field:read
+  description: custom_field:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: custom_field:write
+  description: custom_field:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: custom_field_value:read
+  description: custom_field_value:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: custom_field_value:write
+  description: custom_field_value:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: document:read
+  description: document:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: document:write
+  description: document:write
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: emergency_contact:read
+  description: emergency_contact:read
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: emergency_contact:write
+  description: emergency_contact:write
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: employment:read
+  description: employment:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: employment:write
+  description: employment:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: employment_documents
+  description: employment_documents
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: employment_payments
+  description: employment_payments
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: employments
+  description: employments
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: expense:read
+  description: expense:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: expense:write
+  description: expense:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: form:read
+  description: form:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: help_center_article:read
+  description: help_center_article:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: https://gateway.remote.com/company.manage
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: https://gateway.remote.com/employment.manage
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: identity_verification:read
+  description: identity_verification:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: identity_verification:write
+  description: identity_verification:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: incentive:read
+  description: incentive:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: incentive:write
+  description: incentive:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: invoices
+  description: invoices
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: invoices:read
+  description: invoices:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: invoices:write
+  description: invoices:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: magic_link:write
+  description: magic_link:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: offboarding:read
+  description: offboarding:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: offboarding:write
+  description: offboarding:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: onboarding:write
+  description: onboarding:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: pay_item:read
+  description: pay_item:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: pay_item:write
+  description: pay_item:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: payroll
+  description: payroll
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: payroll_calendar:read
+  description: payroll_calendar:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: payroll_run:read
+  description: payroll_run:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: payslip:read
+  description: payslip:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: personal_detail:read
+  description: personal_detail:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: personal_detail:write
+  description: personal_detail:write
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: pricing_plan:read
+  description: pricing_plan:read
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: pricing_plan:write
+  description: pricing_plan:write
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: probation_document:read
+  description: probation_document:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: probation_document:write
+  description: probation_document:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: resignation:read
+  description: resignation:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: resignation:write
+  description: resignation:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: resignation_letter:read
+  description: resignation_letter:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: risk_reserve:write
+  description: risk_reserve:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: sso_configuration:read
+  description: sso_configuration:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: sso_configuration:write
+  description: sso_configuration:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: time_and_attendance
+  description: time_and_attendance
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: timeoff:read
+  description: timeoff:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: timeoff:write
+  description: timeoff:write
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: timesheet:read
+  description: timesheet:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: timesheet:write
+  description: timesheet:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: travel_letter:read
+  description: travel_letter:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: travel_letter:write
+  description: travel_letter:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: webhook:read
+  description: webhook:read
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: webhook:write
+  description: webhook:write
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: work_authorization:read
+  description: work_authorization:read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json
+- scope: work_authorization:write
+  description: work_authorization:write
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/remote-openapi-original.json

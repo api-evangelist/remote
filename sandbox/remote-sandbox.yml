@@ -1,0 +1,35 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.remote.com/docs/environment-setup
+summary: >-
+  Remote exposes a full sandbox alongside production, with a separate API host
+  and test-vs-live access-token prefixes, so partners can build and validate
+  integrations (including webhook delivery) before touching production data.
+environments:
+  - name: Production
+    website: https://remote.com/
+    api_base: https://gateway.remote.com/
+    token_prefix: ra_live_
+  - name: Sandbox
+    website: https://remote-sandbox.com/
+    api_base: https://gateway.remote-sandbox.com/
+    token_prefix: ra_test_
+    purpose: >-
+      Demonstration environment for all clients. Code is deployed to Sandbox
+      before production, often containing latest features ahead of general
+      release. Ideal for demos, client showcases, and exploratory testing.
+  - name: Partners
+    website: https://partners.remote-sandbox.com/
+    purpose: >-
+      Dedicated partner development, integration, and testing environment.
+      Code is deployed here after it is live in production.
+    ideal_for: API development, integration testing, and partner demos.
+token_modes:
+  live_prefix: ra_live_
+  test_prefix: ra_test_
+  notes: >-
+    Access tokens carry an environment prefix — ra_live_ in production and
+    ra_test_ in sandbox — so callers can tell test and live credentials apart.
+webhooks:
+  testable_in_sandbox: true
+  notes: Webhooks can be registered and tested in the sandbox environment.

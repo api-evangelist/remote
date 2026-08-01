@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/remote-openapi-original.json
+format: http-status-json
+envelope: >-
+  Errors return a standard HTTP status code with a JSON body. Validation
+  failures (422) use the UnprocessableEntityResponse schema. Responses are not
+  RFC 9457 application/problem+json.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: The request was malformed or contained invalid parameters.
+    occurrences: 138
+  - status: 401
+    title: Unauthorized
+    meaning: Missing, invalid, or expired access token. Obtain a valid OAuth 2.0 token.
+    occurrences: 221
+  - status: 403
+    title: Forbidden
+    meaning: The token is valid but lacks the OAuth scope or role for this resource.
+    occurrences: 100
+  - status: 404
+    title: Not Found
+    meaning: The requested resource does not exist or is not visible to the caller.
+    occurrences: 242
+  - status: 409
+    title: Conflict
+    meaning: The request conflicts with the current state of the resource.
+    occurrences: 38
+  - status: 422
+    title: Unprocessable Entity
+    schema: UnprocessableEntityResponse
+    meaning: The request was well-formed but failed validation (business rules or field-level errors).
+    occurrences: 225
+  - status: 429
+    title: Too Many Requests
+    meaning: Rate limit exceeded (300 requests/minute/company). See x-ratelimit-* headers.
+    occurrences: 130
+    cross_ref: rate-limits/remote-rate-limits.yml
+  - status: 500
+    title: Internal Server Error
+    meaning: An unexpected error occurred on Remote's side.
+    occurrences: 3

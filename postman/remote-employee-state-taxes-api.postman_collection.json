@@ -1,0 +1,604 @@
+{
+  "info": {
+    "_postman_id": "22c3f576-1ffc-4451-a402-c50c6b6c36af",
+    "name": "Remote Address Details Employee State Taxes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:54.000Z",
+    "updatedAt": "2026-07-28T02:45:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-22c3f576-1ffc-4451-a402-c50c6b6c36af"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "state-taxes",
+              "item": [
+                {
+                  "name": "{jurisdiction}",
+                  "item": [
+                    {
+                      "name": "Submit employee state taxes",
+                      "id": "8042326e-f0ce-4f0e-aec0-9a6f11331946",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "oauth2",
+                          "oauth2": [
+                            {
+                              "key": "scope",
+                              "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                              "type": "string"
+                            },
+                            {
+                              "key": "accessTokenUrl",
+                              "value": "/auth/oauth2/token",
+                              "type": "string"
+                            },
+                            {
+                              "key": "grant_type",
+                              "value": "client_credentials",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"state_taxes\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/state-taxes/:jurisdiction",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "state-taxes",
+                            ":jurisdiction"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c09c69b2-4c44-4de2-9c56-9913ff7b8a79",
+                              "key": "jurisdiction",
+                              "value": "<string>",
+                              "description": "(Required) Two-letter US state/jurisdiction code"
+                            }
+                          ]
+                        },
+                        "description": "Submits the authenticated employee's US state tax withholding answers for a\nsingle jurisdiction (e.g. `NY`).\n\nAvailable for US Global Payroll employees once they reach the post-enrollment\nstate, at which point the per-jurisdiction state tax task exists.\n\nThis endpoint requires country/jurisdiction-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `global_payroll_state_taxes`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage personal details (`personal_detail:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "01b7e477-b6b8-4903-8d5d-97fe7029e904",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state_taxes\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/state-taxes/:jurisdiction",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "state-taxes",
+                                ":jurisdiction"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jurisdiction"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"status\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:45:54.000Z",
+                          "updatedAt": "2026-07-28T02:45:54.000Z",
+                          "uid": "35240-01b7e477-b6b8-4903-8d5d-97fe7029e904"
+                        },
+                        {
+                          "id": "9b54e21b-0235-4adc-82af-2a5d8edd42c6",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state_taxes\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/state-taxes/:jurisdiction",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "state-taxes",
+                                ":jurisdiction"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jurisdiction"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:45:54.000Z",
+                          "updatedAt": "2026-07-28T02:45:54.000Z",
+                          "uid": "35240-9b54e21b-0235-4adc-82af-2a5d8edd42c6"
+                        },
+                        {
+                          "id": "fafa43dc-2bbf-411c-9802-372769d7737c",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state_taxes\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/state-taxes/:jurisdiction",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "state-taxes",
+                                ":jurisdiction"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jurisdiction"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:54.000Z",
+                          "updatedAt": "2026-07-28T02:45:54.000Z",
+                          "uid": "35240-fafa43dc-2bbf-411c-9802-372769d7737c"
+                        },
+                        {
+                          "id": "231d984e-38d6-49db-9ef3-f321e4438dfd",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state_taxes\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/state-taxes/:jurisdiction",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "state-taxes",
+                                ":jurisdiction"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jurisdiction"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Forbidden\"\n}",
+                          "createdAt": "2026-07-28T02:45:54.000Z",
+                          "updatedAt": "2026-07-28T02:45:54.000Z",
+                          "uid": "35240-231d984e-38d6-49db-9ef3-f321e4438dfd"
+                        },
+                        {
+                          "id": "27d29ad7-3129-44e4-bd22-7d2ad80a8af6",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state_taxes\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/state-taxes/:jurisdiction",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "state-taxes",
+                                ":jurisdiction"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jurisdiction"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:54.000Z",
+                          "updatedAt": "2026-07-28T02:45:54.000Z",
+                          "uid": "35240-27d29ad7-3129-44e4-bd22-7d2ad80a8af6"
+                        },
+                        {
+                          "id": "404d4b2c-183a-4402-80d6-b826be0c7c9c",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state_taxes\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/state-taxes/:jurisdiction",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "state-taxes",
+                                ":jurisdiction"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jurisdiction"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:54.000Z",
+                          "updatedAt": "2026-07-28T02:45:54.000Z",
+                          "uid": "35240-404d4b2c-183a-4402-80d6-b826be0c7c9c"
+                        },
+                        {
+                          "id": "3040831c-ecb5-4db1-8055-6bdfff3b6d2b",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state_taxes\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employee/state-taxes/:jurisdiction",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employee",
+                                "state-taxes",
+                                ":jurisdiction"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jurisdiction"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:45:54.000Z",
+                          "updatedAt": "2026-07-28T02:45:54.000Z",
+                          "uid": "35240-3040831c-ecb5-4db1-8055-6bdfff3b6d2b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:54.000Z",
+                      "updatedAt": "2026-07-28T02:45:54.000Z",
+                      "uid": "35240-8042326e-f0ce-4f0e-aec0-9a6f11331946"
+                    }
+                  ],
+                  "id": "4a2bdf94-f209-4112-ac7d-b5560eac9b4c",
+                  "createdAt": "2026-07-28T02:45:54.000Z",
+                  "updatedAt": "2026-07-28T02:45:54.000Z",
+                  "uid": "35240-4a2bdf94-f209-4112-ac7d-b5560eac9b4c"
+                }
+              ],
+              "id": "1412325f-689b-4802-8634-05c8b593ed76",
+              "createdAt": "2026-07-28T02:45:54.000Z",
+              "updatedAt": "2026-07-28T02:45:54.000Z",
+              "uid": "35240-1412325f-689b-4802-8634-05c8b593ed76"
+            }
+          ],
+          "id": "07053cd3-c751-4134-9872-accf41f919cf",
+          "createdAt": "2026-07-28T02:45:54.000Z",
+          "updatedAt": "2026-07-28T02:45:54.000Z",
+          "uid": "35240-07053cd3-c751-4134-9872-accf41f919cf"
+        }
+      ],
+      "id": "81331fa5-75da-45be-a124-53504c286e05",
+      "createdAt": "2026-07-28T02:45:54.000Z",
+      "updatedAt": "2026-07-28T02:45:54.000Z",
+      "uid": "35240-81331fa5-75da-45be-a124-53504c286e05"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

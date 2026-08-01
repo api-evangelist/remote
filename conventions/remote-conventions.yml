@@ -1,0 +1,61 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.remote.com/docs/getting-started-with-remote
+summary: >-
+  Cross-cutting request/response semantics for the Remote API — a RESTful,
+  JSON-only API over standard HTTP verbs and status codes, protected by OAuth
+  2.0, with page-based pagination, header-based rate-limit signaling, and
+  cryptographically signed webhooks.
+authentication:
+  style: oauth2
+  schemes: [BasicAuth, ClientToken, OAuth2 (authorization_code + client_credentials), OAuth2Assertion (jwt-bearer)]
+  token_lifetime_seconds: 3600
+  docs: https://developer.remote.com/docs/authentication
+  cross_ref: authentication/remote-authentication.yml
+content_type:
+  request: application/json
+  response: application/json
+  notes: JSON is the only accepted format; standard HTTP verbs and status codes.
+idempotency:
+  supported: false
+  notes: >-
+    Remote does not document an idempotency-key header and the OpenAPI declares
+    no idempotency parameter. No idempotency contract is asserted.
+pagination:
+  style: page-number
+  params: [page, page_size]
+  notes: Page-based pagination; page and page_size query parameters.
+rate_limiting:
+  limit: 300 requests per minute per company
+  scope: company (not per-token)
+  response_status: 429
+  headers:
+    - x-ratelimit-count
+    - x-ratelimit-remaining
+    - x-ratelimit-reset
+  docs: https://developer.remote.com/docs/rate-limit
+  cross_ref: rate-limits/remote-rate-limits.yml
+error_envelope:
+  style: custom-json
+  notes: >-
+    Errors return standard HTTP status codes with a JSON body. Validation
+    failures return 422 with an UnprocessableEntityResponse schema. Not
+    RFC 9457 problem+json.
+  cross_ref: errors/remote-problem-types.yml
+webhooks:
+  supported: true
+  signing:
+    scheme: HMAC signature per callback signing_key
+    headers: [X-Remote-Signature, X-Remote-Timestamp]
+    timestamp: unix-milliseconds
+  docs: https://developer.remote.com/docs/working-with-webhooks
+  cross_ref: asyncapi/remote-webhooks.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  base: https://gateway.remote.com/v1/
+  cross_ref: lifecycle/remote-lifecycle.yml
+environments:
+  production: https://gateway.remote.com/
+  sandbox: https://gateway.remote-sandbox.com/
+  cross_ref: sandbox/remote-sandbox.yml

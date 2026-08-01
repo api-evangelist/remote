@@ -1,0 +1,20 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.remote.com/docs/rate-limit
+policy:
+  limit_count: 300
+  window: 1 minute
+  scope: company
+  notes: >-
+    The Remote API processes up to 300 authenticated requests per minute per
+    company (not per token). Requests from all tokens belonging to the same
+    company share the limit. The window starts at the first request and resets
+    60 seconds later.
+  exceeded_status: 429
+headers:
+  - name: x-ratelimit-count
+    description: Requests performed within the current rate-limit period.
+  - name: x-ratelimit-remaining
+    description: Requests remaining before you must wait for the reset.
+  - name: x-ratelimit-reset
+    description: Milliseconds until the counter resets to the maximum limit.

@@ -1,0 +1,1540 @@
+{
+  "info": {
+    "_postman_id": "507ca276-e2d7-4a3b-abab-67810f08b342",
+    "name": "Remote Address Details Pre-Onboarding Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:34.000Z",
+    "updatedAt": "2026-07-28T02:47:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-507ca276-e2d7-4a3b-abab-67810f08b342"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "onboarding",
+          "item": [
+            {
+              "name": "employments",
+              "item": [
+                {
+                  "name": "{employment_id}",
+                  "item": [
+                    {
+                      "name": "pre-onboarding-document-requirements",
+                      "item": [
+                        {
+                          "name": "List pre-onboarding document requirements for an employment",
+                          "id": "b61272e1-237c-4330-84ff-95d0f2101b8b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-document-requirements",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "onboarding",
+                                "employments",
+                                ":employment_id",
+                                "pre-onboarding-document-requirements"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "25b92464-fb3f-4eec-8d34-6ccea0f60da9",
+                                  "key": "employment_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Employment ID"
+                                }
+                              ]
+                            },
+                            "description": "Returns the list of pre-onboarding document requirements (e.g. master service agreements,\nindividual labour agreements) that must be fulfilled before the given employment can be onboarded.\n\nDeprecated: use `GET /onboarding/employments/:employment_id/pre-onboarding-requirements` instead,\nwhich returns both document and acknowledgement requirements.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+                          },
+                          "response": [
+                            {
+                              "id": "01ba016e-3251-42a2-ad7e-ed6fe20745fe",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-document-requirements",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-document-requirements"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": [\n    {\n      \"slug\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"supports_redlining\": \"<boolean>\",\n      \"needs_constraints_ack\": \"<boolean>\",\n      \"depends_on_requirement\": {\n        \"description\": \"The requirement that must be fulfilled before this one becomes available (if any).\",\n        \"nullable\": true,\n        \"value\": \"<Circular reference to #/components/schemas/PreOnboardingDocumentRequirement detected>\"\n      },\n      \"document_constraints_ack_at\": \"<dateTime>\",\n      \"freeze_employment_data\": \"<boolean>\",\n      \"redlining_help_email\": \"<string>\",\n      \"status\": \"blocked\"\n    },\n    {\n      \"slug\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"supports_redlining\": \"<boolean>\",\n      \"needs_constraints_ack\": \"<boolean>\",\n      \"depends_on_requirement\": {\n        \"description\": \"The requirement that must be fulfilled before this one becomes available (if any).\",\n        \"nullable\": true,\n        \"value\": \"<Circular reference to #/components/schemas/PreOnboardingDocumentRequirement detected>\"\n      },\n      \"document_constraints_ack_at\": \"<dateTime>\",\n      \"freeze_employment_data\": \"<boolean>\",\n      \"redlining_help_email\": \"<string>\",\n      \"status\": \"blocked\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-01ba016e-3251-42a2-ad7e-ed6fe20745fe"
+                            },
+                            {
+                              "id": "63da710a-62d1-4304-aca0-1fcacf0c183a",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-document-requirements",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-document-requirements"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-63da710a-62d1-4304-aca0-1fcacf0c183a"
+                            },
+                            {
+                              "id": "f78dbba6-9f6f-4b25-885c-3b92c9428968",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-document-requirements",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-document-requirements"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Forbidden\"\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-f78dbba6-9f6f-4b25-885c-3b92c9428968"
+                            },
+                            {
+                              "id": "f951f799-eedf-4876-930e-7632b67b0521",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-document-requirements",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-document-requirements"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Not Found\"\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-f951f799-eedf-4876-930e-7632b67b0521"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:47:34.000Z",
+                          "updatedAt": "2026-07-28T02:47:34.000Z",
+                          "uid": "35240-b61272e1-237c-4330-84ff-95d0f2101b8b"
+                        }
+                      ],
+                      "id": "9c4bc699-961d-4892-87d7-b2f0938a5add",
+                      "createdAt": "2026-07-28T02:47:34.000Z",
+                      "updatedAt": "2026-07-28T02:47:34.000Z",
+                      "uid": "35240-9c4bc699-961d-4892-87d7-b2f0938a5add"
+                    },
+                    {
+                      "name": "pre-onboarding-documents",
+                      "item": [
+                        {
+                          "name": "{id}",
+                          "item": [
+                            {
+                              "name": "sign",
+                              "item": [
+                                {
+                                  "name": "Sign a pre-onboarding document",
+                                  "id": "ea7b528c-6156-4cba-a36b-7c1d12b1944d",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "auth": {
+                                      "type": "bearer",
+                                      "bearer": [
+                                        {
+                                          "key": "token",
+                                          "value": "{{bearerToken}}",
+                                          "type": "string"
+                                        }
+                                      ]
+                                    },
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "onboarding",
+                                        "employments",
+                                        ":employment_id",
+                                        "pre-onboarding-documents",
+                                        ":id",
+                                        "sign"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "8d29f394-a1fd-4118-908f-5f8e202367f9",
+                                          "key": "employment_id",
+                                          "value": "<string>",
+                                          "description": "(Required) Employment ID"
+                                        },
+                                        {
+                                          "id": "a5cf6bac-eddc-48ed-bfa5-e4a8ba44a810",
+                                          "key": "id",
+                                          "value": "<string>",
+                                          "description": "(Required) Pre-onboarding document ID"
+                                        }
+                                      ]
+                                    },
+                                    "description": "Signs the latest contract document associated with the given pre-onboarding document on behalf\nof the company signatory.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "6528d170-9622-4609-904d-024fa08d0805",
+                                      "name": "Success",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "onboarding",
+                                            "employments",
+                                            ":employment_id",
+                                            "pre-onboarding-documents",
+                                            ":id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"data\": {\n    \"status\": \"<string>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T02:47:34.000Z",
+                                      "updatedAt": "2026-07-28T02:47:34.000Z",
+                                      "uid": "35240-6528d170-9622-4609-904d-024fa08d0805"
+                                    },
+                                    {
+                                      "id": "7dc8e99b-3f77-4dd9-8828-3e11a576f8df",
+                                      "name": "Bad Request",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "onboarding",
+                                            "employments",
+                                            ":employment_id",
+                                            "pre-onboarding-documents",
+                                            ":id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T02:47:34.000Z",
+                                      "updatedAt": "2026-07-28T02:47:34.000Z",
+                                      "uid": "35240-7dc8e99b-3f77-4dd9-8828-3e11a576f8df"
+                                    },
+                                    {
+                                      "id": "652415b2-37a5-44a2-a80d-8c4eaacb4f56",
+                                      "name": "Unauthorized",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "onboarding",
+                                            "employments",
+                                            ":employment_id",
+                                            "pre-onboarding-documents",
+                                            ":id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                                      "createdAt": "2026-07-28T02:47:34.000Z",
+                                      "updatedAt": "2026-07-28T02:47:34.000Z",
+                                      "uid": "35240-652415b2-37a5-44a2-a80d-8c4eaacb4f56"
+                                    },
+                                    {
+                                      "id": "83098ea6-b085-4a0c-b6d1-c66f5da0b2bb",
+                                      "name": "Forbidden",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "onboarding",
+                                            "employments",
+                                            ":employment_id",
+                                            "pre-onboarding-documents",
+                                            ":id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Forbidden",
+                                      "code": 403,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                                      "createdAt": "2026-07-28T02:47:34.000Z",
+                                      "updatedAt": "2026-07-28T02:47:34.000Z",
+                                      "uid": "35240-83098ea6-b085-4a0c-b6d1-c66f5da0b2bb"
+                                    },
+                                    {
+                                      "id": "be82f91e-b7e9-4adf-a0e4-4119412cf778",
+                                      "name": "Not Found",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "onboarding",
+                                            "employments",
+                                            ":employment_id",
+                                            "pre-onboarding-documents",
+                                            ":id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                                      "createdAt": "2026-07-28T02:47:34.000Z",
+                                      "updatedAt": "2026-07-28T02:47:34.000Z",
+                                      "uid": "35240-be82f91e-b7e9-4adf-a0e4-4119412cf778"
+                                    },
+                                    {
+                                      "id": "27c013d9-7a08-4365-9c49-6ede9f476d3e",
+                                      "name": "Unprocessable Entity",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "onboarding",
+                                            "employments",
+                                            ":employment_id",
+                                            "pre-onboarding-documents",
+                                            ":id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                      "code": 422,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"errors\": {}\n}",
+                                      "createdAt": "2026-07-28T02:47:34.000Z",
+                                      "updatedAt": "2026-07-28T02:47:34.000Z",
+                                      "uid": "35240-27c013d9-7a08-4365-9c49-6ede9f476d3e"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:47:34.000Z",
+                                  "updatedAt": "2026-07-28T02:47:34.000Z",
+                                  "uid": "35240-ea7b528c-6156-4cba-a36b-7c1d12b1944d"
+                                }
+                              ],
+                              "id": "1800d0ec-e46e-43fe-a05e-add86fd90bd7",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-1800d0ec-e46e-43fe-a05e-add86fd90bd7"
+                            },
+                            {
+                              "name": "Retrieve a pre-onboarding document with its rendered PDF content",
+                              "id": "59175d1f-71bd-4e2b-b432-9827c67fb02b",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-documents",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c804eecd-6567-48a9-9edd-7db2746b2426",
+                                      "key": "employment_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Employment ID"
+                                    },
+                                    {
+                                      "id": "9179b0d6-bd4e-49bd-aa2f-033cb7e93377",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) Pre-onboarding document ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Returns the rendered contract PDF (base64-encoded) and the list of signatories for the given\npre-onboarding document. The `content` field is prefixed with `data:application/pdf;base64,` so\nit can be embedded directly in a document viewer.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "90a04823-18bf-4ab0-9d6e-136f12ce62bc",
+                                  "name": "Success",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "onboarding",
+                                        "employments",
+                                        ":employment_id",
+                                        "pre-onboarding-documents",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "employment_id"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"pre_onboarding_document\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\",\n      \"signatories\": [\n        {\n          \"type\": \"unknown\",\n          \"status\": \"signed\",\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"signature\": \"<string>\",\n          \"signature_method\": \"docusign\",\n          \"signature_type\": \"standard\",\n          \"signed_at\": \"<dateTime>\",\n          \"user_id\": \"<string>\"\n        },\n        {\n          \"type\": \"company\",\n          \"status\": \"pending\",\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"signature\": \"<string>\",\n          \"signature_method\": \"in_platform\",\n          \"signature_type\": \"ses\",\n          \"signed_at\": \"<dateTime>\",\n          \"user_id\": \"<string>\"\n        }\n      ],\n      \"status\": \"draft\"\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T02:47:34.000Z",
+                                  "updatedAt": "2026-07-28T02:47:34.000Z",
+                                  "uid": "35240-90a04823-18bf-4ab0-9d6e-136f12ce62bc"
+                                },
+                                {
+                                  "id": "e1c60b55-62e3-4c8f-b3a8-dcf0fb5fb332",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "onboarding",
+                                        "employments",
+                                        ":employment_id",
+                                        "pre-onboarding-documents",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "employment_id"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                                  "createdAt": "2026-07-28T02:47:34.000Z",
+                                  "updatedAt": "2026-07-28T02:47:34.000Z",
+                                  "uid": "35240-e1c60b55-62e3-4c8f-b3a8-dcf0fb5fb332"
+                                },
+                                {
+                                  "id": "ad52379d-99c7-4447-960c-60c73a1872b7",
+                                  "name": "Forbidden",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "onboarding",
+                                        "employments",
+                                        ":employment_id",
+                                        "pre-onboarding-documents",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "employment_id"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"Forbidden\"\n}",
+                                  "createdAt": "2026-07-28T02:47:34.000Z",
+                                  "updatedAt": "2026-07-28T02:47:34.000Z",
+                                  "uid": "35240-ad52379d-99c7-4447-960c-60c73a1872b7"
+                                },
+                                {
+                                  "id": "a0adc373-bae0-44a9-a16f-bdfc04bfc84a",
+                                  "name": "Not Found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "onboarding",
+                                        "employments",
+                                        ":employment_id",
+                                        "pre-onboarding-documents",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "employment_id"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                                  "createdAt": "2026-07-28T02:47:34.000Z",
+                                  "updatedAt": "2026-07-28T02:47:34.000Z",
+                                  "uid": "35240-a0adc373-bae0-44a9-a16f-bdfc04bfc84a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-59175d1f-71bd-4e2b-b432-9827c67fb02b"
+                            }
+                          ],
+                          "id": "f5b8e2b5-093e-4b14-86f4-af137ade5683",
+                          "createdAt": "2026-07-28T02:47:34.000Z",
+                          "updatedAt": "2026-07-28T02:47:34.000Z",
+                          "uid": "35240-f5b8e2b5-093e-4b14-86f4-af137ade5683"
+                        },
+                        {
+                          "name": "Find or create a pre-onboarding document for an employment",
+                          "id": "dd127181-a4a2-4d42-8346-918c38e7c5e3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"pre_onboarding_document_requirement_slug\": \"<uuid>\",\n  \"constraints_ack_at\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "onboarding",
+                                "employments",
+                                ":employment_id",
+                                "pre-onboarding-documents"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e559f7e5-7b82-4bd3-b080-2123d831d63e",
+                                  "key": "employment_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Employment ID"
+                                }
+                              ]
+                            },
+                            "description": "Finds an existing unsigned pre-onboarding document for the given requirement, or creates a new one.\nIdempotent: repeated calls with the same `pre_onboarding_document_requirement_slug` return the same\ndocument until it is signed.\n\nDeprecated: use\n`POST /onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/documents` instead.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+                          },
+                          "response": [
+                            {
+                              "id": "13c92107-3aeb-462e-8a18-0a28c3629b9d",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"pre_onboarding_document_requirement_slug\": \"<uuid>\",\n  \"constraints_ack_at\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"pre_onboarding_document\": {\n      \"id\": \"<uuid>\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-13c92107-3aeb-462e-8a18-0a28c3629b9d"
+                            },
+                            {
+                              "id": "56dd01b7-a356-412d-a2f8-b69b54fd109a",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"pre_onboarding_document_requirement_slug\": \"<uuid>\",\n  \"constraints_ack_at\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-56dd01b7-a356-412d-a2f8-b69b54fd109a"
+                            },
+                            {
+                              "id": "8a3174f7-44eb-4247-98f1-84bb919dbb56",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"pre_onboarding_document_requirement_slug\": \"<uuid>\",\n  \"constraints_ack_at\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Forbidden\"\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-8a3174f7-44eb-4247-98f1-84bb919dbb56"
+                            },
+                            {
+                              "id": "bf112bd2-dd9b-44c6-b0aa-65cc2648231a",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"pre_onboarding_document_requirement_slug\": \"<uuid>\",\n  \"constraints_ack_at\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Not Found\"\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-bf112bd2-dd9b-44c6-b0aa-65cc2648231a"
+                            },
+                            {
+                              "id": "e003510a-1b33-477b-9ddc-9d6693559b8f",
+                              "name": "Unprocessable Entity",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"pre_onboarding_document_requirement_slug\": \"<uuid>\",\n  \"constraints_ack_at\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/onboarding/employments/:employment_id/pre-onboarding-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "onboarding",
+                                    "employments",
+                                    ":employment_id",
+                                    "pre-onboarding-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": {}\n}",
+                              "createdAt": "2026-07-28T02:47:34.000Z",
+                              "updatedAt": "2026-07-28T02:47:34.000Z",
+                              "uid": "35240-e003510a-1b33-477b-9ddc-9d6693559b8f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:47:34.000Z",
+                          "updatedAt": "2026-07-28T02:47:34.000Z",
+                          "uid": "35240-dd127181-a4a2-4d42-8346-918c38e7c5e3"
+                        }
+                      ],
+                      "id": "4428971e-8add-4470-8859-15bf2c34bc28",
+                      "createdAt": "2026-07-28T02:47:34.000Z",
+                      "updatedAt": "2026-07-28T02:47:34.000Z",
+                      "uid": "35240-4428971e-8add-4470-8859-15bf2c34bc28"
+                    }
+                  ],
+                  "id": "541d0d5a-369f-41f3-b355-36710d92aba7",
+                  "createdAt": "2026-07-28T02:47:34.000Z",
+                  "updatedAt": "2026-07-28T02:47:34.000Z",
+                  "uid": "35240-541d0d5a-369f-41f3-b355-36710d92aba7"
+                }
+              ],
+              "id": "7f8d7fc5-a7bb-4a3a-8518-c73fdd2fec69",
+              "createdAt": "2026-07-28T02:47:34.000Z",
+              "updatedAt": "2026-07-28T02:47:34.000Z",
+              "uid": "35240-7f8d7fc5-a7bb-4a3a-8518-c73fdd2fec69"
+            }
+          ],
+          "id": "5fc72729-5205-45b1-8e4c-d09519128323",
+          "createdAt": "2026-07-28T02:47:34.000Z",
+          "updatedAt": "2026-07-28T02:47:34.000Z",
+          "uid": "35240-5fc72729-5205-45b1-8e4c-d09519128323"
+        }
+      ],
+      "id": "cd061b1f-10c2-4d3f-9483-e36822fb4e9f",
+      "createdAt": "2026-07-28T02:47:34.000Z",
+      "updatedAt": "2026-07-28T02:47:34.000Z",
+      "uid": "35240-cd061b1f-10c2-4d3f-9483-e36822fb4e9f"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

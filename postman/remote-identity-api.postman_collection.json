@@ -1,0 +1,581 @@
+{
+  "info": {
+    "_postman_id": "d47c4869-ffe7-4fe6-b50d-9f8eb7fb6559",
+    "name": "Remote Address Details Identity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:46:33.000Z",
+    "updatedAt": "2026-07-28T02:46:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d47c4869-ffe7-4fe6-b50d-9f8eb7fb6559"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employee",
+          "item": [
+            {
+              "name": "current",
+              "item": [
+                {
+                  "name": "Get employee token identity",
+                  "id": "59379982-2e19-4fae-9914-f688323afc5b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "address:read address:write bank_account:read bank_account:write document:read document:write emergency_contact:read emergency_contact:write employment_documents employment_payments employments expense:read incentive:read payroll payslip:read personal_detail:read personal_detail:write time_and_attendance timeoff:read timeoff:write timesheet:read",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "/auth/oauth2/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "client_credentials",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/employee/current",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "employee",
+                        "current"
+                      ]
+                    },
+                    "description": "Returns user and company information for the authenticated employee."
+                  },
+                  "response": [
+                    {
+                      "id": "f19e5a7f-160d-4767-a2a6-3ad34d1c4323",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"status\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-f19e5a7f-160d-4767-a2a6-3ad34d1c4323"
+                    },
+                    {
+                      "id": "a4bc6b8d-6fe7-4b06-834f-854cfe2cf032",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-a4bc6b8d-6fe7-4b06-834f-854cfe2cf032"
+                    },
+                    {
+                      "id": "295677fb-91f7-466f-a574-acdaf6b20961",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employee/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employee",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-295677fb-91f7-466f-a574-acdaf6b20961"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:46:34.000Z",
+                  "updatedAt": "2026-07-28T02:46:34.000Z",
+                  "uid": "35240-59379982-2e19-4fae-9914-f688323afc5b"
+                }
+              ],
+              "id": "a800d292-1037-4684-a900-ad1cd17f4955",
+              "createdAt": "2026-07-28T02:46:34.000Z",
+              "updatedAt": "2026-07-28T02:46:34.000Z",
+              "uid": "35240-a800d292-1037-4684-a900-ad1cd17f4955"
+            }
+          ],
+          "id": "e18eff92-5d30-4873-96fd-78d75cb409f2",
+          "createdAt": "2026-07-28T02:46:34.000Z",
+          "updatedAt": "2026-07-28T02:46:34.000Z",
+          "uid": "35240-e18eff92-5d30-4873-96fd-78d75cb409f2"
+        },
+        {
+          "name": "identity",
+          "item": [
+            {
+              "name": "current",
+              "item": [
+                {
+                  "name": "Get token identity",
+                  "id": "5b1b309d-9097-4ab8-bf88-03a4af2ad7d6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/identity/current",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "identity",
+                        "current"
+                      ]
+                    },
+                    "description": "Shows information about the entities that can be controlled by the current auth token.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "6bb6001e-3c05-4eb2-99d5-148fada8d342",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/identity/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "identity",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"client_id\": \"<string>\",\n    \"integration\": {\n      \"contact_email\": \"<string>\",\n      \"display_name\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-6bb6001e-3c05-4eb2-99d5-148fada8d342"
+                    },
+                    {
+                      "id": "f672ee59-838e-4f08-baf2-8ba0bf33cdcd",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/identity/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "identity",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-f672ee59-838e-4f08-baf2-8ba0bf33cdcd"
+                    },
+                    {
+                      "id": "c4630ab3-138d-410e-8acf-31036c23aa27",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/identity/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "identity",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-c4630ab3-138d-410e-8acf-31036c23aa27"
+                    },
+                    {
+                      "id": "28806ba1-e944-490d-8c5d-d952baca65ce",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/identity/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "identity",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-28806ba1-e944-490d-8c5d-d952baca65ce"
+                    },
+                    {
+                      "id": "810a290a-89e5-4d3b-8d45-c597e3374209",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/identity/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "identity",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-810a290a-89e5-4d3b-8d45-c597e3374209"
+                    },
+                    {
+                      "id": "0cbdee54-dc45-45e8-9448-2975e0eefa94",
+                      "name": "Too many requests",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/identity/current",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "identity",
+                            "current"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:46:34.000Z",
+                      "updatedAt": "2026-07-28T02:46:34.000Z",
+                      "uid": "35240-0cbdee54-dc45-45e8-9448-2975e0eefa94"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:46:34.000Z",
+                  "updatedAt": "2026-07-28T02:46:34.000Z",
+                  "uid": "35240-5b1b309d-9097-4ab8-bf88-03a4af2ad7d6"
+                }
+              ],
+              "id": "6e6217c0-cc9d-4305-8464-b83a5485a366",
+              "createdAt": "2026-07-28T02:46:34.000Z",
+              "updatedAt": "2026-07-28T02:46:34.000Z",
+              "uid": "35240-6e6217c0-cc9d-4305-8464-b83a5485a366"
+            }
+          ],
+          "id": "bc30d715-7693-4244-9dd8-4448aa3aa2fb",
+          "createdAt": "2026-07-28T02:46:34.000Z",
+          "updatedAt": "2026-07-28T02:46:34.000Z",
+          "uid": "35240-bc30d715-7693-4244-9dd8-4448aa3aa2fb"
+        }
+      ],
+      "id": "8db14792-cb6e-406c-a7dd-7e5c263d019f",
+      "createdAt": "2026-07-28T02:46:34.000Z",
+      "updatedAt": "2026-07-28T02:46:34.000Z",
+      "uid": "35240-8db14792-cb6e-406c-a7dd-7e5c263d019f"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

@@ -1,0 +1,938 @@
+{
+  "info": {
+    "_postman_id": "6611f5d4-57de-4fd8-b612-f0c31603817e",
+    "name": "Remote Address Details Payroll Runs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:22.000Z",
+    "updatedAt": "2026-07-28T02:47:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6611f5d4-57de-4fd8-b612-f0c31603817e"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "payroll-runs",
+          "item": [
+            {
+              "name": "{payroll_run_id}",
+              "item": [
+                {
+                  "name": "employee-details",
+                  "item": [
+                    {
+                      "name": "Get Employee Details for a Payroll Run",
+                      "id": "1472084b-67a3-47e9-a1ff-2239f1fcea4c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id/employee-details?page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-runs",
+                            ":payroll_run_id",
+                            "employee-details"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "f11574ff-bdcd-48fe-823a-99ae38b56b71",
+                              "key": "payroll_run_id",
+                              "value": "<string>",
+                              "description": "(Required) Payroll run ID"
+                            }
+                          ]
+                        },
+                        "description": "Gets the employee details for a payroll run\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "63624348-06a8-4b56-bffd-ac7eeb0b956a",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id/employee-details?page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "payroll-runs",
+                                ":payroll_run_id",
+                                "employee-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payroll_run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"employee_details\": [\n      {\n        \"full_name\": \"<string>\",\n        \"payslip_id\": \"<uuid>\",\n        \"total_cost\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"net_pay\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"gross_pay\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"deductions\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"base_salary\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"expenses\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"incentives\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"other\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"benefits\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"employer_costs\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"employment_id\": \"<uuid>\"\n      },\n      {\n        \"full_name\": \"<string>\",\n        \"payslip_id\": \"<uuid>\",\n        \"total_cost\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"net_pay\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"gross_pay\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"deductions\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"base_salary\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"expenses\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"incentives\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"other\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"benefits\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"employer_costs\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"employment_id\": \"<uuid>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:47:22.000Z",
+                          "updatedAt": "2026-07-28T02:47:22.000Z",
+                          "uid": "35240-63624348-06a8-4b56-bffd-ac7eeb0b956a"
+                        },
+                        {
+                          "id": "7d711b45-be1d-4f21-884c-e89cd1f1a66a",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id/employee-details?page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "payroll-runs",
+                                ":payroll_run_id",
+                                "employee-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payroll_run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:47:22.000Z",
+                          "updatedAt": "2026-07-28T02:47:22.000Z",
+                          "uid": "35240-7d711b45-be1d-4f21-884c-e89cd1f1a66a"
+                        },
+                        {
+                          "id": "060ce2a2-efcf-4f2b-9002-3ef7e2dc4c48",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id/employee-details?page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "payroll-runs",
+                                ":payroll_run_id",
+                                "employee-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payroll_run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:47:22.000Z",
+                          "updatedAt": "2026-07-28T02:47:22.000Z",
+                          "uid": "35240-060ce2a2-efcf-4f2b-9002-3ef7e2dc4c48"
+                        },
+                        {
+                          "id": "488748f4-f948-4ea9-aebe-8c2acf07a398",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id/employee-details?page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "payroll-runs",
+                                ":payroll_run_id",
+                                "employee-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Number of items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "payroll_run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:47:22.000Z",
+                          "updatedAt": "2026-07-28T02:47:22.000Z",
+                          "uid": "35240-488748f4-f948-4ea9-aebe-8c2acf07a398"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:47:22.000Z",
+                      "updatedAt": "2026-07-28T02:47:22.000Z",
+                      "uid": "35240-1472084b-67a3-47e9-a1ff-2239f1fcea4c"
+                    }
+                  ],
+                  "id": "b01dceae-3722-4287-b35e-fcde8c5f82d2",
+                  "createdAt": "2026-07-28T02:47:22.000Z",
+                  "updatedAt": "2026-07-28T02:47:22.000Z",
+                  "uid": "35240-b01dceae-3722-4287-b35e-fcde8c5f82d2"
+                },
+                {
+                  "name": "Show Company Payroll Runs",
+                  "id": "124031c6-7e78-423a-8b98-dc24f45f0d40",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-runs",
+                        ":payroll_run_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5ae0d2d4-a4e8-4652-8cc5-6e98f8cdc23f",
+                          "key": "payroll_run_id",
+                          "value": "<string>",
+                          "description": "(Required) Payroll run ID"
+                        }
+                      ]
+                    },
+                    "description": "Given an ID, shows a payroll run.\n`employee_details` field is deprecated in favour of the `employee_details` endpoint and will be removed in the future.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "14e8b9d5-f918-4f4c-872c-cdf99288d7c9",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-runs",
+                            ":payroll_run_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payroll_run_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"payroll_run\": {\n    \"id\": \"<uuid>\",\n    \"status\": \"finalized\",\n    \"period_start\": \"<date>\",\n    \"period_end\": \"<date>\",\n    \"approval_date\": \"<date>\",\n    \"expected_payout_date\": \"<date>\",\n    \"currency_code\": \"<string>\",\n    \"country\": {\n      \"alpha_2_code\": \"<string>\",\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"contractor_products_available\": [\n        \"plus\",\n        \"standard\"\n      ],\n      \"country_subdivisions\": [\n        {\n          \"name\": \"<string>\",\n          \"code\": \"<string>\",\n          \"subdivision_type\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"code\": \"<string>\",\n          \"subdivision_type\": \"<string>\"\n        }\n      ],\n      \"employment_agreement_preview_available\": \"<boolean>\",\n      \"eor_onboarding\": \"<boolean>\",\n      \"locked_benefits\": \"<string>\",\n      \"region\": \"<string>\",\n      \"subregion\": \"<string>\",\n      \"supported_json_schemas\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"total_payroll_cost\": \"<integer>\",\n    \"salary_total\": \"<integer>\",\n    \"benefits_total\": \"<integer>\",\n    \"incentives_total\": \"<integer>\",\n    \"expenses_total\": \"<integer>\",\n    \"other_total\": \"<integer>\",\n    \"employer_contributions_total\": \"<integer>\",\n    \"employee_details\": [\n      {\n        \"full_name\": \"<string>\",\n        \"payslip_id\": \"<uuid>\",\n        \"total_cost\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"net_pay\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"gross_pay\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"deductions\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"base_salary\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"expenses\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"incentives\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"other\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"benefits\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"employer_costs\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"employment_id\": \"<uuid>\"\n      },\n      {\n        \"full_name\": \"<string>\",\n        \"payslip_id\": \"<uuid>\",\n        \"total_cost\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"net_pay\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"gross_pay\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"deductions\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"base_salary\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"expenses\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"incentives\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"other\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"benefits\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"employer_costs\": {\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        \"employment_id\": \"<uuid>\"\n      }\n    ],\n    \"cutoff_date\": \"<date>\",\n    \"type\": \"main\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:22.000Z",
+                      "updatedAt": "2026-07-28T02:47:22.000Z",
+                      "uid": "35240-14e8b9d5-f918-4f4c-872c-cdf99288d7c9"
+                    },
+                    {
+                      "id": "83dc866e-a6df-4315-88ef-d8a95fc53b90",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-runs",
+                            ":payroll_run_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payroll_run_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:47:22.000Z",
+                      "updatedAt": "2026-07-28T02:47:22.000Z",
+                      "uid": "35240-83dc866e-a6df-4315-88ef-d8a95fc53b90"
+                    },
+                    {
+                      "id": "9dbdef20-ed5b-4b31-8f80-1b20943b399a",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-runs",
+                            ":payroll_run_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payroll_run_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:47:22.000Z",
+                      "updatedAt": "2026-07-28T02:47:22.000Z",
+                      "uid": "35240-9dbdef20-ed5b-4b31-8f80-1b20943b399a"
+                    },
+                    {
+                      "id": "a75944dd-fb8a-4b8e-8818-80e7a7637a01",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/payroll-runs/:payroll_run_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "payroll-runs",
+                            ":payroll_run_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "payroll_run_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:22.000Z",
+                      "updatedAt": "2026-07-28T02:47:22.000Z",
+                      "uid": "35240-a75944dd-fb8a-4b8e-8818-80e7a7637a01"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:22.000Z",
+                  "updatedAt": "2026-07-28T02:47:22.000Z",
+                  "uid": "35240-124031c6-7e78-423a-8b98-dc24f45f0d40"
+                }
+              ],
+              "id": "baef64b4-9081-4260-acc4-37b6deffc45a",
+              "createdAt": "2026-07-28T02:47:22.000Z",
+              "updatedAt": "2026-07-28T02:47:22.000Z",
+              "uid": "35240-baef64b4-9081-4260-acc4-37b6deffc45a"
+            },
+            {
+              "name": "List Company Payroll Runs",
+              "id": "4ae0edc2-ac82-47be-86fc-e9a5a2cf7b00",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/payroll-runs?payroll_period=<date>&page=1&page_size=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "payroll-runs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filters payroll runs where period_start or period_end match the given date",
+                      "key": "payroll_period",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page",
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "Lists all payroll runs for a company\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+              },
+              "response": [
+                {
+                  "id": "35b3f932-6ade-46f2-9e52-8901aff9b25d",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-runs?payroll_period=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-runs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filters payroll runs where period_start or period_end match the given date",
+                          "key": "payroll_period",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"payroll_runs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"finalized\",\n      \"period_start\": \"<date>\",\n      \"period_end\": \"<date>\",\n      \"approval_date\": \"<date>\",\n      \"expected_payout_date\": \"<date>\",\n      \"currency_code\": \"<string>\",\n      \"country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"cor\",\n          \"plus\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"total_payroll_cost\": \"<integer>\",\n      \"type\": \"tax_documents\",\n      \"cutoff_date\": \"<date>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"status\": \"finalized\",\n      \"period_start\": \"<date>\",\n      \"period_end\": \"<date>\",\n      \"approval_date\": \"<date>\",\n      \"expected_payout_date\": \"<date>\",\n      \"currency_code\": \"<string>\",\n      \"country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"cor\",\n          \"cor\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"total_payroll_cost\": \"<integer>\",\n      \"type\": \"main\",\n      \"cutoff_date\": \"<date>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:47:22.000Z",
+                  "updatedAt": "2026-07-28T02:47:22.000Z",
+                  "uid": "35240-35b3f932-6ade-46f2-9e52-8901aff9b25d"
+                },
+                {
+                  "id": "c2fc46a7-2415-48ef-9ec8-1d1cc3ae30c6",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-runs?payroll_period=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-runs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filters payroll runs where period_start or period_end match the given date",
+                          "key": "payroll_period",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:47:22.000Z",
+                  "updatedAt": "2026-07-28T02:47:22.000Z",
+                  "uid": "35240-c2fc46a7-2415-48ef-9ec8-1d1cc3ae30c6"
+                },
+                {
+                  "id": "e8af1bb1-1b19-49c2-8d68-ba6e4fe9f423",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-runs?payroll_period=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-runs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filters payroll runs where period_start or period_end match the given date",
+                          "key": "payroll_period",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:47:22.000Z",
+                  "updatedAt": "2026-07-28T02:47:22.000Z",
+                  "uid": "35240-e8af1bb1-1b19-49c2-8d68-ba6e4fe9f423"
+                },
+                {
+                  "id": "c82e2d62-704a-4b86-89e9-0178c7e34355",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/payroll-runs?payroll_period=<date>&page=1&page_size=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "payroll-runs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filters payroll runs where period_start or period_end match the given date",
+                          "key": "payroll_period",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:47:22.000Z",
+                  "updatedAt": "2026-07-28T02:47:22.000Z",
+                  "uid": "35240-c82e2d62-704a-4b86-89e9-0178c7e34355"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:22.000Z",
+              "updatedAt": "2026-07-28T02:47:22.000Z",
+              "uid": "35240-4ae0edc2-ac82-47be-86fc-e9a5a2cf7b00"
+            }
+          ],
+          "id": "d179a3b9-b2c1-4b73-b531-49d646564bb3",
+          "createdAt": "2026-07-28T02:47:22.000Z",
+          "updatedAt": "2026-07-28T02:47:22.000Z",
+          "uid": "35240-d179a3b9-b2c1-4b73-b531-49d646564bb3"
+        }
+      ],
+      "id": "a44040a2-f543-470b-bcbf-bdc0a971fa12",
+      "createdAt": "2026-07-28T02:47:22.000Z",
+      "updatedAt": "2026-07-28T02:47:22.000Z",
+      "uid": "35240-a44040a2-f543-470b-bcbf-bdc0a971fa12"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

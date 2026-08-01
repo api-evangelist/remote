@@ -1,0 +1,602 @@
+{
+  "info": {
+    "_postman_id": "e1f4b8a3-f721-4348-9cb8-18c9d8c74ddd",
+    "name": "Remote Address Details Probation Letters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:39.000Z",
+    "updatedAt": "2026-07-28T02:47:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e1f4b8a3-f721-4348-9cb8-18c9d8c74ddd"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "probation-completion-letter",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Show probation completion letter",
+                  "id": "1d50aa8b-8395-426a-8171-31eb1246370b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-completion-letter/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-completion-letter",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0ded4a8d-f5bb-4281-a913-2e26fb90054a",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) probation completion letter ID"
+                        }
+                      ]
+                    },
+                    "description": "Show a single probation completion letter.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View probation documents (`probation_document:read`) | Manage probation documents (`probation_document:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "073566ed-bda8-4692-8ba8-030aaf61f304",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/probation-completion-letter/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "probation-completion-letter",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"probation_completion_letter\": {\n      \"employment_id\": \"<string>\",\n      \"letter\": {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"status\": \"canceled\",\n      \"submitted_at\": \"<dateTime>\",\n      \"zendesk_ticket_url\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:39.000Z",
+                      "updatedAt": "2026-07-28T02:47:39.000Z",
+                      "uid": "35240-073566ed-bda8-4692-8ba8-030aaf61f304"
+                    },
+                    {
+                      "id": "ccda1559-f28f-4cbc-a5e5-de50d9a662cc",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/probation-completion-letter/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "probation-completion-letter",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:47:39.000Z",
+                      "updatedAt": "2026-07-28T02:47:39.000Z",
+                      "uid": "35240-ccda1559-f28f-4cbc-a5e5-de50d9a662cc"
+                    },
+                    {
+                      "id": "de561ced-e9be-4339-bea2-e69065c60304",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/probation-completion-letter/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "probation-completion-letter",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:47:39.000Z",
+                      "updatedAt": "2026-07-28T02:47:39.000Z",
+                      "uid": "35240-de561ced-e9be-4339-bea2-e69065c60304"
+                    },
+                    {
+                      "id": "83c191a6-f34e-40c5-8c58-a9398b6737a8",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/probation-completion-letter/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "probation-completion-letter",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:39.000Z",
+                      "updatedAt": "2026-07-28T02:47:39.000Z",
+                      "uid": "35240-83c191a6-f34e-40c5-8c58-a9398b6737a8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:39.000Z",
+                  "updatedAt": "2026-07-28T02:47:39.000Z",
+                  "uid": "35240-1d50aa8b-8395-426a-8171-31eb1246370b"
+                }
+              ],
+              "id": "337a38a9-0fea-4ba7-89aa-e196fbab9b3d",
+              "createdAt": "2026-07-28T02:47:39.000Z",
+              "updatedAt": "2026-07-28T02:47:39.000Z",
+              "uid": "35240-337a38a9-0fea-4ba7-89aa-e196fbab9b3d"
+            },
+            {
+              "name": "Create probation completion letter",
+              "id": "1d1eea2f-d96a-4b7f-87f3-d848e6c2a991",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employment_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/probation-completion-letter",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "probation-completion-letter"
+                  ]
+                },
+                "description": "Create a new probation completion letter request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage probation documents (`probation_document:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "5709e679-0fd3-4c3c-a912-20d8f6de4a70",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-completion-letter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-completion-letter"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"probation_completion_letter\": {\n      \"employment_id\": \"<string>\",\n      \"letter\": {\n        \"id\": \"<string>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"type\": \"<string>\",\n        \"sub_type\": \"<string>\"\n      },\n      \"id\": \"<string>\",\n      \"status\": \"canceled\",\n      \"submitted_at\": \"<dateTime>\",\n      \"zendesk_ticket_url\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:39.000Z",
+                  "updatedAt": "2026-07-28T02:47:39.000Z",
+                  "uid": "35240-5709e679-0fd3-4c3c-a912-20d8f6de4a70"
+                },
+                {
+                  "id": "9361132f-7d43-41a1-bcca-5cf099c78ece",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-completion-letter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-completion-letter"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:47:39.000Z",
+                  "updatedAt": "2026-07-28T02:47:39.000Z",
+                  "uid": "35240-9361132f-7d43-41a1-bcca-5cf099c78ece"
+                },
+                {
+                  "id": "538dce0b-f07c-4b08-aa48-fb16610efc47",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-completion-letter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-completion-letter"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:47:39.000Z",
+                  "updatedAt": "2026-07-28T02:47:39.000Z",
+                  "uid": "35240-538dce0b-f07c-4b08-aa48-fb16610efc47"
+                },
+                {
+                  "id": "7defa38d-491b-4bc7-b3dc-4c6f3ad6a8af",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"employment_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/probation-completion-letter",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "probation-completion-letter"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:47:39.000Z",
+                  "updatedAt": "2026-07-28T02:47:39.000Z",
+                  "uid": "35240-7defa38d-491b-4bc7-b3dc-4c6f3ad6a8af"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:39.000Z",
+              "updatedAt": "2026-07-28T02:47:39.000Z",
+              "uid": "35240-1d1eea2f-d96a-4b7f-87f3-d848e6c2a991"
+            }
+          ],
+          "id": "59ebafd5-3a10-448d-9608-402d2f1d68f2",
+          "createdAt": "2026-07-28T02:47:39.000Z",
+          "updatedAt": "2026-07-28T02:47:39.000Z",
+          "uid": "35240-59ebafd5-3a10-448d-9608-402d2f1d68f2"
+        }
+      ],
+      "id": "c4c2ea29-d12e-44e5-ab9e-919352699f6c",
+      "createdAt": "2026-07-28T02:47:39.000Z",
+      "updatedAt": "2026-07-28T02:47:39.000Z",
+      "uid": "35240-c4c2ea29-d12e-44e5-ab9e-919352699f6c"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

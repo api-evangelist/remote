@@ -1,0 +1,766 @@
+{
+  "info": {
+    "_postman_id": "1b6c479d-5b2b-4d79-82a6-98d55360ae68",
+    "name": "Remote Address Details Contract Details API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:13.000Z",
+    "updatedAt": "2026-07-28T02:45:13.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1b6c479d-5b2b-4d79-82a6-98d55360ae68"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "contract-details",
+                  "item": [
+                    {
+                      "name": "Update contract details",
+                      "id": "2c5a7290-8979-4e6c-87bf-aecb135b8ddb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"contract_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "employments",
+                            ":employment_id",
+                            "contract-details"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the contract_details form schema",
+                              "key": "contract_details_json_schema_version",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                              "key": "skip_benefits",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "7796f112-2e65-4e86-97f5-acea9a6e89e3",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates employment's contract details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-form) tool.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "2179896a-2b30-4eed-bdaa-1294fad96d1f",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "contract-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the contract_details form schema",
+                                  "key": "contract_details_json_schema_version",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                                  "key": "skip_benefits",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"pending_post_self_enrollment_actions\",\n      \"type\": \"global_payroll_employee\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"cancelled\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"provided_by_customer\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:45:13.000Z",
+                          "updatedAt": "2026-07-28T02:45:13.000Z",
+                          "uid": "35240-2179896a-2b30-4eed-bdaa-1294fad96d1f"
+                        },
+                        {
+                          "id": "5cf1765a-c274-4f7b-803d-35cc6a07af5e",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "contract-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the contract_details form schema",
+                                  "key": "contract_details_json_schema_version",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                                  "key": "skip_benefits",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:45:13.000Z",
+                          "updatedAt": "2026-07-28T02:45:13.000Z",
+                          "uid": "35240-5cf1765a-c274-4f7b-803d-35cc6a07af5e"
+                        },
+                        {
+                          "id": "a8134ab9-faed-4081-9623-d96990829b73",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "contract-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the contract_details form schema",
+                                  "key": "contract_details_json_schema_version",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                                  "key": "skip_benefits",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:45:13.000Z",
+                          "updatedAt": "2026-07-28T02:45:13.000Z",
+                          "uid": "35240-a8134ab9-faed-4081-9623-d96990829b73"
+                        },
+                        {
+                          "id": "7932b22f-0617-4485-a03f-f42ff50fee86",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "contract-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the contract_details form schema",
+                                  "key": "contract_details_json_schema_version",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                                  "key": "skip_benefits",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Forbidden\"\n}",
+                          "createdAt": "2026-07-28T02:45:13.000Z",
+                          "updatedAt": "2026-07-28T02:45:13.000Z",
+                          "uid": "35240-7932b22f-0617-4485-a03f-f42ff50fee86"
+                        },
+                        {
+                          "id": "bcbb0c03-53ef-4582-a098-669641920421",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "contract-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the contract_details form schema",
+                                  "key": "contract_details_json_schema_version",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                                  "key": "skip_benefits",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:45:13.000Z",
+                          "updatedAt": "2026-07-28T02:45:13.000Z",
+                          "uid": "35240-bcbb0c03-53ef-4582-a098-669641920421"
+                        },
+                        {
+                          "id": "f0160d35-2a95-493a-ad2e-2383a13df731",
+                          "name": "Conflict",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "contract-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the contract_details form schema",
+                                  "key": "contract_details_json_schema_version",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                                  "key": "skip_benefits",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:45:13.000Z",
+                          "updatedAt": "2026-07-28T02:45:13.000Z",
+                          "uid": "35240-f0160d35-2a95-493a-ad2e-2383a13df731"
+                        },
+                        {
+                          "id": "498063f3-0eee-4d8d-9da4-fa366ecb50e5",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "contract-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the contract_details form schema",
+                                  "key": "contract_details_json_schema_version",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                                  "key": "skip_benefits",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:45:13.000Z",
+                          "updatedAt": "2026-07-28T02:45:13.000Z",
+                          "uid": "35240-498063f3-0eee-4d8d-9da4-fa366ecb50e5"
+                        },
+                        {
+                          "id": "760b0626-7151-4130-9ad6-68423b9fce28",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/contract-details?contract_details_json_schema_version=<integer>&skip_benefits=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "contract-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the contract_details form schema",
+                                  "key": "contract_details_json_schema_version",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API.",
+                                  "key": "skip_benefits",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:45:13.000Z",
+                          "updatedAt": "2026-07-28T02:45:13.000Z",
+                          "uid": "35240-760b0626-7151-4130-9ad6-68423b9fce28"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:45:13.000Z",
+                      "updatedAt": "2026-07-28T02:45:13.000Z",
+                      "uid": "35240-2c5a7290-8979-4e6c-87bf-aecb135b8ddb"
+                    }
+                  ],
+                  "id": "98fbcb93-6740-41b6-8681-1935abd0137c",
+                  "createdAt": "2026-07-28T02:45:13.000Z",
+                  "updatedAt": "2026-07-28T02:45:13.000Z",
+                  "uid": "35240-98fbcb93-6740-41b6-8681-1935abd0137c"
+                }
+              ],
+              "id": "bc162629-9381-431e-9106-785ab7e84f05",
+              "createdAt": "2026-07-28T02:45:13.000Z",
+              "updatedAt": "2026-07-28T02:45:13.000Z",
+              "uid": "35240-bc162629-9381-431e-9106-785ab7e84f05"
+            }
+          ],
+          "id": "9a28f731-a404-472a-8a51-257fb1c2e6bb",
+          "createdAt": "2026-07-28T02:45:13.000Z",
+          "updatedAt": "2026-07-28T02:45:13.000Z",
+          "uid": "35240-9a28f731-a404-472a-8a51-257fb1c2e6bb"
+        }
+      ],
+      "id": "7841b130-1b2e-479b-9521-628ee5f0fee6",
+      "createdAt": "2026-07-28T02:45:13.000Z",
+      "updatedAt": "2026-07-28T02:45:13.000Z",
+      "uid": "35240-7841b130-1b2e-479b-9521-628ee5f0fee6"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

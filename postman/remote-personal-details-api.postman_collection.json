@@ -1,0 +1,1207 @@
+{
+  "info": {
+    "_postman_id": "d06b52fb-2ce2-4312-b588-289a6627abc1",
+    "name": "Remote Address Details Personal Details API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:29.000Z",
+    "updatedAt": "2026-07-28T02:47:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d06b52fb-2ce2-4312-b588-289a6627abc1"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "personal-details",
+                  "item": [
+                    {
+                      "name": "Update personal details",
+                      "id": "4c23a4a6-d9ac-4133-8ea0-933262051d28",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"personal_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "employments",
+                            ":employment_id",
+                            "personal-details"
+                          ],
+                          "query": [
+                            {
+                              "description": "Version of the personal_details form schema",
+                              "key": "personal_details_json_schema_version",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "ddfe916d-3f2b-4c23-b178-cd17e3a47adc",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates employment's personal details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-form) tool.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "1ac07901-f3ec-43a8-aa25-8fafd6de11da",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the personal_details form schema",
+                                  "key": "personal_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"employment\": {\n      \"id\": \"<string>\",\n      \"status\": \"pending_post_self_enrollment_actions\",\n      \"type\": \"direct_employee\",\n      \"updated_at\": \"<string>\",\n      \"user_status\": \"created\",\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"basic_information\": {},\n      \"billing_address_details\": {},\n      \"contract_details\": {},\n      \"contract_origin\": \"provided_by_customer\",\n      \"emergency_contact_details\": {},\n      \"personal_details\": {},\n      \"pricing_plan_details\": {}\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-1ac07901-f3ec-43a8-aa25-8fafd6de11da"
+                        },
+                        {
+                          "id": "d5d0731e-5dc0-4b83-a9bb-0b46adf935b3",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the personal_details form schema",
+                                  "key": "personal_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-d5d0731e-5dc0-4b83-a9bb-0b46adf935b3"
+                        },
+                        {
+                          "id": "5798b6b5-94e4-40cb-ab8b-02950ee68463",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the personal_details form schema",
+                                  "key": "personal_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-5798b6b5-94e4-40cb-ab8b-02950ee68463"
+                        },
+                        {
+                          "id": "064dba52-330f-457d-991d-6783c7fdb833",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the personal_details form schema",
+                                  "key": "personal_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Forbidden\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-064dba52-330f-457d-991d-6783c7fdb833"
+                        },
+                        {
+                          "id": "93797502-1dbf-48b1-90f0-5018845b0b49",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the personal_details form schema",
+                                  "key": "personal_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-93797502-1dbf-48b1-90f0-5018845b0b49"
+                        },
+                        {
+                          "id": "c0156c09-2ca4-466c-8662-eacdc6a9a6ef",
+                          "name": "Conflict",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the personal_details form schema",
+                                  "key": "personal_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-c0156c09-2ca4-466c-8662-eacdc6a9a6ef"
+                        },
+                        {
+                          "id": "b96aa558-9d2a-44dc-8a97-17ae03b2ba16",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the personal_details form schema",
+                                  "key": "personal_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-b96aa558-9d2a-44dc-8a97-17ae03b2ba16"
+                        },
+                        {
+                          "id": "08a9e29e-c019-43a7-a318-edd317aca16f",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/employments/:employment_id/personal-details?personal_details_json_schema_version=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Version of the personal_details form schema",
+                                  "key": "personal_details_json_schema_version",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-08a9e29e-c019-43a7-a318-edd317aca16f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:47:29.000Z",
+                      "updatedAt": "2026-07-28T02:47:29.000Z",
+                      "uid": "35240-4c23a4a6-d9ac-4133-8ea0-933262051d28"
+                    }
+                  ],
+                  "id": "c8278692-395e-4ddb-8eb3-6510b508d3ef",
+                  "createdAt": "2026-07-28T02:47:29.000Z",
+                  "updatedAt": "2026-07-28T02:47:29.000Z",
+                  "uid": "35240-c8278692-395e-4ddb-8eb3-6510b508d3ef"
+                }
+              ],
+              "id": "c0676b9f-3801-4211-815c-fe187d98a303",
+              "createdAt": "2026-07-28T02:47:29.000Z",
+              "updatedAt": "2026-07-28T02:47:29.000Z",
+              "uid": "35240-c0676b9f-3801-4211-815c-fe187d98a303"
+            }
+          ],
+          "id": "bb422bc7-4356-4e08-a138-126fec785792",
+          "createdAt": "2026-07-28T02:47:29.000Z",
+          "updatedAt": "2026-07-28T02:47:29.000Z",
+          "uid": "35240-bb422bc7-4356-4e08-a138-126fec785792"
+        }
+      ],
+      "id": "7863dd45-49e9-41ce-8d4a-44c2274940b8",
+      "createdAt": "2026-07-28T02:47:29.000Z",
+      "updatedAt": "2026-07-28T02:47:29.000Z",
+      "uid": "35240-7863dd45-49e9-41ce-8d4a-44c2274940b8"
+    },
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "personal-details",
+                  "item": [
+                    {
+                      "name": "Update personal details",
+                      "id": "ce3bb576-d105-49a3-9b25-a3e922e73fc8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"personal_details\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employments/:employment_id/personal-details",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employments",
+                            ":employment_id",
+                            "personal-details"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ce7880e4-81ff-4db7-8051-66ce2db3b29e",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Updates employment's personal details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid\ncompliance issues and to have the latest version of a country requirements.\n\nIf you are using this endpoint to build an integration, make sure you are dynamically collecting or\ndisplaying the latest parameters for each country by querying the _\"Show form schema\"_ endpoint.\n\nFor more information on JSON Schemas, see the **How JSON Schemas work** documentation.\n\nTo learn how you can dynamically generate forms to display in your UI, see the documentation for\nthe [json-schema-form](https://developer.remote.com/docs/how-json-schemas-form) tool.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "db3f54f4-b9eb-4619-89b3-ef594ee34af4",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/personal-details",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"employment\": {\n      \"address_details\": {},\n      \"administrative_details\": {},\n      \"bank_account_details\": [],\n      \"billing_address_details\": {},\n      \"company_id\": \"<string>\",\n      \"contract_details\": {},\n      \"country\": {\n        \"alpha_2_code\": \"<string>\",\n        \"code\": \"<string>\",\n        \"name\": \"<string>\",\n        \"contractor_products_available\": [\n          \"plus\",\n          \"plus\"\n        ],\n        \"country_subdivisions\": [\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"code\": \"<string>\",\n            \"subdivision_type\": \"<string>\"\n          }\n        ],\n        \"employment_agreement_preview_available\": \"<boolean>\",\n        \"eor_onboarding\": \"<boolean>\",\n        \"locked_benefits\": \"<string>\",\n        \"region\": \"<string>\",\n        \"subregion\": \"<string>\",\n        \"supported_json_schemas\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"created_at\": \"<string>\",\n      \"emergency_contact_details\": {},\n      \"files\": [\n        {\n          \"id\": \"<string>\",\n          \"inserted_at\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"sub_type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"inserted_at\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"sub_type\": \"<string>\"\n        }\n      ],\n      \"full_name\": \"<string>\",\n      \"id\": \"<string>\",\n      \"type\": \"contractor\",\n      \"employment_model\": \"eor\",\n      \"work_address_details\": {},\n      \"job_title\": \"<string>\",\n      \"manager_email\": \"<string>\",\n      \"manager_employment_id\": \"<string>\",\n      \"onboarding_tasks\": {\n        \"address_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"pending\"\n        },\n        \"administrative_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"pending\"\n        },\n        \"bank_account_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"completed\"\n        },\n        \"billing_address_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"completed\"\n        },\n        \"contract_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"pending\"\n        },\n        \"emergency_contact_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"pending\"\n        },\n        \"employment_document_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"pending\"\n        },\n        \"personal_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"completed\"\n        },\n        \"pricing_plan_details\": {\n          \"description\": \"<string>\",\n          \"status\": \"completed\"\n        }\n      },\n      \"personal_details\": {},\n      \"personal_email\": \"<string>\",\n      \"login_email\": \"<string>\",\n      \"pricing_plan_details\": {\n        \"frequency\": \"monthly\"\n      },\n      \"status\": \"deleted\",\n      \"employment_lifecycle_stage\": \"offboarded\",\n      \"updated_at\": \"<dateTime>\",\n      \"work_email\": \"<string>\",\n      \"eligible_for_onboarding_cancellation\": \"<boolean>\",\n      \"short_id\": \"<string>\",\n      \"department\": \"<string>\",\n      \"provisional_start_date\": \"<date>\",\n      \"contractor_settings\": {\n        \"requires_work_confirmation\": \"<boolean>\"\n      },\n      \"contractor_type\": \"standard\",\n      \"contractor_rate\": {\n        \"amount\": {\n          \"amount\": \"<number>\",\n          \"currency\": {\n            \"code\": \"<string>\"\n          }\n        },\n        \"pay_frequency\": \"weekly\",\n        \"slug\": \"<string>\",\n        \"type\": \"monthly\"\n      },\n      \"expiration_date\": \"<date>\",\n      \"bill_to_legal_entity_id\": \"<uuid>\",\n      \"basic_information\": {},\n      \"probation_period_end_date\": \"<date>\",\n      \"department_id\": \"<uuid>\",\n      \"manager\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"user_status\": \"initiated\",\n      \"seniority_date\": \"<date>\",\n      \"active_contract_id\": \"<string>\",\n      \"engaged_by_legal_entity_id\": \"<uuid>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-db3f54f4-b9eb-4619-89b3-ef594ee34af4"
+                        },
+                        {
+                          "id": "7454b6ff-c241-48c7-9685-8d4cc14c7c78",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/personal-details",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-7454b6ff-c241-48c7-9685-8d4cc14c7c78"
+                        },
+                        {
+                          "id": "6b5ce513-a13b-4dcb-9dce-a71c5169619a",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/personal-details",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Forbidden\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-6b5ce513-a13b-4dcb-9dce-a71c5169619a"
+                        },
+                        {
+                          "id": "431535c4-f80b-4efa-9923-59cc8da9ac10",
+                          "name": "Conflict",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/personal-details",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-431535c4-f80b-4efa-9923-59cc8da9ac10"
+                        },
+                        {
+                          "id": "714fa620-e429-49f4-8279-cfebb24a6612",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/personal-details",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-714fa620-e429-49f4-8279-cfebb24a6612"
+                        },
+                        {
+                          "id": "5420988b-32d5-4c54-b5c1-1ae7fb5e9874",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"personal_details\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/personal-details",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "personal-details"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:47:29.000Z",
+                          "updatedAt": "2026-07-28T02:47:29.000Z",
+                          "uid": "35240-5420988b-32d5-4c54-b5c1-1ae7fb5e9874"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:47:29.000Z",
+                      "updatedAt": "2026-07-28T02:47:29.000Z",
+                      "uid": "35240-ce3bb576-d105-49a3-9b25-a3e922e73fc8"
+                    }
+                  ],
+                  "id": "3ed819f5-8e82-49a9-a190-2710d96aa1c0",
+                  "createdAt": "2026-07-28T02:47:29.000Z",
+                  "updatedAt": "2026-07-28T02:47:29.000Z",
+                  "uid": "35240-3ed819f5-8e82-49a9-a190-2710d96aa1c0"
+                }
+              ],
+              "id": "7f9a4aec-fee0-45fb-bb7c-d7b684d6816f",
+              "createdAt": "2026-07-28T02:47:29.000Z",
+              "updatedAt": "2026-07-28T02:47:29.000Z",
+              "uid": "35240-7f9a4aec-fee0-45fb-bb7c-d7b684d6816f"
+            }
+          ],
+          "id": "04e00016-acb5-4a4b-9522-f2f56ee01037",
+          "createdAt": "2026-07-28T02:47:29.000Z",
+          "updatedAt": "2026-07-28T02:47:29.000Z",
+          "uid": "35240-04e00016-acb5-4a4b-9522-f2f56ee01037"
+        }
+      ],
+      "id": "b4a89492-7649-46ed-b287-891cfe8d2eca",
+      "createdAt": "2026-07-28T02:47:29.000Z",
+      "updatedAt": "2026-07-28T02:47:29.000Z",
+      "uid": "35240-b4a89492-7649-46ed-b287-891cfe8d2eca"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

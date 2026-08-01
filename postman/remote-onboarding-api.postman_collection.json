@@ -1,0 +1,582 @@
+{
+  "info": {
+    "_postman_id": "e4a83efa-7568-41d1-8516-d714b3721f8c",
+    "name": "Remote Address Details Onboarding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:46:51.000Z",
+    "updatedAt": "2026-07-28T02:46:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e4a83efa-7568-41d1-8516-d714b3721f8c"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "cancel-onboarding",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "Cancel onboarding",
+                  "id": "ba296bbc-c2b1-4367-9a10-136a87381995",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/cancel-onboarding/:employment_id?async=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "cancel-onboarding",
+                        ":employment_id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether the request should be performed async\n",
+                          "key": "async",
+                          "value": "<boolean>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "6664bd81-59b8-41c7-9e70-31e9a70baea1",
+                          "key": "employment_id",
+                          "value": "<string>",
+                          "description": "(Required) Employment ID"
+                        }
+                      ]
+                    },
+                    "description": "Cancel onboarding.\n\nRequirements for the cancellation to succeed:\n\n* Employment has to be in `invited`, `created`, `created_awaiting_reserve`, `created_reserve_paid`, `pre_hire` status\n* Employee must not have signed the employment contract\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage onboarding (`onboarding:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "dd5a43c6-211f-49f6-ae8c-cf4dfd3ed95f",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/cancel-onboarding/:employment_id?async=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "cancel-onboarding",
+                            ":employment_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether the request should be performed async\n",
+                              "key": "async",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"status\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:46:51.000Z",
+                      "updatedAt": "2026-07-28T02:46:51.000Z",
+                      "uid": "35240-dd5a43c6-211f-49f6-ae8c-cf4dfd3ed95f"
+                    },
+                    {
+                      "id": "c1469347-5939-4652-9716-99c8859c8bfa",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/cancel-onboarding/:employment_id?async=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "cancel-onboarding",
+                            ":employment_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether the request should be performed async\n",
+                              "key": "async",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:46:51.000Z",
+                      "updatedAt": "2026-07-28T02:46:51.000Z",
+                      "uid": "35240-c1469347-5939-4652-9716-99c8859c8bfa"
+                    },
+                    {
+                      "id": "16a4527f-96f8-464c-95e1-a61b4e66ced1",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/cancel-onboarding/:employment_id?async=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "cancel-onboarding",
+                            ":employment_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether the request should be performed async\n",
+                              "key": "async",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:46:51.000Z",
+                      "updatedAt": "2026-07-28T02:46:51.000Z",
+                      "uid": "35240-16a4527f-96f8-464c-95e1-a61b4e66ced1"
+                    },
+                    {
+                      "id": "50ac54b9-9e22-4126-aaae-152a07b6ea7c",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/cancel-onboarding/:employment_id?async=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "cancel-onboarding",
+                            ":employment_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Whether the request should be performed async\n",
+                              "key": "async",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "employment_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:46:51.000Z",
+                      "updatedAt": "2026-07-28T02:46:51.000Z",
+                      "uid": "35240-50ac54b9-9e22-4126-aaae-152a07b6ea7c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:46:51.000Z",
+                  "updatedAt": "2026-07-28T02:46:51.000Z",
+                  "uid": "35240-ba296bbc-c2b1-4367-9a10-136a87381995"
+                }
+              ],
+              "id": "95b0d58d-71eb-4bfb-a1b3-2c236bc95aea",
+              "createdAt": "2026-07-28T02:46:51.000Z",
+              "updatedAt": "2026-07-28T02:46:51.000Z",
+              "uid": "35240-95b0d58d-71eb-4bfb-a1b3-2c236bc95aea"
+            }
+          ],
+          "id": "e22509c4-7c7f-421e-8d6f-6ae771534acf",
+          "createdAt": "2026-07-28T02:46:51.000Z",
+          "updatedAt": "2026-07-28T02:46:51.000Z",
+          "uid": "35240-e22509c4-7c7f-421e-8d6f-6ae771534acf"
+        },
+        {
+          "name": "employments",
+          "item": [
+            {
+              "name": "{employment_id}",
+              "item": [
+                {
+                  "name": "onboarding-steps",
+                  "item": [
+                    {
+                      "name": "Show onboarding steps for an employment",
+                      "id": "40ae4e94-1d72-422f-b7c3-ca6b8be255b9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/employments/:employment_id/onboarding-steps",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "employments",
+                            ":employment_id",
+                            "onboarding-steps"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0d5cae7f-6659-45f4-a0f4-e8344a03f8aa",
+                              "key": "employment_id",
+                              "value": "<uuid>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Returns onboarding steps and substeps in a hierarchical, ordered structure.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "7eb81505-3558-4bbc-b0fd-2a029bff4194",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/onboarding-steps",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "onboarding-steps"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"steps\": [\n      {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"label\": \"<string>\",\n        \"status\": \"failed\",\n        \"sub_steps\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"label\": \"<string>\",\n            \"status\": \"in_progress\",\n            \"optional\": \"<boolean>\",\n            \"completed_at\": \"<string>\",\n            \"started_at\": \"<string>\",\n            \"tag\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"label\": \"<string>\",\n            \"status\": \"failed\",\n            \"optional\": \"<boolean>\",\n            \"completed_at\": \"<string>\",\n            \"started_at\": \"<string>\",\n            \"tag\": \"<string>\"\n          }\n        ],\n        \"completed_at\": \"<string>\",\n        \"description\": \"<string>\",\n        \"started_at\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"label\": \"<string>\",\n        \"status\": \"completed\",\n        \"sub_steps\": [\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"label\": \"<string>\",\n            \"status\": \"in_progress\",\n            \"optional\": \"<boolean>\",\n            \"completed_at\": \"<string>\",\n            \"started_at\": \"<string>\",\n            \"tag\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"type\": \"<string>\",\n            \"label\": \"<string>\",\n            \"status\": \"failed\",\n            \"optional\": \"<boolean>\",\n            \"completed_at\": \"<string>\",\n            \"started_at\": \"<string>\",\n            \"tag\": \"<string>\"\n          }\n        ],\n        \"completed_at\": \"<string>\",\n        \"description\": \"<string>\",\n        \"started_at\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-07-28T02:46:51.000Z",
+                          "updatedAt": "2026-07-28T02:46:51.000Z",
+                          "uid": "35240-7eb81505-3558-4bbc-b0fd-2a029bff4194"
+                        },
+                        {
+                          "id": "ec31e759-f3c1-43a3-a50d-36aeff11c0c7",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/onboarding-steps",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "onboarding-steps"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:46:51.000Z",
+                          "updatedAt": "2026-07-28T02:46:51.000Z",
+                          "uid": "35240-ec31e759-f3c1-43a3-a50d-36aeff11c0c7"
+                        },
+                        {
+                          "id": "36697c94-70d3-4ec6-9f48-3c572030397d",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/employments/:employment_id/onboarding-steps",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "employments",
+                                ":employment_id",
+                                "onboarding-steps"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:46:51.000Z",
+                          "updatedAt": "2026-07-28T02:46:51.000Z",
+                          "uid": "35240-36697c94-70d3-4ec6-9f48-3c572030397d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:46:51.000Z",
+                      "updatedAt": "2026-07-28T02:46:51.000Z",
+                      "uid": "35240-40ae4e94-1d72-422f-b7c3-ca6b8be255b9"
+                    }
+                  ],
+                  "id": "b533db43-2cc7-43e1-8e4c-10838d13ef00",
+                  "createdAt": "2026-07-28T02:46:51.000Z",
+                  "updatedAt": "2026-07-28T02:46:51.000Z",
+                  "uid": "35240-b533db43-2cc7-43e1-8e4c-10838d13ef00"
+                }
+              ],
+              "id": "901bc88f-d102-4ef8-9d85-23caf1eab2a3",
+              "createdAt": "2026-07-28T02:46:51.000Z",
+              "updatedAt": "2026-07-28T02:46:51.000Z",
+              "uid": "35240-901bc88f-d102-4ef8-9d85-23caf1eab2a3"
+            }
+          ],
+          "id": "27f36f70-778b-4d6a-84f1-e1e454caf244",
+          "createdAt": "2026-07-28T02:46:51.000Z",
+          "updatedAt": "2026-07-28T02:46:51.000Z",
+          "uid": "35240-27f36f70-778b-4d6a-84f1-e1e454caf244"
+        }
+      ],
+      "id": "712230d2-e270-4ee1-9487-13eb859936de",
+      "createdAt": "2026-07-28T02:46:51.000Z",
+      "updatedAt": "2026-07-28T02:46:51.000Z",
+      "uid": "35240-712230d2-e270-4ee1-9487-13eb859936de"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

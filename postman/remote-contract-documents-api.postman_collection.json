@@ -1,0 +1,1008 @@
+{
+  "info": {
+    "_postman_id": "47910207-6fc7-47ff-ba6f-84ae5790f232",
+    "name": "Remote Address Details Contract Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:45:14.000Z",
+    "updatedAt": "2026-07-28T02:45:14.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-47910207-6fc7-47ff-ba6f-84ae5790f232"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "contractors",
+          "item": [
+            {
+              "name": "employments",
+              "item": [
+                {
+                  "name": "{employment_id}",
+                  "item": [
+                    {
+                      "name": "contract-documents",
+                      "item": [
+                        {
+                          "name": "{id}",
+                          "item": [
+                            {
+                              "name": "Return a base64 encoded version of the contract document",
+                              "id": "ad5f1e6b-0e95-438b-abe0-61b6cbea2095",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "contract-documents",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "2098b44b-9414-4352-94d4-981d6916974c",
+                                      "key": "employment_id",
+                                      "value": "<string>",
+                                      "description": "(Required) Employment ID"
+                                    },
+                                    {
+                                      "id": "0dc91073-fa53-4cf6-b275-5d7eb15027a7",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) Document ID"
+                                    }
+                                  ]
+                                },
+                                "description": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "248fcc45-9e47-4022-8dbb-d0ed615b0944",
+                                  "name": "Success",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "contractors",
+                                        "employments",
+                                        ":employment_id",
+                                        "contract-documents",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "employment_id"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"contract_document\": {\n      \"content\": \"<binary>\",\n      \"name\": \"<string>\",\n      \"signatories\": [\n        {\n          \"type\": \"employee\",\n          \"status\": \"signed\",\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"signature\": \"<string>\",\n          \"signature_method\": \"in_platform\",\n          \"signature_type\": \"standard\",\n          \"signed_at\": \"<dateTime>\",\n          \"user_id\": \"<string>\"\n        },\n        {\n          \"type\": \"admin\",\n          \"status\": \"signed\",\n          \"email\": \"<string>\",\n          \"name\": \"<string>\",\n          \"signature\": \"<string>\",\n          \"signature_method\": \"docusign\",\n          \"signature_type\": \"ses\",\n          \"signed_at\": \"<dateTime>\",\n          \"user_id\": \"<string>\"\n        }\n      ],\n      \"status\": \"draft\"\n    }\n  }\n}",
+                                  "createdAt": "2026-07-28T02:45:14.000Z",
+                                  "updatedAt": "2026-07-28T02:45:14.000Z",
+                                  "uid": "35240-248fcc45-9e47-4022-8dbb-d0ed615b0944"
+                                },
+                                {
+                                  "id": "fb4dd8bb-5821-4877-800c-e878705f721c",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "contractors",
+                                        "employments",
+                                        ":employment_id",
+                                        "contract-documents",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "employment_id"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                                  "createdAt": "2026-07-28T02:45:14.000Z",
+                                  "updatedAt": "2026-07-28T02:45:14.000Z",
+                                  "uid": "35240-fb4dd8bb-5821-4877-800c-e878705f721c"
+                                },
+                                {
+                                  "id": "cfc757f8-d019-40a3-904a-cd70ea74e60e",
+                                  "name": "Not Found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "contractors",
+                                        "employments",
+                                        ":employment_id",
+                                        "contract-documents",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "employment_id"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                                  "createdAt": "2026-07-28T02:45:14.000Z",
+                                  "updatedAt": "2026-07-28T02:45:14.000Z",
+                                  "uid": "35240-cfc757f8-d019-40a3-904a-cd70ea74e60e"
+                                },
+                                {
+                                  "id": "161994ce-4ebd-4be0-acf2-766d256dec7a",
+                                  "name": "Unprocessable Entity",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "contractors",
+                                        "employments",
+                                        ":employment_id",
+                                        "contract-documents",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "employment_id"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"errors\": {}\n}",
+                                  "createdAt": "2026-07-28T02:45:14.000Z",
+                                  "updatedAt": "2026-07-28T02:45:14.000Z",
+                                  "uid": "35240-161994ce-4ebd-4be0-acf2-766d256dec7a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T02:45:14.000Z",
+                              "updatedAt": "2026-07-28T02:45:14.000Z",
+                              "uid": "35240-ad5f1e6b-0e95-438b-abe0-61b6cbea2095"
+                            }
+                          ],
+                          "id": "c091992a-78bb-4619-94da-e16aac978169",
+                          "createdAt": "2026-07-28T02:45:14.000Z",
+                          "updatedAt": "2026-07-28T02:45:14.000Z",
+                          "uid": "35240-c091992a-78bb-4619-94da-e16aac978169"
+                        },
+                        {
+                          "name": "{contract_document_id}",
+                          "item": [
+                            {
+                              "name": "sign",
+                              "item": [
+                                {
+                                  "name": "Sign a document for a contractor",
+                                  "id": "c30bb81e-ae9a-487d-873d-026d63e05521",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "auth": {
+                                      "type": "bearer",
+                                      "bearer": [
+                                        {
+                                          "key": "token",
+                                          "value": "{{bearerToken}}",
+                                          "type": "string"
+                                        }
+                                      ]
+                                    },
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:contract_document_id/sign",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "v1",
+                                        "contractors",
+                                        "employments",
+                                        ":employment_id",
+                                        "contract-documents",
+                                        ":contract_document_id",
+                                        "sign"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "41717a30-e1fc-4053-a3d0-c589e9455eef",
+                                          "key": "employment_id",
+                                          "value": "<string>",
+                                          "description": "(Required) Employment ID"
+                                        },
+                                        {
+                                          "id": "59856b54-b586-4bf4-af67-8d15496a3b34",
+                                          "key": "contract_document_id",
+                                          "value": "<string>",
+                                          "description": "(Required) Document ID"
+                                        }
+                                      ]
+                                    },
+                                    "description": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "1136e38e-c8e3-4b89-950b-0d261322ed59",
+                                      "name": "Success",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:contract_document_id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "contractors",
+                                            "employments",
+                                            ":employment_id",
+                                            "contract-documents",
+                                            ":contract_document_id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "contract_document_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"data\": {\n    \"status\": \"<string>\"\n  }\n}",
+                                      "createdAt": "2026-07-28T02:45:14.000Z",
+                                      "updatedAt": "2026-07-28T02:45:14.000Z",
+                                      "uid": "35240-1136e38e-c8e3-4b89-950b-0d261322ed59"
+                                    },
+                                    {
+                                      "id": "e8ecdd7b-5a48-4775-8c80-a23bcf3a2f92",
+                                      "name": "Bad Request",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:contract_document_id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "contractors",
+                                            "employments",
+                                            ":employment_id",
+                                            "contract-documents",
+                                            ":contract_document_id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "contract_document_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Bad Request",
+                                      "code": 400,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"<string>\"\n}",
+                                      "createdAt": "2026-07-28T02:45:14.000Z",
+                                      "updatedAt": "2026-07-28T02:45:14.000Z",
+                                      "uid": "35240-e8ecdd7b-5a48-4775-8c80-a23bcf3a2f92"
+                                    },
+                                    {
+                                      "id": "64128642-a192-4bf7-b878-60d09a0e58a1",
+                                      "name": "Forbidden",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"signature\": \"<string>\"\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents/:contract_document_id/sign",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "v1",
+                                            "contractors",
+                                            "employments",
+                                            ":employment_id",
+                                            "contract-documents",
+                                            ":contract_document_id",
+                                            "sign"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "employment_id"
+                                            },
+                                            {
+                                              "key": "contract_document_id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Forbidden",
+                                      "code": 403,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"message\": \"Forbidden\"\n}",
+                                      "createdAt": "2026-07-28T02:45:14.000Z",
+                                      "updatedAt": "2026-07-28T02:45:14.000Z",
+                                      "uid": "35240-64128642-a192-4bf7-b878-60d09a0e58a1"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T02:45:14.000Z",
+                                  "updatedAt": "2026-07-28T02:45:14.000Z",
+                                  "uid": "35240-c30bb81e-ae9a-487d-873d-026d63e05521"
+                                }
+                              ],
+                              "id": "14992290-68ab-4e40-8cb4-a372da998448",
+                              "createdAt": "2026-07-28T02:45:14.000Z",
+                              "updatedAt": "2026-07-28T02:45:14.000Z",
+                              "uid": "35240-14992290-68ab-4e40-8cb4-a372da998448"
+                            }
+                          ],
+                          "id": "9781006b-4fc3-428e-898e-30421e7126e9",
+                          "createdAt": "2026-07-28T02:45:14.000Z",
+                          "updatedAt": "2026-07-28T02:45:14.000Z",
+                          "uid": "35240-9781006b-4fc3-428e-898e-30421e7126e9"
+                        },
+                        {
+                          "name": "Create a contract document for a contractor",
+                          "id": "217cd100-9639-4525-8ea6-265036138167",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contract_document\": {},\n  \"skip_ai_checks\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "contractors",
+                                "employments",
+                                ":employment_id",
+                                "contract-documents"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2fbc74e2-4ef6-4d80-a733-1ae7af42ea46",
+                                  "key": "employment_id",
+                                  "value": "<string>",
+                                  "description": "(Required) Employment ID"
+                                }
+                              ]
+                            },
+                            "description": "Create a contract document for a contractor.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+                          },
+                          "response": [
+                            {
+                              "id": "74d4906f-386e-49dc-b1bb-185755ceabfb",
+                              "name": "Success",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"contract_document\": {},\n  \"skip_ai_checks\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "contract-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"contract_document\": {\n      \"id\": \"<string>\",\n      \"status\": \"finished\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:45:14.000Z",
+                              "updatedAt": "2026-07-28T02:45:14.000Z",
+                              "uid": "35240-74d4906f-386e-49dc-b1bb-185755ceabfb"
+                            },
+                            {
+                              "id": "92a821d2-76df-4c56-8819-996b8ba9747a",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"contract_document\": {},\n  \"skip_ai_checks\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "contract-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                              "createdAt": "2026-07-28T02:45:14.000Z",
+                              "updatedAt": "2026-07-28T02:45:14.000Z",
+                              "uid": "35240-92a821d2-76df-4c56-8819-996b8ba9747a"
+                            },
+                            {
+                              "id": "f9dfbbe2-48ea-4590-81dd-ae8aa84ffce3",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"contract_document\": {},\n  \"skip_ai_checks\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "contract-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"Not Found\"\n}",
+                              "createdAt": "2026-07-28T02:45:14.000Z",
+                              "updatedAt": "2026-07-28T02:45:14.000Z",
+                              "uid": "35240-f9dfbbe2-48ea-4590-81dd-ae8aa84ffce3"
+                            },
+                            {
+                              "id": "91d8dad5-fb81-4c3b-a964-225c6378627e",
+                              "name": "Unprocessable Entity",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"contract_document\": {},\n  \"skip_ai_checks\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/v1/contractors/employments/:employment_id/contract-documents",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "v1",
+                                    "contractors",
+                                    "employments",
+                                    ":employment_id",
+                                    "contract-documents"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "employment_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": {}\n}",
+                              "createdAt": "2026-07-28T02:45:14.000Z",
+                              "updatedAt": "2026-07-28T02:45:14.000Z",
+                              "uid": "35240-91d8dad5-fb81-4c3b-a964-225c6378627e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:45:14.000Z",
+                          "updatedAt": "2026-07-28T02:45:14.000Z",
+                          "uid": "35240-217cd100-9639-4525-8ea6-265036138167"
+                        }
+                      ],
+                      "id": "744d224b-30ad-4a28-91cf-cb94a0bcdca2",
+                      "createdAt": "2026-07-28T02:45:14.000Z",
+                      "updatedAt": "2026-07-28T02:45:14.000Z",
+                      "uid": "35240-744d224b-30ad-4a28-91cf-cb94a0bcdca2"
+                    }
+                  ],
+                  "id": "1606e2e2-6913-4d30-9380-955efd4e8d04",
+                  "createdAt": "2026-07-28T02:45:14.000Z",
+                  "updatedAt": "2026-07-28T02:45:14.000Z",
+                  "uid": "35240-1606e2e2-6913-4d30-9380-955efd4e8d04"
+                }
+              ],
+              "id": "edca6f82-7db0-4541-89d6-3d7237bfc477",
+              "createdAt": "2026-07-28T02:45:14.000Z",
+              "updatedAt": "2026-07-28T02:45:14.000Z",
+              "uid": "35240-edca6f82-7db0-4541-89d6-3d7237bfc477"
+            }
+          ],
+          "id": "c517815a-3a05-485f-add6-b21b6c710780",
+          "createdAt": "2026-07-28T02:45:14.000Z",
+          "updatedAt": "2026-07-28T02:45:14.000Z",
+          "uid": "35240-c517815a-3a05-485f-add6-b21b6c710780"
+        }
+      ],
+      "id": "9867b372-2e50-480b-b252-c8459ff7f385",
+      "createdAt": "2026-07-28T02:45:14.000Z",
+      "updatedAt": "2026-07-28T02:45:14.000Z",
+      "uid": "35240-9867b372-2e50-480b-b252-c8459ff7f385"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

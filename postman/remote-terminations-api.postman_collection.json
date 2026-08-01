@@ -1,0 +1,2675 @@
+{
+  "info": {
+    "_postman_id": "1a5ebf0a-b1fd-4ab3-8dc3-eb131e404b7e",
+    "name": "Remote Address Details Terminations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:54.000Z",
+    "updatedAt": "2026-07-28T02:47:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1a5ebf0a-b1fd-4ab3-8dc3-eb131e404b7e"
+  },
+  "item": [
+    {
+      "name": "v1",
+      "item": [
+        {
+          "name": "offboardings",
+          "item": [
+            {
+              "name": "employments",
+              "item": [
+                {
+                  "name": "{employment_id}",
+                  "item": [
+                    {
+                      "name": "List Offboardings for Employment",
+                      "id": "f3cbed38-9281-416e-9855-f8c75edfec88",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/offboardings/employments/:employment_id?page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "offboardings",
+                            "employments",
+                            ":employment_id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Starts fetching records after the given page",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "448be77a-409a-4984-9a23-d98cfe3c7d27",
+                              "key": "employment_id",
+                              "value": "<string>",
+                              "description": "(Required) Employment ID"
+                            }
+                          ]
+                        },
+                        "description": "Lists Offboarding requests for a specific employment.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+                      },
+                      "response": [
+                        {
+                          "id": "3b9348ec-4265-47de-b539-36257ec24bc6",
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/offboardings/employments/:employment_id?page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "offboardings",
+                                "employments",
+                                ":employment_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"offboardings\": [\n      {\n        \"id\": \"<string>\",\n        \"type\": \"resignation\",\n        \"status\": \"submitted\",\n        \"submitted_at\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"requested_by\": \"<string>\",\n        \"proposed_last_working_day\": \"<date>\",\n        \"termination_date\": \"<date>\",\n        \"resignation_reason\": \"conversion_to_contractor\",\n        \"additional_comments\": \"<string>\",\n        \"agrees_to_pto_amount\": \"<boolean>\",\n        \"employer_awareness\": \"<string>\",\n        \"offboarding_id\": \"<string>\",\n        \"reason_description\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"type\": \"resignation\",\n        \"status\": \"canceled\",\n        \"submitted_at\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"requested_by\": \"<string>\",\n        \"proposed_last_working_day\": \"<date>\",\n        \"termination_date\": \"<date>\",\n        \"resignation_reason\": \"relocation_leaving_remote\",\n        \"additional_comments\": \"<string>\",\n        \"agrees_to_pto_amount\": \"<boolean>\",\n        \"employer_awareness\": \"<string>\",\n        \"offboarding_id\": \"<string>\",\n        \"reason_description\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-07-28T02:47:55.000Z",
+                          "updatedAt": "2026-07-28T02:47:55.000Z",
+                          "uid": "35240-3b9348ec-4265-47de-b539-36257ec24bc6"
+                        },
+                        {
+                          "id": "d920ab0d-8144-42fb-a58d-ec17a6a8139a",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/offboardings/employments/:employment_id?page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "offboardings",
+                                "employments",
+                                ":employment_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T02:47:55.000Z",
+                          "updatedAt": "2026-07-28T02:47:55.000Z",
+                          "uid": "35240-d920ab0d-8144-42fb-a58d-ec17a6a8139a"
+                        },
+                        {
+                          "id": "32c742b7-8705-4694-b729-e94309341386",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/offboardings/employments/:employment_id?page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "offboardings",
+                                "employments",
+                                ":employment_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                          "createdAt": "2026-07-28T02:47:55.000Z",
+                          "updatedAt": "2026-07-28T02:47:55.000Z",
+                          "uid": "35240-32c742b7-8705-4694-b729-e94309341386"
+                        },
+                        {
+                          "id": "d4a918ee-7b26-4f81-9eea-70f2706ac93a",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/offboardings/employments/:employment_id?page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "offboardings",
+                                "employments",
+                                ":employment_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Not Found\"\n}",
+                          "createdAt": "2026-07-28T02:47:55.000Z",
+                          "updatedAt": "2026-07-28T02:47:55.000Z",
+                          "uid": "35240-d4a918ee-7b26-4f81-9eea-70f2706ac93a"
+                        },
+                        {
+                          "id": "33a9bd53-af13-4319-830a-06f66527fd07",
+                          "name": "Unprocessable Entity",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/offboardings/employments/:employment_id?page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "offboardings",
+                                "employments",
+                                ":employment_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": {}\n}",
+                          "createdAt": "2026-07-28T02:47:55.000Z",
+                          "updatedAt": "2026-07-28T02:47:55.000Z",
+                          "uid": "35240-33a9bd53-af13-4319-830a-06f66527fd07"
+                        },
+                        {
+                          "id": "518740f3-407f-49dd-abb5-c6a0fd17f828",
+                          "name": "Too many requests",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v1/offboardings/employments/:employment_id?page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v1",
+                                "offboardings",
+                                "employments",
+                                ":employment_id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Starts fetching records after the given page",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "employment_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"Too many requests\"\n}",
+                          "createdAt": "2026-07-28T02:47:55.000Z",
+                          "updatedAt": "2026-07-28T02:47:55.000Z",
+                          "uid": "35240-518740f3-407f-49dd-abb5-c6a0fd17f828"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-f3cbed38-9281-416e-9855-f8c75edfec88"
+                    }
+                  ],
+                  "id": "d746b04c-f997-4b22-92bb-76678397f02d",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-d746b04c-f997-4b22-92bb-76678397f02d"
+                }
+              ],
+              "id": "8c5dce81-a2d9-4530-8024-64b817e50089",
+              "createdAt": "2026-07-28T02:47:55.000Z",
+              "updatedAt": "2026-07-28T02:47:55.000Z",
+              "uid": "35240-8c5dce81-a2d9-4530-8024-64b817e50089"
+            },
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Show Offboarding",
+                  "id": "bc76d3dc-d997-45c8-8531-e520600d4c84",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "add804ac-552c-492d-ba0a-13bf4eb04581",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Offboarding request ID"
+                        }
+                      ]
+                    },
+                    "description": "Shows an Offboarding request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "c1bd7ea4-f4f3-438b-916e-39d06a58f24f",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"offboarding\": {\n      \"id\": \"<string>\",\n      \"type\": \"resignation\",\n      \"status\": \"canceled\",\n      \"submitted_at\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"proposed_last_working_day\": \"<date>\",\n      \"termination_date\": \"<date>\",\n      \"resignation_reason\": \"relocation_leaving_remote\",\n      \"additional_comments\": \"<string>\",\n      \"agrees_to_pto_amount\": \"<boolean>\",\n      \"employer_awareness\": \"<string>\",\n      \"offboarding_id\": \"<string>\",\n      \"reason_description\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-c1bd7ea4-f4f3-438b-916e-39d06a58f24f"
+                    },
+                    {
+                      "id": "494d8f68-b594-43f6-af33-61ec673cc821",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-494d8f68-b594-43f6-af33-61ec673cc821"
+                    },
+                    {
+                      "id": "d8365fd9-8223-4531-837c-c0b8b3fde654",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-d8365fd9-8223-4531-837c-c0b8b3fde654"
+                    },
+                    {
+                      "id": "d26d3e9b-bd96-416f-a73d-e3825cd555be",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-d26d3e9b-bd96-416f-a73d-e3825cd555be"
+                    },
+                    {
+                      "id": "8d70a417-7452-4b88-aed5-cbeaa2388946",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-8d70a417-7452-4b88-aed5-cbeaa2388946"
+                    },
+                    {
+                      "id": "9cd41566-c12e-42d6-b701-6b0cbc4954f3",
+                      "name": "Too many requests",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v1/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v1",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-9cd41566-c12e-42d6-b701-6b0cbc4954f3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-bc76d3dc-d997-45c8-8531-e520600d4c84"
+                }
+              ],
+              "id": "505b8d61-02b5-482d-9d90-7f474717f718",
+              "createdAt": "2026-07-28T02:47:55.000Z",
+              "updatedAt": "2026-07-28T02:47:55.000Z",
+              "uid": "35240-505b8d61-02b5-482d-9d90-7f474717f718"
+            },
+            {
+              "name": "List Offboarding",
+              "id": "445dac81-bbd2-436a-b9b5-d78799949aa9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v1/offboardings?employment_id=<string>&type=<string>&include_confidential=<string>&page=<integer>&page_size=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "offboardings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by Employment ID",
+                      "key": "employment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by offboarding type",
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                      "key": "include_confidential",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Lists Offboarding requests.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "4e43366f-48b0-45ee-96a9-0d98a389092b",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings?employment_id=<string>&type=<string>&include_confidential=<string>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type",
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"offboardings\": [\n      {\n        \"id\": \"<string>\",\n        \"type\": \"resignation\",\n        \"status\": \"submitted\",\n        \"submitted_at\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"requested_by\": \"<string>\",\n        \"proposed_last_working_day\": \"<date>\",\n        \"termination_date\": \"<date>\",\n        \"resignation_reason\": \"conversion_to_contractor\",\n        \"additional_comments\": \"<string>\",\n        \"agrees_to_pto_amount\": \"<boolean>\",\n        \"employer_awareness\": \"<string>\",\n        \"offboarding_id\": \"<string>\",\n        \"reason_description\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"type\": \"resignation\",\n        \"status\": \"canceled\",\n        \"submitted_at\": \"<string>\",\n        \"employment_id\": \"<string>\",\n        \"requested_by\": \"<string>\",\n        \"proposed_last_working_day\": \"<date>\",\n        \"termination_date\": \"<date>\",\n        \"resignation_reason\": \"relocation_leaving_remote\",\n        \"additional_comments\": \"<string>\",\n        \"agrees_to_pto_amount\": \"<boolean>\",\n        \"employer_awareness\": \"<string>\",\n        \"offboarding_id\": \"<string>\",\n        \"reason_description\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-4e43366f-48b0-45ee-96a9-0d98a389092b"
+                },
+                {
+                  "id": "b6bfe83c-bf49-4e7e-9258-361aef13238c",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings?employment_id=<string>&type=<string>&include_confidential=<string>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type",
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-b6bfe83c-bf49-4e7e-9258-361aef13238c"
+                },
+                {
+                  "id": "d6939e2b-aad4-46f5-b57c-8b7f31db0eed",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings?employment_id=<string>&type=<string>&include_confidential=<string>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type",
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-d6939e2b-aad4-46f5-b57c-8b7f31db0eed"
+                },
+                {
+                  "id": "7236f913-cc7b-4895-b09e-d490bc878b2c",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings?employment_id=<string>&type=<string>&include_confidential=<string>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type",
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-7236f913-cc7b-4895-b09e-d490bc878b2c"
+                },
+                {
+                  "id": "e32ba7f7-f1d5-4353-a820-b93516d7ed50",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings?employment_id=<string>&type=<string>&include_confidential=<string>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type",
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-e32ba7f7-f1d5-4353-a820-b93516d7ed50"
+                },
+                {
+                  "id": "3351145e-d495-4ed5-9189-020ca2ffff00",
+                  "name": "Too many requests",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings?employment_id=<string>&type=<string>&include_confidential=<string>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type",
+                          "key": "type",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Too many requests\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-3351145e-d495-4ed5-9189-020ca2ffff00"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:55.000Z",
+              "updatedAt": "2026-07-28T02:47:55.000Z",
+              "uid": "35240-445dac81-bbd2-436a-b9b5-d78799949aa9"
+            },
+            {
+              "name": "Create Offboarding",
+              "id": "52804c3e-072d-48b5-93c4-4177becf0868",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"termination\",\n  \"employment_id\": \"<string>\",\n  \"termination_details\": {\n    \"confidential\": \"<boolean>\",\n    \"proposed_termination_date\": \"<date>\",\n    \"termination_reason\": \"values\",\n    \"risk_assessment_reasons\": [\n      \"requested_medical_or_family_leave\"\n    ],\n    \"will_challenge_termination\": \"<boolean>\",\n    \"reason_description\": \"<string>\",\n    \"acknowledge_termination_procedure\": \"<boolean>\",\n    \"additional_comments\": \"<string>\",\n    \"agrees_to_pto_amount\": \"<boolean>\",\n    \"agrees_to_pto_amount_notes\": \"<string>\",\n    \"customer_informed_employee\": \"<boolean>\",\n    \"employee_awareness\": {\n      \"date\": \"<date>\",\n      \"note\": \"<string>\"\n    },\n    \"personal_email\": \"<email>\",\n    \"termination_reason_files\": [\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      }\n    ],\n    \"timesheet_file\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\"\n    },\n    \"will_challenge_termination_description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v1/offboardings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v1",
+                    "offboardings"
+                  ]
+                },
+                "description": "Creates an Offboarding request\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage offboarding (`offboarding:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "bd9b7559-685d-48fb-8dc5-0fa799c140c3",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"termination\",\n  \"employment_id\": \"<string>\",\n  \"termination_details\": {\n    \"confidential\": \"<boolean>\",\n    \"proposed_termination_date\": \"<date>\",\n    \"termination_reason\": \"values\",\n    \"risk_assessment_reasons\": [\n      \"requested_medical_or_family_leave\"\n    ],\n    \"will_challenge_termination\": \"<boolean>\",\n    \"reason_description\": \"<string>\",\n    \"acknowledge_termination_procedure\": \"<boolean>\",\n    \"additional_comments\": \"<string>\",\n    \"agrees_to_pto_amount\": \"<boolean>\",\n    \"agrees_to_pto_amount_notes\": \"<string>\",\n    \"customer_informed_employee\": \"<boolean>\",\n    \"employee_awareness\": {\n      \"date\": \"<date>\",\n      \"note\": \"<string>\"\n    },\n    \"personal_email\": \"<email>\",\n    \"termination_reason_files\": [\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      }\n    ],\n    \"timesheet_file\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\"\n    },\n    \"will_challenge_termination_description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"offboarding\": {\n      \"id\": \"<string>\",\n      \"type\": \"resignation\",\n      \"status\": \"canceled\",\n      \"submitted_at\": \"<string>\",\n      \"employment_id\": \"<string>\",\n      \"requested_by\": \"<string>\",\n      \"proposed_last_working_day\": \"<date>\",\n      \"termination_date\": \"<date>\",\n      \"resignation_reason\": \"relocation_leaving_remote\",\n      \"additional_comments\": \"<string>\",\n      \"agrees_to_pto_amount\": \"<boolean>\",\n      \"employer_awareness\": \"<string>\",\n      \"offboarding_id\": \"<string>\",\n      \"reason_description\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-bd9b7559-685d-48fb-8dc5-0fa799c140c3"
+                },
+                {
+                  "id": "96ac9be7-deae-4085-b7a0-405b220034fd",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"termination\",\n  \"employment_id\": \"<string>\",\n  \"termination_details\": {\n    \"confidential\": \"<boolean>\",\n    \"proposed_termination_date\": \"<date>\",\n    \"termination_reason\": \"values\",\n    \"risk_assessment_reasons\": [\n      \"requested_medical_or_family_leave\"\n    ],\n    \"will_challenge_termination\": \"<boolean>\",\n    \"reason_description\": \"<string>\",\n    \"acknowledge_termination_procedure\": \"<boolean>\",\n    \"additional_comments\": \"<string>\",\n    \"agrees_to_pto_amount\": \"<boolean>\",\n    \"agrees_to_pto_amount_notes\": \"<string>\",\n    \"customer_informed_employee\": \"<boolean>\",\n    \"employee_awareness\": {\n      \"date\": \"<date>\",\n      \"note\": \"<string>\"\n    },\n    \"personal_email\": \"<email>\",\n    \"termination_reason_files\": [\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      }\n    ],\n    \"timesheet_file\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\"\n    },\n    \"will_challenge_termination_description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-96ac9be7-deae-4085-b7a0-405b220034fd"
+                },
+                {
+                  "id": "ad44d06b-d213-4167-9368-1c188370042e",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"termination\",\n  \"employment_id\": \"<string>\",\n  \"termination_details\": {\n    \"confidential\": \"<boolean>\",\n    \"proposed_termination_date\": \"<date>\",\n    \"termination_reason\": \"values\",\n    \"risk_assessment_reasons\": [\n      \"requested_medical_or_family_leave\"\n    ],\n    \"will_challenge_termination\": \"<boolean>\",\n    \"reason_description\": \"<string>\",\n    \"acknowledge_termination_procedure\": \"<boolean>\",\n    \"additional_comments\": \"<string>\",\n    \"agrees_to_pto_amount\": \"<boolean>\",\n    \"agrees_to_pto_amount_notes\": \"<string>\",\n    \"customer_informed_employee\": \"<boolean>\",\n    \"employee_awareness\": {\n      \"date\": \"<date>\",\n      \"note\": \"<string>\"\n    },\n    \"personal_email\": \"<email>\",\n    \"termination_reason_files\": [\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      }\n    ],\n    \"timesheet_file\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\"\n    },\n    \"will_challenge_termination_description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-ad44d06b-d213-4167-9368-1c188370042e"
+                },
+                {
+                  "id": "45e8d0ff-85c5-47ba-a464-6223bc45f55c",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"termination\",\n  \"employment_id\": \"<string>\",\n  \"termination_details\": {\n    \"confidential\": \"<boolean>\",\n    \"proposed_termination_date\": \"<date>\",\n    \"termination_reason\": \"values\",\n    \"risk_assessment_reasons\": [\n      \"requested_medical_or_family_leave\"\n    ],\n    \"will_challenge_termination\": \"<boolean>\",\n    \"reason_description\": \"<string>\",\n    \"acknowledge_termination_procedure\": \"<boolean>\",\n    \"additional_comments\": \"<string>\",\n    \"agrees_to_pto_amount\": \"<boolean>\",\n    \"agrees_to_pto_amount_notes\": \"<string>\",\n    \"customer_informed_employee\": \"<boolean>\",\n    \"employee_awareness\": {\n      \"date\": \"<date>\",\n      \"note\": \"<string>\"\n    },\n    \"personal_email\": \"<email>\",\n    \"termination_reason_files\": [\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      }\n    ],\n    \"timesheet_file\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\"\n    },\n    \"will_challenge_termination_description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-45e8d0ff-85c5-47ba-a464-6223bc45f55c"
+                },
+                {
+                  "id": "631f4e0d-c7db-4116-b173-d45dfd8f7d96",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"termination\",\n  \"employment_id\": \"<string>\",\n  \"termination_details\": {\n    \"confidential\": \"<boolean>\",\n    \"proposed_termination_date\": \"<date>\",\n    \"termination_reason\": \"values\",\n    \"risk_assessment_reasons\": [\n      \"requested_medical_or_family_leave\"\n    ],\n    \"will_challenge_termination\": \"<boolean>\",\n    \"reason_description\": \"<string>\",\n    \"acknowledge_termination_procedure\": \"<boolean>\",\n    \"additional_comments\": \"<string>\",\n    \"agrees_to_pto_amount\": \"<boolean>\",\n    \"agrees_to_pto_amount_notes\": \"<string>\",\n    \"customer_informed_employee\": \"<boolean>\",\n    \"employee_awareness\": {\n      \"date\": \"<date>\",\n      \"note\": \"<string>\"\n    },\n    \"personal_email\": \"<email>\",\n    \"termination_reason_files\": [\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      }\n    ],\n    \"timesheet_file\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\"\n    },\n    \"will_challenge_termination_description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-631f4e0d-c7db-4116-b173-d45dfd8f7d96"
+                },
+                {
+                  "id": "b3acc77e-d2f4-416d-b764-5c3301bc04f0",
+                  "name": "Too many requests",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"termination\",\n  \"employment_id\": \"<string>\",\n  \"termination_details\": {\n    \"confidential\": \"<boolean>\",\n    \"proposed_termination_date\": \"<date>\",\n    \"termination_reason\": \"values\",\n    \"risk_assessment_reasons\": [\n      \"requested_medical_or_family_leave\"\n    ],\n    \"will_challenge_termination\": \"<boolean>\",\n    \"reason_description\": \"<string>\",\n    \"acknowledge_termination_procedure\": \"<boolean>\",\n    \"additional_comments\": \"<string>\",\n    \"agrees_to_pto_amount\": \"<boolean>\",\n    \"agrees_to_pto_amount_notes\": \"<string>\",\n    \"customer_informed_employee\": \"<boolean>\",\n    \"employee_awareness\": {\n      \"date\": \"<date>\",\n      \"note\": \"<string>\"\n    },\n    \"personal_email\": \"<email>\",\n    \"termination_reason_files\": [\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      }\n    ],\n    \"timesheet_file\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\"\n    },\n    \"will_challenge_termination_description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Too many requests\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-b3acc77e-d2f4-416d-b764-5c3301bc04f0"
+                },
+                {
+                  "id": "d5952c05-79ca-49b8-8066-6b0caa5d83be",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"termination\",\n  \"employment_id\": \"<string>\",\n  \"termination_details\": {\n    \"confidential\": \"<boolean>\",\n    \"proposed_termination_date\": \"<date>\",\n    \"termination_reason\": \"values\",\n    \"risk_assessment_reasons\": [\n      \"requested_medical_or_family_leave\"\n    ],\n    \"will_challenge_termination\": \"<boolean>\",\n    \"reason_description\": \"<string>\",\n    \"acknowledge_termination_procedure\": \"<boolean>\",\n    \"additional_comments\": \"<string>\",\n    \"agrees_to_pto_amount\": \"<boolean>\",\n    \"agrees_to_pto_amount_notes\": \"<string>\",\n    \"customer_informed_employee\": \"<boolean>\",\n    \"employee_awareness\": {\n      \"date\": \"<date>\",\n      \"note\": \"<string>\"\n    },\n    \"personal_email\": \"<email>\",\n    \"termination_reason_files\": [\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"content\": \"<binary>\"\n      }\n    ],\n    \"timesheet_file\": {\n      \"name\": \"<string>\",\n      \"content\": \"<binary>\"\n    },\n    \"will_challenge_termination_description\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v1/offboardings",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v1",
+                        "offboardings"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-d5952c05-79ca-49b8-8066-6b0caa5d83be"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:55.000Z",
+              "updatedAt": "2026-07-28T02:47:55.000Z",
+              "uid": "35240-52804c3e-072d-48b5-93c4-4177becf0868"
+            }
+          ],
+          "id": "2ecc9027-8282-4070-b7c1-5383c5d4bf1b",
+          "createdAt": "2026-07-28T02:47:55.000Z",
+          "updatedAt": "2026-07-28T02:47:55.000Z",
+          "uid": "35240-2ecc9027-8282-4070-b7c1-5383c5d4bf1b"
+        }
+      ],
+      "id": "11be6d4d-bde8-4c09-9872-e331084622a2",
+      "createdAt": "2026-07-28T02:47:55.000Z",
+      "updatedAt": "2026-07-28T02:47:55.000Z",
+      "uid": "35240-11be6d4d-bde8-4c09-9872-e331084622a2"
+    },
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "offboardings",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Show Offboarding (v2)",
+                  "id": "bff7353c-149b-4a64-806a-ef3688159fdf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/offboardings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "offboardings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "66e0df66-0963-4a87-92ce-3f44ae328654",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) Offboarding ID"
+                        }
+                      ]
+                    },
+                    "description": "Returns a single offboarding by its ID.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+                  },
+                  "response": [
+                    {
+                      "id": "6bc3456e-8dcf-47a5-a02f-4d2c60d2dd9e",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"offboarding\": {\n      \"id\": \"<string>\",\n      \"status\": \"in_review\",\n      \"type\": \"conversion\",\n      \"employment_id\": \"<string>\",\n      \"inserted_at\": \"<string>\",\n      \"confidential\": \"<boolean>\",\n      \"reason\": \"<string>\",\n      \"request\": {\n        \"additional_comments\": \"<string>\",\n        \"agrees_to_pto_amount\": \"<boolean>\",\n        \"employee_awareness\": {\n          \"date\": \"<date>\",\n          \"note\": \"<string>\"\n        },\n        \"proposed_termination_date\": \"<date>\",\n        \"reason_description\": \"<string>\",\n        \"risk_assessment_reasons\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"will_challenge_termination\": \"<boolean>\",\n        \"will_challenge_termination_description\": \"<string>\"\n      },\n      \"termination_date\": \"<date>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-6bc3456e-8dcf-47a5-a02f-4d2c60d2dd9e"
+                    },
+                    {
+                      "id": "8336cc00-1ee6-47fb-9fe4-ee2cfe5074e7",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-8336cc00-1ee6-47fb-9fe4-ee2cfe5074e7"
+                    },
+                    {
+                      "id": "57a0199c-4171-48cd-ac15-13311538258b",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-57a0199c-4171-48cd-ac15-13311538258b"
+                    },
+                    {
+                      "id": "ffea150c-a457-4347-a25f-2810b9bf46d7",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Not Found\"\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-ffea150c-a457-4347-a25f-2810b9bf46d7"
+                    },
+                    {
+                      "id": "5a90f340-e220-4653-b59a-074c17902d15",
+                      "name": "Unprocessable Entity",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": {}\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-5a90f340-e220-4653-b59a-074c17902d15"
+                    },
+                    {
+                      "id": "04b8b8bc-564c-440a-a16a-28946063f6a9",
+                      "name": "Too many requests",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/offboardings/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "offboardings",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"Too many requests\"\n}",
+                      "createdAt": "2026-07-28T02:47:55.000Z",
+                      "updatedAt": "2026-07-28T02:47:55.000Z",
+                      "uid": "35240-04b8b8bc-564c-440a-a16a-28946063f6a9"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-bff7353c-149b-4a64-806a-ef3688159fdf"
+                }
+              ],
+              "id": "4d3c5257-2ae3-4570-8961-0096207e1f6a",
+              "createdAt": "2026-07-28T02:47:55.000Z",
+              "updatedAt": "2026-07-28T02:47:55.000Z",
+              "uid": "35240-4d3c5257-2ae3-4570-8961-0096207e1f6a"
+            },
+            {
+              "name": "List Offboardings (v2)",
+              "id": "2f4b2cc8-275a-4d1a-9f59-3065864b76f9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/offboardings?employment_id=<string>&type=cancellation&include_confidential=<boolean>&page=<integer>&page_size=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "offboardings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by Employment ID",
+                      "key": "employment_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by offboarding type.",
+                      "key": "type",
+                      "value": "cancellation"
+                    },
+                    {
+                      "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                      "key": "include_confidential",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Starts fetching records after the given page",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Lists offboardings for a company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+              },
+              "response": [
+                {
+                  "id": "fa4698e3-d310-4574-bba2-eaf2256ebdbf",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/offboardings?employment_id=<string>&type=cancellation&include_confidential=<boolean>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type.",
+                          "key": "type",
+                          "value": "cancellation"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"current_page\": \"<integer>\",\n    \"offboardings\": [\n      {\n        \"id\": \"<string>\",\n        \"status\": \"in_review\",\n        \"type\": \"conversion\",\n        \"employment_id\": \"<string>\",\n        \"inserted_at\": \"<string>\",\n        \"confidential\": \"<boolean>\",\n        \"reason\": \"<string>\",\n        \"request\": {\n          \"additional_comments\": \"<string>\",\n          \"agrees_to_pto_amount\": \"<boolean>\",\n          \"employee_awareness\": {\n            \"date\": \"<date>\",\n            \"note\": \"<string>\"\n          },\n          \"proposed_termination_date\": \"<date>\",\n          \"reason_description\": \"<string>\",\n          \"risk_assessment_reasons\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"will_challenge_termination\": \"<boolean>\",\n          \"will_challenge_termination_description\": \"<string>\"\n        },\n        \"termination_date\": \"<date>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"status\": \"in_review\",\n        \"type\": \"termination\",\n        \"employment_id\": \"<string>\",\n        \"inserted_at\": \"<string>\",\n        \"confidential\": \"<boolean>\",\n        \"reason\": \"<string>\",\n        \"request\": {\n          \"additional_comments\": \"<string>\",\n          \"agrees_to_pto_amount\": \"<boolean>\",\n          \"employee_awareness\": {\n            \"date\": \"<date>\",\n            \"note\": \"<string>\"\n          },\n          \"proposed_termination_date\": \"<date>\",\n          \"reason_description\": \"<string>\",\n          \"risk_assessment_reasons\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"will_challenge_termination\": \"<boolean>\",\n          \"will_challenge_termination_description\": \"<string>\"\n        },\n        \"termination_date\": \"<date>\"\n      }\n    ],\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-fa4698e3-d310-4574-bba2-eaf2256ebdbf"
+                },
+                {
+                  "id": "dbef2bf9-757c-47bc-8fc5-8cb067ad3b32",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/offboardings?employment_id=<string>&type=cancellation&include_confidential=<boolean>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type.",
+                          "key": "type",
+                          "value": "cancellation"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-dbef2bf9-757c-47bc-8fc5-8cb067ad3b32"
+                },
+                {
+                  "id": "b10f2b31-ca52-416e-ba6b-fe7da7d62f1b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/offboardings?employment_id=<string>&type=cancellation&include_confidential=<boolean>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type.",
+                          "key": "type",
+                          "value": "cancellation"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Unauthorized\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-b10f2b31-ca52-416e-ba6b-fe7da7d62f1b"
+                },
+                {
+                  "id": "9ced90e6-1b67-4d28-a3cf-475cbcf56d35",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/offboardings?employment_id=<string>&type=cancellation&include_confidential=<boolean>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type.",
+                          "key": "type",
+                          "value": "cancellation"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Not Found\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-9ced90e6-1b67-4d28-a3cf-475cbcf56d35"
+                },
+                {
+                  "id": "2b830ac1-ad51-42e0-acfb-70145a6df64e",
+                  "name": "Unprocessable Entity",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/offboardings?employment_id=<string>&type=cancellation&include_confidential=<boolean>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type.",
+                          "key": "type",
+                          "value": "cancellation"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": {}\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-2b830ac1-ad51-42e0-acfb-70145a6df64e"
+                },
+                {
+                  "id": "e201dff3-a603-4c80-af8c-90e67c237a8b",
+                  "name": "Too many requests",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/offboardings?employment_id=<string>&type=cancellation&include_confidential=<boolean>&page=<integer>&page_size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "offboardings"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by Employment ID",
+                          "key": "employment_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter by offboarding type.",
+                          "key": "type",
+                          "value": "cancellation"
+                        },
+                        {
+                          "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n",
+                          "key": "include_confidential",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Starts fetching records after the given page",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Change the amount of records returned per page, defaults to 20, limited to 100",
+                          "key": "page_size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"Too many requests\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-e201dff3-a603-4c80-af8c-90e67c237a8b"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:55.000Z",
+              "updatedAt": "2026-07-28T02:47:55.000Z",
+              "uid": "35240-2f4b2cc8-275a-4d1a-9f59-3065864b76f9"
+            }
+          ],
+          "id": "569b69c7-ca77-43fe-b54a-b18b335af8ab",
+          "createdAt": "2026-07-28T02:47:55.000Z",
+          "updatedAt": "2026-07-28T02:47:55.000Z",
+          "uid": "35240-569b69c7-ca77-43fe-b54a-b18b335af8ab"
+        }
+      ],
+      "id": "e935e35c-57ab-4ea4-b9c6-f7879aa2dc94",
+      "createdAt": "2026-07-28T02:47:55.000Z",
+      "updatedAt": "2026-07-28T02:47:55.000Z",
+      "uid": "35240-e935e35c-57ab-4ea4-b9c6-f7879aa2dc94"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://gateway.remote.com/"
+    }
+  ]
+}

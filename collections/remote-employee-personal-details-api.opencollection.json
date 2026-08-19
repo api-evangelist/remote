@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Employee Personal Details API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employee Personal Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show employee personal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/personal-details",
+            "params": [
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the authenticated employee's personal details.\n\nThis endpoint requires country-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `personal_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View personal details (`personal_detail:read`) | Manage personal details (`personal_det"
+        },
+        {
+          "info": {
+            "name": "Update employee personal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/personal-details",
+            "params": [
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates the authenticated employee's personal details (date of birth,\nnational ID, nationality, etc.).\n\nThis endpoint requires country-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `personal_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage personal details (`personal_"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

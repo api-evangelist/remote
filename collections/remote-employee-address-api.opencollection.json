@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Employee Address API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employee Address",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show employee address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/address",
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the authenticated employee's residential address.\n\nThe employment is derived from the access token's subject — there is no\nemployment id in the path.\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `address_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Cate"
+        },
+        {
+          "info": {
+            "name": "Update employee address",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/address",
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates the authenticated employee's residential address.\n\nThe employment is derived from the access token's subject — there is no\nemployment id in the path. The token must be an employee-role token\n(typically obtained via the OAuth2 assertion grant with subject\n`urn:remote-api:employee:employment:<employment_id>`).\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

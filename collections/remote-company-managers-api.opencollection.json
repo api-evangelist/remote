@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Company Managers API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Managers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Company Managers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/company-managers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "0a8s2d1-company-id-2e3f4th",
+                "type": "query",
+                "description": "A Company ID to filter the results (only applicable for Integration Partners)."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all company managers of an integration. If filtered by the company_id param,\nit lists only company managers belonging to the specified company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View managers (`company_manager:read`) | Manage managers (`company_manager:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create and invite a Company Manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/company-managers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "actions",
+                "value": "no_invite",
+                "type": "query",
+                "description": "Complementary action(s) to perform when creating a company manager:\n\n- `no_invite` skips the email invitation step\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a Company Manager and sends the invitation email for signing in to the Remote Platform.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage managers (`company_manager:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show company manager user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/company-managers/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "1a8s2d1-user-id-2e3f4tz",
+                "type": "path",
+                "description": "User ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows a single company manager user\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View managers (`company_manager:read`) | Manage managers (`company_manager:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Deletes a Company Manager user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/company-managers/:user_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "user_id",
+                "value": "1a8s2d1-user-id-2e3f4tz",
+                "type": "path",
+                "description": "User ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a Company Manager user\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage managers (`company_manager:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Pay Codes API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pay Codes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Pay Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "",
+                "type": "path",
+                "description": "Legal entity ID"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Lists pay codes available for a legal entity.\nPay codes represent the allowed pay element types that can be submitted via `POST /v1/pay-items/bulk`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

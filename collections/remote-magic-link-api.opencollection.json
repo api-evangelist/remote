@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Magic Link API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Magic Link",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Magic links generator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/magic-link",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Generates a magic link for a passwordless authentication.\nTo create a magic link for a company admin, you need to provide the `user_id` parameter.\nTo create a magic link for an employee, you need to provide the `employment_id` parameter.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Create magic links (`magic_link:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

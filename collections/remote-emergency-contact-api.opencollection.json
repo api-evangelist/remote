@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Emergency Contact API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Emergency Contact",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update emergency contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/emergency-contact",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "emergency_contact_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the emergency_contact_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the employment's emergency contact details.\n\nThis endpoint requires country-specific data. Query the **Show form schema** endpoint\npassing the country code and `emergency_contact_details` as path parameters to see\nthe required fields for a given country.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

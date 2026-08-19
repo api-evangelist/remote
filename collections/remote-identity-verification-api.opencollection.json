@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Identity Verification API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identity Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Employment Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/identity-verification/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "0a8s2d1-employment-id-2e3f4th",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets necessary information to perform the identity verification of an employee.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View identity verification (`identity_verification:read`) | Manage identity verification (`identity_verification:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Decline Identity Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/identity-verification/:employment_id/decline",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "0a8s2d1-employment-id-2e3f4th",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Declines the identity verification of an employee.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage identity verification (`identity_verification:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Verify Employment Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/identity-verification/:employment_id/verify",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "0a8s2d1-employment-id-2e3f4th",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to confirms the employment profile is from the actual employee\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage identity verification (`identity_verification:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,460 @@
+{
+  "item": [
+    {
+      "id": "d7dfed6d-5aa8-4b31-b3cd-cd5ba7345f2c",
+      "name": "Time Off Balances",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "435e1199-af61-48ee-a0fb-a74e5acbe2c0",
+          "name": "Show Time Off Balance",
+          "request": {
+            "name": "Show Time Off Balance",
+            "description": {
+              "content": "Shows the time off balance for the given employment_id.\n\nDeprecated since February 2025 in favour of **[List Leave Policies Summary](#tag/Leave-Policies/operation/get_index_leave_policies_summary)** endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "timeoff-balances",
+                ":employment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "employment_id",
+                  "description": "(Required) Employment ID for which to show the time off balance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "63e22b1c-016a-4b00-9abc-6ae73d12f368",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeoff-balances",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employment_id",
+                      "description": "(Required) Employment ID for which to show the time off balance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeoff_balance\": {\n      \"timeoff_entitlements\": [\n        {\n          \"name\": \"string\",\n          \"expiry_date\": \"2019-10-16\",\n          \"can_expire\": false,\n          \"entitled\": {\n            \"days\": 1,\n            \"hours\": 3\n          },\n          \"taken\": {\n            \"days\": 1,\n            \"hours\": 3\n          },\n          \"remaining\": {\n            \"days\": 1,\n            \"hours\": 3\n          },\n          \"type\": \"transfer_pto\"\n        },\n        {\n          \"name\": \"string\",\n          \"expiry_date\": \"1976-11-04\",\n          \"can_expire\": true,\n          \"entitled\": {\n            \"days\": 1,\n            \"hours\": 3\n          },\n          \"taken\": {\n            \"days\": 1,\n            \"hours\": 3\n          },\n          \"remaining\": {\n            \"days\": 1,\n            \"hours\": 3\n          },\n          \"type\": \"transfer_pto\"\n        }\n      ],\n      \"taken\": {\n        \"days\": 1,\n        \"hours\": 3\n      },\n      \"upcoming_approved\": {\n        \"days\": 1,\n        \"hours\": 3\n      },\n      \"upcoming_requested\": {\n        \"days\": 1,\n        \"hours\": 3\n      },\n      \"working_hours_per_day\": 3589,\n      \"contractual_leave_entitlement_type\": \"string\",\n      \"contractual_entitled\": 7676,\n      \"total_entitled_days\": 2208\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52d9ae95-0d28-49bc-87db-84d682beff67",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeoff-balances",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employment_id",
+                      "description": "(Required) Employment ID for which to show the time off balance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e58a661d-72f0-4812-b60b-73220c3a01d1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeoff-balances",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employment_id",
+                      "description": "(Required) Employment ID for which to show the time off balance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15a9aa8e-846a-4a44-a198-b9a34dda96cb",
+              "name": "TimeoffBalanceNotFoundResponse",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeoff-balances",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employment_id",
+                      "description": "(Required) Employment ID for which to show the time off balance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": {\n    \"code\": \"resource_already_exists\",\n    \"message\": \"There is already a submitted Employee termination request for this user, so you can't submit another one\",\n    \"resource_id\": \"aca8ba1f-8d3a-4de8-9ab4-e0fcb4b210be\",\n    \"resource_type\": \"termination_request\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "752568f0-9ef4-4a52-9a52-f1327af442ee",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeoff-balances",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employment_id",
+                      "description": "(Required) Employment ID for which to show the time off balance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8051cddb-2548-4298-b1d7-d91333767409",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "timeoff-balances",
+                    ":employment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "employment_id",
+                      "description": "(Required) Employment ID for which to show the time off balance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f2da2da2-5ebc-49a1-8501-e968cff5ef0e",
+    "name": "Remote Address Details Time Off Balances API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

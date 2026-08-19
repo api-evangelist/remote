@@ -1,0 +1,386 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Time Off API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Off",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cancel Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/cancel",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "93t3j-timeoff-id-9suej43",
+                "type": "path",
+                "description": "Time Off ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel a time off request that was already approved.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Decline a time off cancellation request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/cancel-request/decline",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "93t3j-timeoff-id-9suej43",
+                "type": "path",
+                "description": "Time Off ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Decline a time off cancellation request.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Time Off Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timeoff/types",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "full_time",
+                "type": "query",
+                "description": "Optional. Employment type to list time off types for: `contractor` or `full_time`. Omit for backward-compatible behavior (full-time types)."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all time off types that can be used for the `timeoff_type` parameter.\n\n**Backward compatibility:** Calling this endpoint without the `type` query parameter returns the same response as before (time off types for full-time employments). Existing integrations do not need to change.\n\nOptionally, pass `type=contractor` to get time off types for contractor employments, or `type=full_time` for full-time employments (same as omitting the parameter).\n\n\n## Scopes\n\n| Category | Read only Scope | Wri"
+        },
+        {
+          "info": {
+            "name": "Show Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timeoff/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-timeoff-id-9suej43",
+                "type": "path",
+                "description": "Timeoff ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows a single Time Off record\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/timeoff/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-timeoff-id-9suej43",
+                "type": "path",
+                "description": "Timeoff ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a Time Off record.\nWarning: Updating the status of a time off through this endpoint is deprecated and will be removed on January 13, 2025.\nTo approve or cancel an approved time off, use the `/approve` and `/cancel` endpoints instead.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/timeoff/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-timeoff-id-9suej43",
+                "type": "path",
+                "description": "Timeoff ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a Time Off record.\nWarning: Updating the status of a time off through this endpoint is deprecated and will be removed on January 13, 2025.\nTo approve or cancel an approved time off, use the `/approve` and `/cancel` endpoints instead.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Decline Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/decline",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "93t3j-timeoff-id-9suej43",
+                "type": "path",
+                "description": "Time Off ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Decline a time off request. Please note that only time off requests on the `requested` status can be declined.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Approve Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/approve",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "93t3j-timeoff-id-9suej43",
+                "type": "path",
+                "description": "Time Off ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approve a time off request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/timeoff",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "query",
+                "description": "Only show time off for a specific employment"
+              },
+              {
+                "name": "timeoff_type",
+                "value": "sick_leave",
+                "type": "query",
+                "description": "Filter time off by its type"
+              },
+              {
+                "name": "status",
+                "value": "approved",
+                "type": "query",
+                "description": "Filter time off by its status"
+              },
+              {
+                "name": "start_date",
+                "value": "2024-01-01",
+                "type": "query",
+                "description": "ISO 8601 date. When combined with `end_date`, returns all time off records that overlap the `[start_date, end_date]` window — including records that only partially overlap at either boundary. When used alone, returns records whose `start_date` is on or after this date.\n"
+              },
+              {
+                "name": "end_date",
+                "value": "2024-12-31",
+                "type": "query",
+                "description": "ISO 8601 date. When combined with `start_date`, returns all time off records that overlap the `[start_date, end_date]` window — including records that only partially overlap at either boundary. When used alone, returns records whose `end_date` is on or before this date.\n"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "sort_by",
+                "value": "timeoff_type",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all Time Off records.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | View timeoffs (`timeoff:read`) | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Time Off",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Time Off record\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Approve a time off cancellation request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/timeoff/:timeoff_id/cancel-request/approve",
+            "params": [
+              {
+                "name": "timeoff_id",
+                "value": "93t3j-timeoff-id-9suej43",
+                "type": "path",
+                "description": "Time Off ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approve a time off cancellation request.\nIn order to approve a time off cancellation request, the timeoff status must be `cancel_requested`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage timeoffs (`time_and_attendance`) | - | Manage timeoffs (`timeoff:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Cost Center Allocations API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cost Center Allocations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List cost center allocations for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/cost-center-allocations",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filters allocations by status. When omitted, allocations of every status are returned."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the cost center allocations for an employment. Each allocation includes the cost center,\nthe allocated percentage, and its effective period. An employment with no cost center assigned\nreturns an empty list.\n\nUse the `status` query parameter to return only `active`, `scheduled`, or `expired` allocations.\nWhen omitted, all allocations are returned.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View e"
+        },
+        {
+          "info": {
+            "name": "List cost center allocations for a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/company/:company_id/cost-center-allocations",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "93t3j-company-id-9suej43",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filters allocations by status. When omitted, allocations of every status are returned."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all employments under a company with their cost center allocations, grouped by employment.\nEach entry includes the employment's legal entity IDs and the list of cost center allocations\nassigned to it, with each allocation's cost center, allocated percentage, and effective period.\nEmployments with no cost center allocations are included with an empty list.\n\nUse the `status` query parameter to return only `active`, `scheduled`, or `expired` allocations.\nWhen omitted, all allocations are retu"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

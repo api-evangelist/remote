@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Company Tokens API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new token for a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/create-token",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "ec5366b1-a1bc-434c-bdec-7604c5ba6af6",
+                "type": "path",
+                "description": "The ID of the company"
+              },
+              {
+                "name": "scope",
+                "value": "document:read timeoff:write",
+                "type": "query",
+                "description": "The scope of the token"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates new tokens for a given company"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

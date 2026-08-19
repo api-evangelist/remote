@@ -1,0 +1,2120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Employments API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update pricing plan details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/pricing-plan-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "pricing_plan_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the pricing_plan_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the pricing plan for an employment. The frequency determines how often Remote bills the\nemployer for management fees. Annual billing typically offers a discount.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Cancel onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cancel-onboarding/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "async",
+                "value": "true",
+                "type": "query",
+                "description": "Whether the request should be performed async\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel onboarding.\n\nRequirements for the cancellation to succeed:\n\n* Employment has to be in `invited`, `created`, `created_awaiting_reserve`, `created_reserve_paid`, `pre_hire` status\n* Employee must not have signed the employment contract\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage onboarding (`onboarding:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update address details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/address-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's address details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-form"
+        },
+        {
+          "info": {
+            "name": "List employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "93t3j-company-id-9suej43",
+                "type": "query",
+                "description": "Company ID"
+              },
+              {
+                "name": "email",
+                "value": "anna@example.com",
+                "type": "query",
+                "description": "Filters the results by employments whose login email matches the value"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters the results by employments whose status matches the value.\nSupports multiple values separated by commas.\nAlso supports the value `incomplete` to get all employments that are not onboarded yet.\n"
+              },
+              {
+                "name": "employment_type",
+                "value": "contractor",
+                "type": "query",
+                "description": "Filters the results by employments whose employment product type matches the value"
+              },
+              {
+                "name": "employment_model",
+                "value": "global_payroll",
+                "type": "query",
+                "description": "Filters the results by employments whose employment model matches the value.\nPossible values: `global_payroll`, `peo`, `eor`\n"
+              },
+              {
+                "name": "short_id",
+                "value": "aB1cD2",
+                "type": "query",
+                "description": "Filters the results by the employment's short ID. Returns at most one result."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Lists all employments, except for the deleted ones.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [js"
+        },
+        {
+          "info": {
+            "name": "Create employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an employment. We support creating employees and contractors.\n\n## Global Payroll Employees\n\nTo create a Global Payroll employee, pass `global_payroll_employee` as the `type` parameter,\nand provide the id of the specific legal entity that the employee will be engaged by and billed to as the `engaged_by_legal_entity_id` parameter.\n\n## HRIS Employees\n\nTo create a HRIS employee, pass `hris` as the `type` parameter.\n\nThis endpoint requires and returns country-specific data. The exact required"
+        },
+        {
+          "info": {
+            "name": "Show employee bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/bank-account",
+            "params": [
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the authenticated employee's bank account details.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage e"
+        },
+        {
+          "info": {
+            "name": "Update employee bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/bank-account",
+            "params": [
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Upserts the authenticated employee's bank account details.\n\nThis endpoint requires and returns country-specific data. The exact fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `bank_account_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage e"
+        },
+        {
+          "info": {
+            "name": "Get engagement agreement details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/engagement-agreement-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the engagement agreement details for an employment.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Upsert engagement agreement details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/engagement-agreement-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates or updates the engagement agreement details for an employment.\n\nThis endpoint requires country-specific data. The exact required fields will vary depending on\nwhich country the employment is in. To see the list of parameters for each country, see the\n**Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that compliance requirements for each country are subject to change according to local laws.\nUsing Remote's [json-schema-form](https://developer.remot"
+        },
+        {
+          "info": {
+            "name": "Download a document for the employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/documents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-file-id-9suej43",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Get Employment Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/identity-verification/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "0a8s2d1-employment-id-2e3f4th",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets necessary information to perform the identity verification of an employee.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View identity verification (`identity_verification:read`) | Manage identity verification (`identity_verification:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show employment job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/job",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows an employment job details.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Acknowledge a pre-onboarding acknowledgement requirement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/acknowledge",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "requirement_slug",
+                "value": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+                "type": "path",
+                "description": "Pre-onboarding requirement slug"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Records an acknowledgement for an acknowledgement requirement. Rejected if the requirement\nis blocked by an unmet dependency or has already been acknowledged.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Remove a pre-onboarding acknowledgement",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/acknowledge",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "requirement_slug",
+                "value": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+                "type": "path",
+                "description": "Pre-onboarding requirement slug"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes a previously recorded acknowledgement. Rejected once a requirement that depends on\nthis acknowledgement has been signed/completed.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show Background Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/background-checks/:background_check_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Employment Id"
+              },
+              {
+                "name": "background_check_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Background Check Id"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Show Background Check details for a given employment and background check request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View background checks (`background_check:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "List pre-onboarding document requirements for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-document-requirements",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the list of pre-onboarding document requirements (e.g. master service agreements,\nindividual labour agreements) that must be fulfilled before the given employment can be onboarded.\n\nDeprecated: use `GET /onboarding/employments/:employment_id/pre-onboarding-requirements` instead,\nwhich returns both document and acknowledgement requirements.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documen"
+        },
+        {
+          "info": {
+            "name": "List cost center allocations for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/cost-center-allocations",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filters allocations by status. When omitted, allocations of every status are returned."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the cost center allocations for an employment. Each allocation includes the cost center,\nthe allocated percentage, and its effective period. An employment with no cost center assigned\nreturns an empty list.\n\nUse the `status` query parameter to return only `active`, `scheduled`, or `expired` allocations.\nWhen omitted, all allocations are returned.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View e"
+        },
+        {
+          "info": {
+            "name": "Update federal taxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/federal-taxes",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's federal taxes.\n\nRequirements to update federal taxes successfully:\n* Employment should be Global Payroll\n* Employment should be in the post-enrollment state\n* Employment should belong to USA\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) categor"
+        },
+        {
+          "info": {
+            "name": "Create risk reserve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/risk-reserve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new risk reserve\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage risk reserves (`risk_reserve:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Submit risk reserve proof of payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/risk-reserve-proof-of-payments",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "5b44799c-e845-4d5c-9c52-b6e5f7c3d4e1",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submits a proof of payment document for a risk reserve associated with an employment.\n\nTriggers an `employment.cor_hiring.proof_of_payment_submitted` webhook event.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage risk reserves (`risk_reserve:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show employee address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/address",
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the authenticated employee's residential address.\n\nThe employment is derived from the access token's subject — there is no\nemployment id in the path.\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `address_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Cate"
+        },
+        {
+          "info": {
+            "name": "Update employee address",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/address",
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates the authenticated employee's residential address.\n\nThe employment is derived from the access token's subject — there is no\nemployment id in the path. The token must be an employee-role token\n(typically obtained via the OAuth2 assertion grant with subject\n`urn:remote-api:employee:employment:<employment_id>`).\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#"
+        },
+        {
+          "info": {
+            "name": "Get basic information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/basic-information",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "employment_basic_information_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the employment_basic_information form schema"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the employment's basic information.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schem"
+        },
+        {
+          "info": {
+            "name": "Update basic information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/basic-information",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "employment_basic_information_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the employment_basic_information form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's basic information.\n\nSupported employment statuses: `created`, `job_title_review`, `created_reserve_paid`, `created_awaiting_reserve`.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each"
+        },
+        {
+          "info": {
+            "name": "Update federal taxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/federal-taxes",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's federal taxes.\n\nRequirements to update federal taxes successfully:\n* Employment should be Global Payroll\n* Employment should be in the post-enrollment state\n* Employment should belong to USA\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) categor"
+        },
+        {
+          "info": {
+            "name": "Find or create a document for a pre-onboarding requirement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/documents",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "requirement_slug",
+                "value": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+                "type": "path",
+                "description": "Pre-onboarding requirement slug"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds an existing unsigned pre-onboarding document for the given document requirement, or\ncreates a new one. Idempotent: repeated calls return the same document until it is signed.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Download file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-file-id-9suej43",
+                "type": "path",
+                "description": "File ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads a file.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Decline Identity Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/identity-verification/:employment_id/decline",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "0a8s2d1-employment-id-2e3f4th",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Declines the identity verification of an employee.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage identity verification (`identity_verification:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a pre-onboarding document with its rendered PDF content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Pre-onboarding document ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the rendered contract PDF (base64-encoded) and the list of signatories for the given\npre-onboarding document. The `content` field is prefixed with `data:application/pdf;base64,` so\nit can be embedded directly in a document viewer.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Submit employee federal taxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/federal-taxes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Submits the authenticated employee's US federal tax (W-4) details.\n\nAvailable for US Global Payroll employees once they reach the\npost-enrollment state. Calls made before then return a 404.\n\nThis endpoint requires country-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `global_payroll_federal_taxes`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access impli"
+        },
+        {
+          "info": {
+            "name": "Update emergency contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/emergency-contact",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "emergency_contact_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the emergency_contact_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the employment's emergency contact details.\n\nThis endpoint requires country-specific data. Query the **Show form schema** endpoint\npassing the country code and `emergency_contact_details` as path parameters to see\nthe required fields for a given country.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update basic information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/basic-information",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's basic information.\n\nSupported employment statuses: `created`, `job_title_review`, `created_reserve_paid`, `created_awaiting_reserve`.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each"
+        },
+        {
+          "info": {
+            "name": "Show employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "exclude_files",
+                "value": "true",
+                "type": "query",
+                "description": "Wether files should be excluded"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows all the information of an employment.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schem"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              },
+              {
+                "name": "administrative_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the administrative_details form schema"
+              },
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              },
+              {
+                "name": "employment_basic_information_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the employment_basic_information form schema"
+              },
+              {
+                "name": "billing_address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the billing_address_details form schema"
+              },
+              {
+                "name": "contract_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the contract_details form schema"
+              },
+              {
+                "name": "emergency_contact_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the emergency_contact_details form schema"
+              },
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              },
+              {
+                "name": "pricing_plan_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the pricing_plan_details form schema"
+              },
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "skip_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API."
+              },
+              {
+                "name": "actions",
+                "value": "no_invite",
+                "type": "query",
+                "description": "Complementary action(s) to perform when creating an employment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an employment.\n\n**For `created` employments:** You can change all basic params and onboarding tasks or perform a per onboarding task update. You can also update basic_information.\n\n**For `active` employments:** You can update the manager (`manager_id` field), emergency_contact_details, address_details and work_email.\n\n**For `invited` employments:** You can update the work_email.\n\nAfter onboarding, only a limited set of employment data will be available for updates, such as `emergency_con"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              },
+              {
+                "name": "administrative_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the administrative_details form schema"
+              },
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              },
+              {
+                "name": "employment_basic_information_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the employment_basic_information form schema"
+              },
+              {
+                "name": "billing_address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the billing_address_details form schema"
+              },
+              {
+                "name": "contract_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the contract_details form schema"
+              },
+              {
+                "name": "emergency_contact_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the emergency_contact_details form schema"
+              },
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              },
+              {
+                "name": "pricing_plan_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the pricing_plan_details form schema"
+              },
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "skip_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API."
+              },
+              {
+                "name": "actions",
+                "value": "no_invite",
+                "type": "query",
+                "description": "Complementary action(s) to perform when creating an employment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an employment.\n\n**For `created` employments:** You can change all basic params and onboarding tasks or perform a per onboarding task update. You can also update basic_information.\n\n**For `active` employments:** You can update the manager (`manager_id` field), emergency_contact_details, address_details and work_email.\n\n**For `invited` employments:** You can update the work_email.\n\nAfter onboarding, only a limited set of employment data will be available for updates, such as `emergency_con"
+        },
+        {
+          "info": {
+            "name": "List cost center allocations for a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/company/:company_id/cost-center-allocations",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "93t3j-company-id-9suej43",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filters allocations by status. When omitted, allocations of every status are returned."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all employments under a company with their cost center allocations, grouped by employment.\nEach entry includes the employment's legal entity IDs and the list of cost center allocations\nassigned to it, with each allocation's cost center, allocated percentage, and effective period.\nEmployments with no cost center allocations are included with an empty list.\n\nUse the `status` query parameter to return only `active`, `scheduled`, or `expired` allocations.\nWhen omitted, all allocations are retu"
+        },
+        {
+          "info": {
+            "name": "List bulk employment rows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/bulk-employment-jobs/:job_id/rows",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "Bulk employment job id"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns grouped bulk employment rows, including field-level validation errors in `errors`, row-level failures in `row_errors`, and submission-phase failures in `submission_errors`. If a row passes validation but later fails during Global Payroll activation, that failure is surfaced here after submission rather than in the initial create response.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employme"
+        },
+        {
+          "info": {
+            "name": "Show employee emergency contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/emergency-contact",
+            "params": [
+              {
+                "name": "emergency_contact_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the emergency_contact_details form schema"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the authenticated employee's emergency contact.\n\nThe employment is derived from the access token's subject — there is no\nemployment id in the path.\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `emergency_contact_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes"
+        },
+        {
+          "info": {
+            "name": "Update employee emergency contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/emergency-contact",
+            "params": [
+              {
+                "name": "emergency_contact_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the emergency_contact_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates the authenticated employee's emergency contact.\n\nThe employment is derived from the access token's subject — there is no\nemployment id in the path. The token must be an employee-role token\n(typically obtained via the OAuth2 assertion grant with subject\n`urn:remote-api:employee:employment:<employment_id>`).\n\nThis endpoint requires country-specific data. The exact required fields vary depending on which\ncountry the authenticated employee's employment is in. Query the\n[Show form schema](#ta"
+        },
+        {
+          "info": {
+            "name": "Update contract details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/contract-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "contract_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the contract_details form schema"
+              },
+              {
+                "name": "skip_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's contract details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-for"
+        },
+        {
+          "info": {
+            "name": "Complete onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/ready",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes the employee onboarding. When all tasks are completed, the employee is marked as in `review` status"
+        },
+        {
+          "info": {
+            "name": "Set contract origin for a contractor employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/contract-origin",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Sets the `contract_origin` for a contractor employment.\n\n* `remote_contract` — Remote provides and manages the contract (a contract document is created)\n* `custom_remote_contract` — A customised Remote contract is used (a contract document is created)\n* `provided_by_customer` — The employer provides their own contract (no contract document is created)\n\nWhen `provided_by_customer` is selected, the contractor can be invited without completing the\n`contract_details` onboarding step.\n\n\n## Scopes\n\n| "
+        },
+        {
+          "info": {
+            "name": "Show employee personal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/personal-details",
+            "params": [
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the authenticated employee's personal details.\n\nThis endpoint requires country-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `personal_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View personal details (`personal_detail:read`) | Manage personal details (`personal_det"
+        },
+        {
+          "info": {
+            "name": "Update employee personal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/personal-details",
+            "params": [
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates the authenticated employee's personal details (date of birth,\nnational ID, nationality, etc.).\n\nThis endpoint requires country-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `personal_details`\nas the form name to discover the schema for a given country.\n\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage personal details (`personal_"
+        },
+        {
+          "info": {
+            "name": "List employment files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/files",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "emp-123456",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "type",
+                "value": "contract",
+                "type": "query",
+                "description": "Filter by file type (optional)"
+              },
+              {
+                "name": "sub_type",
+                "value": "personal_id",
+                "type": "query",
+                "description": "Filter by file sub_type (optional)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists files associated with a specific employment.\n\nSupports filtering by file type and sub_type.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Upload file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/documents",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <ANY ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Uploads a file associated with a specified employment.\n\nPlease contact api-support@remote.com to request access to this endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Invite employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/invite",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nIn case of the following e"
+        },
+        {
+          "info": {
+            "name": "Update bank account details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/bank-account-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's bank account details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema"
+        },
+        {
+          "info": {
+            "name": "Show onboarding steps for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/onboarding-steps",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "employment-id-123",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns onboarding steps and substeps in a hierarchical, ordered structure.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show bulk employment job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/bulk-employment-jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "Bulk employment job id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update employment"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update employment"
+        },
+        {
+          "info": {
+            "name": "Update personal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/personal-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's personal details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-for"
+        },
+        {
+          "info": {
+            "name": "Find or create a pre-onboarding document for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-documents",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds an existing unsigned pre-onboarding document for the given requirement, or creates a new one.\nIdempotent: repeated calls with the same `pre_onboarding_document_requirement_slug` return the same\ndocument until it is signed.\n\nDeprecated: use\n`POST /onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/documents` instead.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_"
+        },
+        {
+          "info": {
+            "name": "Update billing address details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/billing-address-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "billing_address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the billing_address_details form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's billing address details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-sch"
+        },
+        {
+          "info": {
+            "name": "Create bulk employment job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/bulk-employment-jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a job to bulk-create employments for multiple employees at once. Each employee payload must match the employment schema for the selected country.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update personal details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/personal-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's personal details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schema-for"
+        },
+        {
+          "info": {
+            "name": "Sign a pre-onboarding document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Pre-onboarding document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Signs the latest contract document associated with the given pre-onboarding document on behalf\nof the company signatory.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Submit employee state taxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/state-taxes/:jurisdiction",
+            "params": [
+              {
+                "name": "jurisdiction",
+                "value": "NY",
+                "type": "path",
+                "description": "Two-letter US state/jurisdiction code"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Submits the authenticated employee's US state tax withholding answers for a\nsingle jurisdiction (e.g. `NY`).\n\nAvailable for US Global Payroll employees once they reach the post-enrollment\nstate, at which point the per-jurisdiction state tax task exists.\n\nThis endpoint requires country/jurisdiction-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `global_payroll_state_taxes`\nas the form name to discover the schema for a given country.\n\n\n\n##"
+        },
+        {
+          "info": {
+            "name": "Get engagement agreement details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/engagement-agreement-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the engagement agreement details for an employment.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Upsert engagement agreement details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/engagement-agreement-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates or updates the engagement agreement details for an employment.\n\nThis endpoint requires country-specific data. The exact required fields will vary depending on\nwhich country the employment is in. To see the list of parameters for each country, see the\n**Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that compliance requirements for each country are subject to change according to local laws.\nUsing Remote's [json-schema-form](https://developer.remot"
+        },
+        {
+          "info": {
+            "name": "Update administrative details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id/administrative-details",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates employment's administrative details.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-sche"
+        },
+        {
+          "info": {
+            "name": "Indexes all the documents for the employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/documents",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter documents by their description or file name, accepts full and partial case insensitive matches"
+              },
+              {
+                "name": "inserted_after",
+                "value": "",
+                "type": "query",
+                "description": "Filters the results that were uploaded on or after a given date"
+              },
+              {
+                "name": "inserted_before",
+                "value": "",
+                "type": "query",
+                "description": "Filters the results that were uploaded before a given date"
+              },
+              {
+                "name": "sort_by",
+                "value": "description",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Upload employee file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employee/documents",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Uploads a file owned by the authenticated employee, for example\nidentity documents or tax forms.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Verify Employment Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/identity-verification/:employment_id/verify",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "0a8s2d1-employment-id-2e3f4th",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint to confirms the employment profile is from the actual employee\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage identity verification (`identity_verification:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List pre-onboarding requirements for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-requirements",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the list of pre-onboarding requirements — both documents (e.g. master service\nagreements, individual labour agreements) and acknowledgements — that must be fulfilled\nbefore the given employment can be onboarded. Each requirement carries its `type`, current\n`status`, and the requirement it `depends_on` (if any).\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`docum"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

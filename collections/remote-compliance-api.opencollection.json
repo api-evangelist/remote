@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Compliance API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Compliance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Onboarding Reserves Status for Employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/employments/:employment_id/onboarding-reserves-status",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "employment_id",
+                "value": "97e04d61-0a6d-4c4f-9299-c08d1eeaba20",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the onboarding reserves status for a specific employment.\n\nThe status is the same as the credit risk status but takes the onboarding reserves policies into account.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Get Company Compliance Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/compliance-profile",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the KYB and credit risk status for the company's default legal entity.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

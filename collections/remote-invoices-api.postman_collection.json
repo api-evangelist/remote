@@ -1,0 +1,1005 @@
+{
+  "item": [
+    {
+      "id": "8138fd5d-7235-49bf-bb1a-eb5b51bc1d1d",
+      "name": "Invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d43b710-7b3a-4df9-baf6-beb2314c132e",
+          "name": "Show Contractor Invoice",
+          "request": {
+            "name": "Show Contractor Invoice",
+            "description": {
+              "content": "Shows a single Contractor Invoice record.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contractor-invoices",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a640eb88-47f8-41f4-9166-f8943c82f959",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"contractor_invoice\": {\n      \"id\": \"663e0b79-c893-45ff-a1b2-f6dcabc098b5\",\n      \"date\": \"2024-06-01\",\n      \"items\": [\n        {\n          \"amount\": 5000,\n          \"description\": \"Description\",\n          \"type\": \"manual\"\n        },\n        {\n          \"amount\": 5000,\n          \"description\": \"Description\",\n          \"type\": \"manual\"\n        }\n      ],\n      \"amount\": 350000,\n      \"currency\": \"BRL\",\n      \"source_amount\": 350000,\n      \"source_currency\": \"BRL\",\n      \"status\": \"issued\",\n      \"approved_at\": \"2024-06-05T00:00:00Z\",\n      \"contractor_invoice_schedule_id\": \"9f8e7d6c-5b4a-3c2d-1e0f-a1b2c3d4e5f6\",\n      \"description\": \"Mobile developer payment.\",\n      \"due_date\": \"2024-06-15\",\n      \"employment_id\": \"663e0b79-c893-45ff-a1b2-f6dcabc098b5\",\n      \"fx_rate\": 7517.744652737953,\n      \"number\": \"ABC123\",\n      \"paid_out_at\": \"2024-06-05T12:00:00Z\",\n      \"pay_out_method\": \"swift\",\n      \"processing_fee\": 3364,\n      \"processing_fee_currency\": \"BRL\",\n      \"processing_fee_payer\": \"contractor\",\n      \"target_amount\": 350000,\n      \"target_currency\": \"BRL\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93eec4e4-c710-4d8b-873e-f7fce4696410",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ab7d7e6-8844-4c94-b10a-65b7a310feea",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25dd294b-8ab7-4a57-b30c-21d809857ebc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72bbae99-cb76-4572-b60f-fb8c3c6db6f9",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92e3d78f-8bbb-418a-9650-db6bd60908bd",
+          "name": "List Contractor Invoices",
+          "request": {
+            "name": "List Contractor Invoices",
+            "description": {
+              "content": "Lists Contractor Invoice records.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contractor-invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filters contractor invoices by status matching the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "contractor_invoice_schedule_id",
+                  "value": "<uuid>",
+                  "description": "Filters contractor invoices by invoice schedule ID matching the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_from",
+                  "value": "<date>",
+                  "description": "Filters contractor invoices by date greater than or equal to the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "date_to",
+                  "value": "<date>",
+                  "description": "Filters contractor invoices by date less than or equal to the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "due_date_from",
+                  "value": "<date>",
+                  "description": "Filters contractor invoices by due date greater than or equal to the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "due_date_to",
+                  "value": "<date>",
+                  "description": "Filters contractor invoices by due date less than or equal to the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_date_from",
+                  "value": "<date>",
+                  "description": "Filters contractor invoices by approved date greater than or equal to the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "approved_date_to",
+                  "value": "<date>",
+                  "description": "Filters contractor invoices by approved date less than or equal to the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "paid_out_date_from",
+                  "value": "<date>",
+                  "description": "Filters contractor invoices by paid out date greater than or equal to the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "paid_out_date_to",
+                  "value": "<date>",
+                  "description": "Filters contractor invoices by paid out date less than or equal to the value."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_by",
+                  "value": "<string>",
+                  "description": "Field to sort by"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Sort order"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Starts fetching records after the given page"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20",
+                  "description": "Number of items per page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dd654931-a9da-4c4a-93c3-d02ccde7763a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "issued"
+                    },
+                    {
+                      "key": "contractor_invoice_schedule_id",
+                      "value": "d3745787-1b2b-424c-ab83-cdda8b5cea37"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contractor_invoices\": [\n    {\n      \"amount\": 350000,\n      \"approved_at\": \"2024-06-05T00:00:00Z\",\n      \"contractor_invoice_schedule_id\": \"9f8e7d6c-5b4a-3c2d-1e0f-a1b2c3d4e5f6\",\n      \"currency\": \"BRL\",\n      \"date\": \"2024-06-01\",\n      \"description\": \"Mobile developer payment.\",\n      \"due_date\": \"2024-06-15\",\n      \"fx_rate\": 1.12,\n      \"items\": [\n        {\n          \"amount\": 5000,\n          \"description\": \"Description\",\n          \"type\": \"manual\"\n        }\n      ],\n      \"number\": \"ABC123\",\n      \"paid_out_at\": \"2024-06-05T12:00:00Z\",\n      \"pay_out_method\": \"swift_our\",\n      \"processing_fee\": 500,\n      \"processing_fee_currency\": \"USD\",\n      \"processing_fee_payer\": \"company\",\n      \"source_amount\": 350000,\n      \"source_currency\": \"BRL\",\n      \"status\": \"paid_out\",\n      \"target_amount\": 350000,\n      \"target_currency\": \"BRL\"\n    }\n  ],\n  \"current_page\": 1,\n  \"total_count\": 1,\n  \"total_pages\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09014a44-8d55-476e-b682-f6ca347a22cc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "issued"
+                    },
+                    {
+                      "key": "contractor_invoice_schedule_id",
+                      "value": "d3745787-1b2b-424c-ab83-cdda8b5cea37"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cced83b-ad3d-4b10-8c20-810a06721f9e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "issued"
+                    },
+                    {
+                      "key": "contractor_invoice_schedule_id",
+                      "value": "d3745787-1b2b-424c-ab83-cdda8b5cea37"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03ef034a-fbdd-4e46-bab5-1b8092f9b970",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "issued"
+                    },
+                    {
+                      "key": "contractor_invoice_schedule_id",
+                      "value": "d3745787-1b2b-424c-ab83-cdda8b5cea37"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dd6b2de-ee84-4382-8058-ea6cd2039afc",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contractor-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "issued"
+                    },
+                    {
+                      "key": "contractor_invoice_schedule_id",
+                      "value": "d3745787-1b2b-424c-ab83-cdda8b5cea37"
+                    },
+                    {
+                      "key": "date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "due_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "approved_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_from",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "paid_out_date_to",
+                      "value": "2021-01-01"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "date"
+                    },
+                    {
+                      "key": "order",
+                      "value": "asc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "45c4c25d-2fc3-4fe9-9c64-54cd265db541",
+    "name": "Remote Address Details Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

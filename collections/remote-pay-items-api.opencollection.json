@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Pay Items API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pay Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Create Pay Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/pay-items/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk creates pay items for employments. Supports up to 500 items per request.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Pay Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/pay-items",
+            "params": [
+              {
+                "name": "employment_slug",
+                "value": "",
+                "type": "query",
+                "description": "Filter by employment slug"
+              },
+              {
+                "name": "effective_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter pay items with effective_date >= given date (YYYY-MM-DD)"
+              },
+              {
+                "name": "effective_to",
+                "value": "",
+                "type": "query",
+                "description": "Filter pay items with effective_date <= given date (YYYY-MM-DD)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists pay items for a company with optional filtering by employment, date range, and pagination.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

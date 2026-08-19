@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Pre-Onboarding Documents API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pre-Onboarding Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pre-onboarding document requirements for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-document-requirements",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the list of pre-onboarding document requirements (e.g. master service agreements,\nindividual labour agreements) that must be fulfilled before the given employment can be onboarded.\n\nDeprecated: use `GET /onboarding/employments/:employment_id/pre-onboarding-requirements` instead,\nwhich returns both document and acknowledgement requirements.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documen"
+        },
+        {
+          "info": {
+            "name": "Retrieve a pre-onboarding document with its rendered PDF content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Pre-onboarding document ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the rendered contract PDF (base64-encoded) and the list of signatories for the given\npre-onboarding document. The `content` field is prefixed with `data:application/pdf;base64,` so\nit can be embedded directly in a document viewer.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Find or create a pre-onboarding document for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-documents",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds an existing unsigned pre-onboarding document for the given requirement, or creates a new one.\nIdempotent: repeated calls with the same `pre_onboarding_document_requirement_slug` return the same\ndocument until it is signed.\n\nDeprecated: use\n`POST /onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/documents` instead.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_"
+        },
+        {
+          "info": {
+            "name": "Sign a pre-onboarding document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-documents/:id/sign",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Pre-onboarding document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Signs the latest contract document associated with the given pre-onboarding document on behalf\nof the company signatory.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

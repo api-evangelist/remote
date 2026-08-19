@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Payroll Runs API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payroll Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Company Payroll Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll_run_id-9suej43",
+                "type": "path",
+                "description": "Payroll run ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Given an ID, shows a payroll run.\n`employee_details` field is deprecated in favour of the `employee_details` endpoint and will be removed in the future.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Get Employee Details for a Payroll Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id/employee-details",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll_run_id-9suej43",
+                "type": "path",
+                "description": "Payroll run ID"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets the employee details for a payroll run\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "List Company Payroll Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs",
+            "params": [
+              {
+                "name": "payroll_period",
+                "value": "2021-07-01",
+                "type": "query",
+                "description": "Filters payroll runs where period_start or period_end match the given date"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all payroll runs for a company\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

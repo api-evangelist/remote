@@ -1,0 +1,3109 @@
+{
+  "item": [
+    {
+      "id": "478d2e7a-a664-49a2-8407-06be1cf4b0ea",
+      "name": "Company Management",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0df2b4c8-d329-4e32-909b-2b5524c3593e",
+          "name": "Show form schema",
+          "request": {
+            "name": "Show form schema",
+            "description": {
+              "content": "Returns the json schema of the requested company form.\nCurrently only supports the `address_details` form.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                "schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "(Required) Country code according to ISO 3-digit alphabetic codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "form",
+                  "value": "<string>",
+                  "description": "(Required) Name of the desired form"
+                },
+                {
+                  "disabled": false,
+                  "key": "json_schema_version",
+                  "value": "<integer>",
+                  "description": "Version of the form schema"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5aced858-85ee-4ddb-9edc-615d9d270d04",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "CAN"
+                    },
+                    {
+                      "key": "form",
+                      "value": "address_details"
+                    },
+                    {
+                      "key": "json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"additionalProperties\": false,\n    \"properties\": {\n      \"address\": {\n        \"maxLength\": 255,\n        \"title\": \"Address\",\n        \"type\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66388a39-bfaa-4105-a26f-2d8a8681c82b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "CAN"
+                    },
+                    {
+                      "key": "form",
+                      "value": "address_details"
+                    },
+                    {
+                      "key": "json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9f9d4fd-e4d8-4e15-999c-f48816b88df4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "CAN"
+                    },
+                    {
+                      "key": "form",
+                      "value": "address_details"
+                    },
+                    {
+                      "key": "json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de6db5d4-fe4b-4ff2-b589-7729e784ab1b",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "CAN"
+                    },
+                    {
+                      "key": "form",
+                      "value": "address_details"
+                    },
+                    {
+                      "key": "json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7d7a44d-e1bc-4e07-ab4c-15914fad9b44",
+          "name": "Show a company",
+          "request": {
+            "name": "Show a company",
+            "description": {
+              "content": "Given an ID, shows a company.\n\nIf the used access token was issued by the OAuth 2.0 Authorization Code flow,\nthen only the associated company can be accessed through the endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":company_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) Company ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/auth/oauth2/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7705f7d3-3bed-4a29-8a3f-e8666675fb75",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"company\": {\n      \"address_details\": {},\n      \"company_owner_email\": \"LlgVGdd@UCNzVyMmdefwDcvynTsG.nyjv\",\n      \"company_owner_user_id\": \"string\",\n      \"country_code\": \"string\",\n      \"created_at\": \"1986-10-04T20:38:31.538Z\",\n      \"desired_currency\": \"string\",\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"archived\",\n      \"updated_at\": \"1959-03-02T07:30:31.770Z\",\n      \"terms_of_service_accepted_at\": \"1970-04-13T01:22:44.381Z\",\n      \"default_legal_entity_credit_risk_status\": \"fail\",\n      \"bank_account_details\": {},\n      \"company_owner_name\": \"string\",\n      \"external_id\": \"string\",\n      \"phone_number\": \"string\",\n      \"registration_number\": \"string\",\n      \"tax_number\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a635ee0-0d72-4547-8737-3ff2347db74b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "767c7a37-4055-4fa5-9b5b-5d75c64e8334",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b58de72-44c2-4510-a3fa-34dc2f762e9e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29cc3d3f-af22-4367-9c4b-77ffacc6a25e",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10fb6b70-b289-4db3-91c9-53c6ddfb23a9",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca45b156-463c-41f9-a8a4-9715d378c034",
+          "name": "Update a company",
+          "request": {
+            "name": "Update a company",
+            "description": {
+              "content": "Given an ID and a request object with new information, updates a company.\n\n### Getting a company and its owner to `active` status\nIf you created a company using the\n[create a company endpoint](#tag/Companies/operation/post_create_company) without all the required\nrequest body parameters, you can use this endpoint to provide the missing data. Once the company\nand its owner have all the necessary data, both their statuses will be set to `active` and the company\nonboarding will be marked as \"completed\".\n\nThe following constitutes a company with \"all the necessary data\":\n* Complete `address`, with valid `address`, `postal_code`, `country` and `state` parameters (Varies by country. Use the\n[show form schema endpoint](#tag/Countries/operation/get_show_form_country) to see which address parameters\nare required).\n* Company `tax_number` or `registration_number` is not nil\n* Company `name` is not nil (already required when creating the company)\n* Company has a `desired_currency` in their bank account (already required when creating the company)\n* Company has accepted terms of service (already required when creating the company)\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage companies (`company_management`) | - | Manage companies (`company:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":company_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address_details_json_schema_version",
+                  "value": "<integer>",
+                  "description": "Version of the address_details form schema"
+                },
+                {
+                  "disabled": false,
+                  "key": "bank_account_details_json_schema_version",
+                  "value": "<integer>",
+                  "description": "Version of the bank_account_details form schema"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) Company ID\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address_details\": \"<object>\",\n  \"bank_account_details\": \"<object>\",\n  \"country_code\": \"<string>\",\n  \"desired_currency\": \"<string>\",\n  \"name\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"registration_number\": \"<string>\",\n  \"tax_number\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "acaeb042-4861-495a-935b-50084615d2f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"company\": {\n      \"address_details\": {},\n      \"company_owner_email\": \"LlgVGdd@UCNzVyMmdefwDcvynTsG.nyjv\",\n      \"company_owner_user_id\": \"string\",\n      \"country_code\": \"string\",\n      \"created_at\": \"1986-10-04T20:38:31.538Z\",\n      \"desired_currency\": \"string\",\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"archived\",\n      \"updated_at\": \"1959-03-02T07:30:31.770Z\",\n      \"terms_of_service_accepted_at\": \"1970-04-13T01:22:44.381Z\",\n      \"default_legal_entity_credit_risk_status\": \"fail\",\n      \"bank_account_details\": {},\n      \"company_owner_name\": \"string\",\n      \"external_id\": \"string\",\n      \"phone_number\": \"string\",\n      \"registration_number\": \"string\",\n      \"tax_number\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2d86a06-8d6c-4604-910a-130d6a93a434",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f69c1111-be82-4da2-baa1-91fac2928cc6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "835a588c-bb36-4391-9494-d11fcd193219",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "347df0fe-0ac9-44bb-98d7-097bb3f11256",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b92cb01b-84f5-4210-8e6b-f9265e60f1fe",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb509057-9c7b-4d30-a702-9c0f98120c0d",
+          "name": "Update a company",
+          "request": {
+            "name": "Update a company",
+            "description": {
+              "content": "Given an ID and a request object with new information, updates a company.\n\n### Getting a company and its owner to `active` status\nIf you created a company using the\n[create a company endpoint](#tag/Companies/operation/post_create_company) without all the required\nrequest body parameters, you can use this endpoint to provide the missing data. Once the company\nand its owner have all the necessary data, both their statuses will be set to `active` and the company\nonboarding will be marked as \"completed\".\n\nThe following constitutes a company with \"all the necessary data\":\n* Complete `address`, with valid `address`, `postal_code`, `country` and `state` parameters (Varies by country. Use the\n[show form schema endpoint](#tag/Countries/operation/get_show_form_country) to see which address parameters\nare required).\n* Company `tax_number` or `registration_number` is not nil\n* Company `name` is not nil (already required when creating the company)\n* Company has a `desired_currency` in their bank account (already required when creating the company)\n* Company has accepted terms of service (already required when creating the company)\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage companies (`company_management`) | - | Manage companies (`company:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":company_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address_details_json_schema_version",
+                  "value": "<integer>",
+                  "description": "Version of the address_details form schema"
+                },
+                {
+                  "disabled": false,
+                  "key": "bank_account_details_json_schema_version",
+                  "value": "<integer>",
+                  "description": "Version of the bank_account_details form schema"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) Company ID\n"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address_details\": \"<object>\",\n  \"bank_account_details\": \"<object>\",\n  \"country_code\": \"<string>\",\n  \"desired_currency\": \"<string>\",\n  \"name\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"registration_number\": \"<string>\",\n  \"tax_number\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "657a76e1-f5ce-4bb2-a528-22f4f9039413",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"company\": {\n      \"address_details\": {},\n      \"company_owner_email\": \"LlgVGdd@UCNzVyMmdefwDcvynTsG.nyjv\",\n      \"company_owner_user_id\": \"string\",\n      \"country_code\": \"string\",\n      \"created_at\": \"1986-10-04T20:38:31.538Z\",\n      \"desired_currency\": \"string\",\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"archived\",\n      \"updated_at\": \"1959-03-02T07:30:31.770Z\",\n      \"terms_of_service_accepted_at\": \"1970-04-13T01:22:44.381Z\",\n      \"default_legal_entity_credit_risk_status\": \"fail\",\n      \"bank_account_details\": {},\n      \"company_owner_name\": \"string\",\n      \"external_id\": \"string\",\n      \"phone_number\": \"string\",\n      \"registration_number\": \"string\",\n      \"tax_number\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ea74bfa-8287-4d80-b8e3-52f89d2286b3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "036e3fbb-5c55-4e59-ba6c-e10b3fc018a1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09c3d455-7e6c-4f05-b8c0-67d562602a30",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cccc2b2e-ad40-4b2e-86d2-40ec3d7277df",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13db2064-1191-47bf-b2ab-3bf2d75f7cdd",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID\n"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Authorization Code flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "089de7d7-170a-4e6e-a620-5802995e8d03",
+          "name": "List a company's pending actions",
+          "request": {
+            "name": "List a company's pending actions",
+            "description": {
+              "content": "Given a company ID, returns the company-level actions still pending for the company — for\nexample company verification and Remote Payments setup. The list can be empty or contain one\nor more actions; `setup_remote_payments` is returned once per legal entity that needs it.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":company_id",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) Company ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "/auth/oauth2/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d074cede-1194-49d8-a8eb-60a497ed922c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"actions\": [\n      {\n        \"required\": true,\n        \"type\": \"verify_company\"\n      },\n      {\n        \"legal_entity_id\": \"31b8e49b-aa1c-47af-849c-3d0a53e20e0d\",\n        \"required\": true,\n        \"type\": \"setup_remote_payments\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aabada32-9316-4a8c-9163-2e9c04223d44",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ce57265-ab11-4009-a3a5-d0425411da30",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edecaf15-e69f-4af4-87d4-9bbac4f15234",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa698e7c-e810-451e-9206-db673e3f398f",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53c09a0e-e424-4399-a4d9-844f0c023e73",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":company_id",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) Company ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbba5067-7250-45fb-b45b-e14eab76fe78",
+          "name": "List all companies",
+          "request": {
+            "name": "List all companies",
+            "description": {
+              "content": "List all companies that authorized your integration to act on their behalf. In other words, these are all the companies that your integration can manage. Any company that has completed the authorization flow for your integration will be included in the response.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "External ID"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "939cd733-ca5d-4f92-83bb-8c2bf6aa510c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"companies\": [\n      {\n        \"address_details\": {\n          \"address\": \"1709 Broderick St\",\n          \"address_line_2\": \"Flat number 123\",\n          \"city\": \"San Francisco\",\n          \"postal_code\": \"94115\",\n          \"state\": \"CA\"\n        },\n        \"bank_account_details\": {\n          \"account_holder\": \"Joe Smith\",\n          \"account_number\": \"31234123123\",\n          \"account_type\": \"savings\",\n          \"name\": \"Bank name\",\n          \"ownership_type\": \"BUSINESS\",\n          \"routing_number\": \"123124123\"\n        },\n        \"company_owner_email\": \"te@remote.com\",\n        \"company_owner_name\": \"Joe Smith\",\n        \"company_owner_user_id\": \"75619adf-8775-4531-9e7d-5b2cbabdc1a8\",\n        \"country_code\": \"USA\",\n        \"created_at\": \"2021-07-15T18:18:17Z\",\n        \"default_legal_entity_credit_risk_status\": \"no_deposit_required\",\n        \"desired_currency\": \"USD\",\n        \"external_id\": \"00001111\",\n        \"name\": \"Your Company Name\",\n        \"phone_number\": \"+1123123456\",\n        \"status\": \"active\",\n        \"terms_of_service_accepted_at\": \"2021-10-29T12:39:15Z\",\n        \"updated_at\": \"2021-07-15T18:18:17Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b059f42-1e88-4afb-885f-5333eedbb3e1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8121f4b4-2b1b-49e8-bb0b-a3754643c34c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef3adf6e-f852-4f87-bedb-797f21aa47f1",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "external_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "470b92ff-dded-4f1d-bd4e-1a754c4149e4",
+          "name": "Create a company",
+          "request": {
+            "name": "Create a company",
+            "description": {
+              "content": "  Creates a new company.\n\n  ### Creating a company with only the required request body parameters\n  When you call this endpoint and omit all the optional parameters in the request body,\n  the following resources get created upon a successful response:\n  * A new company with status `pending`.\n  * A company owner for the new company with status `initiated`.\n\n  See the [update a company endpoint](#tag/Companies/operation/patch_update_company) for\n  more details on how to get your company and its owner to `active` status.\n\n  If you'd like to create a company and its owner with `active` status in a single request,\n  please provide the optional `address_details` parameter as well.\n\n  ### Accepting the Terms of Service\n\n  A required step for creating a company in Remote is to accept our Terms of Service (ToS).\n\n  Company managers need to be aware of our Terms of Service and Privacy Policy,\n  hence **it's the responsibility of our partners to advise and ensure company managers read\n  and accept the ToS**. The terms have to be accepted only once, before creating a company,\n  and the Remote API will collect the acceptance timestamp as its confirmation.\n\n  To ensure users read the most recent version of Remote's Terms of Service, their **acceptance\n  must be done within the last fifteen minutes prior the company creation action**.\n\n  To retrieve this information, partners can provide an element with any text and a description\n  explaining that by performing that action they are accepting Remote's Term of Service. For\n  instance, the partner can add a checkbox or a \"Create Remote Account\" button followed by a\n  description saying \"By creating an account, you agree to\n  [Remote's Terms of Service](https://remote.com/terms-of-service). Also see Remote's\n  [Privacy Policy](https://remote.com/privacy-policy)\".\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage companies (`company_management`) | - | Manage companies (`company:write`) |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "address_details_json_schema_version",
+                  "value": "<integer>",
+                  "description": "Version of the address_details form schema"
+                },
+                {
+                  "disabled": false,
+                  "key": "bank_account_details_json_schema_version",
+                  "value": "<integer>",
+                  "description": "Version of the bank_account_details form schema"
+                },
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "Complementary action(s) to perform when creating a company:\n\n- `get_oauth_access_tokens` returns the user's access and refresh tokens\n- `send_create_password_email ` sends a reset password token to the company owner's email so they can log in using Remote UI (not needed if integration plans to use SSO only)\n\nIf `action` contains `send_create_password_email` you can redirect the user to [https://employ.remote.com/api-integration-new-password-send](https://employ.remote.com/api-integration-new-password-send)\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "async",
+                  "value": "<boolean>",
+                  "description": "Whether the request should be performed async\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "Scope of the access token\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "company:read company:write company_admin company_management convert_currency:read country:read employment_documents employment_payments employments help_center_article:read invoices payroll payroll_calendar:read pricing_plan:read pricing_plan:write time_and_attendance webhook:read webhook:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/auth/oauth2/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_owner_email\": \"<email>\",\n  \"company_owner_name\": \"<string>\",\n  \"country_code\": \"<string>\",\n  \"desired_currency\": \"<string>\",\n  \"name\": \"<string>\",\n  \"terms_of_service_accepted_at\": \"<dateTime>\",\n  \"address_details\": \"<object>\",\n  \"bank_account_details\": \"<object>\",\n  \"email_domain\": \"<string>\",\n  \"external_id\": \"<string>\",\n  \"phone_number\": \"<string>\",\n  \"registration_number\": \"<string>\",\n  \"tax_number\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "84b42da5-0899-411f-8740-5c235d10657b",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "get_oauth_access_tokens,send_create_password_email"
+                    },
+                    {
+                      "key": "async",
+                      "value": "true"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "file:read timeoff:create"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"company_owner_email\": \"ceo@techvision.com\",\n  \"company_owner_name\": \"Joe Smith\",\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"external_id\": \"00001111\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\",\n  \"terms_of_service_accepted_at\": \"2022-05-05 15:03:45Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"data\": {\n      \"company\": {\n        \"address_details\": {},\n        \"company_owner_email\": \"oEw4N7UQ@wO.abs\",\n        \"company_owner_user_id\": \"string\",\n        \"country_code\": \"string\",\n        \"created_at\": \"1975-05-12T22:53:09.686Z\",\n        \"desired_currency\": \"string\",\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"status\": \"archived\",\n        \"updated_at\": \"1991-12-21T03:50:26.011Z\",\n        \"terms_of_service_accepted_at\": \"1955-12-25T18:16:48.738Z\",\n        \"default_legal_entity_credit_risk_status\": \"referred\",\n        \"bank_account_details\": {},\n        \"company_owner_name\": \"string\",\n        \"external_id\": \"string\",\n        \"phone_number\": \"string\",\n        \"registration_number\": \"string\",\n        \"tax_number\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cca2ce8-8c43-4632-8d8e-5353b30dae4c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "get_oauth_access_tokens,send_create_password_email"
+                    },
+                    {
+                      "key": "async",
+                      "value": "true"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "file:read timeoff:create"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"company_owner_email\": \"ceo@techvision.com\",\n  \"company_owner_name\": \"Joe Smith\",\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"external_id\": \"00001111\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\",\n  \"terms_of_service_accepted_at\": \"2022-05-05 15:03:45Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5945501-9c58-4bbc-ad70-93b48ea7b526",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "get_oauth_access_tokens,send_create_password_email"
+                    },
+                    {
+                      "key": "async",
+                      "value": "true"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "file:read timeoff:create"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"company_owner_email\": \"ceo@techvision.com\",\n  \"company_owner_name\": \"Joe Smith\",\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"external_id\": \"00001111\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\",\n  \"terms_of_service_accepted_at\": \"2022-05-05 15:03:45Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "845e0f20-c4e6-4f9b-bbd9-b79ce675683d",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "get_oauth_access_tokens,send_create_password_email"
+                    },
+                    {
+                      "key": "async",
+                      "value": "true"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "file:read timeoff:create"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"company_owner_email\": \"ceo@techvision.com\",\n  \"company_owner_name\": \"Joe Smith\",\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"external_id\": \"00001111\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\",\n  \"terms_of_service_accepted_at\": \"2022-05-05 15:03:45Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"message\": \"The company with the provided EIN is already registered.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2b141e2-8dc7-4e27-8f92-cc76255666ee",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "get_oauth_access_tokens,send_create_password_email"
+                    },
+                    {
+                      "key": "async",
+                      "value": "true"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "file:read timeoff:create"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"company_owner_email\": \"ceo@techvision.com\",\n  \"company_owner_name\": \"Joe Smith\",\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"external_id\": \"00001111\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\",\n  \"terms_of_service_accepted_at\": \"2022-05-05 15:03:45Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adfad311-ed21-447e-afbb-a87d6b6256e9",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "address_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "bank_account_details_json_schema_version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action",
+                      "value": "get_oauth_access_tokens,send_create_password_email"
+                    },
+                    {
+                      "key": "async",
+                      "value": "true"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "file:read timeoff:create"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Requires a client credentials access token obtained through the Client Credentials flow or the Refresh Token flow.\n\nThe refresh token needs to have been obtained through the Client Credentials flow.\n",
+                    "key": "Authorization",
+                    "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"address_details\": {\n    \"address\": \"1709 Broderick St\",\n    \"address_line_2\": \"Flat number 123\",\n    \"city\": \"San Francisco\",\n    \"postal_code\": \"94115\",\n    \"state\": \"CA\"\n  },\n  \"bank_account_details\": {\n    \"account_holder\": \"Joe Smith\",\n    \"account_number\": \"31234123123\",\n    \"account_type\": \"savings\",\n    \"name\": \"Bank name\",\n    \"ownership_type\": \"BUSINESS\",\n    \"routing_number\": \"123124123\"\n  },\n  \"company_owner_email\": \"ceo@techvision.com\",\n  \"company_owner_name\": \"Joe Smith\",\n  \"country_code\": \"USA\",\n  \"desired_currency\": \"USD\",\n  \"external_id\": \"00001111\",\n  \"name\": \"Tech Vision\",\n  \"phone_number\": \"+11123123456\",\n  \"tax_number\": \"123456789\",\n  \"terms_of_service_accepted_at\": \"2022-05-05 15:03:45Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Too many requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0cc343c4-7712-420f-9899-6e4fc93172af",
+    "name": "Remote Address Details Company Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

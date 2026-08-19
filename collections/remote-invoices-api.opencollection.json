@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Invoices API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Contractor Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor-invoices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2ba34003-78d5-4792-9240-998d473184ce",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows a single Contractor Invoice record.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Contractor Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor-invoices",
+            "params": [
+              {
+                "name": "status",
+                "value": "issued",
+                "type": "query",
+                "description": "Filters contractor invoices by status matching the value."
+              },
+              {
+                "name": "contractor_invoice_schedule_id",
+                "value": "d3745787-1b2b-424c-ab83-cdda8b5cea37",
+                "type": "query",
+                "description": "Filters contractor invoices by invoice schedule ID matching the value."
+              },
+              {
+                "name": "date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by date greater than or equal to the value."
+              },
+              {
+                "name": "date_to",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by date less than or equal to the value."
+              },
+              {
+                "name": "due_date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by due date greater than or equal to the value."
+              },
+              {
+                "name": "due_date_to",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by due date less than or equal to the value."
+              },
+              {
+                "name": "approved_date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by approved date greater than or equal to the value."
+              },
+              {
+                "name": "approved_date_to",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by approved date less than or equal to the value."
+              },
+              {
+                "name": "paid_out_date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by paid out date greater than or equal to the value."
+              },
+              {
+                "name": "paid_out_date_to",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by paid out date less than or equal to the value."
+              },
+              {
+                "name": "sort_by",
+                "value": "date",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists Contractor Invoice records.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

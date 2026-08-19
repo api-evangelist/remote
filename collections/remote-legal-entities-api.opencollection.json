@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Legal Entities API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Legal Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Legal Entity Administrative details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/legal-entities/:legal_entity_id/administrative-details",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                "type": "path",
+                "description": "Legal entity ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Show administrative details of legal entity for the authorized company specified in the request.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update Legal Entity Administrative details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/legal-entities/:legal_entity_id/administrative-details",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                "type": "path",
+                "description": "Legal entity ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update administrative details of legal entity for the authorized company specified in the request.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage companies (`company_management`) | - | Manage companies (`company:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Company Legal Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/legal-entities",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Lists all active legal entities for the authorized company specified in the request.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show contractor eligibility and COR-supported countries for legal entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/legal-entities/:legal_entity_id/contractor-eligibility",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "",
+                "type": "path",
+                "description": "Legal entity ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns which contractor products (standard, plus, cor) the legal entity is eligible to use,\nand the list of country codes where COR is supported for this legal entity.\nCOR-supported countries exclude sanctioned and signup-prevented countries and apply entity rules (same-country, local-to-local).\nWhen the legal entity is not COR-eligible, `cor_supported_country_codes` is an empty list.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage co"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,486 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Contracts API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contracts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show form schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract-amendments/schema",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "query",
+                "description": "The ID of the employment concerned by the contract amendment request."
+              },
+              {
+                "name": "country_code",
+                "value": "CAN",
+                "type": "query",
+                "description": "Country code according to ISO 3-digit alphabetic codes."
+              },
+              {
+                "name": "form",
+                "value": "contract_amendment",
+                "type": "query",
+                "description": "Name of the desired form"
+              },
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the json schema of the `contract_amendment` form for a specific employment.\nThis endpoint requires a company access token, as forms are dependent on certain\nproperties of companies and their current employments.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View contract amendments (`contract_amendment:read`) | Manage contract amendments (`contract_amendment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show probation completion letter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/probation-completion-letter/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-probation_completion_letter_id-9suej43",
+                "type": "path",
+                "description": "probation completion letter ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show a single probation completion letter.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View probation documents (`probation_document:read`) | Manage probation documents (`probation_document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List contract documents for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/contract-documents",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "statuses",
+                "value": "finished,awaiting_signatures",
+                "type": "query",
+                "description": "Filter by contract document statuses"
+              },
+              {
+                "name": "except_statuses",
+                "value": "draft",
+                "type": "query",
+                "description": "Exclude contract documents with specific statuses"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Only contractor employment types are supported. Lists contract documents for a specific employment with pagination, filtering by status, and sorted by updated_at descending (latest first).\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create probation completion letter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/probation-completion-letter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new probation completion letter request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage probation documents (`probation_document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Probation Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/probation-extensions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a probation extension request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage probation documents (`probation_document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract-amendments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query",
+                "description": "Employment ID"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Contract Amendment status"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Contract Amendment requests.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View contract amendments (`contract_amendment:read`) | Manage contract amendments (`contract_amendment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract-amendments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Contract Amendment request.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Contract Amendments](#tag/Contract-Amendments) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote"
+        },
+        {
+          "info": {
+            "name": "Download the Employment Agreement for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/employment-agreement/download",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads a PDF of the auto-generated Employment Agreement for an employment.\n\nThe document is rendered as a draft (no signatures) and is not persisted. EA preview is only\navailable for countries that have a published Employment Agreement automation template — see the\n`employment_agreement_preview_available` flag on the [Countries](#tag/Countries) endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employme"
+        },
+        {
+          "info": {
+            "name": "Show Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contract-amendments/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-contract_amendment_id-9suej43",
+                "type": "path",
+                "description": "Contract amendment request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show a single Contract Amendment request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View contract amendments (`contract_amendment:read`) | Manage contract amendments (`contract_amendment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create contract eligibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/contract-eligibility",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create contract eligibility for an employment.\n\nThis will create a new contract eligibility for the employment.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage contract eligibility (`contract_eligibility:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Automatable Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contract-amendments/automatable",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Check if a contract amendment request is automatable.\nIf the contract amendment request is automatable, then after submission, it will instantly amend the employee's contract\nand send them an updated document.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Contract Amendments](#tag/Contract-A"
+        },
+        {
+          "info": {
+            "name": "Get employment contract pending changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employment-contracts/:employment_id/pending-changes",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment_id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all the pending changes (waiting for aproval or signature) for the employment contract.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View contracts (`contract:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Show Probation Extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/probation-extensions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-probation_extension_id-9suej43",
+                "type": "path",
+                "description": "Probation Extension Request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows a Probation Extension Request.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View probation documents (`probation_document:read`) | Manage probation documents (`probation_document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Employment Contract.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employment-contracts",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment_id-9suej43",
+                "type": "query",
+                "description": "Employment ID"
+              },
+              {
+                "name": "only_active",
+                "value": "false",
+                "type": "query",
+                "description": "Only Active"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the employment contract history for a given employment. If `only_active` is true, it will return only the active or last active contract.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View contracts (`contract:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Preview the Employment Agreement for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/employment-agreement/preview",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a base64-encoded PDF preview of the auto-generated Employment Agreement for an employment.\n\nThe document is rendered as a draft (no signatures) and is not persisted. EA preview is only\navailable for countries that have a published Employment Agreement automation template — see the\n`employment_agreement_preview_available` flag on the [Countries](#tag/Countries) endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

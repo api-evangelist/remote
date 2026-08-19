@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Recurring Incentives API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recurring Incentives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Recurring Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/incentives/recurring",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filter by recurring incentive status: active or deactive."
+              },
+              {
+                "name": "type",
+                "value": "meal_allowance",
+                "type": "query",
+                "description": "Filter by recurring incentive type."
+              },
+              {
+                "name": "note",
+                "value": "meal",
+                "type": "query",
+                "description": "Filter by recurring incentives that contain the value in their notes."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Recurring Incentives of a company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View incentives (`incentive:read`) | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Recurring Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/incentives/recurring",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a Recurring Incentive, that is, a monthly paid incentive.\n\nIncentives use the currency of the employment specified provided in the `employment_id` field.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Delete a Recurring Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/incentives/recurring/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Recurring Incentive ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a Recurring Incentive, that is, a monthly paid incentive.\n\nInternally, Remote schedules upcoming incentives. As such, when you attempt to\ndelete a recurring incentive, Remote will **ONLY** delete scheduled incentives\nwith the `pending` status.\n\nIncentives payments that are already scheduled and cannot be deleted will be\nincluded in the response, in case you need to reference them.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

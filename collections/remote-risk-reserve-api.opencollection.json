@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Risk Reserve API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Risk Reserve",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create risk reserve",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/risk-reserve",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new risk reserve\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage risk reserves (`risk_reserve:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Submit risk reserve proof of payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/risk-reserve-proof-of-payments",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "5b44799c-e845-4d5c-9c52-b6e5f7c3d4e1",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submits a proof of payment document for a risk reserve associated with an employment.\n\nTriggers an `employment.cor_hiring.proof_of_payment_submitted` webhook event.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage risk reserves (`risk_reserve:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

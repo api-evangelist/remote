@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details GL Reports API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GL Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a GL report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id/gl-reports",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll-run-id-9suej43",
+                "type": "path",
+                "description": "The payroll run's ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Triggers generation of a General Ledger report for the given payroll run and type.\nReturns immediately with a `pending` report — poll `show` until `status` is `completed`,\nthen call `download`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Show a GL report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id/gl-reports/:gl_report_id",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll-run-id-9suej43",
+                "type": "path",
+                "description": "The payroll run's ID"
+              },
+              {
+                "name": "gl_report_id",
+                "value": "93t3j-gl-report-id-9suej43",
+                "type": "path",
+                "description": "The GL report's ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the current status of a GL report. Poll until `status` is `completed`, then call `download`.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Download a GL report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id/gl-reports/:gl_report_id/download",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll-run-id-9suej43",
+                "type": "path",
+                "description": "The payroll run's ID"
+              },
+              {
+                "name": "gl_report_id",
+                "value": "93t3j-gl-report-id-9suej43",
+                "type": "path",
+                "description": "The GL report's ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads the generated GL report as a CSV file. The report must have `status: completed` before calling this endpoint.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

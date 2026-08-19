@@ -1,0 +1,343 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Expenses API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Expenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List expenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all expenses records\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/expenses",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an **approved** expense\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Download a receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id/receipt",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "The expense ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "  Downloads an expense receipt.\n\n  Deprecated since late February 2024 in favour of **[Download a receipt by id](#tag/Expenses/operation/get_download_by_id_expense_receipt)** endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List expense categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/categories",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query",
+                "description": "The employment ID for which to list categories. Required if neither expense_id nor country_code is provided."
+              },
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "query",
+                "description": "The expense ID for which to list categories (includes the expense's category, even if it is not selectable by default). If provided without employment_id, will use the expense's employment context."
+              },
+              {
+                "name": "include_parents",
+                "value": "",
+                "type": "query",
+                "description": "Include un-selectable intermediate categories in the response"
+              },
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter categories by country (ISO 3166-1 alpha-3 code, e.g. \"GBR\"). Only used when neither employment_id nor expense_id is provided."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the effective hierarchy of expense categories. At least one of employment_id, expense_id, or country_code must be provided."
+        },
+        {
+          "info": {
+            "name": "List expense categories for the authenticated employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/expense-categories",
+            "params": [
+              {
+                "name": "include_parents",
+                "value": "",
+                "type": "query",
+                "description": "Include parent (non-selectable) categories in addition to selectable leaves"
+              },
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "query",
+                "description": "Expense ID (slug) whose category should be included in the result, even if it is not selectable by default"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the flat list of expense categories applicable to the current employee. Only active categories are returned, filtered by the employee's country / legal-entity visibility rules. Leaf nodes have `is_selectable: true`; parent nodes are excluded unless `include_parents=true`.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Expense ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows a single expense record\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/expenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Expense ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an expense\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/expenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Expense ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an expense\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Download a receipt by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id/receipts/:receipt_id",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "The expense ID"
+              },
+              {
+                "name": "receipt_id",
+                "value": "6ab2e49o-ad1c-47af-849c-3d0a53e21e0e",
+                "type": "path",
+                "description": "The receipt ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download a receipt by id.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List expenses for the authenticated employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/expenses",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a paginated list of expenses belonging to the current employee.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create an expense for the authenticated employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employee/expenses",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates a new expense record for the current employee.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage expenses (`expense:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

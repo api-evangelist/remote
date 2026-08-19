@@ -1,0 +1,540 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Integrations API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Help Center Article",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/help-center-articles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "12345679",
+                "type": "path",
+                "description": "Help Center Article Zendesk ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a help center article by its ID\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View help articles (`help_center_article:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Get user by ID via SCIM v2.0",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/scim/v2/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID (slug)"
+              }
+            ]
+          },
+          "docs": "Retrieves a single user for the authenticated company by user ID"
+        },
+        {
+          "info": {
+            "name": "List Webhook Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/webhook-events",
+            "params": [
+              {
+                "name": "event_type",
+                "value": "timesheet.created",
+                "type": "query",
+                "description": "Filter by webhook event type"
+              },
+              {
+                "name": "successfully_delivered",
+                "value": "true",
+                "type": "query",
+                "description": "Filter by delivery status (true = 200, false = 4xx/5xx)"
+              },
+              {
+                "name": "company_id",
+                "value": "123e4567-e89b-12d3-a456-426614174000",
+                "type": "query",
+                "description": "Filter by company ID"
+              },
+              {
+                "name": "before",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filter by date before (ISO 8601 format)"
+              },
+              {
+                "name": "after",
+                "value": "2025-01-01T00:00:00Z",
+                "type": "query",
+                "description": "Filter by date after (ISO 8601 format)"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "sort_by",
+                "value": "first_triggered_at",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all webhook events\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View webhooks (`webhook:read`) | Manage webhooks (`webhook:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Replay Webhook Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/webhook-events/replay",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Replay webhook events\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update a Webhook Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/webhook-callbacks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook Callback ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a callback previously registered for webhooks\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Delete a Webhook Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/webhook-callbacks/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook Callback ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a callback previously registered for webhooks\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create a Webhook Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/webhook-callbacks",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <ANY ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Register a callback to be used for webhooks\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List users via SCIM v2.0",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/scim/v2/Users",
+            "params": [
+              {
+                "name": "startIndex",
+                "value": "1",
+                "type": "query",
+                "description": "1-based index of the first result"
+              },
+              {
+                "name": "count",
+                "value": "50",
+                "type": "query",
+                "description": "Maximum number of results per page"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression for attributes (supports eq, ne, co, sw, ew, pr, lt, le, gt, ge)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users for the authenticated company following SCIM 2.0 standard"
+        },
+        {
+          "info": {
+            "name": "List groups via SCIM v2.0",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/scim/v2/Groups",
+            "params": [
+              {
+                "name": "startIndex",
+                "value": "1",
+                "type": "query",
+                "description": "1-based index of the first result"
+              },
+              {
+                "name": "count",
+                "value": "50",
+                "type": "query",
+                "description": "Maximum number of results per page"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter expression for attributes (supports eq, ne, co, sw, ew, pr, lt, le, gt, ge)"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of groups (departments) for the authenticated company following SCIM 2.0 standard"
+        },
+        {
+          "info": {
+            "name": "Lists custom fields definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/custom-fields",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns custom fields definitions\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage custom fields (`custom_field:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/custom-fields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new custom field definition.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View custom fields (`custom_field:read`) | Manage custom fields (`custom_field:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List custom field value for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/custom-fields",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of custom field values for a given employment\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Webhook Callbacks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/webhook-callbacks",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "d2091b1e-b1a4-437a-91ea-2809ffbb6d59",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List callbacks for a given company\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View webhooks (`webhook:read`) | Manage webhooks (`webhook:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show a custom field value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/custom-fields/:custom_field_id/values/:employment_id",
+            "params": [
+              {
+                "name": "custom_field_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Custom field ID"
+              },
+              {
+                "name": "employment_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a custom field value for a given employment\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update a Custom Field Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/custom-fields/:custom_field_id/values/:employment_id",
+            "params": [
+              {
+                "name": "custom_field_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Custom field ID"
+              },
+              {
+                "name": "employment_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a custom field value for a given employment.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update a Custom Field Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/custom-fields/:custom_field_id/values/:employment_id",
+            "params": [
+              {
+                "name": "custom_field_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Custom field ID"
+              },
+              {
+                "name": "employment_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a custom field value for a given employment.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Get group by ID via SCIM v2.0",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/scim/v2/Groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Group ID (slug)"
+              }
+            ]
+          },
+          "docs": "Retrieves a single group (department) for the authenticated company by group ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

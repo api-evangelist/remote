@@ -1,0 +1,568 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Offboarding API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offboarding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Offboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/offboardings",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "query",
+                "description": "Filter by Employment ID"
+              },
+              {
+                "name": "type",
+                "value": "paid",
+                "type": "query",
+                "description": "Filter by offboarding type"
+              },
+              {
+                "name": "include_confidential",
+                "value": "true",
+                "type": "query",
+                "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists Offboarding requests.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Offboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/offboardings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an Offboarding request\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage offboarding (`offboarding:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Offboardings (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v2/offboardings",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "query",
+                "description": "Filter by Employment ID"
+              },
+              {
+                "name": "type",
+                "value": "termination",
+                "type": "query",
+                "description": "Filter by offboarding type."
+              },
+              {
+                "name": "include_confidential",
+                "value": "true",
+                "type": "query",
+                "description": "By default, the results do not include confidential termination requests.\nSend `include_confidential=true` to include confidential requests in the response.\n"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists offboardings for a company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show Offboarding (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v2/offboardings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Offboarding ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a single offboarding by its ID.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show work authorization request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/work-authorization-requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2d3cfb38-27e7-42de-a43d-da23e3d4ffea",
+                "type": "path",
+                "description": "work authorization request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show a single work authorization request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View work authorizations (`work_authorization:read`) | Manage work authorizations (`work_authorization:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update work authorization request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/work-authorization-requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "e2a7d189-1346-453a-9818-03772b716e48",
+                "type": "path",
+                "description": "work authorization request ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a work authorization request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage work authorizations (`work_authorization:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update work authorization request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/work-authorization-requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "e2a7d189-1346-453a-9818-03772b716e48",
+                "type": "path",
+                "description": "work authorization request ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a work authorization request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage work authorizations (`work_authorization:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Download a resignation letter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/resignations/:offboarding_request_id/resignation-letter",
+            "params": [
+              {
+                "name": "offboarding_request_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Offboarding request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads a resignation letter from an employment request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View resignation letters (`resignation_letter:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Show travel letter request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/travel-letter-requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "93t3j-travel_letter_id-9suej43",
+                "type": "path",
+                "description": "travel letter request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show a single travel letter request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View travel letters (`travel_letter:read`) | Manage travel letters (`travel_letter:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Updates a travel letter request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/travel-letter-requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Travel letter Request ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a travel letter request\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage travel letters (`travel_letter:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Updates a travel letter request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/travel-letter-requests/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Travel letter Request ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a travel letter request\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage travel letters (`travel_letter:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List travel letter requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/travel-letter-requests",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results on the given status"
+              },
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results on the given employment slug"
+              },
+              {
+                "name": "employee_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter results on the given employee name"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "sort_by",
+                "value": "submitted_at",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List travel letter requests.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View travel letters (`travel_letter:read`) | Manage travel letters (`travel_letter:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Offboardings for Employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/offboardings/employments/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists Offboarding requests for a specific employment.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show Offboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/offboardings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Offboarding request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows an Offboarding request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View offboarding requests (`offboarding:read`) | Manage offboarding (`offboarding:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show Resignation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/resignations/:offboarding_request_id",
+            "params": [
+              {
+                "name": "offboarding_request_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Offboarding request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows the details of a resignation with status `submitted`.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View resignations (`resignation:read`) | Manage resignations (`resignation:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Validate resignation request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/resignations/:offboarding_request_id/validate",
+            "params": [
+              {
+                "name": "offboarding_request_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Offboarding request ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Validates a resignation employment request\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage resignations (`resignation:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List work authorization requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/work-authorization-requests",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results on the given status"
+              },
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results on the given employment slug"
+              },
+              {
+                "name": "employee_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter results on the given employee name"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "sort_by",
+                "value": "submitted_at",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List work authorization requests.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View work authorizations (`work_authorization:read`) | Manage work authorizations (`work_authorization:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

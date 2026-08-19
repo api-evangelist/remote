@@ -1,0 +1,329 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Company Management API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show form schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/schema",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "CAN",
+                "type": "query",
+                "description": "Country code according to ISO 3-digit alphabetic codes."
+              },
+              {
+                "name": "form",
+                "value": "address_details",
+                "type": "query",
+                "description": "Name of the desired form"
+              },
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the json schema of the requested company form.\nCurrently only supports the `address_details` form.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "0a8s2d1-company-id-2e3f4th",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Given an ID, shows a company.\n\nIf the used access token was issued by the OAuth 2.0 Authorization Code flow,\nthen only the associated company can be accessed through the endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/companies/:company_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              },
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              },
+              {
+                "name": "company_id",
+                "value": "0a8s2d1-company-id-2e3f4th",
+                "type": "path",
+                "description": "Company ID\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Given an ID and a request object with new information, updates a company.\n\n### Getting a company and its owner to `active` status\nIf you created a company using the\n[create a company endpoint](#tag/Companies/operation/post_create_company) without all the required\nrequest body parameters, you can use this endpoint to provide the missing data. Once the company\nand its owner have all the necessary data, both their statuses will be set to `active` and the company\nonboarding will be marked as \"comple"
+        },
+        {
+          "info": {
+            "name": "Update a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/companies/:company_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              },
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              },
+              {
+                "name": "company_id",
+                "value": "0a8s2d1-company-id-2e3f4th",
+                "type": "path",
+                "description": "Company ID\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Given an ID and a request object with new information, updates a company.\n\n### Getting a company and its owner to `active` status\nIf you created a company using the\n[create a company endpoint](#tag/Companies/operation/post_create_company) without all the required\nrequest body parameters, you can use this endpoint to provide the missing data. Once the company\nand its owner have all the necessary data, both their statuses will be set to `active` and the company\nonboarding will be marked as \"comple"
+        },
+        {
+          "info": {
+            "name": "List a company's pending actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/actions",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "0a8s2d1-company-id-2e3f4th",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Given a company ID, returns the company-level actions still pending for the company — for\nexample company verification and Remote Payments setup. The list can be empty or contain one\nor more actions; `setup_remote_payments` is returned once per legal entity that needs it.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List all companies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "External ID"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all companies that authorized your integration to act on their behalf. In other words, these are all the companies that your integration can manage. Any company that has completed the authorization flow for your integration will be included in the response.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View companies (`company:read`) | Manage companies (`company:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/companies",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <CLIENT-CREDENTIALS ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              },
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              },
+              {
+                "name": "action",
+                "value": "get_oauth_access_tokens,send_create_password_email",
+                "type": "query",
+                "description": "Complementary action(s) to perform when creating a company:\n\n- `get_oauth_access_tokens` returns the user's access and refresh tokens\n- `send_create_password_email ` sends a reset password token to the company owner's email so they can log in using Remote UI (not needed if integration plans to use SSO only)\n\nIf `action` contains `send_create_password_email` you can redirect the user to [https://employ.remote.com/api-integration-new-password-send](https://employ.remote.com/api-integration-new-password-send)\n"
+              },
+              {
+                "name": "async",
+                "value": "true",
+                "type": "query",
+                "description": "Whether the request should be performed async\n"
+              },
+              {
+                "name": "scope",
+                "value": "file:read timeoff:create",
+                "type": "query",
+                "description": "Scope of the access token\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "  Creates a new company.\n\n  ### Creating a company with only the required request body parameters\n  When you call this endpoint and omit all the optional parameters in the request body,\n  the following resources get created upon a successful response:\n  * A new company with status `pending`.\n  * A company owner for the new company with status `initiated`.\n\n  See the [update a company endpoint](#tag/Companies/operation/patch_update_company) for\n  more details on how to get your company and its ow"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

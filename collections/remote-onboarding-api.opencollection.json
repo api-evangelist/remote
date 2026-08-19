@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Onboarding API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Onboarding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cancel onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cancel-onboarding/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "async",
+                "value": "true",
+                "type": "query",
+                "description": "Whether the request should be performed async\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Cancel onboarding.\n\nRequirements for the cancellation to succeed:\n\n* Employment has to be in `invited`, `created`, `created_awaiting_reserve`, `created_reserve_paid`, `pre_hire` status\n* Employee must not have signed the employment contract\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage onboarding (`onboarding:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show onboarding steps for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/onboarding-steps",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "employment-id-123",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns onboarding steps and substeps in a hierarchical, ordered structure.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

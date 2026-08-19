@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Pre-Onboarding Requirements API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pre-Onboarding Requirements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Acknowledge a pre-onboarding acknowledgement requirement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/acknowledge",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "requirement_slug",
+                "value": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+                "type": "path",
+                "description": "Pre-onboarding requirement slug"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Records an acknowledgement for an acknowledgement requirement. Rejected if the requirement\nis blocked by an unmet dependency or has already been acknowledged.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Remove a pre-onboarding acknowledgement",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/acknowledge",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "requirement_slug",
+                "value": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+                "type": "path",
+                "description": "Pre-onboarding requirement slug"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Removes a previously recorded acknowledgement. Rejected once a requirement that depends on\nthis acknowledgement has been signed/completed.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Find or create a document for a pre-onboarding requirement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-requirements/:requirement_slug/documents",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "requirement_slug",
+                "value": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+                "type": "path",
+                "description": "Pre-onboarding requirement slug"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finds an existing unsigned pre-onboarding document for the given document requirement, or\ncreates a new one. Idempotent: repeated calls return the same document until it is signed.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List pre-onboarding requirements for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/onboarding/employments/:employment_id/pre-onboarding-requirements",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "9bcfaa5d-2c69-4dc6-8318-ba0d4d30b4cf",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the list of pre-onboarding requirements — both documents (e.g. master service\nagreements, individual labour agreements) and acknowledgements — that must be fulfilled\nbefore the given employment can be onboarded. Each requirement carries its `type`, current\n`status`, and the requirement it `depends_on` (if any).\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`docum"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

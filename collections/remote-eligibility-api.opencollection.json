@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Eligibility API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Eligibility",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit eligibility questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/eligibility-questionnaire",
+            "params": [
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submits an eligibility questionnaire for a contractor employment.\n\nThe questionnaire determines if the contractor is eligible for certain products or features.\nThe responses are validated against the JSON schema for the questionnaire type.\n\n**Requirements:**\n- Employment must be of type `contractor`\n- Employment must be in `created` status\n- Responses must conform to the questionnaire JSON schema\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n"
+        },
+        {
+          "info": {
+            "name": "Get eligibility questionnaire schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/schemas/eligibility-questionnaire",
+            "params": [
+              {
+                "name": "type",
+                "value": "contractor_of_record",
+                "type": "query",
+                "description": "Type of eligibility questionnaire"
+              },
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the JSON schema for the eligibility questionnaire by type.\n\nThe schema defines the structure and validation rules for the questionnaire responses.\nSupports versioning to allow for schema evolution while maintaining backwards compatibility.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

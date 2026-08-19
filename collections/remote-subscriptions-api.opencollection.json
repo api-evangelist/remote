@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Subscriptions API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List contractor subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-subscriptions",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint that can be used to list contractor subscriptions.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List contractor of record (COR) termination requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/cor-termination-requests",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "query",
+                "description": "Filter termination requests by employment ID."
+              },
+              {
+                "name": "status",
+                "value": "initiated",
+                "type": "query",
+                "description": "Filter termination requests by status."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists Contractor of Record termination requests for your company,\noptionally filtered by employment and status.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create a contractor of record (COR) termination request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/cor-termination-requests",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiates a termination request for a Contractor of Record employment.\nWhen a termination request is sent, a stop work order is issued and the contractor remains active until a final invoice is paid or waived.\nCurrently, only Contractor of Record employments can be terminated.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show a contractor of record (COR) termination request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/cor-termination-requests/:termination_request_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "termination_request_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Termination Request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves a Contractor of Record termination request by ID.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Terminate contractor of record employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/terminate-cor-employment",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Deprecated.** Use `POST /contractors/employments/{employment_id}/cor-termination-requests` instead.\n\nInitiates a termination request for a Contractor of Record employment.\nWhen a termination request is sent, a stop work order is issued and the contractor remains active until a final invoice is paid or waived.\nCurrently, only Contractor of Record employments can be terminated.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment"
+        },
+        {
+          "info": {
+            "name": "Manage contractor plus subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-plus-subscription",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint that can be used to upgrade, assign or downgrade a contractor's subscription.\nThis can be used when company admins desire to assign someone to the Contractor Plus plan,\nbut also to change the contractor's subscription between Plus and Standard.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create contractor of record subscription intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-cor-subscription",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Assigns Contractor of Record subscription in pending state to employment.\nOnce risk analysis is performed, subscription may start upon contract signing,\nor might be denied.\n\nRequires a non-blocking eligibility questionnaire to be submitted before creating the subscription intent.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Delete contractor of record subscription intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-cor-subscription",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes Contractor of Record subscription intent.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

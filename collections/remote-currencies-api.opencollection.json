@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Currencies API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Currencies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all currencies for the contractor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-currencies",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "restrict_to_guaranteed_pay_out_currencies",
+                "value": "false",
+                "type": "query",
+                "description": "Restrict to currencies which payout is guaranteed (default: true)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "The currencies are listed in the following order:\n1. billing currency of the company\n2. currencies of contractor’s existing withdrawal methods\n3. currency of the contractor’s country\n4. the rest, alphabetical.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List company supported currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/company-currencies",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List company supported currencies\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | View company currencies (`company_currencies:read`) | - |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

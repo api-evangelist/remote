@@ -1,0 +1,474 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Testing & Sandbox API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Testing & Sandbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Report SDK errors",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sdk/telemetry-errors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Receives error telemetry from the frontend SDK.\nErrors are logged to observability backend for monitoring and debugging.\n"
+        },
+        {
+          "info": {
+            "name": "Pass KYB",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sandbox/companies/:company_id/bypass-eligibility-checks",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Pass KYB and credit risk for a company without the intervention of a Remote admin.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        },
+        {
+          "info": {
+            "name": "Approve risk reserve proof of payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sandbox/employments/:employment_id/risk-reserve-proof-of-payments/approve",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "5b44799c-e845-4d5c-9c52-b6e5f7c3d4e1",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approves a risk reserve proof of payment without the intervention of a Remote admin.\n\nTriggers an `employment.cor_hiring.proof_of_payment_accepted` webhook event.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        },
+        {
+          "info": {
+            "name": "Get a mock JSON Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/test-schema",
+            "params": [
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get a mock JSON Schema for testing purposes"
+        },
+        {
+          "info": {
+            "name": "Creates a Benefit Renewal Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sandbox/benefit-renewal-requests",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Benefit Renewal Request for a specific Benefit Group.\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        },
+        {
+          "info": {
+            "name": "Approve Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/sandbox/contract-amendments/:contract_amendment_request_id/approve",
+            "params": [
+              {
+                "name": "contract_amendment_request_id",
+                "value": "6d947344-b053-4a4f-acf0-79d296cbd082",
+                "type": "path",
+                "description": "Contract amendment request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approves a contract amendment request without the intervention of a Remote admin.\nApprovals done via this endpoint are effective immediately,\nregardless of the effective date entered on the contract amendment creation.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        },
+        {
+          "info": {
+            "name": "Create a legal entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sandbox/companies/:company_id/legal-entities",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Company ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new legal entity for a company in a given country, with KYB automatically passed.\n\nThe entity is created with active status and can be set as the company's default\nusing the reassign default entity endpoint.\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        },
+        {
+          "info": {
+            "name": "Create employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sandbox/employments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an employment without provisional_start_date validation.\n\nThis endpoint is only available in Sandbox and allows creating employments which\n`provisional_start_date` is in the past. This is especially helpful for:\n  * Testing the Timeoff Balance endpoints\n  * Testing the Offboarding endpoints\n  * Testing features around probation periods\n\nThis endpoint will respond with a 404 outside of the Sandbox environment.\n\nFor creating an employment's parameters outside of testing purposes, use [this"
+        },
+        {
+          "info": {
+            "name": "Activate Global Payroll for a legal entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sandbox/companies/:company_id/legal-entities/:legal_entity_id/activate-global-payroll",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Legal Entity ID to activate Global Payroll on"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Enables the Global Payroll product on a legal entity so that GP employees can be created against it.\n\nPerforms three idempotent steps:\n  * Adds the Global Payroll product to the company.\n  * Flips `global_payroll_enabled` on the legal entity's settings.\n  * Ensures a Global Payroll pricing plan exists for the legal entity's country.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        },
+        {
+          "info": {
+            "name": "Trigger a Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sandbox/webhook-callbacks/trigger",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Triggers a callback previously registered for webhooks. Use this endpoint to\nemit a webhook for testing in the Sandbox environment. This endpoint will\nrespond with a 404 outside of the Sandbox environment.\n"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/sandbox/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "e3ee69d7-1293-4664-92fc-02625dae5247",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an employment. Use this endpoint to:\n- modify employment states for testing\n- Backdate employment start dates\n\nThis endpoint will respond with a 404 outside of the Sandbox environment.\n\nFor updating an employment's parameters outside of testing purposes, use [this Employment update endpoint](#operation/patch_update_employment).\n"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/sandbox/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "e3ee69d7-1293-4664-92fc-02625dae5247",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an employment. Use this endpoint to:\n- modify employment states for testing\n- Backdate employment start dates\n\nThis endpoint will respond with a 404 outside of the Sandbox environment.\n\nFor updating an employment's parameters outside of testing purposes, use [this Employment update endpoint](#operation/patch_update_employment).\n"
+        },
+        {
+          "info": {
+            "name": "Archive employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/sandbox/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "e3ee69d7-1293-4664-92fc-02625dae5247",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Archives an employment, setting its status to `archived`.\n\nThis endpoint is only available in Sandbox and allows partners to clean up test\nemployees during automated E2E testing without requiring Remote manual intervention.\n\nThis endpoint will respond with a 404 outside of the Sandbox environment.\n"
+        },
+        {
+          "info": {
+            "name": "Set company credit risk status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/sandbox/companies/:company_id/legal-entities/:legal_entity_id/set-credit-risk-status",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Legal Entity ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Sets the credit risk status of a specific legal entity to any valid credit risk status.\n\nUse this endpoint to test hiring flows affected by credit risk, without needing Remote admin intervention.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        },
+        {
+          "info": {
+            "name": "Reassign default legal entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/sandbox/companies/:company_id/default-legal-entity/:legal_entity_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Legal Entity ID to set as the new default"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Set a different legal entity as the company's default entity.\n\nThe default entity is used when creating new employments without an explicit entity.\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        },
+        {
+          "info": {
+            "name": "Cancel Contract Amendment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/sandbox/contract-amendments/:contract_amendment_request_id/cancel",
+            "params": [
+              {
+                "name": "contract_amendment_request_id",
+                "value": "5bdc2cb9-6bda-4cf7-bc6e-0b122791e52a",
+                "type": "path",
+                "description": "Contract amendment request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint to cancel an existing contract amendment request.\n\nThis endpoint is only available in Sandbox, otherwise it will respond with a 404.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

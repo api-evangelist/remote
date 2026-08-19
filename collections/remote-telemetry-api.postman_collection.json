@@ -1,0 +1,270 @@
+{
+  "item": [
+    {
+      "id": "764b0fc6-e74b-4b8b-a5a9-cf2a8e93c0db",
+      "name": "Telemetry",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "449efd95-8689-496b-b899-90f748ce3aba",
+          "name": "Report SDK errors",
+          "request": {
+            "name": "Report SDK errors",
+            "description": {
+              "content": "Receives error telemetry from the frontend SDK.\nErrors are logged to observability backend for monitoring and debugging.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "sdk",
+                "telemetry-errors"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"error\": {\n    \"message\": \"<string>\",\n    \"name\": \"<string>\",\n    \"category\": \"<string>\",\n    \"severity\": \"<string>\",\n    \"component_stack\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"stack\": \"<string>\"\n  },\n  \"metadata\": {\n    \"sdk_version\": \"<string>\",\n    \"timestamp\": \"<datetime>\",\n    \"url\": \"<uri>\",\n    \"user_agent\": \"<string>\",\n    \"environment\": \"<string>\"\n  },\n  \"context\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "851a3c0c-c5c7-45c0-a4c5-871d82a35633",
+              "name": "No Content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sdk",
+                    "telemetry-errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"userId\": \"user123\"\n  },\n  \"error\": {\n    \"category\": \"RENDER_ERROR\",\n    \"component_stack\": [\n      \"Component1\",\n      \"Component2\"\n    ],\n    \"message\": \"Unable to render component\",\n    \"name\": \"RenderError\",\n    \"severity\": \"error\",\n    \"stack\": \"Error: ...\\n  at ...\"\n  },\n  \"metadata\": {\n    \"environment\": \"production\",\n    \"sdk_version\": \"1.0.0\",\n    \"timestamp\": \"2024-01-15T10:30:00Z\",\n    \"url\": \"https://example.com/page\",\n    \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64)\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c98218db-2ad6-4676-a396-798747ee7664",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sdk",
+                    "telemetry-errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"userId\": \"user123\"\n  },\n  \"error\": {\n    \"category\": \"RENDER_ERROR\",\n    \"component_stack\": [\n      \"Component1\",\n      \"Component2\"\n    ],\n    \"message\": \"Unable to render component\",\n    \"name\": \"RenderError\",\n    \"severity\": \"error\",\n    \"stack\": \"Error: ...\\n  at ...\"\n  },\n  \"metadata\": {\n    \"environment\": \"production\",\n    \"sdk_version\": \"1.0.0\",\n    \"timestamp\": \"2024-01-15T10:30:00Z\",\n    \"url\": \"https://example.com/page\",\n    \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64)\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"details\": \"The error payload is malformed\",\n  \"error\": \"Invalid request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60783f2b-f98b-47e8-abc6-b78a211a4397",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "sdk",
+                    "telemetry-errors"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"userId\": \"user123\"\n  },\n  \"error\": {\n    \"category\": \"RENDER_ERROR\",\n    \"component_stack\": [\n      \"Component1\",\n      \"Component2\"\n    ],\n    \"message\": \"Unable to render component\",\n    \"name\": \"RenderError\",\n    \"severity\": \"error\",\n    \"stack\": \"Error: ...\\n  at ...\"\n  },\n  \"metadata\": {\n    \"environment\": \"production\",\n    \"sdk_version\": \"1.0.0\",\n    \"timestamp\": \"2024-01-15T10:30:00Z\",\n    \"url\": \"https://example.com/page\",\n    \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64)\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Too many requests\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "788f2470-111f-4cca-9995-2755c1b50507",
+    "name": "Remote Address Details Telemetry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

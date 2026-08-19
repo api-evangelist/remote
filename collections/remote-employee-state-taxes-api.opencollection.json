@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Employee State Taxes API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employee State Taxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit employee state taxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employee/state-taxes/:jurisdiction",
+            "params": [
+              {
+                "name": "jurisdiction",
+                "value": "NY",
+                "type": "path",
+                "description": "Two-letter US state/jurisdiction code"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Submits the authenticated employee's US state tax withholding answers for a\nsingle jurisdiction (e.g. `NY`).\n\nAvailable for US Global Payroll employees once they reach the post-enrollment\nstate, at which point the per-jurisdiction state tax task exists.\n\nThis endpoint requires country/jurisdiction-specific data. Query the\n[Show form schema](#tag/Countries/operation/get_show_form_country) endpoint with `global_payroll_state_taxes`\nas the form name to discover the schema for a given country.\n\n\n\n##"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

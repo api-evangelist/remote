@@ -1,0 +1,1045 @@
+{
+  "item": [
+    {
+      "id": "e454391d-b0a4-4a21-9981-ac8ec23a12af",
+      "name": "Cost Calculator",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cbf99d45-42a8-4ff9-8320-0412af6a3d70",
+          "name": "Creates a cost estimation of employments",
+          "request": {
+            "name": "Creates a cost estimation of employments",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "cost-calculator",
+                "estimation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"<string>\",\n      \"age\": \"<integer>\",\n      \"annual_gross_salary\": \"<integer>\",\n      \"annual_gross_salary_in_employer_currency\": \"<integer>\",\n      \"annual_total_cost\": \"<integer>\",\n      \"annual_total_cost_in_employer_currency\": \"<integer>\",\n      \"benefits\": [\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        },\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        }\n      ],\n      \"discount\": {\n        \"text\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"months\": 12,\n        \"percent\": \"<number>\",\n        \"quoted_amount\": \"<integer>\"\n      },\n      \"employment_term\": \"<string>\",\n      \"regional_to_employer_exchange_rate\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"region_slug\": \"<string>\",\n      \"age\": \"<integer>\",\n      \"annual_gross_salary\": \"<integer>\",\n      \"annual_gross_salary_in_employer_currency\": \"<integer>\",\n      \"annual_total_cost\": \"<integer>\",\n      \"annual_total_cost_in_employer_currency\": \"<integer>\",\n      \"benefits\": [\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        },\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        }\n      ],\n      \"discount\": {\n        \"text\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"months\": 12,\n        \"percent\": \"<number>\",\n        \"quoted_amount\": \"<integer>\"\n      },\n      \"employment_term\": \"<string>\",\n      \"regional_to_employer_exchange_rate\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"text\": \"<string>\",\n    \"amount\": \"<integer>\",\n    \"months\": 12,\n    \"percent\": \"<number>\",\n    \"quoted_amount\": \"<integer>\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8e4ccf53-7700-4893-96a9-ecbf2905a5d0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"employments\": [\n      {\n        \"country\": {\n          \"alpha_2_code\": \"PT\",\n          \"code\": \"PRT\",\n          \"name\": \"Portugal\",\n          \"slug\": \"portugal-ab18d96a-a9fd-42c0-9688-24f963d8bdc1\"\n        },\n        \"employer_currency_costs\": {\n          \"annual_benefits_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"annual_benefits_total\": 1441200,\n          \"annual_contributions_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"annual_contributions_total\": 1441200,\n          \"annual_gross_salary\": 12000000,\n          \"annual_indirect_tax\": 120,\n          \"annual_management_fee\": 0,\n          \"annual_total\": 13441200,\n          \"currency\": {\n            \"code\": \"EUR\",\n            \"name\": \"European Euro\",\n            \"slug\": \"eur-3b840951-099f-4bd5-90b9-032f7bfe51d9\",\n            \"symbol\": \"€\"\n          },\n          \"discount\": {\n            \"annual_amount\": 120000,\n            \"monthly_amount\": 10000,\n            \"months\": 12,\n            \"text\": \"10% Discount\"\n          },\n          \"extra_statutory_payments_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"extra_statutory_payments_total\": 0,\n          \"monthly_benefits_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_benefits_total\": 120100,\n          \"monthly_contributions_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_contributions_total\": 120100,\n          \"monthly_gross_salary\": 1000000,\n          \"monthly_indirect_tax\": 10,\n          \"monthly_management_fee\": 0,\n          \"monthly_tce\": 1120000,\n          \"monthly_total\": 1120100\n        },\n        \"has_extra_statutory_payment\": true,\n        \"region\": {\n          \"code\": \"USA\",\n          \"name\": \"United States\",\n          \"slug\": \"663e0b79-c893-45ff-a1b2-f6dcabc098b5\"\n        },\n        \"regional_currency_costs\": {\n          \"annual_gross_salary\": 7879,\n          \"annual_contributions_total\": 8519,\n          \"annual_total\": 1933,\n          \"currency\": {\n            \"code\": \"EUR\",\n            \"name\": \"European Euro\",\n            \"slug\": \"eur-3b840951-099f-4bd5-90b9-032f7bfe51d9\",\n            \"symbol\": \"€\"\n          },\n          \"extra_statutory_payments_total\": 3925,\n          \"monthly_contributions_total\": 726,\n          \"monthly_gross_salary\": 5375,\n          \"monthly_tce\": 5559,\n          \"monthly_total\": 8025,\n          \"annual_benefits_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"annual_benefits_total\": 1249,\n          \"annual_contributions_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"annual_indirect_tax\": 3873,\n          \"annual_management_fee\": 7319,\n          \"discount\": {\n            \"annual_amount\": 120000,\n            \"monthly_amount\": 10000,\n            \"months\": 12,\n            \"text\": \"10% Discount\"\n          },\n          \"extra_statutory_payments_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_benefits_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_benefits_total\": 2720,\n          \"monthly_contributions_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_indirect_tax\": 1523,\n          \"monthly_management_fee\": 1131\n        },\n        \"country_benefits_details_url\": \"string\",\n        \"country_guide_url\": \"string\",\n        \"minimum_onboarding_time\": 9240.244137271144\n      },\n      {\n        \"country\": {\n          \"alpha_2_code\": \"PT\",\n          \"code\": \"PRT\",\n          \"name\": \"Portugal\",\n          \"slug\": \"portugal-ab18d96a-a9fd-42c0-9688-24f963d8bdc1\"\n        },\n        \"employer_currency_costs\": {\n          \"annual_benefits_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"annual_benefits_total\": 1441200,\n          \"annual_contributions_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"annual_contributions_total\": 1441200,\n          \"annual_gross_salary\": 12000000,\n          \"annual_indirect_tax\": 120,\n          \"annual_management_fee\": 0,\n          \"annual_total\": 13441200,\n          \"currency\": {\n            \"code\": \"EUR\",\n            \"name\": \"European Euro\",\n            \"slug\": \"eur-3b840951-099f-4bd5-90b9-032f7bfe51d9\",\n            \"symbol\": \"€\"\n          },\n          \"discount\": {\n            \"annual_amount\": 120000,\n            \"monthly_amount\": 10000,\n            \"months\": 12,\n            \"text\": \"10% Discount\"\n          },\n          \"extra_statutory_payments_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"extra_statutory_payments_total\": 0,\n          \"monthly_benefits_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_benefits_total\": 120100,\n          \"monthly_contributions_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_contributions_total\": 120100,\n          \"monthly_gross_salary\": 1000000,\n          \"monthly_indirect_tax\": 10,\n          \"monthly_management_fee\": 0,\n          \"monthly_tce\": 1120000,\n          \"monthly_total\": 1120100\n        },\n        \"has_extra_statutory_payment\": false,\n        \"region\": {\n          \"code\": \"USA\",\n          \"name\": \"United States\",\n          \"slug\": \"663e0b79-c893-45ff-a1b2-f6dcabc098b5\"\n        },\n        \"regional_currency_costs\": {\n          \"annual_gross_salary\": 7392,\n          \"annual_contributions_total\": 1260,\n          \"annual_total\": 9541,\n          \"currency\": {\n            \"code\": \"EUR\",\n            \"name\": \"European Euro\",\n            \"slug\": \"eur-3b840951-099f-4bd5-90b9-032f7bfe51d9\",\n            \"symbol\": \"€\"\n          },\n          \"extra_statutory_payments_total\": 3433,\n          \"monthly_contributions_total\": 7475,\n          \"monthly_gross_salary\": 805,\n          \"monthly_tce\": 2054,\n          \"monthly_total\": 3712,\n          \"annual_benefits_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"annual_benefits_total\": 5259,\n          \"annual_contributions_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"annual_indirect_tax\": 1397,\n          \"annual_management_fee\": 8284,\n          \"discount\": {\n            \"annual_amount\": 120000,\n            \"monthly_amount\": 10000,\n            \"months\": 12,\n            \"text\": \"10% Discount\"\n          },\n          \"extra_statutory_payments_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_benefits_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_benefits_total\": 6505,\n          \"monthly_contributions_breakdown\": [\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            },\n            {\n              \"amount\": 1120000,\n              \"description\": \"Description of how the amount is calculated.\",\n              \"name\": \"Insurance\",\n              \"zendesk_article_id\": \"1234\",\n              \"zendesk_article_url\": \"https://examplezendesk.com/article/1234\"\n            }\n          ],\n          \"monthly_indirect_tax\": 1969,\n          \"monthly_management_fee\": 1943\n        },\n        \"country_benefits_details_url\": \"string\",\n        \"country_guide_url\": \"string\",\n        \"minimum_onboarding_time\": 3324.1923809698105\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b47e9350-e629-4c5d-b851-08d8ea16eb8f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0df6ed76-de04-4b3f-a034-547d9eae29db",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "44cc997c-fa15-49dc-b68e-2d01dbd6ef96",
+          "name": "Creates PDF cost estimation of employments",
+          "request": {
+            "name": "Creates PDF cost estimation of employments",
+            "description": {
+              "content": "Creates a PDF cost estimation of employments based on the provided parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cost-calculator",
+                "estimation-pdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"<string>\",\n      \"age\": \"<integer>\",\n      \"annual_gross_salary\": \"<integer>\",\n      \"annual_gross_salary_in_employer_currency\": \"<integer>\",\n      \"annual_total_cost\": \"<integer>\",\n      \"annual_total_cost_in_employer_currency\": \"<integer>\",\n      \"benefits\": [\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        },\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        }\n      ],\n      \"discount\": {\n        \"text\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"months\": 12,\n        \"percent\": \"<number>\",\n        \"quoted_amount\": \"<integer>\"\n      },\n      \"employment_term\": \"<string>\",\n      \"regional_to_employer_exchange_rate\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"region_slug\": \"<string>\",\n      \"age\": \"<integer>\",\n      \"annual_gross_salary\": \"<integer>\",\n      \"annual_gross_salary_in_employer_currency\": \"<integer>\",\n      \"annual_total_cost\": \"<integer>\",\n      \"annual_total_cost_in_employer_currency\": \"<integer>\",\n      \"benefits\": [\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        },\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        }\n      ],\n      \"discount\": {\n        \"text\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"months\": 12,\n        \"percent\": \"<number>\",\n        \"quoted_amount\": \"<integer>\"\n      },\n      \"employment_term\": \"<string>\",\n      \"regional_to_employer_exchange_rate\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"text\": \"<string>\",\n    \"amount\": \"<integer>\",\n    \"months\": 12,\n    \"percent\": \"<number>\",\n    \"quoted_amount\": \"<integer>\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66cd5291-60bc-4bf3-b3c3-f462baef357f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation-pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"content\": \"base64 encoded content\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abadc159-8f51-4b98-b6ed-13690fc20117",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation-pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87cfe096-73f2-4c7a-92ad-e21d7894fd7b",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation-pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6170a5b0-cf82-4b67-b218-0af48537d366",
+          "name": "List countries for Cost Calculator",
+          "request": {
+            "name": "List countries for Cost Calculator",
+            "description": {
+              "content": "Lists active and processing countries",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cost-calculator",
+                "countries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_premium_benefits",
+                  "value": "<boolean>",
+                  "description": "If the premium benefits should be included in the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2caa69df-75a0-4484-9d3b-910a3a1705a8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "countries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_premium_benefits",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"code\": \"string\",\n      \"currency\": {\n        \"code\": \"EUR\",\n        \"name\": \"European Euro\",\n        \"slug\": \"eur-3b840951-099f-4bd5-90b9-032f7bfe51d9\",\n        \"symbol\": \"€\"\n      },\n      \"name\": \"string\",\n      \"original_country_slug\": \"string\",\n      \"region_slug\": \"string\",\n      \"availability\": \"active\",\n      \"child_regions\": [\n        {\n          \"code\": \"USA\",\n          \"name\": \"United States\",\n          \"slug\": \"663e0b79-c893-45ff-a1b2-f6dcabc098b5\"\n        },\n        {\n          \"code\": \"USA\",\n          \"name\": \"United States\",\n          \"slug\": \"663e0b79-c893-45ff-a1b2-f6dcabc098b5\"\n        }\n      ],\n      \"has_additional_fields\": true\n    },\n    {\n      \"code\": \"string\",\n      \"currency\": {\n        \"code\": \"EUR\",\n        \"name\": \"European Euro\",\n        \"slug\": \"eur-3b840951-099f-4bd5-90b9-032f7bfe51d9\",\n        \"symbol\": \"€\"\n      },\n      \"name\": \"string\",\n      \"original_country_slug\": \"string\",\n      \"region_slug\": \"string\",\n      \"availability\": \"active\",\n      \"child_regions\": [\n        {\n          \"code\": \"USA\",\n          \"name\": \"United States\",\n          \"slug\": \"663e0b79-c893-45ff-a1b2-f6dcabc098b5\"\n        },\n        {\n          \"code\": \"USA\",\n          \"name\": \"United States\",\n          \"slug\": \"663e0b79-c893-45ff-a1b2-f6dcabc098b5\"\n        }\n      ],\n      \"has_additional_fields\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ee8bce9-95f5-400f-a118-2e1776d86fba",
+          "name": "Show region fields",
+          "request": {
+            "name": "Show region fields",
+            "description": {
+              "content": "Returns required fields JSON Schema for a given region. These are required in order to calculate\n      the cost of employment for the region. These fields are based on employer contributions that are associated\n      with the region or any of it's parent regions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cost-calculator",
+                "regions",
+                ":slug",
+                "fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_premium_benefits",
+                  "value": "<boolean>",
+                  "description": "If the premium benefits should be included in the response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) Slug"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cef222a2-3c92-41c1-9f39-45bc40002415",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "regions",
+                    ":slug",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_premium_benefits",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Slug"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"schema\": {\n      \"properties\": {\n        \"ssn\": {\n          \"pattern\": \"^[0-9]{3}-[0-9]{2}-(?!0{4})[0-9]{4}$\",\n          \"title\": \"Social security number\",\n          \"type\": \"string\",\n          \"x-jsf-presentation\": {\n            \"inputType\": \"text\",\n            \"mask\": \"___-__-____\",\n            \"maskPlaceholder\": \"AAA-GG-SSSS\",\n            \"maskSecret\": 4\n          }\n        }\n      },\n      \"required\": [\n        \"ssn\"\n      ],\n      \"type\": \"object\",\n      \"x-jsf-order\": [\n        \"ssn\"\n      ]\n    },\n    \"version\": 7\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24ece114-112f-4007-8634-6ce4929c2764",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "regions",
+                    ":slug",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_premium_benefits",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Slug"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7dd11c7-d5bf-4bc3-b561-b47fb06e04e6",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "regions",
+                    ":slug",
+                    "fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_premium_benefits",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) Slug"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"rejected_reason\": [\n      \"can't be blank\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d7c1f13-a97c-4830-bfa0-f7185b7ff334",
+          "name": "Creates a CSV cost estimation of employments",
+          "request": {
+            "name": "Creates a CSV cost estimation of employments",
+            "description": {
+              "content": "Creates CSV cost estimation of employments",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "cost-calculator",
+                "estimation-csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"<string>\",\n      \"age\": \"<integer>\",\n      \"annual_gross_salary\": \"<integer>\",\n      \"annual_gross_salary_in_employer_currency\": \"<integer>\",\n      \"annual_total_cost\": \"<integer>\",\n      \"annual_total_cost_in_employer_currency\": \"<integer>\",\n      \"benefits\": [\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        },\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        }\n      ],\n      \"discount\": {\n        \"text\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"months\": 12,\n        \"percent\": \"<number>\",\n        \"quoted_amount\": \"<integer>\"\n      },\n      \"employment_term\": \"<string>\",\n      \"regional_to_employer_exchange_rate\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"region_slug\": \"<string>\",\n      \"age\": \"<integer>\",\n      \"annual_gross_salary\": \"<integer>\",\n      \"annual_gross_salary_in_employer_currency\": \"<integer>\",\n      \"annual_total_cost\": \"<integer>\",\n      \"annual_total_cost_in_employer_currency\": \"<integer>\",\n      \"benefits\": [\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        },\n        {\n          \"benefit_group_slug\": \"<string>\",\n          \"benefit_tier_slug\": \"<string>\"\n        }\n      ],\n      \"discount\": {\n        \"text\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"months\": 12,\n        \"percent\": \"<number>\",\n        \"quoted_amount\": \"<integer>\"\n      },\n      \"employment_term\": \"<string>\",\n      \"regional_to_employer_exchange_rate\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"text\": \"<string>\",\n    \"amount\": \"<integer>\",\n    \"months\": 12,\n    \"percent\": \"<number>\",\n    \"quoted_amount\": \"<integer>\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39ad8ba8-63f0-460c-970e-53a75f753d78",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation-csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"content\": \"base64 encoded content\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25be85ba-42c7-44c4-bd89-86055b75344c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation-csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8aeb429-d3c0-4799-9d98-d9fa2def44c4",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "cost-calculator",
+                    "estimation-csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"employments\": [\n    {\n      \"region_slug\": \"region_slug\"\n    },\n    {\n      \"region_slug\": \"region_slug\"\n    }\n  ],\n  \"employer_currency_slug\": \"<string>\",\n  \"company_name\": \"<string>\",\n  \"global_discount\": {\n    \"amount\": 100000,\n    \"months\": 12,\n    \"percent\": 0.1,\n    \"quoted_amount\": 100000,\n    \"text\": \"10% Discount\"\n  },\n  \"include_benefits\": \"<boolean>\",\n  \"include_cost_breakdowns\": \"<boolean>\",\n  \"include_management_fee\": \"<boolean>\",\n  \"include_premium_benefits\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://gateway.remote.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "company_department:read webhook:write magic_link:write offboarding:write custom_field:write address:write expense:read employment:write identity_verification:write timesheet:write travel_letter:write incentive:read personal_detail:read invoices:write work_authorization:write timeoff:write company_structure:read benefit_renewal:write benefit_offer:read employment_documents onboarding:write payroll_run:read risk_reserve:write invoices resignation_letter:read resignation:read convert_currency:read employments probation_document:read company_admin payroll help_center_article:read timesheet:read custom_field_value:write company_currencies:read payslip:read pay_item:write resignation:write custom_field:read payroll_calendar:read contract_amendment:write offboarding:read timeoff:read probation_document:write country:read webhook:read company_department:write company_manager:read pay_item:read contract_amendment:read company:read sso_configuration:write benefit_offer:write contract_eligibility:write benefit_renewal:read background_check:read custom_field_value:read expense:write identity_verification:read address:read document:write time_and_attendance employment_payments form:read work_authorization:read invoices:read incentive:write employment:read contract:read company_manager:write travel_letter:read document:read sso_configuration:read"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "/auth/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "/auth/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d5fa1ccb-35c5-4a43-ad0d-c95f282422a7",
+    "name": "Remote Address Details Cost Calculator API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

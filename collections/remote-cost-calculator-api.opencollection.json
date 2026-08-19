@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Cost Calculator API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cost Calculator",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a cost estimation of employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cost-calculator/estimation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a cost estimation of employments"
+        },
+        {
+          "info": {
+            "name": "Creates PDF cost estimation of employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cost-calculator/estimation-pdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a PDF cost estimation of employments based on the provided parameters."
+        },
+        {
+          "info": {
+            "name": "List countries for Cost Calculator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/cost-calculator/countries",
+            "params": [
+              {
+                "name": "include_premium_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "If the premium benefits should be included in the response"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists active and processing countries"
+        },
+        {
+          "info": {
+            "name": "Show region fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/cost-calculator/regions/:slug/fields",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Slug"
+              },
+              {
+                "name": "include_premium_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "If the premium benefits should be included in the response"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns required fields JSON Schema for a given region. These are required in order to calculate\n      the cost of employment for the region. These fields are based on employer contributions that are associated\n      with the region or any of it's parent regions."
+        },
+        {
+          "info": {
+            "name": "Creates a CSV cost estimation of employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cost-calculator/estimation-csv",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates CSV cost estimation of employments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

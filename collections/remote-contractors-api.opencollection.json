@@ -1,0 +1,724 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Contractors API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Contractors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show Contractor Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor-invoices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "2ba34003-78d5-4792-9240-998d473184ce",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows a single Contractor Invoice record.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Contractor Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor-invoices",
+            "params": [
+              {
+                "name": "status",
+                "value": "issued",
+                "type": "query",
+                "description": "Filters contractor invoices by status matching the value."
+              },
+              {
+                "name": "contractor_invoice_schedule_id",
+                "value": "d3745787-1b2b-424c-ab83-cdda8b5cea37",
+                "type": "query",
+                "description": "Filters contractor invoices by invoice schedule ID matching the value."
+              },
+              {
+                "name": "date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by date greater than or equal to the value."
+              },
+              {
+                "name": "date_to",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by date less than or equal to the value."
+              },
+              {
+                "name": "due_date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by due date greater than or equal to the value."
+              },
+              {
+                "name": "due_date_to",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by due date less than or equal to the value."
+              },
+              {
+                "name": "approved_date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by approved date greater than or equal to the value."
+              },
+              {
+                "name": "approved_date_to",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by approved date less than or equal to the value."
+              },
+              {
+                "name": "paid_out_date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by paid out date greater than or equal to the value."
+              },
+              {
+                "name": "paid_out_date_to",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoices by paid out date less than or equal to the value."
+              },
+              {
+                "name": "sort_by",
+                "value": "date",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists Contractor Invoice records.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List contractor subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-subscriptions",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint that can be used to list contractor subscriptions.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List contractor of record (COR) termination requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/cor-termination-requests",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "query",
+                "description": "Filter termination requests by employment ID."
+              },
+              {
+                "name": "status",
+                "value": "initiated",
+                "type": "query",
+                "description": "Filter termination requests by status."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists Contractor of Record termination requests for your company,\noptionally filtered by employment and status.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Return a base64 encoded version of the contract document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contract-documents/:id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-file-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "id",
+                "value": "93t3j-file-id-9suej43",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View documents (`document:read`) | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List all currencies for the contractor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-currencies",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "663e0b79-c893-45ff-a1b2-f6dcabc098b5",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "restrict_to_guaranteed_pay_out_currencies",
+                "value": "false",
+                "type": "query",
+                "description": "Restrict to currencies which payout is guaranteed (default: true)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "The currencies are listed in the following order:\n1. billing currency of the company\n2. currencies of contractor’s existing withdrawal methods\n3. currency of the contractor’s country\n4. the rest, alphabetical.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create a contractor of record (COR) termination request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/cor-termination-requests",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Initiates a termination request for a Contractor of Record employment.\nWhen a termination request is sent, a stop work order is issued and the contractor remains active until a final invoice is paid or waived.\nCurrently, only Contractor of Record employments can be terminated.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show Contractor Invoice Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor-invoice-schedules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "a6ef7b64-5c02-4ce2-a8c8-e17a99724365",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows a single Contractor Invoice Schedule record\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | View invoices (`invoices:read`) | Manage invoices (`invoices:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Updates Contractor Invoice Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/contractor-invoice-schedules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "5a10e9c3-97c9-4f8a-88f3-274842726d32",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a contractor invoice schedule record\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | - | Manage invoices (`invoices:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Updates Contractor Invoice Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/contractor-invoice-schedules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "b3e8b42c-830a-48e5-abb7-39fdbae2a9fe",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a contractor invoice schedule record\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | - | Manage invoices (`invoices:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Submit eligibility questionnaire",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/eligibility-questionnaire",
+            "params": [
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Submits an eligibility questionnaire for a contractor employment.\n\nThe questionnaire determines if the contractor is eligible for certain products or features.\nThe responses are validated against the JSON schema for the questionnaire type.\n\n**Requirements:**\n- Employment must be of type `contractor`\n- Employment must be in `created` status\n- Responses must conform to the questionnaire JSON schema\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n"
+        },
+        {
+          "info": {
+            "name": "Create a contract document for a contractor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contract-documents",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a contract document for a contractor.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show a contractor of record (COR) termination request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/cor-termination-requests/:termination_request_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "termination_request_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Termination Request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves a Contractor of Record termination request by ID.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Terminate contractor of record employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/terminate-cor-employment",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Deprecated.** Use `POST /contractors/employments/{employment_id}/cor-termination-requests` instead.\n\nInitiates a termination request for a Contractor of Record employment.\nWhen a termination request is sent, a stop work order is issued and the contractor remains active until a final invoice is paid or waived.\nCurrently, only Contractor of Record employments can be terminated.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment"
+        },
+        {
+          "info": {
+            "name": "Sign a document for a contractor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contract-documents/:contract_document_id/sign",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-file-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "contract_document_id",
+                "value": "93t3j-file-id-9suej43",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | - | Manage documents (`document:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Get eligibility questionnaire schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractors/schemas/eligibility-questionnaire",
+            "params": [
+              {
+                "name": "type",
+                "value": "contractor_of_record",
+                "type": "query",
+                "description": "Type of eligibility questionnaire"
+              },
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the JSON schema for the eligibility questionnaire by type.\n\nThe schema defines the structure and validation rules for the questionnaire responses.\nSupports versioning to allow for schema evolution while maintaining backwards compatibility.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Manage contractor plus subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-plus-subscription",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Endpoint that can be used to upgrade, assign or downgrade a contractor's subscription.\nThis can be used when company admins desire to assign someone to the Contractor Plus plan,\nbut also to change the contractor's subscription between Plus and Standard.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create contractor of record subscription intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-cor-subscription",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Assigns Contractor of Record subscription in pending state to employment.\nOnce risk analysis is performed, subscription may start upon contract signing,\nor might be denied.\n\nRequires a non-blocking eligibility questionnaire to be submitted before creating the subscription intent.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Delete contractor of record subscription intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/contractors/employments/:employment_id/contractor-cor-subscription",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "c0a167b8-459d-4e96-9766-7a04c160892e",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes Contractor of Record subscription intent.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Contractor Invoice Schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/contractor-invoice-schedules",
+            "params": [
+              {
+                "name": "start_date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoice schedules by start date greater than or equal to the value."
+              },
+              {
+                "name": "start_date_to",
+                "value": "2021-12-31",
+                "type": "query",
+                "description": "Filters contractor invoice schedules by start date less than or equal to the value."
+              },
+              {
+                "name": "next_invoice_date_from",
+                "value": "2021-01-01",
+                "type": "query",
+                "description": "Filters contractor invoice schedules by next invoice date greater than or equal to the value."
+              },
+              {
+                "name": "next_invoice_date_to",
+                "value": "2021-12-31",
+                "type": "query",
+                "description": "Filters contractor invoice schedules by next invoice date less than or equal to the value."
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filters contractor invoice schedules by status matching the value."
+              },
+              {
+                "name": "employment_id",
+                "value": "25a1b787-cc49-4b30-852e-907ebc7a6b3b",
+                "type": "query",
+                "description": "Filters contractor invoice schedules by employment id matching the value."
+              },
+              {
+                "name": "periodicity",
+                "value": "monthly",
+                "type": "query",
+                "description": "Filters contractor invoice schedules by periodicity matching the value."
+              },
+              {
+                "name": "currency",
+                "value": "USD",
+                "type": "query",
+                "description": "Filters contractor invoice schedules by currency matching the value."
+              },
+              {
+                "name": "sort_by",
+                "value": "number",
+                "type": "query",
+                "description": "Field to sort by"
+              },
+              {
+                "name": "order",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists Contractor Invoice Schedule records.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | - | Manage invoices (`invoices:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Contractor Invoice Schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/contractor-invoice-schedules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates many invoice schedules records.\nIt's supposed to return two lists: one containing created records, and another one containing the schedules that failed to be inserted.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage invoices (`invoices`) | - | Manage invoices (`invoices:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

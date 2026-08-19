@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Employment Agreements API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employment Agreements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download the Employment Agreement for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/employment-agreement/download",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads a PDF of the auto-generated Employment Agreement for an employment.\n\nThe document is rendered as a draft (no signatures) and is not persisted. EA preview is only\navailable for countries that have a published Employment Agreement automation template — see the\n`employment_agreement_preview_available` flag on the [Countries](#tag/Countries) endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employme"
+        },
+        {
+          "info": {
+            "name": "Preview the Employment Agreement for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/employment-agreement/preview",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "1a716003-ae89-4810-aa00-25df6e799162",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a base64-encoded PDF preview of the auto-generated Employment Agreement for an employment.\n\nThe document is rendered as a draft (no signatures) and is not persisted. EA preview is only\navailable for countries that have a published Employment Agreement automation template — see the\n`employment_agreement_preview_available` flag on the [Countries](#tag/Countries) endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

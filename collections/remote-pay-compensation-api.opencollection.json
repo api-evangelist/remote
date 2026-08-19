@@ -1,0 +1,1200 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Pay & Compensation API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pay & Compensation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Create Pay Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/pay-items/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Bulk creates pay items for employments. Supports up to 500 items per request.\nIntegration-specific fields (shift code, currency, pay amount, etc.) go in the `provider_data` object.\nOnly Global Payroll employments are supported. Non-GP employments are returned as `employment_not_global_payroll`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | - | Manage pay items (`pay_item:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Convert currency using flat rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/currency-converter/raw",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Convert currency using FX rates used in Remote’s estimation tools.\n      These rates are not guaranteed to match final onboarding or contract rates.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | Convert currencies (`convert_currency:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Creates a cost estimation of employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cost-calculator/estimation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a cost estimation of employments"
+        },
+        {
+          "info": {
+            "name": "List EOR Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-calendars",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "BRA",
+                "type": "query",
+                "description": "Filter payroll calendars by country code"
+              },
+              {
+                "name": "year",
+                "value": "2024",
+                "type": "query",
+                "description": "Filter payroll calendars by year"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all active payroll calendars for EOR.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll calendars (`payroll_calendar:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "List Recurring Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/incentives/recurring",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Filter by recurring incentive status: active or deactive."
+              },
+              {
+                "name": "type",
+                "value": "meal_allowance",
+                "type": "query",
+                "description": "Filter by recurring incentive type."
+              },
+              {
+                "name": "note",
+                "value": "meal",
+                "type": "query",
+                "description": "Filter by recurring incentives that contain the value in their notes."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Recurring Incentives of a company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View incentives (`incentive:read`) | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Recurring Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/incentives/recurring",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a Recurring Incentive, that is, a monthly paid incentive.\n\nIncentives use the currency of the employment specified provided in the `employment_id` field.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List expenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all expenses records\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/expenses",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an **approved** expense\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create a GL report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id/gl-reports",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll-run-id-9suej43",
+                "type": "path",
+                "description": "The payroll run's ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Triggers generation of a General Ledger report for the given payroll run and type.\nReturns immediately with a `pending` report — poll `show` until `status` is `completed`,\nthen call `download`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Delete a Recurring Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/incentives/recurring/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Recurring Incentive ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a Recurring Incentive, that is, a monthly paid incentive.\n\nInternally, Remote schedules upcoming incentives. As such, when you attempt to\ndelete a recurring incentive, Remote will **ONLY** delete scheduled incentives\nwith the `pending` status.\n\nIncentives payments that are already scheduled and cannot be deleted will be\nincluded in the response, in case you need to reference them.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage "
+        },
+        {
+          "info": {
+            "name": "List Incentives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/incentives",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "query",
+                "description": "Filter by Employment ID"
+              },
+              {
+                "name": "status",
+                "value": "paid",
+                "type": "query",
+                "description": "Filter by Incentive status"
+              },
+              {
+                "name": "recurring_incentive_id",
+                "value": "2f900aaf-4952-4ec4-ac7c-2b917a2b4da9",
+                "type": "query",
+                "description": "Filter by Recurring Incentive id"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all Incentives of a company\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View incentives (`incentive:read`) | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/incentives",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an Incentive.\n\nIncentives use the currency of the employment specified provided in the `employment_id` field.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show a GL report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id/gl-reports/:gl_report_id",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll-run-id-9suej43",
+                "type": "path",
+                "description": "The payroll run's ID"
+              },
+              {
+                "name": "gl_report_id",
+                "value": "93t3j-gl-report-id-9suej43",
+                "type": "path",
+                "description": "The GL report's ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the current status of a GL report. Poll until `status` is `completed`, then call `download`.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Creates PDF cost estimation of employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cost-calculator/estimation-pdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a PDF cost estimation of employments based on the provided parameters."
+        },
+        {
+          "info": {
+            "name": "Show Company Payroll Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll_run_id-9suej43",
+                "type": "path",
+                "description": "Payroll run ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Given an ID, shows a payroll run.\n`employee_details` field is deprecated in favour of the `employee_details` endpoint and will be removed in the future.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Download a receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id/receipt",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "The expense ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "  Downloads an expense receipt.\n\n  Deprecated since late February 2024 in favour of **[Download a receipt by id](#tag/Expenses/operation/get_download_by_id_expense_receipt)** endpoint.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List expense categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/categories",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "",
+                "type": "query",
+                "description": "The employment ID for which to list categories. Required if neither expense_id nor country_code is provided."
+              },
+              {
+                "name": "expense_id",
+                "value": "",
+                "type": "query",
+                "description": "The expense ID for which to list categories (includes the expense's category, even if it is not selectable by default). If provided without employment_id, will use the expense's employment context."
+              },
+              {
+                "name": "include_parents",
+                "value": "",
+                "type": "query",
+                "description": "Include un-selectable intermediate categories in the response"
+              },
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter categories by country (ISO 3166-1 alpha-3 code, e.g. \"GBR\"). Only used when neither employment_id nor expense_id is provided."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the effective hierarchy of expense categories. At least one of employment_id, expense_id, or country_code must be provided."
+        },
+        {
+          "info": {
+            "name": "List countries for Cost Calculator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/cost-calculator/countries",
+            "params": [
+              {
+                "name": "include_premium_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "If the premium benefits should be included in the response"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists active and processing countries"
+        },
+        {
+          "info": {
+            "name": "List Pay Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/companies/:company_id/legal-entities/:legal_entity_id/pay-codes",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "Company ID"
+              },
+              {
+                "name": "legal_entity_id",
+                "value": "",
+                "type": "path",
+                "description": "Legal entity ID"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "/auth/oauth2/authorize",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Lists pay codes available for a legal entity.\nPay codes represent the allowed pay element types that can be submitted via `POST /v1/pay-items/bulk`.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Company Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-calendars/:cycle",
+            "params": [
+              {
+                "name": "cycle",
+                "value": "2024-09",
+                "type": "path",
+                "description": "The cycle for which to list the payroll calendars. Format: YYYY-MM"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all payroll calendars for the company within the requested cycle.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll calendars (`payroll_calendar:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Show region fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/cost-calculator/regions/:slug/fields",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path",
+                "description": "Slug"
+              },
+              {
+                "name": "include_premium_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "If the premium benefits should be included in the response"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns required fields JSON Schema for a given region. These are required in order to calculate\n      the cost of employment for the region. These fields are based on employer contributions that are associated\n      with the region or any of it's parent regions."
+        },
+        {
+          "info": {
+            "name": "Get Employee Details for a Payroll Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id/employee-details",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll_run_id-9suej43",
+                "type": "path",
+                "description": "Payroll run ID"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets the employee details for a payroll run\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Creates a CSV cost estimation of employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/cost-calculator/estimation-csv",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates CSV cost estimation of employments"
+        },
+        {
+          "info": {
+            "name": "Download payslip in the PDF format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payslips/:payslip_id/pdf",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "payslip_id",
+                "value": "93t3j-payslip-id-9suej43",
+                "type": "path",
+                "description": "Payslip ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Given a Payslip ID, downloads a payslip.\nIt is important to note that each country has a different payslip format and they are not authored by Remote.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Convert currency using dynamic rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/currency-converter/effective",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Convert currency using the rates Remote applies during employment creation and invoicing.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | Convert currencies (`convert_currency:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Download a GL report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs/:payroll_run_id/gl-reports/:gl_report_id/download",
+            "params": [
+              {
+                "name": "payroll_run_id",
+                "value": "93t3j-payroll-run-id-9suej43",
+                "type": "path",
+                "description": "The payroll run's ID"
+              },
+              {
+                "name": "gl_report_id",
+                "value": "93t3j-gl-report-id-9suej43",
+                "type": "path",
+                "description": "The GL report's ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads the generated GL report as a CSV file. The report must have `status: completed` before calling this endpoint.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Show expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Expense ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows a single expense record\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/expenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Expense ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an expense\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/expenses/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Expense ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an expense\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/incentives/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Incentive ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show an Incentive's details\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View incentives (`incentive:read`) | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/incentives/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Incentive ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an Incentive.\n\nIncentives use the currency of the employment specified provided in the `employment_id` field.\n\nThe API doesn't support updating paid incentives.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/incentives/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Incentive ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an Incentive.\n\nIncentives use the currency of the employment specified provided in the `employment_id` field.\n\nThe API doesn't support updating paid incentives.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Delete an Incentive",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://gateway.remote.com/v1/incentives/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Incentive ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an incentive.\n\n`one_time` incentives that have the following status **CANNOT** be deleted:\n* `processing`\n* `paid`\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | - | Manage incentives (`incentive:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Pay Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/pay-items",
+            "params": [
+              {
+                "name": "employment_slug",
+                "value": "",
+                "type": "query",
+                "description": "Filter by employment slug"
+              },
+              {
+                "name": "effective_from",
+                "value": "",
+                "type": "query",
+                "description": "Filter pay items with effective_date >= given date (YYYY-MM-DD)"
+              },
+              {
+                "name": "effective_to",
+                "value": "",
+                "type": "query",
+                "description": "Filter pay items with effective_date <= given date (YYYY-MM-DD)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists pay items for a company with optional filtering by employment, date range, and pagination.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View pay items (`pay_item:read`) | Manage pay items (`pay_item:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List payslips",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payslips",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "query",
+                "description": "Employment ID"
+              },
+              {
+                "name": "start_date",
+                "value": "\"2022-12-15\"",
+                "type": "query",
+                "description": "Filters by payslips `issued_at` field, after or on the same day than the given date"
+              },
+              {
+                "name": "end_date",
+                "value": "\"2023-12-15\"",
+                "type": "query",
+                "description": "Filters by payslips `issued_at` field, before or or the same day than the given date"
+              },
+              {
+                "name": "expected_payout_start_date",
+                "value": "\"2022-12-15\"",
+                "type": "query",
+                "description": "Filters by payslips `expected_payout_date` field, after or on the same day than the given date"
+              },
+              {
+                "name": "expected_payout_end_date",
+                "value": "\"2023-12-15\"",
+                "type": "query",
+                "description": "Filters by payslips `expected_payout_date` field, before or or the same day than the given date"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all payslips belonging to a company. Can also filter for a single employment belonging\nto that company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Download a receipt by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/expenses/:expense_id/receipts/:receipt_id",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "The expense ID"
+              },
+              {
+                "name": "receipt_id",
+                "value": "6ab2e49o-ad1c-47af-849c-3d0a53e21e0e",
+                "type": "path",
+                "description": "The receipt ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download a receipt by id.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage expenses (`employment_payments`) | View expenses (`expense:read`) | Manage expenses (`expense:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List Company Payroll Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-runs",
+            "params": [
+              {
+                "name": "payroll_period",
+                "value": "2021-07-01",
+                "type": "query",
+                "description": "Filters payroll runs where period_start or period_end match the given date"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all payroll runs for a company\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll runs (`payroll_run:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Convert currency using dynamic rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/currency-converter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Convert currency using the rates Remote applies during employment creation and invoicing.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage company resources (`company_admin`) | Convert currencies (`convert_currency:read`) | - |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

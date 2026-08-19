@@ -4,34 +4,33 @@ status: published
 source: https://developer.remote.com/docs/introduction-to-remote-mcp
 server:
   name: Remote.com MCP
-  description: >-
-    Hosted Model Context Protocol server that connects an MCP-compatible AI
-    client to live Remote employment data — employees, contracts, payroll,
-    time off, org structure, legal entities, timesheets, billing and invoices —
-    over the same data model and permissions as the REST API.
+  description: Hosted Model Context Protocol server that connects an MCP-compatible AI client to live
+    Remote employment data — employees, contracts, payroll, time off, org structure, legal entities, timesheets,
+    billing and invoices — over the same data model and permissions as the REST API.
   transport: http
   auth:
     type: oauth2
     flow: authorization_code_pkce
-    notes: >-
-      OAuth 2.0 Authorization Code with PKCE through the standard Remote
-      browser sign-in. Clients register dynamically; no API keys or client
-      secrets to configure. Tool visibility is limited to what the signed-in
-      Remote account and role permit. No OAuth scopes are requested manually.
+    notes: OAuth 2.0 Authorization Code with PKCE through the standard Remote browser sign-in. Clients
+      register dynamically; no API keys or client secrets to configure. Tool visibility is limited to
+      what the signed-in Remote account and role permit. No OAuth scopes are requested manually.
 tool_families:
-  - name: read
-    tools:
-      - Employees and employment records
-      - Contracts and contract amendments
-      - Payroll runs, pay schedules, and deadlines
-      - Time off, leave balances, and policies
-      - Org structure and reporting lines
-      - Legal entities and country-specific requirements
-      - Timesheets, billing, and invoices
-  - name: write
-    tools:
-      - Employee self-service write actions (scoped to caller permissions)
-notes: >-
-  Remote publishes a hosted, first-party MCP server. Tools are discovered at
-  connection time rather than enumerated in a static manifest, so individual
-  tool names are not listed in the public docs.
+- name: read
+  tools:
+  - Employees and employment records
+  - Contracts and contract amendments
+  - Payroll runs, pay schedules, and deadlines
+  - Time off, leave balances, and policies
+  - Org structure and reporting lines
+  - Legal entities and country-specific requirements
+  - Timesheets, billing, and invoices
+- name: write
+  tools:
+  - Employee self-service write actions (scoped to caller permissions)
+notes: Remote publishes a hosted, first-party MCP server. Tools are discovered at connection time rather
+  than enumerated in a static manifest, so individual tool names are not listed in the public docs.
+deployment:
+  mode: remote
+  verified: searched
+  checked: '2026-08-12'
+  source: catalog MCP census

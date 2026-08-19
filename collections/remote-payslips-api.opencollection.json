@@ -1,0 +1,185 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Payslips API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payslips",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List approved payslip files for the authenticated employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/payslips",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a paginated list of payslip files belonging to the current employee.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "List payslip files for the authenticated employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employee/payslip-files",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a paginated list of payslip files belonging to the current employee.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Download payslip in the PDF format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payslips/:payslip_id/pdf",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "payslip_id",
+                "value": "93t3j-payslip-id-9suej43",
+                "type": "path",
+                "description": "Payslip ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Given a Payslip ID, downloads a payslip.\nIt is important to note that each country has a different payslip format and they are not authored by Remote.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "List payslips",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payslips",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "query",
+                "description": "Employment ID"
+              },
+              {
+                "name": "start_date",
+                "value": "\"2022-12-15\"",
+                "type": "query",
+                "description": "Filters by payslips `issued_at` field, after or on the same day than the given date"
+              },
+              {
+                "name": "end_date",
+                "value": "\"2023-12-15\"",
+                "type": "query",
+                "description": "Filters by payslips `issued_at` field, before or or the same day than the given date"
+              },
+              {
+                "name": "expected_payout_start_date",
+                "value": "\"2022-12-15\"",
+                "type": "query",
+                "description": "Filters by payslips `expected_payout_date` field, after or on the same day than the given date"
+              },
+              {
+                "name": "expected_payout_end_date",
+                "value": "\"2023-12-15\"",
+                "type": "query",
+                "description": "Filters by payslips `expected_payout_date` field, before or or the same day than the given date"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "30",
+                "type": "query",
+                "description": "Change the amount of records returned per page, defaults to 20, limited to 100"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all payslips belonging to a company. Can also filter for a single employment belonging\nto that company.\n\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View payslips (`payslip:read`) | - |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

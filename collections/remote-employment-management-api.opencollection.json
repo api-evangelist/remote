@@ -1,0 +1,562 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Employment Management API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employment Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List employments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "company_id",
+                "value": "93t3j-company-id-9suej43",
+                "type": "query",
+                "description": "Company ID"
+              },
+              {
+                "name": "email",
+                "value": "anna@example.com",
+                "type": "query",
+                "description": "Filters the results by employments whose login email matches the value"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters the results by employments whose status matches the value.\nSupports multiple values separated by commas.\nAlso supports the value `incomplete` to get all employments that are not onboarded yet.\n"
+              },
+              {
+                "name": "employment_type",
+                "value": "contractor",
+                "type": "query",
+                "description": "Filters the results by employments whose employment product type matches the value"
+              },
+              {
+                "name": "employment_model",
+                "value": "global_payroll",
+                "type": "query",
+                "description": "Filters the results by employments whose employment model matches the value.\nPossible values: `global_payroll`, `peo`, `eor`\n"
+              },
+              {
+                "name": "short_id",
+                "value": "aB1cD2",
+                "type": "query",
+                "description": "Filters the results by the employment's short ID. Returns at most one result."
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ]
+          },
+          "docs": "Lists all employments, except for the deleted ones.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [js"
+        },
+        {
+          "info": {
+            "name": "Create employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the form schema"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an employment. We support creating employees and contractors.\n\n## Global Payroll Employees\n\nTo create a Global Payroll employee, pass `global_payroll_employee` as the `type` parameter,\nand provide the id of the specific legal entity that the employee will be engaged by and billed to as the `engaged_by_legal_entity_id` parameter.\n\n## HRIS Employees\n\nTo create a HRIS employee, pass `hris` as the `type` parameter.\n\nThis endpoint requires and returns country-specific data. The exact required"
+        },
+        {
+          "info": {
+            "name": "Show employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "exclude_files",
+                "value": "true",
+                "type": "query",
+                "description": "Wether files should be excluded"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows all the information of an employment.\n\nThis endpoint requires and returns country-specific data. The exact required and returned fields will\nvary depending on which country the employment is in. To see the list of parameters for each country,\nsee the **Show form schema** endpoint under the [Countries](#tag/Countries) category.\n\nPlease note that the compliance requirements for each country are subject to change according to local\nlaws. Given its continual updates, using Remote's [json-schem"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              },
+              {
+                "name": "administrative_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the administrative_details form schema"
+              },
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              },
+              {
+                "name": "employment_basic_information_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the employment_basic_information form schema"
+              },
+              {
+                "name": "billing_address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the billing_address_details form schema"
+              },
+              {
+                "name": "contract_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the contract_details form schema"
+              },
+              {
+                "name": "emergency_contact_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the emergency_contact_details form schema"
+              },
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              },
+              {
+                "name": "pricing_plan_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the pricing_plan_details form schema"
+              },
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "skip_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API."
+              },
+              {
+                "name": "actions",
+                "value": "no_invite",
+                "type": "query",
+                "description": "Complementary action(s) to perform when creating an employment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an employment.\n\n**For `created` employments:** You can change all basic params and onboarding tasks or perform a per onboarding task update. You can also update basic_information.\n\n**For `active` employments:** You can update the manager (`manager_id` field), emergency_contact_details, address_details and work_email.\n\n**For `invited` employments:** You can update the work_email.\n\nAfter onboarding, only a limited set of employment data will be available for updates, such as `emergency_con"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the address_details form schema"
+              },
+              {
+                "name": "administrative_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the administrative_details form schema"
+              },
+              {
+                "name": "bank_account_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the bank_account_details form schema"
+              },
+              {
+                "name": "employment_basic_information_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the employment_basic_information form schema"
+              },
+              {
+                "name": "billing_address_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the billing_address_details form schema"
+              },
+              {
+                "name": "contract_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the contract_details form schema"
+              },
+              {
+                "name": "emergency_contact_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the emergency_contact_details form schema"
+              },
+              {
+                "name": "personal_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the personal_details form schema"
+              },
+              {
+                "name": "pricing_plan_details_json_schema_version",
+                "value": "1",
+                "type": "query",
+                "description": "Version of the pricing_plan_details form schema"
+              },
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "skip_benefits",
+                "value": "true",
+                "type": "query",
+                "description": "Skips the dynamic benefits part of the schema if set. To be used when benefits are set via its own API."
+              },
+              {
+                "name": "actions",
+                "value": "no_invite",
+                "type": "query",
+                "description": "Complementary action(s) to perform when creating an employment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an employment.\n\n**For `created` employments:** You can change all basic params and onboarding tasks or perform a per onboarding task update. You can also update basic_information.\n\n**For `active` employments:** You can update the manager (`manager_id` field), emergency_contact_details, address_details and work_email.\n\n**For `invited` employments:** You can update the work_email.\n\nAfter onboarding, only a limited set of employment data will be available for updates, such as `emergency_con"
+        },
+        {
+          "info": {
+            "name": "List bulk employment rows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/bulk-employment-jobs/:job_id/rows",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "Bulk employment job id"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns grouped bulk employment rows, including field-level validation errors in `errors`, row-level failures in `row_errors`, and submission-phase failures in `submission_errors`. If a row passes validation but later fails during Global Payroll activation, that failure is surfaced here after submission rather than in the initial create response.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employme"
+        },
+        {
+          "info": {
+            "name": "Complete onboarding",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/ready",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes the employee onboarding. When all tasks are completed, the employee is marked as in `review` status"
+        },
+        {
+          "info": {
+            "name": "Set contract origin for a contractor employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/contract-origin",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Sets the `contract_origin` for a contractor employment.\n\n* `remote_contract` — Remote provides and manages the contract (a contract document is created)\n* `custom_remote_contract` — A customised Remote contract is used (a contract document is created)\n* `provided_by_customer` — The employer provides their own contract (no contract document is created)\n\nWhen `provided_by_customer` is selected, the contractor can be invited without completing the\n`contract_details` onboarding step.\n\n\n## Scopes\n\n| "
+        },
+        {
+          "info": {
+            "name": "Invite employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/invite",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "Bearer <COMPANY-SCOPED ACCESS TOKEN>"
+              }
+            ],
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "31b8e49b-aa1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Invite an employment to start the self-enrollment.\n\nRequirements for the invitation to succeed:\n\n* Employment needs to have the following JSON Schema forms filled: `contract_details` and `pricing_plan_details`\n* `provisional_start_date` must consider the minimum onboarding time of the employment's country\n\nIf there are validations errors, they are returned with a Conflict HTTP Status (409) and a descriptive message.\nHTTP Status OK (200) is returned in case of success.\n\nIn case of the following e"
+        },
+        {
+          "info": {
+            "name": "Show bulk employment job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/bulk-employment-jobs/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "Bulk employment job id"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View employments (`employment:read`) | Manage employments (`employment:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update employment"
+        },
+        {
+          "info": {
+            "name": "Update employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v2/employments/:employment_id",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "93t3j-employment-id-9suej43",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update employment"
+        },
+        {
+          "info": {
+            "name": "Create bulk employment job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/bulk-employment-jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a job to bulk-create employments for multiple employees at once. Each employee payload must match the employment schema for the selected country.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage employments (`employment:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

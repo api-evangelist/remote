@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Payroll Calendars API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payroll Calendars",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List EOR Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-calendars",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "BRA",
+                "type": "query",
+                "description": "Filter payroll calendars by country code"
+              },
+              {
+                "name": "year",
+                "value": "2024",
+                "type": "query",
+                "description": "Filter payroll calendars by year"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "/auth/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List all active payroll calendars for EOR.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll calendars (`payroll_calendar:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "List Company Payroll Calendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/payroll-calendars/:cycle",
+            "params": [
+              {
+                "name": "cycle",
+                "value": "2024-09",
+                "type": "path",
+                "description": "The cycle for which to list the payroll calendars. Format: YYYY-MM"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all payroll calendars for the company within the requested cycle.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage payroll runs (`payroll`) | View payroll calendars (`payroll_calendar:read`) | - |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

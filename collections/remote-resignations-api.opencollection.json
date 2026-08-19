@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Resignations API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resignations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a resignation letter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/resignations/:offboarding_request_id/resignation-letter",
+            "params": [
+              {
+                "name": "offboarding_request_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Offboarding request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads a resignation letter from an employment request.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employment documents (`employment_documents`) | View resignation letters (`resignation_letter:read`) | - |\n"
+        },
+        {
+          "info": {
+            "name": "Show Resignation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/resignations/:offboarding_request_id",
+            "params": [
+              {
+                "name": "offboarding_request_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Offboarding request ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Shows the details of a resignation with status `submitted`.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View resignations (`resignation:read`) | Manage resignations (`resignation:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Validate resignation request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/resignations/:offboarding_request_id/validate",
+            "params": [
+              {
+                "name": "offboarding_request_id",
+                "value": "3ab2e491-ad1c-47af-849c-3d0a53e20e0d",
+                "type": "path",
+                "description": "Offboarding request ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Validates a resignation employment request\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage resignations (`resignation:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Remote Address Details Custom Fields API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "/auth/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lists custom fields definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/custom-fields",
+            "params": [
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns custom fields definitions\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage custom fields (`custom_field:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Create Custom Field Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://gateway.remote.com/v1/custom-fields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new custom field definition.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View custom fields (`custom_field:read`) | Manage custom fields (`custom_field:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "List custom field value for an employment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/employments/:employment_id/custom-fields",
+            "params": [
+              {
+                "name": "employment_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Employment ID"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Starts fetching records after the given page"
+              },
+              {
+                "name": "page_size",
+                "value": "20",
+                "type": "query",
+                "description": "Number of items per page"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of custom field values for a given employment\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Show a custom field value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://gateway.remote.com/v1/custom-fields/:custom_field_id/values/:employment_id",
+            "params": [
+              {
+                "name": "custom_field_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Custom field ID"
+              },
+              {
+                "name": "employment_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a custom field value for a given employment\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update a Custom Field Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://gateway.remote.com/v1/custom-fields/:custom_field_id/values/:employment_id",
+            "params": [
+              {
+                "name": "custom_field_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Custom field ID"
+              },
+              {
+                "name": "employment_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a custom field value for a given employment.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |\n"
+        },
+        {
+          "info": {
+            "name": "Update a Custom Field Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://gateway.remote.com/v1/custom-fields/:custom_field_id/values/:employment_id",
+            "params": [
+              {
+                "name": "custom_field_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Custom field ID"
+              },
+              {
+                "name": "employment_id",
+                "value": "ec23ebda-4b7a-4dbd-9d79-bd1eec3f83c9",
+                "type": "path",
+                "description": "Employment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a custom field value for a given employment.\n\n## Scopes\n\n| Category | Read only Scope | Write only Scope (read access implicit) |\n|---|---|---|\n| Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

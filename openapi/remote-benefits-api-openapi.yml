@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Remote Address Details Benefits API
+  title: Remote Benefits API
   version: 0.1.0
 servers:
 - url: https://gateway.remote.com/
@@ -23,9 +23,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View benefit offers (`benefit_offer:read`) | Manage benefit offers (`benefit_offer:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View benefit offers (`benefit_offer:read`) | Manage benefit offers (`benefit_offer:write`) |'
       operationId: get_v1_employments_employment_id_benefit-offers
       parameters:
       - description: Starts fetching records after the given page
@@ -179,7 +177,6 @@ paths:
         properties of companies and their current employments.
 
 
-
         ## Scopes
 
 
@@ -187,9 +184,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View benefit renewals (`benefit_renewal:read`) | Manage benefit renewals (`benefit_renewal:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View benefit renewals (`benefit_renewal:read`) | Manage benefit renewals (`benefit_renewal:write`) |'
       operationId: get_v1_benefit-renewal-requests_benefit_renewal_request_id_schema
       parameters:
       - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
@@ -283,9 +278,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View benefit renewals (`benefit_renewal:read`) | Manage benefit renewals (`benefit_renewal:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View benefit renewals (`benefit_renewal:read`) | Manage benefit renewals (`benefit_renewal:write`) |'
       operationId: get_v1_benefit-renewal-requests
       parameters:
       - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
@@ -385,9 +378,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View benefit offers (`benefit_offer:read`) | Manage benefit offers (`benefit_offer:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View benefit offers (`benefit_offer:read`) | Manage benefit offers (`benefit_offer:write`) |'
       operationId: get_v1_employments_employment_id_benefit-offers_schema
       parameters:
       - description: Unique identifier of the employment
@@ -468,9 +459,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View benefit renewals (`benefit_renewal:read`) | Manage benefit renewals (`benefit_renewal:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View benefit renewals (`benefit_renewal:read`) | Manage benefit renewals (`benefit_renewal:write`) |'
       operationId: get_v1_benefit-renewal-requests_benefit_renewal_request_id
       parameters:
       - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
@@ -548,9 +537,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | - | Manage benefit renewals (`benefit_renewal:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | - | Manage benefit renewals (`benefit_renewal:write`) |'
       operationId: post_v1_benefit-renewal-requests_benefit_renewal_request_id
       parameters:
       - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
@@ -640,7 +627,6 @@ paths:
       description: 'List benefit offers for each country.
 
 
-
         ## Scopes
 
 
@@ -648,9 +634,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View benefit offers (`benefit_offer:read`) | Manage benefit offers (`benefit_offer:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View benefit offers (`benefit_offer:read`) | Manage benefit offers (`benefit_offer:write`) |'
       operationId: get_v1_benefit-offers_country-summaries
       parameters:
       - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
@@ -709,7 +693,6 @@ paths:
       description: 'List benefit offers by employment.
 
 
-
         ## Scopes
 
 
@@ -717,9 +700,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View benefit offers (`benefit_offer:read`) | Manage benefit offers (`benefit_offer:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View benefit offers (`benefit_offer:read`) | Manage benefit offers (`benefit_offer:write`) |'
       operationId: get_v1_benefit-offers
       parameters:
       - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
@@ -765,892 +746,48 @@ paths:
       summary: List Benefit Offers By Employment
       tags:
       - Benefits
+webhooks:
+  benefit_renewal_request.created:
+    post:
+      deprecated: false
+      description: This event is triggered when a Benefit Renewal Request is created.
+      summary: benefit_renewal_request.created
+      tags:
+      - Benefits
+      responses:
+        2XX:
+          description: Any 200 response confirms that the webhook was delivered.
+      security: []
+      operationId: benefit_renewal_request.created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - event_type
+              - benefit_renewal_request_id
+              - country_code
+              - company_id
+              example:
+                benefit_renewal_request_id: ba310525-9282-40c9-8977-14d844bf891a
+                company_id: d2091b1e-b1a4-437a-91ea-2809ffbb6d59
+                country_code: FRA
+                event_type: benefit_renewal_request.created
+              properties:
+                company_id:
+                  type: string
+                  description: The unique identifier of the related company.
+                country_code:
+                  type: string
+                  description: The ISO 3166-1 3-letter country code.
+                event_type:
+                  type: string
+                  description: The webhook event type identifier.
+                benefit_renewal_request_id:
+                  type: string
+                  description: The unique identifier of the benefit renewal request.
 components:
   schemas:
-    BenefitGroup:
-      additionalProperties: false
-      description: A category of benefits (e.g., "Health", "Dental", "Life Insurance") with a defined policy period. Each group contains one or more tiers representing different coverage levels.
-      example:
-        id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
-        name: Health
-        policy_end_date: '2024-12-31'
-        policy_start_date: '2024-01-01'
-      properties:
-        id:
-          description: The unique identifier (UUID) of the benefit group.
-          type: string
-        name:
-          description: The name of the benefit category (e.g., "Health", "Dental", "Life Insurance").
-          type: string
-        policy_end_date:
-          description: The date when the policy period ends for this benefit group (ISO 8601 format). Benefits may need to be renewed after this date.
-          format: date
-          type: string
-        policy_start_date:
-          description: The date when the policy period begins for this benefit group (ISO 8601 format).
-          format: date
-          type: string
-      required:
-      - id
-      - name
-      - policy_start_date
-      - policy_end_date
-      title: BenefitGroup
-      type: object
-    BenefitRenewalRequests.BenefitRenewalRequestFormResponse:
-      additionalProperties: false
-      description: 'Benefit Renewal Request Form Response, an object with required and optional fields, its descriptions and suggested presentation.
-
-        '
-      properties:
-        data:
-          type: object
-      title: BenefitRenewalRequests.BenefitRenewalRequestFormResponse
-      type: object
-    Unified.Employment.BenefitOffer:
-      additionalProperties: false
-      description: The benefit offer for an employment schema
-      example:
-        benefit_group:
-          filter:
-            name: Benefit Group
-            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-          name: Benefit Group
-          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-        benefit_tier:
-          display_cost: $1337 + pension
-          name: Benefit Tier 1
-          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-      properties:
-        benefit_group:
-          $ref: '#/components/schemas/Unified.Employment.BenefitGroup'
-        benefit_tier:
-          allOf:
-          - $ref: '#/components/schemas/Unified.Employment.BenefitTier'
-          example:
-            display_cost: $1337 + pension
-            name: Benefit Tier 1
-            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-          nullable: true
-          title: MaybeUnified.Employment.BenefitTier
-          type: object
-      required:
-      - benefit_group
-      - benefit_tier
-      title: Unified.Employment.BenefitOffer
-      type: object
-    ParameterError:
-      example:
-        code: invalid_param
-        message: Invalid parameter
-        param: employment_id
-      properties:
-        code:
-          description: An error code that describes the nature of the error.
-          type: string
-        message:
-          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
-          type: string
-        param:
-          description: The parameter that lead to the error message.
-          type: string
-      required:
-      - code
-      - message
-      - param
-      title: ParameterError
-      type: object
-    BenefitRenewalRequests.MinimalBenefitRenewalResponse:
-      additionalProperties: false
-      example:
-        benefit_tier:
-          description: A tier for testing purposes
-          display_cost: ~$100
-          id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-          name: Premium
-        updated_at: '2021-07-01T00:00:00Z'
-      properties:
-        benefit_tier:
-          $ref: '#/components/schemas/NullableMinimalBenefitTier'
-        updated_at:
-          $ref: '#/components/schemas/DateTime'
-      required:
-      - benefit_tier
-      - updated_at
-      title: BenefitRenewalRequests.MinimalBenefitRenewalResponse
-      type: object
-    BenefitTier:
-      additionalProperties: false
-      description: A specific coverage level within a benefit group. For example, a "Health" benefit group might have tiers like "Basic", "Standard", and "Premium", each with different coverage and providers.
-      example:
-        description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
-        id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
-        name: Premium 2023 (Medical, Dental and Vision)
-        providers:
-        - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-          name: Health Provider
-      properties:
-        description:
-          description: A detailed description of what this tier covers, including the types of benefits included.
-          type: string
-        id:
-          description: The unique identifier (UUID) of the benefit tier.
-          type: string
-        name:
-          description: The name of this tier (e.g., "Premium 2024 (Medical, Dental and Vision)").
-          type: string
-        providers:
-          description: The insurance carriers or providers associated with this tier.
-          items:
-            $ref: '#/components/schemas/BenefitProvider'
-          type: array
-      required:
-      - id
-      - name
-      - description
-      - providers
-      title: BenefitTier
-      type: object
-    BenefitRenewalRequests.BenefitRenewalRequestResponse:
-      additionalProperties: false
-      description: Benefit Renewal Request Response
-      example:
-        data:
-          benefit_renewal_request:
-            benefit_group:
-              country_code: FRA
-              id: 03b20f23-06b2-4fe2-8f21-49b445ccc1bb
-              name: Health
-            benefit_renewal_response:
-              benefit_tier:
-                description: A tier for testing purposes
-                display_cost: ~$100
-                id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-                name: Premium
-              updated_at: '2021-07-01T00:00:00Z'
-            coverage_end_date: '2022-07-01'
-            coverage_start_date: '2021-07-01'
-            current_benefit_tier:
-              description: A tier for testing purposes
-              display_cost: ~$100
-              id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-              name: Premium
-            id: 0073f4b5-b669-4b4a-b963-2a477f4e75a1
-            number_of_affected_employees: 10
-            renewal_selection_end_date: '2021-05-01'
-            renewal_selection_instructions: 'We are delighted to announce our new Global Life Insurance plans, now available in 66 countries.
-
-              This addition is set to significantly enhance the benefits package for your international team.
-
-              Selection Deadline: Review and choose the right Global Life Insurance plan for each country where your team is based by 11:59 PM on December 31, 2023.
-
-              We offer flexible coverage options from $50,000 to $600,000, so take your time to decide what''s best for your team.
-
-              If you don''t make a selection within this period, your team members won''t be enrolled in the Global Life Insurance.
-
-              If you wish to do so anytime next year, please reach out to help@remote.com
-
-              For more information on how benefits work in different countries, check out our Global <a href="https://remote.com/benefits-guide/global-life-insurance">benefits guide</a>.
-
-              '
-            renewal_selection_start_date: '2021-03-01'
-      properties:
-        data:
-          additionalProperties: false
-          properties:
-            benefit_renewal_request:
-              $ref: '#/components/schemas/BenefitRenewalRequests.BenefitRenewalRequest'
-          required:
-          - benefit_renewal_request
-          type: object
-      required:
-      - data
-      title: BenefitRenewalRequests.BenefitRenewalRequestResponse
-      type: object
-    Date:
-      description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-      example: '2021-07-01'
-      format: date
-      title: Date
-      type: string
-    OfferedBenefitGroup:
-      additionalProperties: false
-      description: A benefit group that has been offered to employees, including enrollment statistics aggregated across all tiers and the individual offered tiers with their own statistics.
-      example:
-        benefit_group:
-          id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
-          name: Health
-          policy_end_date: '2024-12-31'
-          policy_start_date: '2024-01-01'
-        employee_stats:
-          number_of_employees_enrolled: 10
-          number_of_employees_offered: 12
-        offered_benefit_tiers:
-        - benefit_tier:
-            description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
-            id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
-            name: Premium 2023 (Medical, Dental and Vision)
-            providers:
-            - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-              name: Health Provider
-          employee_stats:
-            number_of_employees_enrolled: 10
-            number_of_employees_offered: 12
-      properties:
-        benefit_group:
-          $ref: '#/components/schemas/BenefitGroup'
-        employee_stats:
-          $ref: '#/components/schemas/EmployeeStats'
-        offered_benefit_tiers:
-          description: The individual tiers within this group that have been offered, each with their own enrollment statistics.
-          items:
-            $ref: '#/components/schemas/OfferedBenefitTier'
-          type: array
-      required:
-      - benefit_group
-      - employee_stats
-      - offered_benefit_tiers
-      title: OfferedBenefitGroup
-      type: object
-    Unified.MinimalBenefitGroup:
-      example:
-        name: Benefit Group
-        slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-      properties:
-        name:
-          nullable: true
-          type: string
-        slug:
-          $ref: '#/components/schemas/Slug'
-      required:
-      - name
-      - slug
-      title: Unified.MinimalBenefitGroup
-      type: object
-    OfferedBenefitTier:
-      additionalProperties: false
-      description: A benefit tier that has been offered to employees, combined with enrollment statistics for that tier.
-      example:
-        benefit_tier:
-          description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
-          id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
-          name: Premium 2023 (Medical, Dental and Vision)
-          providers:
-          - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-            name: Health Provider
-        employee_stats:
-          number_of_employees_enrolled: 10
-          number_of_employees_offered: 12
-      properties:
-        benefit_tier:
-          $ref: '#/components/schemas/BenefitTier'
-        employee_stats:
-          $ref: '#/components/schemas/EmployeeStats'
-      required:
-      - benefit_tier
-      - employee_stats
-      title: OfferedBenefitTier
-      type: object
-    BenefitRenewalRequests.UpdateBenefitRenewalRequest:
-      description: 'Upsert benefit offers Renewal Request.
-
-
-        This endpoint requires and returns country-specific data. The exact required and returned fields will
-
-        vary depending on which country the employment is in. To see the list of parameters for each country,
-
-        see the **Show form schema** endpoint under the [Show benefit renewal request schema](#tag/Benefit-Renewal-Requests) category.
-
-
-        Please note that the compliance requirements for each country are subject to change according to local
-
-        laws. Given its continual updates, using Remote''s [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid
-
-        compliance issues and to have the latest version of a country requirements.
-
-
-        If you are using this endpoint to build an integration, make sure you are dynamically collecting or
-
-        displaying the latest parameters for each country by querying the _"Show benefit renewal request schema"_ endpoint.
-
-
-        For more information on JSON Schemas, see the **How JSON Schemas work** documentation.
-
-
-        To learn how you can dynamically generate forms to display in your UI, see the documentation for
-
-        the [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.
-
-
-        '
-      properties: {}
-      title: BenefitRenewalRequests.UpdateBenefitRenewalRequest
-      type: object
-    SuccessResponse:
-      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
-      example:
-        data:
-          status: ok
-      properties:
-        data:
-          properties:
-            status:
-              description: The result status. Always `"ok"` for successful operations.
-              type: string
-          type: object
-      required:
-      - data
-      title: SuccessResponse
-      type: object
-    Slug:
-      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-      nullable: false
-      title: Slug
-      type: string
-    DateTime:
-      description: UTC date time in YYYY-MM-DDTHH:mm:ss format
-      example: '2021-07-15T18:18:17'
-      format: datetime
-      title: DateTime
-      type: string
-    UnauthorizedResponse:
-      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
-      example:
-        message: Unauthorized
-      properties:
-        message:
-          pattern: Unauthorized
-          type: string
-      required:
-      - message
-      title: UnauthorizedResponse
-      type: object
-    Benefit:
-      additionalProperties: false
-      description: 'Benefits with status enrolled have their summed costs in costs.
-
-        Benefits with status offered have their summed costs in projected_costs.
-
-        Benefit-offers where the employer opted-out have benefit_tier: null in the response.
-
-        '
-      example:
-        costs:
-          employee_cost: 234
-          employer_cost: 44
-        coverage_end_date: '2025-02-28'
-        coverage_start_date: '2024-03-18'
-        id: 562977cfd-cf60-4cf4-a70f-ac2061d709088
-        name: benefit name
-        projected_costs: null
-        provider:
-          id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-          name: Health Provider
-        status: enrolled
-        type: benefit type
-      properties:
-        costs:
-          $ref: '#/components/schemas/Costs'
-        coverage_end_date:
-          description: The date when benefit coverage ends (ISO 8601).
-          format: date
-          type: string
-        coverage_start_date:
-          description: The date when benefit coverage begins (ISO 8601).
-          format: date
-          type: string
-        id:
-          description: The unique identifier (UUID) of the benefit.
-          type: string
-        name:
-          description: The name of the benefit (e.g., "Health Insurance", "Dental Plan").
-          type: string
-        projected_costs:
-          $ref: '#/components/schemas/Costs'
-        provider:
-          $ref: '#/components/schemas/BenefitProvider'
-        status:
-          description: 'The enrollment status of this benefit for the employee.
-
-
-            - `offered`: The benefit has been offered but the employee has not yet enrolled.
-
-            - `enrolled`: The employee is actively enrolled in this benefit.
-
-            - `waived`: The employee declined or opted out of this benefit.
-
-            '
-          enum:
-          - offered
-          - enrolled
-          - waived
-          type: string
-        type:
-          description: The type/category of the benefit.
-          type: string
-      required:
-      - id
-      - status
-      - name
-      - type
-      - coverage_start_date
-      - coverage_end_date
-      - provider
-      - costs
-      - projected_costs
-      title: Benefit
-      type: object
-    UnprocessableEntityResponse:
-      anyOf:
-      - properties:
-          errors:
-            type: object
-        required:
-        - errors
-        type: object
-      - properties:
-          message:
-            oneOf:
-            - type: string
-            - $ref: '#/components/schemas/ParameterError'
-            - items:
-                $ref: '#/components/schemas/ParameterError'
-              title: ParameterErrors
-              type: array
-            - $ref: '#/components/schemas/ActionError'
-            - items:
-                $ref: '#/components/schemas/ActionError'
-              title: ActionErrors
-              type: array
-        required:
-        - message
-        type: object
-      example:
-        errors:
-          some_field:
-          - is invalid
-      title: UnprocessableEntityResponse
-      type: object
-    Country:
-      description: A supported country on Remote
-      example:
-        alpha_2_code: PT
-        code: PRT
-        contractor_products_available:
-        - standard
-        - plus
-        - cor
-        country_subdivisions:
-        - code: PT-06
-          name: Coimbra
-          subdivision_type: District
-        - code: PT-11
-          name: Lisboa
-          subdivision_type: District
-        employment_agreement_preview_available: true
-        eor_onboarding: true
-        locked_benefits: after_first_hire
-        name: Portugal
-        region: Europe
-        subregion: Southern Europe
-        supported_json_schemas:
-        - additional_documents
-        - address_details
-        - administrative_details
-        - employment-basic-information
-        - bank_account_details
-        - contract_details
-        - emergency_contact
-      properties:
-        alpha_2_code:
-          description: The ISO 3166-1 alpha-2 country code (e.g., "PT").
-          type: string
-        code:
-          description: The ISO 3166-1 alpha-3 country code (e.g., "PRT"). This is the primary code used across the Remote API.
-          type: string
-        contractor_products_available:
-          description: Contractor product names available for this country
-          items:
-            enum:
-            - standard
-            - plus
-            - cor
-            type: string
-          type: array
-        country_subdivisions:
-          description: Administrative subdivisions of the country (e.g., states, provinces, districts). Null if the country has no subdivisions relevant to Remote's services.
-          items:
-            $ref: '#/components/schemas/CountrySubdivision'
-          nullable: true
-          type: array
-        employment_agreement_preview_available:
-          description: Whether an Employment Agreement preview is available for this country.
-          type: boolean
-        eor_onboarding:
-          description: Whether EOR (Employer of Record) onboarding is available in this country.
-          type: boolean
-        locked_benefits:
-          description: When benefit plan selections become locked for this country (e.g., "after_first_hire" means benefits cannot be changed after the first employee is hired).
-          type: string
-        name:
-          description: The country's full English name.
-          type: string
-        region:
-          description: The geographic region the country belongs to (e.g., "Europe", "Asia", "Americas").
-          type: string
-        subregion:
-          description: The geographic subregion (e.g., "Southern Europe", "Southeast Asia"). Null for some countries.
-          nullable: true
-          type: string
-        supported_json_schemas:
-          description: The list of JSON schema form names available for this country (e.g., "address_details", "contract_details"). Use these with the Show form schema endpoint to get country-specific field requirements.
-          items:
-            type: string
-          type: array
-      required:
-      - alpha_2_code
-      - code
-      - name
-      title: Country
-      type: object
-    Unified.Employment.BenefitGroup:
-      additionalProperties: false
-      example:
-        filter:
-          name: Benefit Group
-          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-        name: Benefit Group
-        slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-      properties:
-        filter:
-          allOf:
-          - $ref: '#/components/schemas/Unified.MinimalBenefitGroup'
-          example:
-            name: Benefit Group
-            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-          nullable: true
-          title: MaybeUnified.MinimalBenefitGroup
-          type: object
-        name:
-          nullable: true
-          type: string
-        slug:
-          $ref: '#/components/schemas/Slug'
-      required:
-      - name
-      - slug
-      - filter
-      title: Unified.Employment.BenefitGroup
-      type: object
-    BadRequestResponse:
-      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
-      example:
-        message: invalid {resource}
-      oneOf:
-      - properties:
-          message:
-            description: A human-readable error message describing what was wrong with the request.
-            type: string
-        required:
-        - message
-        type: object
-      - properties:
-          message:
-            properties:
-              code:
-                type: string
-              message:
-                type: string
-            required:
-            - code
-            - message
-            type: object
-        type: object
-      title: BadRequestResponse
-      type: object
-    BenefitRenewalRequests.ListBenefitRenewalRequestResponse:
-      description: Response schema listing many benefit_renewal_requests
-      example:
-        benefit_renewal_requests:
-        - benefit_group:
-            country_code: FRA
-            id: 03b20f23-06b2-4fe2-8f21-49b445ccc1bb
-            name: Health
-          benefit_renewal_response:
-            benefit_tier:
-              description: A tier for testing purposes
-              display_cost: ~$100
-              id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-              name: Premium
-            updated_at: '2021-07-01T00:00:00Z'
-          coverage_end_date: '2022-07-01'
-          coverage_start_date: '2021-07-01'
-          current_benefit_tier:
-            description: A tier for testing purposes
-            display_cost: ~$100
-            id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-            name: Premium
-          id: 0073f4b5-b669-4b4a-b963-2a477f4e75a1
-          number_of_affected_employees: 10
-          renewal_selection_end_date: '2021-05-01'
-          renewal_selection_instructions: 'We are delighted to announce our new Global Life Insurance plans, now available in 66 countries.
-
-            This addition is set to significantly enhance the benefits package for your international team.
-
-            Selection Deadline: Review and choose the right Global Life Insurance plan for each country where your team is based by 11:59 PM on December 31, 2023.
-
-            We offer flexible coverage options from $50,000 to $600,000, so take your time to decide what''s best for your team.
-
-            If you don''t make a selection within this period, your team members won''t be enrolled in the Global Life Insurance.
-
-            If you wish to do so anytime next year, please reach out to help@remote.com
-
-            For more information on how benefits work in different countries, check out our Global <a href="https://remote.com/benefits-guide/global-life-insurance">benefits guide</a>.
-
-            '
-          renewal_selection_start_date: '2021-03-01'
-        current_page: 1
-        total_count: 1
-        total_pages: 1
-      properties:
-        data:
-          properties:
-            benefit_renewal_requests:
-              items:
-                $ref: '#/components/schemas/BenefitRenewalRequests.BenefitRenewalRequest'
-              type: array
-            current_page:
-              description: The current page among all of the total_pages
-              type: integer
-            total_count:
-              description: The total number of records in the result
-              type: integer
-            total_pages:
-              description: The total number of pages the user can go through
-              type: integer
-          type: object
-      title: BenefitRenewalRequests.ListBenefitRenewalRequestResponse
-      type: object
-    ActionError:
-      properties:
-        action:
-          description: The action that lead to the error message.
-          type: string
-        code:
-          description: An error code that describes the nature of the error.
-          type: string
-        message:
-          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
-          type: string
-      required:
-      - code
-      - message
-      - action
-      title: ActionError
-      type: object
-    EmployeeStats:
-      additionalProperties: false
-      description: Enrollment statistics for a benefit at a given level (country, group, or tier). Shows how many employees have been offered the benefit versus how many are actively enrolled.
-      example:
-        number_of_employees_enrolled: 10
-        number_of_employees_offered: 12
-      properties:
-        number_of_employees_enrolled:
-          description: The number of employees currently enrolled in this benefit. An enrolled employee has an active benefit record.
-          type: integer
-        number_of_employees_offered:
-          description: The total number of employees who have been offered this benefit. An employee is counted as offered once a benefit offer record exists, regardless of whether they have enrolled.
-          type: integer
-      required:
-      - number_of_employees_offered
-      - number_of_employees_enrolled
-      title: EmployeeStats
-      type: object
-    CountrySummariesResponse:
-      additionalProperties: false
-      description: Response containing a company's benefit offering summaries broken down by country. Each country includes aggregate enrollment statistics and details of all offered benefit groups and tiers.
-      example:
-        data:
-          company_id: 79297cfd-cf60-4cf4-a70f-ac2061d72a74
-          country_summaries:
-          - country:
-              alpha_2_code: PT
-              code: PRT
-              contractor_products_available:
-              - standard
-              - plus
-              - cor
-              country_subdivisions:
-              - code: PT-06
-                name: Coimbra
-                subdivision_type: District
-              - code: PT-11
-                name: Lisboa
-                subdivision_type: District
-              employment_agreement_preview_available: true
-              eor_onboarding: true
-              locked_benefits: after_first_hire
-              name: Portugal
-              region: Europe
-              subregion: Southern Europe
-              supported_json_schemas:
-              - additional_documents
-              - address_details
-              - administrative_details
-              - employment-basic-information
-              - bank_account_details
-              - contract_details
-              - emergency_contact
-            employee_stats:
-              number_of_employees_enrolled: 10
-              number_of_employees_offered: 12
-            offered_benefit_groups:
-            - benefit_group:
-                id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
-                name: Health
-                policy_end_date: '2024-12-31'
-                policy_start_date: '2024-01-01'
-              employee_stats:
-                number_of_employees_enrolled: 10
-                number_of_employees_offered: 12
-              offered_benefit_tiers:
-              - benefit_tier:
-                  description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
-                  id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
-                  name: Premium 2023 (Medical, Dental and Vision)
-                  providers:
-                  - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-                    name: Health Provider
-                employee_stats:
-                  number_of_employees_enrolled: 10
-                  number_of_employees_offered: 12
-      properties:
-        data:
-          additionalProperties: false
-          properties:
-            company_id:
-              description: The unique identifier (UUID) of the company these benefit summaries belong to.
-              type: string
-            country_summaries:
-              description: Benefit offering summaries for each country where the company has employees.
-              items:
-                $ref: '#/components/schemas/CountrySummary'
-              type: array
-          required:
-          - company_id
-          - country_summaries
-          type: object
-      required:
-      - data
-      title: CountrySummariesResponse
-      type: object
-    BenefitOffersByEmployment:
-      additionalProperties: false
-      example:
-        benefit_offers:
-        - benefit_group:
-            id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
-            name: Health
-            policy_end_date: '2024-12-31'
-            policy_start_date: '2024-01-01'
-          benefit_tier:
-            description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
-            id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
-            name: Premium 2023 (Medical, Dental and Vision)
-            providers:
-            - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-              name: Health Provider
-          benefits:
-          - costs:
-              employee_cost: 234
-              employer_cost: 44
-            coverage_end_date: '2025-02-28'
-            coverage_start_date: '2024-03-18'
-            id: 562977cfd-cf60-4cf4-a70f-ac2061d709088
-            name: benefit name
-            projected_costs: null
-            provider:
-              id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-              name: Health Provider
-            status: enrolled
-            type: benefit type
-          costs:
-            employee_cost: 234
-            employer_cost: 44
-        costs:
-          employee_cost: 234
-          employer_cost: 44
-        employment:
-          country:
-            alpha_2_code: PT
-            code: PRT
-            contractor_products_available:
-            - standard
-            - plus
-            - cor
-            country_subdivisions:
-            - code: PT-06
-              name: Coimbra
-              subdivision_type: District
-            - code: PT-11
-              name: Lisboa
-              subdivision_type: District
-            employment_agreement_preview_available: true
-            eor_onboarding: true
-            locked_benefits: after_first_hire
-            name: Portugal
-            region: Europe
-            subregion: Southern Europe
-            supported_json_schemas:
-            - additional_documents
-            - address_details
-            - administrative_details
-            - employment-basic-information
-            - bank_account_details
-            - contract_details
-            - emergency_contact
-          given_name: Given Name
-          id: 67897cfd-cf60-4cf4-a70f-ac2061d72984
-          name: Name
-          surname: Surname
-      properties:
-        benefit_offers:
-          items:
-            $ref: '#/components/schemas/BenefitOffer'
-          type: array
-        costs:
-          $ref: '#/components/schemas/Costs'
-        employment:
-          $ref: '#/components/schemas/BenefitOffersEmployment'
-      required:
-      - employment
-      - costs
-      - benefit_offers
-      title: BenefitOffersByEmployment
-      type: object
-    ForbiddenResponse:
-      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
-      example:
-        message: Forbidden
-      properties:
-        message:
-          pattern: Forbidden
-          type: string
-      required:
-      - message
-      title: ForbiddenResponse
-      type: object
-    NotFoundResponse:
-      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
-      example:
-        message: '{resource} not found'
-      properties:
-        message:
-          description: A message indicating which resource was not found.
-          pattern: Not Found
-          type: string
-      title: NotFoundResponse
-      type: object
     BenefitOfferByEmploymentResponse:
       additionalProperties: false
       example:
@@ -1750,257 +887,6 @@ components:
       - data
       title: BenefitOfferByEmploymentResponse
       type: object
-    CountrySummary:
-      additionalProperties: false
-      description: A per-country summary of benefit offerings, including aggregate enrollment statistics and a breakdown of all offered benefit groups and their tiers for that country.
-      example:
-        country:
-          alpha_2_code: PT
-          code: PRT
-          contractor_products_available:
-          - standard
-          - plus
-          - cor
-          country_subdivisions:
-          - code: PT-06
-            name: Coimbra
-            subdivision_type: District
-          - code: PT-11
-            name: Lisboa
-            subdivision_type: District
-          employment_agreement_preview_available: true
-          eor_onboarding: true
-          locked_benefits: after_first_hire
-          name: Portugal
-          region: Europe
-          subregion: Southern Europe
-          supported_json_schemas:
-          - additional_documents
-          - address_details
-          - administrative_details
-          - employment-basic-information
-          - bank_account_details
-          - contract_details
-          - emergency_contact
-        employee_stats:
-          number_of_employees_enrolled: 10
-          number_of_employees_offered: 12
-        offered_benefit_groups:
-        - benefit_group:
-            id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
-            name: Health
-            policy_end_date: '2024-12-31'
-            policy_start_date: '2024-01-01'
-          employee_stats:
-            number_of_employees_enrolled: 10
-            number_of_employees_offered: 12
-          offered_benefit_tiers:
-          - benefit_tier:
-              description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
-              id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
-              name: Premium 2023 (Medical, Dental and Vision)
-              providers:
-              - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-                name: Health Provider
-            employee_stats:
-              number_of_employees_enrolled: 10
-              number_of_employees_offered: 12
-      properties:
-        country:
-          $ref: '#/components/schemas/Country'
-        employee_stats:
-          $ref: '#/components/schemas/EmployeeStats'
-        offered_benefit_groups:
-          description: All benefit groups that have been offered to employees in this country.
-          items:
-            $ref: '#/components/schemas/OfferedBenefitGroup'
-          type: array
-      required:
-      - country
-      - employee_stats
-      - offered_benefit_groups
-      title: CountrySummary
-      type: object
-    BenefitProvider:
-      additionalProperties: false
-      description: The insurance carrier or provider that underwrites a benefit tier. May be null if the benefit tier does not have a specific external provider assigned.
-      example:
-        id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-        name: Health Provider
-      nullable: true
-      properties:
-        id:
-          description: The unique identifier (UUID) of the benefit provider.
-          type: string
-        name:
-          description: The name of the insurance carrier or benefit provider (e.g., "Allianz", "Bupa").
-          type: string
-      required:
-      - id
-      - name
-      title: BenefitProvider
-      type: object
-    NullableMinimalBenefitTier:
-      additionalProperties: false
-      example:
-        description: A tier for testing purposes
-        display_cost: ~$100
-        id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-        name: Premium
-      nullable: true
-      properties:
-        description:
-          description: A description of what this tier includes.
-          type: string
-        display_cost:
-          description: A human-readable cost estimate for this tier (e.g., "~$100"). Null if cost is not available.
-          nullable: true
-          type: string
-        id:
-          description: The unique identifier (UUID) of the benefit tier.
-          type: string
-        name:
-          description: The name of the benefit tier (e.g., "Premium", "Standard").
-          type: string
-      required:
-      - id
-      - name
-      - description
-      title: NullableMinimalBenefitTier
-      type: object
-    Employments.BenefitOffers.ListBenefitOffers:
-      additionalProperties: false
-      description: The list of benefit offers for an employment schema
-      example:
-        data:
-        - benefit_group:
-            filter:
-              name: Benefit Group
-              slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-            name: Benefit Group
-            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-          benefit_tier:
-            display_cost: $1337 + pension
-            name: Benefit Tier 1
-            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Unified.Employment.BenefitOffer'
-          type: array
-      required:
-      - data
-      title: Employments.BenefitOffers.ListBenefitOffers
-      type: object
-    Unified.Employment.BenefitTier:
-      additionalProperties: false
-      example:
-        display_cost: $1337 + pension
-        name: Benefit Tier 1
-        slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-      properties:
-        display_cost:
-          nullable: true
-          type: string
-        name:
-          type: string
-        slug:
-          $ref: '#/components/schemas/Slug'
-      title: Unified.Employment.BenefitTier
-      type: object
-    UuidSlug:
-      description: Identifier of the employment being terminated.
-      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-      format: uuid
-      title: UuidSlug
-      type: string
-    BenefitRenewalRequests.BenefitRenewalRequest:
-      additionalProperties: false
-      example:
-        benefit_group:
-          country_code: FRA
-          id: 03b20f23-06b2-4fe2-8f21-49b445ccc1bb
-          name: Health
-        benefit_renewal_response:
-          benefit_tier:
-            description: A tier for testing purposes
-            display_cost: ~$100
-            id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-            name: Premium
-          updated_at: '2021-07-01T00:00:00Z'
-        coverage_end_date: '2022-07-01'
-        coverage_start_date: '2021-07-01'
-        current_benefit_tier:
-          description: A tier for testing purposes
-          display_cost: ~$100
-          id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-          name: Premium
-        id: 0073f4b5-b669-4b4a-b963-2a477f4e75a1
-        number_of_affected_employees: 10
-        renewal_selection_end_date: '2021-05-01'
-        renewal_selection_instructions: 'We are delighted to announce our new Global Life Insurance plans, now available in 66 countries.
-
-          This addition is set to significantly enhance the benefits package for your international team.
-
-          Selection Deadline: Review and choose the right Global Life Insurance plan for each country where your team is based by 11:59 PM on December 31, 2023.
-
-          We offer flexible coverage options from $50,000 to $600,000, so take your time to decide what''s best for your team.
-
-          If you don''t make a selection within this period, your team members won''t be enrolled in the Global Life Insurance.
-
-          If you wish to do so anytime next year, please reach out to help@remote.com
-
-          For more information on how benefits work in different countries, check out our Global <a href="https://remote.com/benefits-guide/global-life-insurance">benefits guide</a>.
-
-          '
-        renewal_selection_start_date: '2021-03-01'
-      properties:
-        benefit_group:
-          $ref: '#/components/schemas/BenefitRenewalRequests.MinimalBenefitGroup'
-        benefit_renewal_response:
-          allOf:
-          - $ref: '#/components/schemas/BenefitRenewalRequests.MinimalBenefitRenewalResponse'
-          example:
-            benefit_tier:
-              description: A tier for testing purposes
-              display_cost: ~$100
-              id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
-              name: Premium
-            updated_at: '2021-07-01T00:00:00Z'
-          nullable: true
-          title: MaybeBenefitRenewalRequests.MinimalBenefitRenewalResponse
-          type: object
-        coverage_end_date:
-          $ref: '#/components/schemas/Date'
-        coverage_start_date:
-          $ref: '#/components/schemas/Date'
-        current_benefit_tier:
-          $ref: '#/components/schemas/NullableMinimalBenefitTier'
-        id:
-          description: The unique identifier (UUID) of the benefit renewal request.
-          type: string
-        number_of_affected_employees:
-          description: The number of employees who will be affected by this benefit renewal.
-          type: integer
-        renewal_selection_end_date:
-          $ref: '#/components/schemas/Date'
-        renewal_selection_instructions:
-          description: Instructions for the employer about the renewal process, available plans, and deadlines.
-          type: string
-        renewal_selection_start_date:
-          $ref: '#/components/schemas/Date'
-      required:
-      - id
-      - coverage_start_date
-      - coverage_end_date
-      - renewal_selection_start_date
-      - renewal_selection_end_date
-      - renewal_selection_instructions
-      - benefit_group
-      - benefit_renewal_response
-      - number_of_affected_employees
-      title: BenefitRenewalRequests.BenefitRenewalRequest
-      type: object
     Currency:
       description: The type of money in general use in a particular country
       example:
@@ -2022,6 +908,67 @@ components:
       - slug
       - symbol
       title: Currency
+      type: object
+    UnauthorizedResponse:
+      description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
+      example:
+        message: Unauthorized
+      properties:
+        message:
+          pattern: Unauthorized
+          type: string
+      required:
+      - message
+      title: UnauthorizedResponse
+      type: object
+    Unified.Employment.UpsertBenefitOffersRequest:
+      description: "Upsert benefit offers request. As its properties may vary depending on the employment,\n          you must query the [Show benefit offers schema](#tag/benefits/operation/get_show_benefit_offer) endpoint\n          passing the employment id"
+      title: Unified.Employment.UpsertBenefitOffersRequest
+      type: object
+    TooManyRequestsResponse:
+      description: Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.
+      example:
+        message: Too many requests
+      properties:
+        message:
+          pattern: Too many requests
+          type: string
+      title: TooManyRequestsResponse
+      type: object
+    BenefitRenewalRequests.UpdateBenefitRenewalRequest:
+      description: 'Upsert benefit offers Renewal Request.
+
+
+        This endpoint requires and returns country-specific data. The exact required and returned fields will
+
+        vary depending on which country the employment is in. To see the list of parameters for each country,
+
+        see the **Show form schema** endpoint under the [Show benefit renewal request schema](#tag/Benefit-Renewal-Requests) category.
+
+
+        Please note that the compliance requirements for each country are subject to change according to local
+
+        laws. Given its continual updates, using Remote''s [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) should be considered in order to avoid
+
+        compliance issues and to have the latest version of a country requirements.
+
+
+        If you are using this endpoint to build an integration, make sure you are dynamically collecting or
+
+        displaying the latest parameters for each country by querying the _"Show benefit renewal request schema"_ endpoint.
+
+
+        For more information on JSON Schemas, see the **How JSON Schemas work** documentation.
+
+
+        To learn how you can dynamically generate forms to display in your UI, see the documentation for
+
+        the [json-schema-form](https://developer.remote.com/docs/how-json-schemas-work) tool.
+
+
+        '
+      properties: {}
+      title: BenefitRenewalRequests.UpdateBenefitRenewalRequest
       type: object
     BenefitOffersEmployment:
       additionalProperties: false
@@ -2064,8 +1011,9 @@ components:
           $ref: '#/components/schemas/Country'
         given_name:
           description: The employee's given (first) name. Null if not available.
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           description: The unique identifier (UUID) of the employment.
           type: string
@@ -2074,8 +1022,9 @@ components:
           type: string
         surname:
           description: The employee's surname (last name). Null if not available.
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       required:
       - id
       - given_name
@@ -2083,6 +1032,183 @@ components:
       - surname
       - country
       title: BenefitOffersEmployment
+      type: object
+    EmployeeStats:
+      additionalProperties: false
+      description: Enrollment statistics for a benefit at a given level (country, group, or tier). Shows how many employees have been offered the benefit versus how many are actively enrolled.
+      example:
+        number_of_employees_enrolled: 10
+        number_of_employees_offered: 12
+      properties:
+        number_of_employees_enrolled:
+          description: The number of employees currently enrolled in this benefit. An enrolled employee has an active benefit record.
+          type: integer
+        number_of_employees_offered:
+          description: The total number of employees who have been offered this benefit. An employee is counted as offered once a benefit offer record exists, regardless of whether they have enrolled.
+          type: integer
+      required:
+      - number_of_employees_offered
+      - number_of_employees_enrolled
+      title: EmployeeStats
+      type: object
+    Country:
+      description: A supported country on Remote
+      example:
+        alpha_2_code: PT
+        code: PRT
+        contractor_products_available:
+        - standard
+        - plus
+        - cor
+        country_subdivisions:
+        - code: PT-06
+          name: Coimbra
+          subdivision_type: District
+        - code: PT-11
+          name: Lisboa
+          subdivision_type: District
+        employment_agreement_preview_available: true
+        eor_onboarding: true
+        locked_benefits: after_first_hire
+        name: Portugal
+        region: Europe
+        subregion: Southern Europe
+        supported_json_schemas:
+        - additional_documents
+        - address_details
+        - administrative_details
+        - employment-basic-information
+        - bank_account_details
+        - contract_details
+        - emergency_contact
+      properties:
+        alpha_2_code:
+          description: The ISO 3166-1 alpha-2 country code (e.g., "PT").
+          type: string
+        code:
+          description: The ISO 3166-1 alpha-3 country code (e.g., "PRT"). This is the primary code used across the Remote API.
+          type: string
+        contractor_products_available:
+          description: Contractor product names available for this country
+          items:
+            enum:
+            - standard
+            - plus
+            - cor
+            type: string
+          type: array
+        country_subdivisions:
+          description: Administrative subdivisions of the country (e.g., states, provinces, districts). Null if the country has no subdivisions relevant to Remote's services.
+          items:
+            $ref: '#/components/schemas/CountrySubdivision'
+          type:
+          - array
+          - 'null'
+        employment_agreement_preview_available:
+          description: Whether an Employment Agreement preview is available for this country.
+          type: boolean
+        eor_onboarding:
+          description: Whether EOR (Employer of Record) onboarding is available in this country.
+          type: boolean
+        locked_benefits:
+          description: When benefit plan selections become locked for this country (e.g., "after_first_hire" means benefits cannot be changed after the first employee is hired).
+          type: string
+        name:
+          description: The country's full English name.
+          type: string
+        region:
+          description: The geographic region the country belongs to (e.g., "Europe", "Asia", "Americas").
+          type: string
+        subregion:
+          description: The geographic subregion (e.g., "Southern Europe", "Southeast Asia"). Null for some countries.
+          type:
+          - string
+          - 'null'
+        supported_json_schemas:
+          description: The list of JSON schema form names available for this country (e.g., "address_details", "contract_details"). Use these with the Show form schema endpoint to get country-specific field requirements.
+          items:
+            type: string
+          type: array
+      required:
+      - alpha_2_code
+      - code
+      - name
+      title: Country
+      type: object
+    Benefit:
+      additionalProperties: false
+      description: 'Benefits with status enrolled have their summed costs in costs.
+
+        Benefits with status offered have their summed costs in projected_costs.
+
+        Benefit-offers where the employer opted-out have benefit_tier: null in the response.
+
+        '
+      example:
+        costs:
+          employee_cost: 234
+          employer_cost: 44
+        coverage_end_date: '2025-02-28'
+        coverage_start_date: '2024-03-18'
+        id: 562977cfd-cf60-4cf4-a70f-ac2061d709088
+        name: benefit name
+        projected_costs: null
+        provider:
+          id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+          name: Health Provider
+        status: enrolled
+        type: benefit type
+      properties:
+        costs:
+          $ref: '#/components/schemas/Costs'
+        coverage_end_date:
+          description: The date when benefit coverage ends (ISO 8601).
+          format: date
+          type: string
+        coverage_start_date:
+          description: The date when benefit coverage begins (ISO 8601).
+          format: date
+          type: string
+        id:
+          description: The unique identifier (UUID) of the benefit.
+          type: string
+        name:
+          description: The name of the benefit (e.g., "Health Insurance", "Dental Plan").
+          type: string
+        projected_costs:
+          $ref: '#/components/schemas/Costs'
+        provider:
+          $ref: '#/components/schemas/BenefitProvider'
+        status:
+          description: 'The enrollment status of this benefit for the employee.
+
+
+            - `offered`: The benefit has been offered but the employee has not yet enrolled.
+
+            - `enrolled`: The employee is actively enrolled in this benefit.
+
+            - `waived`: The employee declined or opted out of this benefit.
+
+            '
+          enum:
+          - offered
+          - enrolled
+          - waived
+          type: string
+        type:
+          description: The type/category of the benefit.
+          type: string
+      required:
+      - id
+      - status
+      - name
+      - type
+      - coverage_start_date
+      - coverage_end_date
+      - provider
+      - costs
+      - projected_costs
+      title: Benefit
       type: object
     CountrySubdivision:
       description: A subdivision of a supported country on Remote
@@ -2104,67 +1230,18 @@ components:
       - name
       title: CountrySubdivision
       type: object
-    BenefitOffer:
-      additionalProperties: false
-      example:
-        benefit_group:
-          id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
-          name: Health
-          policy_end_date: '2024-12-31'
-          policy_start_date: '2024-01-01'
-        benefit_tier:
-          description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
-          id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
-          name: Premium 2023 (Medical, Dental and Vision)
-          providers:
-          - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-            name: Health Provider
-        benefits:
-        - costs:
-            employee_cost: 234
-            employer_cost: 44
-          coverage_end_date: '2025-02-28'
-          coverage_start_date: '2024-03-18'
-          id: 562977cfd-cf60-4cf4-a70f-ac2061d709088
-          name: benefit name
-          projected_costs: null
-          provider:
-            id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-            name: Health Provider
-          status: enrolled
-          type: benefit type
-        costs:
-          employee_cost: 234
-          employer_cost: 44
-      properties:
-        benefit_group:
-          $ref: '#/components/schemas/BenefitGroup'
-        benefit_tier:
-          allOf:
-          - $ref: '#/components/schemas/BenefitTier'
-          example:
-            description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
-            id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
-            name: Premium 2023 (Medical, Dental and Vision)
-            providers:
-            - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
-              name: Health Provider
-          nullable: true
-          title: MaybeBenefitTier
-          type: object
-        benefits:
-          items:
-            $ref: '#/components/schemas/Benefit'
-          type: array
-        costs:
-          $ref: '#/components/schemas/Costs'
-      required:
-      - benefit_group
-      - benefit_tier
-      - costs
-      - benefits
-      title: BenefitOffer
-      type: object
+    UuidSlug:
+      description: Identifier of the employment being terminated.
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      format: uuid
+      title: UuidSlug
+      type: string
+    DateTime:
+      description: UTC date time in YYYY-MM-DDTHH:mm:ss format
+      example: '2021-07-15T18:18:17'
+      format: datetime
+      title: DateTime
+      type: string
     Unified.Employments.BenefitOffersJSONSchemaResponse:
       description: JSON schema response for benefit offers
       example:
@@ -2334,15 +1411,472 @@ components:
           type: object
       title: Unified.Employments.BenefitOffersJSONSchemaResponse
       type: object
-    TooManyRequestsResponse:
-      description: Returned when the API rate limit has been exceeded (HTTP 429). Wait before retrying. Check the `Retry-After` response header for the recommended wait time.
+    Unified.Employment.BenefitOffer:
+      additionalProperties: false
+      description: The benefit offer for an employment schema
       example:
-        message: Too many requests
+        benefit_group:
+          filter:
+            name: Benefit Group
+            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          name: Benefit Group
+          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        benefit_tier:
+          display_cost: $1337 + pension
+          name: Benefit Tier 1
+          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        benefit_group:
+          $ref: '#/components/schemas/Unified.Employment.BenefitGroup'
+        benefit_tier:
+          allOf:
+          - $ref: '#/components/schemas/Unified.Employment.BenefitTier'
+          example:
+            display_cost: $1337 + pension
+            name: Benefit Tier 1
+            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          title: MaybeUnified.Employment.BenefitTier
+          type:
+          - object
+          - 'null'
+      required:
+      - benefit_group
+      - benefit_tier
+      title: Unified.Employment.BenefitOffer
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
+      type: object
+    BenefitRenewalRequests.BenefitRenewalRequestResponse:
+      additionalProperties: false
+      description: Benefit Renewal Request Response
+      example:
+        data:
+          benefit_renewal_request:
+            benefit_group:
+              country_code: FRA
+              id: 03b20f23-06b2-4fe2-8f21-49b445ccc1bb
+              name: Health
+            benefit_renewal_response:
+              benefit_tier:
+                description: A tier for testing purposes
+                display_cost: ~$100
+                id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+                name: Premium
+              updated_at: '2021-07-01T00:00:00Z'
+            coverage_end_date: '2022-07-01'
+            coverage_start_date: '2021-07-01'
+            current_benefit_tier:
+              description: A tier for testing purposes
+              display_cost: ~$100
+              id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+              name: Premium
+            id: 0073f4b5-b669-4b4a-b963-2a477f4e75a1
+            number_of_affected_employees: 10
+            renewal_selection_end_date: '2021-05-01'
+            renewal_selection_instructions: 'We are delighted to announce our new Global Life Insurance plans, now available in 66 countries.
+
+              This addition is set to significantly enhance the benefits package for your international team.
+
+              Selection Deadline: Review and choose the right Global Life Insurance plan for each country where your team is based by 11:59 PM on December 31, 2023.
+
+              We offer flexible coverage options from $50,000 to $600,000, so take your time to decide what''s best for your team.
+
+              If you don''t make a selection within this period, your team members won''t be enrolled in the Global Life Insurance.
+
+              If you wish to do so anytime next year, please reach out to help@remote.com
+
+              For more information on how benefits work in different countries, check out our Global <a href="https://remote.com/benefits-guide/global-life-insurance">benefits guide</a>.
+
+              '
+            renewal_selection_start_date: '2021-03-01'
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            benefit_renewal_request:
+              $ref: '#/components/schemas/BenefitRenewalRequests.BenefitRenewalRequest'
+          required:
+          - benefit_renewal_request
+          type: object
+      required:
+      - data
+      title: BenefitRenewalRequests.BenefitRenewalRequestResponse
+      type: object
+    ForbiddenResponse:
+      description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
+      example:
+        message: Forbidden
       properties:
         message:
-          pattern: Too many requests
+          pattern: Forbidden
           type: string
-      title: TooManyRequestsResponse
+      required:
+      - message
+      title: ForbiddenResponse
+      type: object
+    BenefitRenewalRequests.ListBenefitRenewalRequestResponse:
+      description: Response schema listing many benefit_renewal_requests
+      example:
+        benefit_renewal_requests:
+        - benefit_group:
+            country_code: FRA
+            id: 03b20f23-06b2-4fe2-8f21-49b445ccc1bb
+            name: Health
+          benefit_renewal_response:
+            benefit_tier:
+              description: A tier for testing purposes
+              display_cost: ~$100
+              id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+              name: Premium
+            updated_at: '2021-07-01T00:00:00Z'
+          coverage_end_date: '2022-07-01'
+          coverage_start_date: '2021-07-01'
+          current_benefit_tier:
+            description: A tier for testing purposes
+            display_cost: ~$100
+            id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+            name: Premium
+          id: 0073f4b5-b669-4b4a-b963-2a477f4e75a1
+          number_of_affected_employees: 10
+          renewal_selection_end_date: '2021-05-01'
+          renewal_selection_instructions: 'We are delighted to announce our new Global Life Insurance plans, now available in 66 countries.
+
+            This addition is set to significantly enhance the benefits package for your international team.
+
+            Selection Deadline: Review and choose the right Global Life Insurance plan for each country where your team is based by 11:59 PM on December 31, 2023.
+
+            We offer flexible coverage options from $50,000 to $600,000, so take your time to decide what''s best for your team.
+
+            If you don''t make a selection within this period, your team members won''t be enrolled in the Global Life Insurance.
+
+            If you wish to do so anytime next year, please reach out to help@remote.com
+
+            For more information on how benefits work in different countries, check out our Global <a href="https://remote.com/benefits-guide/global-life-insurance">benefits guide</a>.
+
+            '
+          renewal_selection_start_date: '2021-03-01'
+        current_page: 1
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            benefit_renewal_requests:
+              items:
+                $ref: '#/components/schemas/BenefitRenewalRequests.BenefitRenewalRequest'
+              type: array
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: BenefitRenewalRequests.ListBenefitRenewalRequestResponse
+      type: object
+    OfferedBenefitTier:
+      additionalProperties: false
+      description: A benefit tier that has been offered to employees, combined with enrollment statistics for that tier.
+      example:
+        benefit_tier:
+          description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
+          id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
+          name: Premium 2023 (Medical, Dental and Vision)
+          providers:
+          - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+            name: Health Provider
+        employee_stats:
+          number_of_employees_enrolled: 10
+          number_of_employees_offered: 12
+      properties:
+        benefit_tier:
+          $ref: '#/components/schemas/BenefitTier'
+        employee_stats:
+          $ref: '#/components/schemas/EmployeeStats'
+      required:
+      - benefit_tier
+      - employee_stats
+      title: OfferedBenefitTier
+      type: object
+    Unified.Employment.BenefitGroup:
+      additionalProperties: false
+      example:
+        filter:
+          name: Benefit Group
+          slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+        name: Benefit Group
+        slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        filter:
+          allOf:
+          - $ref: '#/components/schemas/Unified.MinimalBenefitGroup'
+          example:
+            name: Benefit Group
+            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          title: MaybeUnified.MinimalBenefitGroup
+          type:
+          - object
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        slug:
+          $ref: '#/components/schemas/Slug'
+      required:
+      - name
+      - slug
+      - filter
+      title: Unified.Employment.BenefitGroup
+      type: object
+    NullableMinimalBenefitTier:
+      additionalProperties: false
+      example:
+        description: A tier for testing purposes
+        display_cost: ~$100
+        id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+        name: Premium
+      properties:
+        description:
+          description: A description of what this tier includes.
+          type: string
+        display_cost:
+          description: A human-readable cost estimate for this tier (e.g., "~$100"). Null if cost is not available.
+          type:
+          - string
+          - 'null'
+        id:
+          description: The unique identifier (UUID) of the benefit tier.
+          type: string
+        name:
+          description: The name of the benefit tier (e.g., "Premium", "Standard").
+          type: string
+      required:
+      - id
+      - name
+      - description
+      title: NullableMinimalBenefitTier
+      type:
+      - object
+      - 'null'
+    BadRequestResponse:
+      description: Returned when the request is malformed or contains invalid parameters. The message may be a simple string or a structured object with a code and detailed message.
+      example:
+        message: invalid {resource}
+      oneOf:
+      - properties:
+          message:
+            description: A human-readable error message describing what was wrong with the request.
+            type: string
+        required:
+        - message
+        type: object
+      - properties:
+          message:
+            properties:
+              code:
+                type: string
+              message:
+                type: string
+            required:
+            - code
+            - message
+            type: object
+        type: object
+      title: BadRequestResponse
+      type: object
+    CountrySummary:
+      additionalProperties: false
+      description: A per-country summary of benefit offerings, including aggregate enrollment statistics and a breakdown of all offered benefit groups and their tiers for that country.
+      example:
+        country:
+          alpha_2_code: PT
+          code: PRT
+          contractor_products_available:
+          - standard
+          - plus
+          - cor
+          country_subdivisions:
+          - code: PT-06
+            name: Coimbra
+            subdivision_type: District
+          - code: PT-11
+            name: Lisboa
+            subdivision_type: District
+          employment_agreement_preview_available: true
+          eor_onboarding: true
+          locked_benefits: after_first_hire
+          name: Portugal
+          region: Europe
+          subregion: Southern Europe
+          supported_json_schemas:
+          - additional_documents
+          - address_details
+          - administrative_details
+          - employment-basic-information
+          - bank_account_details
+          - contract_details
+          - emergency_contact
+        employee_stats:
+          number_of_employees_enrolled: 10
+          number_of_employees_offered: 12
+        offered_benefit_groups:
+        - benefit_group:
+            id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
+            name: Health
+            policy_end_date: '2024-12-31'
+            policy_start_date: '2024-01-01'
+          employee_stats:
+            number_of_employees_enrolled: 10
+            number_of_employees_offered: 12
+          offered_benefit_tiers:
+          - benefit_tier:
+              description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
+              id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
+              name: Premium 2023 (Medical, Dental and Vision)
+              providers:
+              - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+                name: Health Provider
+            employee_stats:
+              number_of_employees_enrolled: 10
+              number_of_employees_offered: 12
+      properties:
+        country:
+          $ref: '#/components/schemas/Country'
+        employee_stats:
+          $ref: '#/components/schemas/EmployeeStats'
+        offered_benefit_groups:
+          description: All benefit groups that have been offered to employees in this country.
+          items:
+            $ref: '#/components/schemas/OfferedBenefitGroup'
+          type: array
+      required:
+      - country
+      - employee_stats
+      - offered_benefit_groups
+      title: CountrySummary
+      type: object
+    BenefitOffersByEmployment:
+      additionalProperties: false
+      example:
+        benefit_offers:
+        - benefit_group:
+            id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
+            name: Health
+            policy_end_date: '2024-12-31'
+            policy_start_date: '2024-01-01'
+          benefit_tier:
+            description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
+            id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
+            name: Premium 2023 (Medical, Dental and Vision)
+            providers:
+            - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+              name: Health Provider
+          benefits:
+          - costs:
+              employee_cost: 234
+              employer_cost: 44
+            coverage_end_date: '2025-02-28'
+            coverage_start_date: '2024-03-18'
+            id: 562977cfd-cf60-4cf4-a70f-ac2061d709088
+            name: benefit name
+            projected_costs: null
+            provider:
+              id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+              name: Health Provider
+            status: enrolled
+            type: benefit type
+          costs:
+            employee_cost: 234
+            employer_cost: 44
+        costs:
+          employee_cost: 234
+          employer_cost: 44
+        employment:
+          country:
+            alpha_2_code: PT
+            code: PRT
+            contractor_products_available:
+            - standard
+            - plus
+            - cor
+            country_subdivisions:
+            - code: PT-06
+              name: Coimbra
+              subdivision_type: District
+            - code: PT-11
+              name: Lisboa
+              subdivision_type: District
+            employment_agreement_preview_available: true
+            eor_onboarding: true
+            locked_benefits: after_first_hire
+            name: Portugal
+            region: Europe
+            subregion: Southern Europe
+            supported_json_schemas:
+            - additional_documents
+            - address_details
+            - administrative_details
+            - employment-basic-information
+            - bank_account_details
+            - contract_details
+            - emergency_contact
+          given_name: Given Name
+          id: 67897cfd-cf60-4cf4-a70f-ac2061d72984
+          name: Name
+          surname: Surname
+      properties:
+        benefit_offers:
+          items:
+            $ref: '#/components/schemas/BenefitOffer'
+          type: array
+        costs:
+          $ref: '#/components/schemas/Costs'
+        employment:
+          $ref: '#/components/schemas/BenefitOffersEmployment'
+      required:
+      - employment
+      - costs
+      - benefit_offers
+      title: BenefitOffersByEmployment
+      type: object
+    Unified.MinimalBenefitGroup:
+      example:
+        name: Benefit Group
+        slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        slug:
+          $ref: '#/components/schemas/Slug'
+      required:
+      - name
+      - slug
+      title: Unified.MinimalBenefitGroup
       type: object
     Costs:
       additionalProperties: false
@@ -2350,7 +1884,6 @@ components:
       example:
         employee_cost: 234
         employer_cost: 44
-      nullable: true
       properties:
         employee_cost:
           description: The employee's portion of the benefit cost, in cents.
@@ -2362,10 +1895,512 @@ components:
       - employee_cost
       - employer_cost
       title: Costs
+      type:
+      - object
+      - 'null'
+    Employments.BenefitOffers.ListBenefitOffers:
+      additionalProperties: false
+      description: The list of benefit offers for an employment schema
+      example:
+        data:
+        - benefit_group:
+            filter:
+              name: Benefit Group
+              slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            name: Benefit Group
+            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+          benefit_tier:
+            display_cost: $1337 + pension
+            name: Benefit Tier 1
+            slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Unified.Employment.BenefitOffer'
+          type: array
+      required:
+      - data
+      title: Employments.BenefitOffers.ListBenefitOffers
       type: object
-    Unified.Employment.UpsertBenefitOffersRequest:
-      description: "Upsert benefit offers request. As its properties may vary depending on the employment,\n          you must query the [Show benefit offers schema](#tag/benefits/operation/get_show_benefit_offer) endpoint\n          passing the employment id"
-      title: Unified.Employment.UpsertBenefitOffersRequest
+    BenefitGroup:
+      additionalProperties: false
+      description: A category of benefits (e.g., "Health", "Dental", "Life Insurance") with a defined policy period. Each group contains one or more tiers representing different coverage levels.
+      example:
+        id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
+        name: Health
+        policy_end_date: '2024-12-31'
+        policy_start_date: '2024-01-01'
+      properties:
+        id:
+          description: The unique identifier (UUID) of the benefit group.
+          type: string
+        name:
+          description: The name of the benefit category (e.g., "Health", "Dental", "Life Insurance").
+          type: string
+        policy_end_date:
+          description: The date when the policy period ends for this benefit group (ISO 8601 format). Benefits may need to be renewed after this date.
+          format: date
+          type: string
+        policy_start_date:
+          description: The date when the policy period begins for this benefit group (ISO 8601 format).
+          format: date
+          type: string
+      required:
+      - id
+      - name
+      - policy_start_date
+      - policy_end_date
+      title: BenefitGroup
+      type: object
+    BenefitOffer:
+      additionalProperties: false
+      example:
+        benefit_group:
+          id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
+          name: Health
+          policy_end_date: '2024-12-31'
+          policy_start_date: '2024-01-01'
+        benefit_tier:
+          description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
+          id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
+          name: Premium 2023 (Medical, Dental and Vision)
+          providers:
+          - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+            name: Health Provider
+        benefits:
+        - costs:
+            employee_cost: 234
+            employer_cost: 44
+          coverage_end_date: '2025-02-28'
+          coverage_start_date: '2024-03-18'
+          id: 562977cfd-cf60-4cf4-a70f-ac2061d709088
+          name: benefit name
+          projected_costs: null
+          provider:
+            id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+            name: Health Provider
+          status: enrolled
+          type: benefit type
+        costs:
+          employee_cost: 234
+          employer_cost: 44
+      properties:
+        benefit_group:
+          $ref: '#/components/schemas/BenefitGroup'
+        benefit_tier:
+          allOf:
+          - $ref: '#/components/schemas/BenefitTier'
+          example:
+            description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
+            id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
+            name: Premium 2023 (Medical, Dental and Vision)
+            providers:
+            - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+              name: Health Provider
+          title: MaybeBenefitTier
+          type:
+          - object
+          - 'null'
+        benefits:
+          items:
+            $ref: '#/components/schemas/Benefit'
+          type: array
+        costs:
+          $ref: '#/components/schemas/Costs'
+      required:
+      - benefit_group
+      - benefit_tier
+      - costs
+      - benefits
+      title: BenefitOffer
+      type: object
+    BenefitProvider:
+      additionalProperties: false
+      description: The insurance carrier or provider that underwrites a benefit tier. May be null if the benefit tier does not have a specific external provider assigned.
+      example:
+        id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+        name: Health Provider
+      properties:
+        id:
+          description: The unique identifier (UUID) of the benefit provider.
+          type: string
+        name:
+          description: The name of the insurance carrier or benefit provider (e.g., "Allianz", "Bupa").
+          type: string
+      required:
+      - id
+      - name
+      title: BenefitProvider
+      type:
+      - object
+      - 'null'
+    BenefitRenewalRequests.MinimalBenefitRenewalResponse:
+      additionalProperties: false
+      example:
+        benefit_tier:
+          description: A tier for testing purposes
+          display_cost: ~$100
+          id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+          name: Premium
+        updated_at: '2021-07-01T00:00:00Z'
+      properties:
+        benefit_tier:
+          $ref: '#/components/schemas/NullableMinimalBenefitTier'
+        updated_at:
+          $ref: '#/components/schemas/DateTime'
+      required:
+      - benefit_tier
+      - updated_at
+      title: BenefitRenewalRequests.MinimalBenefitRenewalResponse
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    OfferedBenefitGroup:
+      additionalProperties: false
+      description: A benefit group that has been offered to employees, including enrollment statistics aggregated across all tiers and the individual offered tiers with their own statistics.
+      example:
+        benefit_group:
+          id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
+          name: Health
+          policy_end_date: '2024-12-31'
+          policy_start_date: '2024-01-01'
+        employee_stats:
+          number_of_employees_enrolled: 10
+          number_of_employees_offered: 12
+        offered_benefit_tiers:
+        - benefit_tier:
+            description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
+            id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
+            name: Premium 2023 (Medical, Dental and Vision)
+            providers:
+            - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+              name: Health Provider
+          employee_stats:
+            number_of_employees_enrolled: 10
+            number_of_employees_offered: 12
+      properties:
+        benefit_group:
+          $ref: '#/components/schemas/BenefitGroup'
+        employee_stats:
+          $ref: '#/components/schemas/EmployeeStats'
+        offered_benefit_tiers:
+          description: The individual tiers within this group that have been offered, each with their own enrollment statistics.
+          items:
+            $ref: '#/components/schemas/OfferedBenefitTier'
+          type: array
+      required:
+      - benefit_group
+      - employee_stats
+      - offered_benefit_tiers
+      title: OfferedBenefitGroup
+      type: object
+    Slug:
+      example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      title: Slug
+      type: string
+    Unified.Employment.BenefitTier:
+      additionalProperties: false
+      example:
+        display_cost: $1337 + pension
+        name: Benefit Tier 1
+        slug: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+      properties:
+        display_cost:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        slug:
+          $ref: '#/components/schemas/Slug'
+      title: Unified.Employment.BenefitTier
+      type: object
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    BenefitRenewalRequests.BenefitRenewalRequest:
+      additionalProperties: false
+      example:
+        benefit_group:
+          country_code: FRA
+          id: 03b20f23-06b2-4fe2-8f21-49b445ccc1bb
+          name: Health
+        benefit_renewal_response:
+          benefit_tier:
+            description: A tier for testing purposes
+            display_cost: ~$100
+            id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+            name: Premium
+          updated_at: '2021-07-01T00:00:00Z'
+        coverage_end_date: '2022-07-01'
+        coverage_start_date: '2021-07-01'
+        current_benefit_tier:
+          description: A tier for testing purposes
+          display_cost: ~$100
+          id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+          name: Premium
+        id: 0073f4b5-b669-4b4a-b963-2a477f4e75a1
+        number_of_affected_employees: 10
+        renewal_selection_end_date: '2021-05-01'
+        renewal_selection_instructions: 'We are delighted to announce our new Global Life Insurance plans, now available in 66 countries.
+
+          This addition is set to significantly enhance the benefits package for your international team.
+
+          Selection Deadline: Review and choose the right Global Life Insurance plan for each country where your team is based by 11:59 PM on December 31, 2023.
+
+          We offer flexible coverage options from $50,000 to $600,000, so take your time to decide what''s best for your team.
+
+          If you don''t make a selection within this period, your team members won''t be enrolled in the Global Life Insurance.
+
+          If you wish to do so anytime next year, please reach out to help@remote.com
+
+          For more information on how benefits work in different countries, check out our Global <a href="https://remote.com/benefits-guide/global-life-insurance">benefits guide</a>.
+
+          '
+        renewal_selection_start_date: '2021-03-01'
+      properties:
+        benefit_group:
+          $ref: '#/components/schemas/BenefitRenewalRequests.MinimalBenefitGroup'
+        benefit_renewal_response:
+          allOf:
+          - $ref: '#/components/schemas/BenefitRenewalRequests.MinimalBenefitRenewalResponse'
+          example:
+            benefit_tier:
+              description: A tier for testing purposes
+              display_cost: ~$100
+              id: 163d8f6c-2440-4f45-918b-d095f9e0ef79
+              name: Premium
+            updated_at: '2021-07-01T00:00:00Z'
+          title: MaybeBenefitRenewalRequests.MinimalBenefitRenewalResponse
+          type:
+          - object
+          - 'null'
+        coverage_end_date:
+          $ref: '#/components/schemas/Date'
+        coverage_start_date:
+          $ref: '#/components/schemas/Date'
+        current_benefit_tier:
+          $ref: '#/components/schemas/NullableMinimalBenefitTier'
+        id:
+          description: The unique identifier (UUID) of the benefit renewal request.
+          type: string
+        number_of_affected_employees:
+          description: The number of employees who will be affected by this benefit renewal.
+          type: integer
+        renewal_selection_end_date:
+          $ref: '#/components/schemas/Date'
+        renewal_selection_instructions:
+          description: Instructions for the employer about the renewal process, available plans, and deadlines.
+          type: string
+        renewal_selection_start_date:
+          $ref: '#/components/schemas/Date'
+      required:
+      - id
+      - coverage_start_date
+      - coverage_end_date
+      - renewal_selection_start_date
+      - renewal_selection_end_date
+      - renewal_selection_instructions
+      - benefit_group
+      - benefit_renewal_response
+      - number_of_affected_employees
+      title: BenefitRenewalRequests.BenefitRenewalRequest
+      type: object
+    Date:
+      description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+      example: '2021-07-01'
+      format: date
+      title: Date
+      type: string
+    BenefitRenewalRequests.BenefitRenewalRequestFormResponse:
+      additionalProperties: false
+      description: 'Benefit Renewal Request Form Response, an object with required and optional fields, its descriptions and suggested presentation.
+
+        '
+      properties:
+        data:
+          type: object
+      title: BenefitRenewalRequests.BenefitRenewalRequestFormResponse
+      type: object
+    CountrySummariesResponse:
+      additionalProperties: false
+      description: Response containing a company's benefit offering summaries broken down by country. Each country includes aggregate enrollment statistics and details of all offered benefit groups and tiers.
+      example:
+        data:
+          company_id: 79297cfd-cf60-4cf4-a70f-ac2061d72a74
+          country_summaries:
+          - country:
+              alpha_2_code: PT
+              code: PRT
+              contractor_products_available:
+              - standard
+              - plus
+              - cor
+              country_subdivisions:
+              - code: PT-06
+                name: Coimbra
+                subdivision_type: District
+              - code: PT-11
+                name: Lisboa
+                subdivision_type: District
+              employment_agreement_preview_available: true
+              eor_onboarding: true
+              locked_benefits: after_first_hire
+              name: Portugal
+              region: Europe
+              subregion: Southern Europe
+              supported_json_schemas:
+              - additional_documents
+              - address_details
+              - administrative_details
+              - employment-basic-information
+              - bank_account_details
+              - contract_details
+              - emergency_contact
+            employee_stats:
+              number_of_employees_enrolled: 10
+              number_of_employees_offered: 12
+            offered_benefit_groups:
+            - benefit_group:
+                id: 54297cfd-cf60-4cf4-a70f-ac2061d72b44
+                name: Health
+                policy_end_date: '2024-12-31'
+                policy_start_date: '2024-01-01'
+              employee_stats:
+                number_of_employees_enrolled: 10
+                number_of_employees_offered: 12
+              offered_benefit_tiers:
+              - benefit_tier:
+                  description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
+                  id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
+                  name: Premium 2023 (Medical, Dental and Vision)
+                  providers:
+                  - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+                    name: Health Provider
+                employee_stats:
+                  number_of_employees_enrolled: 10
+                  number_of_employees_offered: 12
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            company_id:
+              description: The unique identifier (UUID) of the company these benefit summaries belong to.
+              type: string
+            country_summaries:
+              description: Benefit offering summaries for each country where the company has employees.
+              items:
+                $ref: '#/components/schemas/CountrySummary'
+              type: array
+          required:
+          - company_id
+          - country_summaries
+          type: object
+      required:
+      - data
+      title: CountrySummariesResponse
+      type: object
+    BenefitTier:
+      additionalProperties: false
+      description: A specific coverage level within a benefit group. For example, a "Health" benefit group might have tiers like "Basic", "Standard", and "Premium", each with different coverage and providers.
+      example:
+        description: This is the premium tier for 2023 that includes medical, dental and vision benefits.
+        id: 66297cfd-cf60-4cf4-a70f-ac2561d92b04
+        name: Premium 2023 (Medical, Dental and Vision)
+        providers:
+        - id: 88297cfd-cf60-4cf4-a70f-ac2861d92b87
+          name: Health Provider
+      properties:
+        description:
+          description: A detailed description of what this tier covers, including the types of benefits included.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the benefit tier.
+          type: string
+        name:
+          description: The name of this tier (e.g., "Premium 2024 (Medical, Dental and Vision)").
+          type: string
+        providers:
+          description: The insurance carriers or providers associated with this tier.
+          items:
+            $ref: '#/components/schemas/BenefitProvider'
+          type: array
+      required:
+      - id
+      - name
+      - description
+      - providers
+      title: BenefitTier
+      type: object
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
+      example:
+        message: '{resource} not found'
+      properties:
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
+      type: object
+    SuccessResponse:
+      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
+      example:
+        data:
+          status: ok
+      properties:
+        data:
+          properties:
+            status:
+              description: The result status. Always `"ok"` for successful operations.
+              type: string
+          type: object
+      required:
+      - data
+      title: SuccessResponse
       type: object
     BenefitRenewalRequests.MinimalBenefitGroup:
       additionalProperties: false

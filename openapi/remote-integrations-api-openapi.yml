@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: Remote Address Details Integrations API
+  title: Remote Integrations API
   version: 0.1.0
 servers:
 - url: https://gateway.remote.com/
@@ -26,9 +26,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View help articles (`help_center_article:read`) | - |
-
-        '
+        | Manage company resources (`company_admin`) | View help articles (`help_center_article:read`) | - |'
       operationId: get_v1_help-center-articles_id
       parameters:
       - description: Help Center Article Zendesk ID
@@ -122,9 +120,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View webhooks (`webhook:read`) | Manage webhooks (`webhook:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View webhooks (`webhook:read`) | Manage webhooks (`webhook:write`) |'
       operationId: get_v1_webhook-events
       parameters:
       - description: Filter by webhook event type
@@ -250,9 +246,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |'
       operationId: post_v1_webhook-events_replay
       parameters: []
       requestBody:
@@ -310,9 +304,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |'
       operationId: delete_v1_webhook-callbacks_id
       parameters:
       - description: 'Requires a Company-scoped access token obtained through the Authorization Code flow or the Refresh Token flow.
@@ -385,9 +377,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |'
       operationId: patch_v1_webhook-callbacks_id
       parameters:
       - description: Webhook Callback ID
@@ -456,9 +446,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | - | Manage webhooks (`webhook:write`) |'
       operationId: post_v1_webhook-callbacks
       parameters:
       - description: 'This endpoint works with any of the access tokens provided. You can use an access
@@ -659,9 +647,7 @@ paths:
 
         |---|---|---|
 
-        | Manage employments (`employments`) | - | Manage custom fields (`custom_field:write`) |
-
-        '
+        | Manage employments (`employments`) | - | Manage custom fields (`custom_field:write`) |'
       operationId: get_v1_custom-fields
       parameters:
       - description: Starts fetching records after the given page
@@ -735,9 +721,7 @@ paths:
 
         |---|---|---|
 
-        | Manage employments (`employments`) | View custom fields (`custom_field:read`) | Manage custom fields (`custom_field:write`) |
-
-        '
+        | Manage employments (`employments`) | View custom fields (`custom_field:read`) | Manage custom fields (`custom_field:write`) |'
       operationId: post_v1_custom-fields
       parameters: []
       requestBody:
@@ -804,9 +788,7 @@ paths:
 
         |---|---|---|
 
-        | Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |
-
-        '
+        | Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |'
       operationId: get_v1_employments_employment_id_custom-fields
       parameters:
       - description: Employment ID
@@ -892,9 +874,7 @@ paths:
 
         |---|---|---|
 
-        | Manage company resources (`company_admin`) | View webhooks (`webhook:read`) | Manage webhooks (`webhook:write`) |
-
-        '
+        | Manage company resources (`company_admin`) | View webhooks (`webhook:read`) | Manage webhooks (`webhook:write`) |'
       operationId: get_v1_companies_company_id_webhook-callbacks
       parameters:
       - description: Company ID
@@ -955,9 +935,7 @@ paths:
 
         |---|---|---|
 
-        | Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |
-
-        '
+        | Manage employments (`employments`) | View custom field values (`custom_field_value:read`) | Manage custom field values (`custom_field_value:write`) |'
       operationId: get_v1_custom-fields_custom_field_id_values_employment_id
       parameters:
       - description: Custom field ID
@@ -1030,9 +1008,7 @@ paths:
 
         |---|---|---|
 
-        | Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |
-
-        '
+        | Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |'
       operationId: patch_v1_custom-fields_custom_field_id_values_employment_id (2)
       parameters:
       - description: Custom field ID
@@ -1114,9 +1090,7 @@ paths:
 
         |---|---|---|
 
-        | Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |
-
-        '
+        | Manage employments (`employments`) | - | Manage custom field values (`custom_field_value:write`) |'
       operationId: patch_v1_custom-fields_custom_field_id_values_employment_id
       parameters:
       - description: Custom field ID
@@ -1226,67 +1200,102 @@ paths:
       summary: Get group by ID via SCIM v2.0
       tags:
       - Integrations
+webhooks:
+  custom_field.value_updated:
+    post:
+      deprecated: false
+      description: This event is triggered when a custom field value is updated.
+      summary: custom_field.value_updated
+      tags:
+      - Integrations
+      responses:
+        2XX:
+          description: Any 200 response confirms that the webhook was delivered.
+      security: []
+      operationId: custom_field.value_updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - custom_field_id
+              - employment_id
+              - event_type
+              - company_id
+              example:
+                company_id: d2091b1e-b1a4-437a-91ea-2809ffbb6d59
+                custom_field_id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+                employment_id: 2614f814-b08e-4c8e-8c4d-ddbcc4692d99
+                event_type: custom_field.value_updated
+              properties:
+                employment_id:
+                  type: string
+                  description: The unique identifier of the related employment.
+                company_id:
+                  type: string
+                  description: The unique identifier of the related company.
+                event_type:
+                  type: string
+                  description: The webhook event type identifier.
+                custom_field_id:
+                  type: string
+                  description: The unique identifier of the custom field.
 components:
   schemas:
-    CreateSingleSelectCustomFieldDefinitionParams:
+    BeforeAfterRequiredParams:
       additionalProperties: false
-      description: Schema for creating a single select custom field definition
       example:
-        data_entry_access: company_admin_only
-        metadata:
-          options:
-          - S
-          - M
-          - L
-          - XL
-        name: T-Shirt Size
-        required: false
-        type: single_select
-        visibility_scope: everyone
+        after: '2025-01-02T00:00:00Z'
+        before: '2025-01-01T00:00:00Z'
       properties:
-        data_entry_access:
-          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
-        metadata:
-          $ref: '#/components/schemas/SingleSelectMetadata'
-        name:
+        after:
+          description: Only replay events triggered after this timestamp (ISO 8601).
+          example: '2025-01-01T00:00:00Z'
           type: string
-        required:
+        before:
+          description: Only replay events triggered before this timestamp (ISO 8601).
+          example: '2025-01-01T00:00:00Z'
+          type: string
+        company_id:
+          description: Optional filter to only replay events for a specific company.
+          example: 123e4567-e89b-12d3-a456-426614174000
+          type: string
+        event_type:
+          description: Optional filter to only replay events of this type.
+          example: timesheet.created
+          type: string
+        successfully_delivered:
+          description: Optional filter by delivery status. Set to false to replay only failed deliveries.
+          example: true
           type: boolean
-        type:
-          enum:
-          - single_select
-          type: string
-        visibility_scope:
-          $ref: '#/components/schemas/CustomFieldVisibilityScope'
       required:
-      - name
-      - type
-      - required
-      - data_entry_access
-      - visibility_scope
-      - metadata
-      title: CreateSingleSelectCustomFieldDefinitionParams
+      - before
+      - after
+      title: BeforeAfterRequiredParams
       type: object
-    ParameterError:
+    CreateEmploymentCustomFieldResponse:
+      description: Response returned after successfully creating a new custom field definition.
       example:
-        code: invalid_param
-        message: Invalid parameter
-        param: employment_id
+        data:
+          custom_field:
+            data_entry_access: company_admin_only
+            id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+            metadata: {}
+            name: Internal ID
+            required: true
+            type: string
+            visibility_scope: everyone
       properties:
-        code:
-          description: An error code that describes the nature of the error.
-          type: string
-        message:
-          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
-          type: string
-        param:
-          description: The parameter that lead to the error message.
-          type: string
+        data:
+          properties:
+            custom_field:
+              $ref: '#/components/schemas/EmploymentCustomField'
+          required:
+          - custom_field
+          type: object
       required:
-      - code
-      - message
-      - param
-      title: ParameterError
+      - data
+      title: CreateEmploymentCustomFieldResponse
       type: object
     ListEmploymentCustomFieldsResponse:
       description: Response schema listing many custom_fields
@@ -1320,175 +1329,6 @@ components:
               type: integer
           type: object
       title: ListEmploymentCustomFieldsResponse
-      type: object
-    SingleSelectMetadata:
-      description: The metadata for a single select custom field
-      example:
-        options:
-        - S
-        - M
-        - L
-        - XL
-      properties:
-        options:
-          items:
-            nullable: false
-            type: string
-          minItems: 1
-          type: array
-      required:
-      - options
-      title: SingleSelectMetadata
-      type: object
-    SuccessResponse:
-      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
-      example:
-        data:
-          status: ok
-      properties:
-        data:
-          properties:
-            status:
-              description: The result status. Always `"ok"` for successful operations.
-              type: string
-          type: object
-      required:
-      - data
-      title: SuccessResponse
-      type: object
-    WebhookEvent:
-      additionalProperties: false
-      example:
-        company_id: 123e4567-e89b-12d3-a456-426614174000
-        event_type: timesheet.created
-        first_triggered_at: '2025-01-01T00:00:00Z'
-        id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
-        last_triggered_at: '2025-01-02T00:00:00Z'
-        successfully_delivered: true
-      properties:
-        company_id:
-          description: The unique identifier (UUID) of the company this event belongs to.
-          type: string
-        event_type:
-          description: The type of event that was triggered (e.g., "timesheet.created", "employment.activated").
-          type: string
-        first_triggered_at:
-          description: The timestamp when this event was first triggered.
-          type: string
-        id:
-          description: The unique identifier (UUID) of the webhook event.
-          type: string
-        last_triggered_at:
-          description: The timestamp of the most recent delivery attempt for this event.
-          type: string
-        successfully_delivered:
-          description: Whether the webhook event was successfully delivered to the callback URL (received a 2XX response).
-          type: boolean
-      required:
-      - id
-      - event_type
-      - successfully_delivered
-      - company_id
-      - first_triggered_at
-      - last_triggered_at
-      title: WebhookEvent
-      type: object
-    ListEmploymentCustomFieldValuePaginatedResponse:
-      description: Response schema listing many custom_field_values
-      example:
-        current_page: 1
-        custom_field_values:
-        - custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
-          name: Custom field
-          type: string
-          value: UXH34HG
-        total_count: 1
-        total_pages: 1
-      properties:
-        data:
-          properties:
-            current_page:
-              description: The current page among all of the total_pages
-              type: integer
-            custom_field_values:
-              items:
-                $ref: '#/components/schemas/ListEmploymentCustomFieldValueResponse'
-              type: array
-            total_count:
-              description: The total number of records in the result
-              type: integer
-            total_pages:
-              description: The total number of pages the user can go through
-              type: integer
-          type: object
-      title: ListEmploymentCustomFieldValuePaginatedResponse
-      type: object
-    Integrations.Scim.GroupListResponse:
-      additionalProperties: false
-      example:
-        Resources:
-        - displayName: Engineering
-          id: engineering-dept
-          members:
-          - display: John Doe
-            value: user-123-slug
-          meta:
-            created: '2024-01-01T00:00:00Z'
-            lastModified: '2024-01-01T00:00:00Z'
-            resourceType: Group
-          schemas:
-          - urn:ietf:params:scim:schemas:core:2.0:Group
-        itemsPerPage: 10
-        schemas:
-        - urn:ietf:params:scim:api:messages:2.0:ListResponse
-        startIndex: 1
-        totalResults: 10
-      properties:
-        Resources:
-          description: Array of group resources
-          items:
-            $ref: '#/components/schemas/Integrations.Scim.Group'
-          type: array
-        itemsPerPage:
-          description: Number of results returned in the current set
-          type: integer
-        schemas:
-          description: SCIM schema identifiers
-          items:
-            type: string
-          type: array
-        startIndex:
-          description: 1-based index of the first result in the current set
-          type: integer
-        totalResults:
-          description: Total number of results matching the query
-          type: integer
-      required:
-      - schemas
-      - totalResults
-      - startIndex
-      - itemsPerPage
-      - Resources
-      title: Integrations.Scim.GroupListResponse
-      type: object
-    EmploymentCustomFieldValueResponse:
-      description: Response containing a single custom field value for an employment.
-      example:
-        data:
-          custom_field_value:
-            custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
-            value: UXH34HG
-      properties:
-        data:
-          properties:
-            custom_field_value:
-              $ref: '#/components/schemas/EmploymentCustomFieldValue'
-          required:
-          - custom_field_value
-          type: object
-      required:
-      - data
-      title: EmploymentCustomFieldValueResponse
       type: object
     UnauthorizedResponse:
       description: Returned when the request does not include valid authentication credentials. Ensure you are passing a valid OAuth2 access token or API token in the Authorization header.
@@ -1637,181 +1477,6 @@ components:
       - url
       title: CreateWebhookCallbackParams
       type: object
-    UnprocessableEntityResponse:
-      anyOf:
-      - properties:
-          errors:
-            type: object
-        required:
-        - errors
-        type: object
-      - properties:
-          message:
-            oneOf:
-            - type: string
-            - $ref: '#/components/schemas/ParameterError'
-            - items:
-                $ref: '#/components/schemas/ParameterError'
-              title: ParameterErrors
-              type: array
-            - $ref: '#/components/schemas/ActionError'
-            - items:
-                $ref: '#/components/schemas/ActionError'
-              title: ActionErrors
-              type: array
-        required:
-        - message
-        type: object
-      example:
-        errors:
-          some_field:
-          - is invalid
-      title: UnprocessableEntityResponse
-      type: object
-    CurrencyCode:
-      description: Currency code of the SWIFT fee. Only present when processing_fee is set.
-      example: BRL
-      maxLength: 3
-      minLength: 3
-      nullable: true
-      title: CurrencyCode
-      type: string
-    HelpCenterArticleResponse:
-      additionalProperties: false
-      description: Help Center Article Response
-      example:
-        data:
-          help_center_article:
-            body: Help Center Article Body
-            html_url: https://www.example.com
-            title: Help Center Article
-            zendesk_id: 12345679
-      properties:
-        data:
-          additionalProperties: false
-          properties:
-            help_center_article:
-              $ref: '#/components/schemas/HelpCenterArticle'
-          required:
-          - help_center_article
-          type: object
-      required:
-      - data
-      title: HelpCenterArticleResponse
-      type: object
-    Integrations.Scim.User:
-      additionalProperties: false
-      example:
-        active: true
-        department: Engineering
-        emails:
-        - primary: true
-          type: work
-          value: john.doe@example.com
-        employeeNumber: EMP001
-        id: '123456'
-        manager:
-          displayName: Jane Manager
-          value: '789012'
-        meta:
-          created: '2023-01-01T00:00:00Z'
-          lastModified: '2023-01-01T00:00:00Z'
-          resourceType: User
-        name:
-          familyName: Doe
-          formatted: John Doe
-          givenName: John
-        schemas:
-        - urn:ietf:params:scim:schemas:core:2.0:User
-        - urn:ietf:params:scim:schemas:extension:enterprise:2.0:User
-        userName: john.doe@example.com
-      properties:
-        active:
-          description: Whether the user is active
-          type: boolean
-        department:
-          description: Identifies the name of a department (Enterprise User extension)
-          type: string
-        emails:
-          items:
-            properties:
-              primary:
-                description: Whether this is the primary email
-                type: boolean
-              type:
-                description: Type of email (e.g., 'work')
-                type: string
-              value:
-                description: Email address
-                type: string
-            required:
-            - value
-            - type
-            type: object
-          type: array
-        employeeNumber:
-          description: Numeric or alphanumeric identifier assigned to a person (Enterprise User extension)
-          type: string
-        id:
-          description: Unique identifier for the user
-          type: string
-        manager:
-          description: The user's manager (Enterprise User extension)
-          properties:
-            $ref:
-              description: The URI of the SCIM resource representing the user's manager
-              type: string
-            displayName:
-              description: The displayName of the user's manager
-              type: string
-            value:
-              description: The id of the SCIM resource representing the user's manager
-              type: string
-          type: object
-        meta:
-          properties:
-            created:
-              description: Creation timestamp
-              type: string
-            lastModified:
-              description: Last modification timestamp
-              type: string
-            resourceType:
-              description: Resource type
-              type: string
-          type: object
-        name:
-          properties:
-            familyName:
-              description: Last name
-              type: string
-            formatted:
-              description: Full name
-              type: string
-            givenName:
-              description: First name
-              type: string
-          required:
-          - givenName
-          - familyName
-          type: object
-        schemas:
-          description: SCIM schema identifiers
-          items:
-            type: string
-          type: array
-        userName:
-          description: Username for the user
-          type: string
-      required:
-      - schemas
-      - id
-      - userName
-      - name
-      - emails
-      - active
-      title: Integrations.Scim.User
-      type: object
     CreateCurrencyCustomFieldDefinitionParams:
       additionalProperties: false
       description: Schema for creating a currency custom field definition
@@ -1850,100 +1515,63 @@ components:
       - metadata
       title: CreateCurrencyCustomFieldDefinitionParams
       type: object
-    CustomFieldDataType:
-      description: The datatype of the custom field
-      enum:
-      - string
-      - text
-      - integer
-      - date
-      - boolean
-      - percentage
-      - decimal
-      - link
-      - currency
-      - single_select
-      example: string
-      title: CustomFieldDataType
-      type: string
-    EmploymentCustomFieldValue:
-      description: The value of a custom field for a specific employment. The type of `value` depends on the custom field's data type.
+    ListWebhookEventsResponse:
+      description: Response schema listing many webhook_events
       example:
-        custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
-        value: UXH34HG
+        current_page: 1
+        total_count: 1
+        total_pages: 1
+        webhook_events:
+        - company_id: 123e4567-e89b-12d3-a456-426614174000
+          event_type: timesheet.created
+          first_triggered_at: '2025-01-01T00:00:00Z'
+          id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+          last_triggered_at: '2025-01-02T00:00:00Z'
+          successfully_delivered: true
       properties:
-        custom_field_id:
-          description: The unique identifier (UUID) of the custom field definition this value belongs to.
-          type: string
-        value:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: boolean
-          - description: Decimal value represented as a String
-            format: decimal
-            type: number
-          - $ref: '#/components/schemas/EmploymentCustomFieldValueJsonValue'
-          nullable: true
-      required:
-      - custom_field_id
-      - value
-      title: EmploymentCustomFieldValue
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+            webhook_events:
+              items:
+                $ref: '#/components/schemas/WebhookEvent'
+              type: array
+          type: object
+      title: ListWebhookEventsResponse
       type: object
-    ActionError:
-      properties:
-        action:
-          description: The action that lead to the error message.
-          type: string
-        code:
-          description: An error code that describes the nature of the error.
-          type: string
-        message:
-          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
-          type: string
-      required:
-      - code
-      - message
-      - action
-      title: ActionError
-      type: object
-    Integrations.Scim.UserListResponse:
+    Integrations.Scim.GroupListResponse:
       additionalProperties: false
       example:
         Resources:
-        - active: true
-          department: Engineering
-          emails:
-          - primary: true
-            type: work
-            value: john.doe@example.com
-          employeeNumber: EMP001
-          id: '123456'
-          manager:
-            displayName: Jane Manager
-            value: '789012'
+        - displayName: Engineering
+          id: engineering-dept
+          members:
+          - display: John Doe
+            value: user-123-slug
           meta:
-            created: '2023-01-01T00:00:00Z'
-            lastModified: '2023-01-01T00:00:00Z'
-            resourceType: User
-          name:
-            familyName: Doe
-            formatted: John Doe
-            givenName: John
+            created: '2024-01-01T00:00:00Z'
+            lastModified: '2024-01-01T00:00:00Z'
+            resourceType: Group
           schemas:
-          - urn:ietf:params:scim:schemas:core:2.0:User
-          - urn:ietf:params:scim:schemas:extension:enterprise:2.0:User
-          userName: john.doe@example.com
-        itemsPerPage: 50
+          - urn:ietf:params:scim:schemas:core:2.0:Group
+        itemsPerPage: 10
         schemas:
         - urn:ietf:params:scim:api:messages:2.0:ListResponse
         startIndex: 1
-        totalResults: 100
+        totalResults: 10
       properties:
         Resources:
-          description: Array of user resources
+          description: Array of group resources
           items:
-            $ref: '#/components/schemas/Integrations.Scim.User'
+            $ref: '#/components/schemas/Integrations.Scim.Group'
           type: array
         itemsPerPage:
           description: Number of results returned in the current set
@@ -1965,57 +1593,8 @@ components:
       - startIndex
       - itemsPerPage
       - Resources
-      title: Integrations.Scim.UserListResponse
+      title: Integrations.Scim.GroupListResponse
       type: object
-    ListEmploymentCustomFieldValueResponse:
-      description: A custom field value as returned in list responses, including the field definition details alongside the value.
-      example:
-        custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
-        name: Custom field
-        type: string
-        value: UXH34HG
-      properties:
-        custom_field_id:
-          description: The unique identifier (UUID) of the custom field definition.
-          type: string
-        name:
-          description: The display name of the custom field.
-          type: string
-        type:
-          description: The data type of the custom field (e.g., "string", "integer", "single_select").
-          type: string
-        value:
-          anyOf:
-          - type: string
-          - type: integer
-          - type: boolean
-          - description: Decimal value represented as a String
-            format: decimal
-            type: number
-          - $ref: '#/components/schemas/EmploymentCustomFieldValueJsonValue'
-          nullable: true
-      required:
-      - custom_field_id
-      - name
-      - type
-      - value
-      title: ListEmploymentCustomFieldValueResponse
-      type: object
-    CustomFieldSimpleDataType:
-      additionalProperties: false
-      description: The datatype of the custom field
-      enum:
-      - string
-      - text
-      - integer
-      - date
-      - boolean
-      - percentage
-      - decimal
-      - link
-      example: string
-      title: CustomFieldSimpleDataType
-      type: string
     WebhookCallback:
       description: A registered webhook callback endpoint. Remote sends HTTP POST requests to the configured URL when subscribed events occur.
       example:
@@ -2170,32 +1749,175 @@ components:
       - url
       title: WebhookCallback
       type: object
-    UpdateEmploymentCustomFieldValueParams:
-      description: Schema for updating a custom field value.
+    CustomFieldDataType:
+      description: The datatype of the custom field
+      enum:
+      - string
+      - text
+      - integer
+      - date
+      - boolean
+      - percentage
+      - decimal
+      - link
+      - currency
+      - single_select
+      example: string
+      title: CustomFieldDataType
+      type: string
+    ListEmploymentCustomFieldValuePaginatedResponse:
+      description: Response schema listing many custom_field_values
       example:
+        current_page: 1
+        custom_field_values:
+        - custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+          name: Custom field
+          type: string
+          value: UXH34HG
+        total_count: 1
+        total_pages: 1
+      properties:
+        data:
+          properties:
+            current_page:
+              description: The current page among all of the total_pages
+              type: integer
+            custom_field_values:
+              items:
+                $ref: '#/components/schemas/ListEmploymentCustomFieldValueResponse'
+              type: array
+            total_count:
+              description: The total number of records in the result
+              type: integer
+            total_pages:
+              description: The total number of pages the user can go through
+              type: integer
+          type: object
+      title: ListEmploymentCustomFieldValuePaginatedResponse
+      type: object
+    ListWebhookCallbacksResponse:
+      example:
+        data:
+        - id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+          subscribed_events:
+          - employment.onboarding_task.completed
+          url: https://example.com/callback
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WebhookCallback'
+          type: array
+      required:
+      - data
+      title: ListWebhookCallbacksResponse
+      type: object
+    ReplayWebhookEventsParams:
+      additionalProperties: false
+      description: Replay webhook events params
+      example:
+        after: '2025-01-02T00:00:00Z'
+        before: '2025-01-01T00:00:00Z'
+        company_id: 123e4567-e89b-12d3-a456-426614174000
+        event_type: timesheet.created
+        successfully_delivered: true
+      oneOf:
+      - $ref: '#/components/schemas/IdsRequiredParams'
+      - $ref: '#/components/schemas/BeforeAfterRequiredParams'
+      title: ReplayWebhookEventsParams
+      type: object
+    EmploymentCustomField:
+      description: A custom field definition that can be applied to employments within a company. Custom fields allow you to store additional structured data on employments beyond the standard fields.
+      example:
+        data_entry_access: company_admin_only
+        id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+        metadata: {}
+        name: Internal ID
+        required: true
+        type: string
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        id:
+          description: The unique identifier (UUID) of the custom field definition.
+          type: string
+        metadata:
+          description: Additional configuration for the field. For `single_select` fields, contains the list of selectable options. For `currency` fields, contains the currency code. Null for simple field types.
+          type:
+          - object
+          - 'null'
+        name:
+          description: The display name of the custom field (e.g., "Internal ID", "T-Shirt Size").
+          type: string
+        required:
+          description: Whether this custom field is required for all employments in the company.
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CustomFieldDataType'
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - id
+      - name
+      - type
+      - required
+      - visibility_scope
+      - data_entry_access
+      - metadata
+      title: EmploymentCustomField
+      type: object
+    CustomFieldDataEntryAccess:
+      description: Who can enter or edit values for this custom field. Controls which users see the field as editable vs read-only.
+      enum:
+      - company_admin_only
+      - employee_only
+      - everyone
+      example: company_admin_only
+      title: CustomFieldDataEntryAccess
+      type: string
+    EmploymentCustomFieldValue:
+      description: The value of a custom field for a specific employment. The type of `value` depends on the custom field's data type.
+      example:
+        custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
         value: UXH34HG
       properties:
+        custom_field_id:
+          description: The unique identifier (UUID) of the custom field definition this value belongs to.
+          type: string
         value:
           anyOf:
-          - description: For string, text, or link data types. Also decimal values represented as strings, including percentage, decimal, and currency data types. Currency values must be provided in cents (e.g. "1042.00" for $10.42)
-            type: string
-          - description: For integer data type.
-            type: integer
-          - description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
-            example: '2021-07-01'
-            format: date
-            title: Date
-            type: string
-          - description: For boolean data type.
-            type: boolean
-          - description: Selected option value. For single select data.
-            example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
-            format: uuid
-            title: OptionValue
-            type: string
+          - type: string
+          - type: integer
+          - type: boolean
+          - description: Decimal value represented as a String
+            format: decimal
+            type: number
+          - $ref: '#/components/schemas/EmploymentCustomFieldValueJsonValue'
       required:
+      - custom_field_id
       - value
-      title: UpdateEmploymentCustomFieldValueParams
+      title: EmploymentCustomFieldValue
+      type: object
+    ParameterError:
+      example:
+        code: invalid_param
+        message: Invalid parameter
+        param: employment_id
+      properties:
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+        param:
+          description: The parameter that lead to the error message.
+          type: string
+      required:
+      - code
+      - message
+      - param
+      title: ParameterError
       type: object
     ForbiddenResponse:
       description: Returned when the authenticated user or token does not have permission to perform the requested action. Check that the token has the required OAuth2 scopes and that the user has the necessary role.
@@ -2208,6 +1930,424 @@ components:
       required:
       - message
       title: ForbiddenResponse
+      type: object
+    CreateSingleSelectCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a single select custom field definition
+      example:
+        data_entry_access: company_admin_only
+        metadata:
+          options:
+          - S
+          - M
+          - L
+          - XL
+        name: T-Shirt Size
+        required: false
+        type: single_select
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        metadata:
+          $ref: '#/components/schemas/SingleSelectMetadata'
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          enum:
+          - single_select
+          type: string
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - name
+      - type
+      - required
+      - data_entry_access
+      - visibility_scope
+      - metadata
+      title: CreateSingleSelectCustomFieldDefinitionParams
+      type: object
+    Integrations.Scim.User:
+      additionalProperties: false
+      example:
+        active: true
+        department: Engineering
+        emails:
+        - primary: true
+          type: work
+          value: john.doe@example.com
+        employeeNumber: EMP001
+        id: '123456'
+        manager:
+          displayName: Jane Manager
+          value: '789012'
+        meta:
+          created: '2023-01-01T00:00:00Z'
+          lastModified: '2023-01-01T00:00:00Z'
+          resourceType: User
+        name:
+          familyName: Doe
+          formatted: John Doe
+          givenName: John
+        schemas:
+        - urn:ietf:params:scim:schemas:core:2.0:User
+        - urn:ietf:params:scim:schemas:extension:enterprise:2.0:User
+        userName: john.doe@example.com
+      properties:
+        active:
+          description: Whether the user is active
+          type: boolean
+        department:
+          description: Identifies the name of a department (Enterprise User extension)
+          type: string
+        emails:
+          items:
+            properties:
+              primary:
+                description: Whether this is the primary email
+                type: boolean
+              type:
+                description: Type of email (e.g., 'work')
+                type: string
+              value:
+                description: Email address
+                type: string
+            required:
+            - value
+            - type
+            type: object
+          type: array
+        employeeNumber:
+          description: Numeric or alphanumeric identifier assigned to a person (Enterprise User extension)
+          type: string
+        id:
+          description: Unique identifier for the user
+          type: string
+        manager:
+          description: The user's manager (Enterprise User extension)
+          properties:
+            $ref:
+              description: The URI of the SCIM resource representing the user's manager
+              type: string
+            displayName:
+              description: The displayName of the user's manager
+              type: string
+            value:
+              description: The id of the SCIM resource representing the user's manager
+              type: string
+          type: object
+        meta:
+          properties:
+            created:
+              description: Creation timestamp
+              type: string
+            lastModified:
+              description: Last modification timestamp
+              type: string
+            resourceType:
+              description: Resource type
+              type: string
+          type: object
+        name:
+          properties:
+            familyName:
+              description: Last name
+              type: string
+            formatted:
+              description: Full name
+              type: string
+            givenName:
+              description: First name
+              type: string
+          required:
+          - givenName
+          - familyName
+          type: object
+        schemas:
+          description: SCIM schema identifiers
+          items:
+            type: string
+          type: array
+        userName:
+          description: Username for the user
+          type: string
+      required:
+      - schemas
+      - id
+      - userName
+      - name
+      - emails
+      - active
+      title: Integrations.Scim.User
+      type: object
+    Integrations.Scim.UserListResponse:
+      additionalProperties: false
+      example:
+        Resources:
+        - active: true
+          department: Engineering
+          emails:
+          - primary: true
+            type: work
+            value: john.doe@example.com
+          employeeNumber: EMP001
+          id: '123456'
+          manager:
+            displayName: Jane Manager
+            value: '789012'
+          meta:
+            created: '2023-01-01T00:00:00Z'
+            lastModified: '2023-01-01T00:00:00Z'
+            resourceType: User
+          name:
+            familyName: Doe
+            formatted: John Doe
+            givenName: John
+          schemas:
+          - urn:ietf:params:scim:schemas:core:2.0:User
+          - urn:ietf:params:scim:schemas:extension:enterprise:2.0:User
+          userName: john.doe@example.com
+        itemsPerPage: 50
+        schemas:
+        - urn:ietf:params:scim:api:messages:2.0:ListResponse
+        startIndex: 1
+        totalResults: 100
+      properties:
+        Resources:
+          description: Array of user resources
+          items:
+            $ref: '#/components/schemas/Integrations.Scim.User'
+          type: array
+        itemsPerPage:
+          description: Number of results returned in the current set
+          type: integer
+        schemas:
+          description: SCIM schema identifiers
+          items:
+            type: string
+          type: array
+        startIndex:
+          description: 1-based index of the first result in the current set
+          type: integer
+        totalResults:
+          description: Total number of results matching the query
+          type: integer
+      required:
+      - schemas
+      - totalResults
+      - startIndex
+      - itemsPerPage
+      - Resources
+      title: Integrations.Scim.UserListResponse
+      type: object
+    HelpCenterArticle:
+      additionalProperties: false
+      description: Help Center Article
+      example:
+        body: Help Center Article Body
+        html_url: https://www.example.com
+        title: Help Center Article
+        zendesk_id: 12345679
+      properties:
+        body:
+          description: Body of the article
+          type: string
+        html_url:
+          description: HTML URL of the article
+          type: string
+        title:
+          description: Title of the article
+          type: string
+        zendesk_id:
+          description: Zendesk ID of the article
+          type: integer
+      required:
+      - zendesk_id
+      - title
+      - body
+      - html_url
+      title: HelpCenterArticle
+      type: object
+    EmploymentCustomFieldValueJsonValue:
+      description: The value for a single-select custom field, containing both the option ID and its human-readable label.
+      example:
+        selected_option: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb55
+        selected_option_label: XL
+      properties:
+        selected_option:
+          description: The unique identifier of the selected option.
+          type: string
+        selected_option_label:
+          description: The human-readable label of the selected option (e.g., "XL").
+          type: string
+      required:
+      - selected_option
+      - selected_option_label
+      title: EmploymentCustomFieldValueJsonValue
+      type: object
+    IdsRequiredParams:
+      additionalProperties: false
+      example:
+        ids:
+        - 0073fcb5-b669-4e4a-b963-2a47744e75a1
+      properties:
+        ids:
+          description: A list of webhook event IDs to replay.
+          example:
+          - 0073fcb5-b669-4e4a-b963-2a47744e75a1
+          items:
+            type: string
+          type: array
+      required:
+      - ids
+      title: IdsRequiredParams
+      type: object
+    ListEmploymentCustomFieldValueResponse:
+      description: A custom field value as returned in list responses, including the field definition details alongside the value.
+      example:
+        custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+        name: Custom field
+        type: string
+        value: UXH34HG
+      properties:
+        custom_field_id:
+          description: The unique identifier (UUID) of the custom field definition.
+          type: string
+        name:
+          description: The display name of the custom field.
+          type: string
+        type:
+          description: The data type of the custom field (e.g., "string", "integer", "single_select").
+          type: string
+        value:
+          anyOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - description: Decimal value represented as a String
+            format: decimal
+            type: number
+          - $ref: '#/components/schemas/EmploymentCustomFieldValueJsonValue'
+      required:
+      - custom_field_id
+      - name
+      - type
+      - value
+      title: ListEmploymentCustomFieldValueResponse
+      type: object
+    CreateCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a custom field definition
+      example:
+        data_entry_access: company_admin_only
+        name: Internal ID
+        required: false
+        type: string
+        visibility_scope: everyone
+      oneOf:
+      - $ref: '#/components/schemas/CreateGeneralCustomFieldDefinitionParams'
+      - $ref: '#/components/schemas/CreateSingleSelectCustomFieldDefinitionParams'
+      - $ref: '#/components/schemas/CreateCurrencyCustomFieldDefinitionParams'
+      title: CreateCustomFieldDefinitionParams
+    CustomFieldSimpleDataType:
+      additionalProperties: false
+      description: The datatype of the custom field
+      enum:
+      - string
+      - text
+      - integer
+      - date
+      - boolean
+      - percentage
+      - decimal
+      - link
+      example: string
+      title: CustomFieldSimpleDataType
+      type: string
+    CreateGeneralCustomFieldDefinitionParams:
+      additionalProperties: false
+      description: Schema for creating a general custom field definition
+      example:
+        data_entry_access: company_admin_only
+        name: Internal ID
+        required: false
+        type: string
+        visibility_scope: everyone
+      properties:
+        data_entry_access:
+          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
+        name:
+          type: string
+        required:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/CustomFieldSimpleDataType'
+        visibility_scope:
+          $ref: '#/components/schemas/CustomFieldVisibilityScope'
+      required:
+      - name
+      - type
+      - required
+      - data_entry_access
+      - visibility_scope
+      title: CreateGeneralCustomFieldDefinitionParams
+      type: object
+    UnprocessableEntityResponse:
+      anyOf:
+      - properties:
+          errors:
+            type: object
+        required:
+        - errors
+        type: object
+      - properties:
+          message:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/ParameterError'
+            - items:
+                $ref: '#/components/schemas/ParameterError'
+              title: ParameterErrors
+              type: array
+            - $ref: '#/components/schemas/ActionError'
+            - items:
+                $ref: '#/components/schemas/ActionError'
+              title: ActionErrors
+              type: array
+        required:
+        - message
+        type: object
+      example:
+        errors:
+          some_field:
+          - is invalid
+      title: UnprocessableEntityResponse
+      type: object
+    HelpCenterArticleResponse:
+      additionalProperties: false
+      description: Help Center Article Response
+      example:
+        data:
+          help_center_article:
+            body: Help Center Article Body
+            html_url: https://www.example.com
+            title: Help Center Article
+            zendesk_id: 12345679
+      properties:
+        data:
+          additionalProperties: false
+          properties:
+            help_center_article:
+              $ref: '#/components/schemas/HelpCenterArticle'
+          required:
+          - help_center_article
+          type: object
+      required:
+      - data
+      title: HelpCenterArticleResponse
       type: object
     Integrations.Scim.Group:
       additionalProperties: false
@@ -2271,119 +2411,79 @@ components:
       - members
       title: Integrations.Scim.Group
       type: object
-    NotFoundResponse:
-      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
-      example:
-        message: '{resource} not found'
-      properties:
-        message:
-          description: A message indicating which resource was not found.
-          pattern: Not Found
-          type: string
-      title: NotFoundResponse
-      type: object
-    CustomFieldVisibilityScope:
-      description: Who can see this custom field and its values. Controls visibility across different user roles.
-      enum:
-      - company_admin_only
-      - everyone
-      example: everyone
-      title: CustomFieldVisibilityScope
-      type: string
-    EmploymentCustomField:
-      description: A custom field definition that can be applied to employments within a company. Custom fields allow you to store additional structured data on employments beyond the standard fields.
-      example:
-        data_entry_access: company_admin_only
-        id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
-        metadata: {}
-        name: Internal ID
-        required: true
-        type: string
-        visibility_scope: everyone
-      properties:
-        data_entry_access:
-          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
-        id:
-          description: The unique identifier (UUID) of the custom field definition.
-          type: string
-        metadata:
-          description: Additional configuration for the field. For `single_select` fields, contains the list of selectable options. For `currency` fields, contains the currency code. Null for simple field types.
-          nullable: true
-          type: object
-        name:
-          description: The display name of the custom field (e.g., "Internal ID", "T-Shirt Size").
-          type: string
-        required:
-          description: Whether this custom field is required for all employments in the company.
-          type: boolean
-        type:
-          $ref: '#/components/schemas/CustomFieldDataType'
-        visibility_scope:
-          $ref: '#/components/schemas/CustomFieldVisibilityScope'
-      required:
-      - id
-      - name
-      - type
-      - required
-      - visibility_scope
-      - data_entry_access
-      - metadata
-      title: EmploymentCustomField
-      type: object
-    IdsRequiredParams:
+    WebhookEvent:
       additionalProperties: false
       example:
-        ids:
-        - 0073fcb5-b669-4e4a-b963-2a47744e75a1
-      properties:
-        ids:
-          description: A list of webhook event IDs to replay.
-          example:
-          - 0073fcb5-b669-4e4a-b963-2a47744e75a1
-          items:
-            type: string
-          type: array
-      required:
-      - ids
-      title: IdsRequiredParams
-      type: object
-    CustomFieldDataEntryAccess:
-      description: Who can enter or edit values for this custom field. Controls which users see the field as editable vs read-only.
-      enum:
-      - company_admin_only
-      - employee_only
-      - everyone
-      example: company_admin_only
-      title: CustomFieldDataEntryAccess
-      type: string
-    ReplayWebhookEventsParams:
-      additionalProperties: false
-      description: Replay webhook events params
-      example:
-        after: '2025-01-02T00:00:00Z'
-        before: '2025-01-01T00:00:00Z'
         company_id: 123e4567-e89b-12d3-a456-426614174000
         event_type: timesheet.created
+        first_triggered_at: '2025-01-01T00:00:00Z'
+        id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+        last_triggered_at: '2025-01-02T00:00:00Z'
         successfully_delivered: true
-      oneOf:
-      - $ref: '#/components/schemas/IdsRequiredParams'
-      - $ref: '#/components/schemas/BeforeAfterRequiredParams'
-      title: ReplayWebhookEventsParams
+      properties:
+        company_id:
+          description: The unique identifier (UUID) of the company this event belongs to.
+          type: string
+        event_type:
+          description: The type of event that was triggered (e.g., "timesheet.created", "employment.activated").
+          type: string
+        first_triggered_at:
+          description: The timestamp when this event was first triggered.
+          type: string
+        id:
+          description: The unique identifier (UUID) of the webhook event.
+          type: string
+        last_triggered_at:
+          description: The timestamp of the most recent delivery attempt for this event.
+          type: string
+        successfully_delivered:
+          description: Whether the webhook event was successfully delivered to the callback URL (received a 2XX response).
+          type: boolean
+      required:
+      - id
+      - event_type
+      - successfully_delivered
+      - company_id
+      - first_triggered_at
+      - last_triggered_at
+      title: WebhookEvent
       type: object
-    CreateCustomFieldDefinitionParams:
-      additionalProperties: false
-      description: Schema for creating a custom field definition
+    ActionError:
+      properties:
+        action:
+          description: The action that lead to the error message.
+          type: string
+        code:
+          description: An error code that describes the nature of the error.
+          type: string
+        message:
+          description: A developer friendly error message that gives details on what the error was and how it may be remedied.
+          type: string
+      required:
+      - code
+      - message
+      - action
+      title: ActionError
+      type: object
+    EmploymentCustomFieldValueResponse:
+      description: Response containing a single custom field value for an employment.
       example:
-        data_entry_access: company_admin_only
-        name: Internal ID
-        required: false
-        type: string
-        visibility_scope: everyone
-      oneOf:
-      - $ref: '#/components/schemas/CreateGeneralCustomFieldDefinitionParams'
-      - $ref: '#/components/schemas/CreateSingleSelectCustomFieldDefinitionParams'
-      - $ref: '#/components/schemas/CreateCurrencyCustomFieldDefinitionParams'
-      title: CreateCustomFieldDefinitionParams
+        data:
+          custom_field_value:
+            custom_field_id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
+            value: UXH34HG
+      properties:
+        data:
+          properties:
+            custom_field_value:
+              $ref: '#/components/schemas/EmploymentCustomFieldValue'
+          required:
+          - custom_field_value
+          type: object
+      required:
+      - data
+      title: EmploymentCustomFieldValueResponse
+      type: object
     Integrations.Scim.ErrorResponse:
       additionalProperties: false
       example:
@@ -2403,8 +2503,9 @@ components:
           type: array
         scimType:
           description: SCIM error type
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         status:
           description: HTTP status code
           type: string
@@ -2414,37 +2515,35 @@ components:
       - status
       title: Integrations.Scim.ErrorResponse
       type: object
-    BeforeAfterRequiredParams:
-      additionalProperties: false
+    WebhookCallbackResponse:
+      description: Webhook callback response
       example:
-        after: '2025-01-02T00:00:00Z'
-        before: '2025-01-01T00:00:00Z'
+        data:
+          webhook_callback:
+            id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
+            subscribed_events:
+            - employment.onboarding_task.completed
+            url: https://example.com/callback
       properties:
-        after:
-          description: Only replay events triggered after this timestamp (ISO 8601).
-          example: '2025-01-01T00:00:00Z'
-          type: string
-        before:
-          description: Only replay events triggered before this timestamp (ISO 8601).
-          example: '2025-01-01T00:00:00Z'
-          type: string
-        company_id:
-          description: Optional filter to only replay events for a specific company.
-          example: 123e4567-e89b-12d3-a456-426614174000
-          type: string
-        event_type:
-          description: Optional filter to only replay events of this type.
-          example: timesheet.created
-          type: string
-        successfully_delivered:
-          description: Optional filter by delivery status. Set to false to replay only failed deliveries.
-          example: true
-          type: boolean
+        data:
+          properties:
+            webhook_callback:
+              $ref: '#/components/schemas/WebhookCallback'
+          required:
+          - webhook_callback
+          type: object
       required:
-      - before
-      - after
-      title: BeforeAfterRequiredParams
+      - data
+      title: WebhookCallbackResponse
       type: object
+    CustomFieldVisibilityScope:
+      description: Who can see this custom field and its values. Controls visibility across different user roles.
+      enum:
+      - company_admin_only
+      - everyone
+      example: everyone
+      title: CustomFieldVisibilityScope
+      type: string
     UpdateWebhookCallbackParams:
       additionalProperties: false
       description: 'Webhook callback update params. Provide either `subscribed_events` or `subscribe_to_all_events` (they are mutually exclusive). Omitting `subscribe_to_all_events` leaves the current subscription mode unchanged, so resending an event list does not disable all-events delivery. Setting `subscribe_to_all_events: false` requires a non-empty `subscribed_events`.'
@@ -2578,172 +2677,87 @@ components:
           type: string
       title: UpdateWebhookCallbackParams
       type: object
-    WebhookCallbackResponse:
-      description: Webhook callback response
+    NotFoundResponse:
+      description: Returned when the requested resource does not exist or is not accessible with the current authentication credentials.
       example:
-        data:
-          webhook_callback:
-            id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
-            subscribed_events:
-            - employment.onboarding_task.completed
-            url: https://example.com/callback
+        message: '{resource} not found'
       properties:
-        data:
-          properties:
-            webhook_callback:
-              $ref: '#/components/schemas/WebhookCallback'
-          required:
-          - webhook_callback
-          type: object
-      required:
-      - data
-      title: WebhookCallbackResponse
+        message:
+          description: A message indicating which resource was not found.
+          pattern: Not Found
+          type: string
+      title: NotFoundResponse
       type: object
-    ListWebhookCallbacksResponse:
+    SingleSelectMetadata:
+      description: The metadata for a single select custom field
       example:
-        data:
-        - id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
-          subscribed_events:
-          - employment.onboarding_task.completed
-          url: https://example.com/callback
+        options:
+        - S
+        - M
+        - L
+        - XL
       properties:
-        data:
+        options:
           items:
-            $ref: '#/components/schemas/WebhookCallback'
+            type: string
+          minItems: 1
           type: array
       required:
-      - data
-      title: ListWebhookCallbacksResponse
+      - options
+      title: SingleSelectMetadata
       type: object
-    EmploymentCustomFieldValueJsonValue:
-      description: The value for a single-select custom field, containing both the option ID and its human-readable label.
-      example:
-        selected_option: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb55
-        selected_option_label: XL
-      properties:
-        selected_option:
-          description: The unique identifier of the selected option.
-          type: string
-        selected_option_label:
-          description: The human-readable label of the selected option (e.g., "XL").
-          type: string
-      required:
-      - selected_option
-      - selected_option_label
-      title: EmploymentCustomFieldValueJsonValue
-      type: object
-    HelpCenterArticle:
-      additionalProperties: false
-      description: Help Center Article
-      example:
-        body: Help Center Article Body
-        html_url: https://www.example.com
-        title: Help Center Article
-        zendesk_id: 12345679
-      properties:
-        body:
-          description: Body of the article
-          type: string
-        html_url:
-          description: HTML URL of the article
-          type: string
-        title:
-          description: Title of the article
-          type: string
-        zendesk_id:
-          description: Zendesk ID of the article
-          type: integer
-      required:
-      - zendesk_id
-      - title
-      - body
-      - html_url
-      title: HelpCenterArticle
-      type: object
-    CreateEmploymentCustomFieldResponse:
-      description: Response returned after successfully creating a new custom field definition.
+    SuccessResponse:
+      description: A generic success response returned by operations that don't produce a specific resource (e.g., updates, deletes).
       example:
         data:
-          custom_field:
-            data_entry_access: company_admin_only
-            id: 01c0e4d2-f41b-11ed-9d3f-cb3ecccebb58
-            metadata: {}
-            name: Internal ID
-            required: true
+          status: ok
+      properties:
+        data:
+          properties:
+            status:
+              description: The result status. Always `"ok"` for successful operations.
+              type: string
+          type: object
+      required:
+      - data
+      title: SuccessResponse
+      type: object
+    UpdateEmploymentCustomFieldValueParams:
+      description: Schema for updating a custom field value.
+      example:
+        value: UXH34HG
+      properties:
+        value:
+          anyOf:
+          - description: For string, text, or link data types. Also decimal values represented as strings, including percentage, decimal, and currency data types. Currency values must be provided in cents (e.g. "1042.00" for $10.42)
             type: string
-            visibility_scope: everyone
-      properties:
-        data:
-          properties:
-            custom_field:
-              $ref: '#/components/schemas/EmploymentCustomField'
-          required:
-          - custom_field
-          type: object
+          - description: For integer data type.
+            type: integer
+          - description: UTC date in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+            example: '2021-07-01'
+            format: date
+            title: Date
+            type: string
+          - description: For boolean data type.
+            type: boolean
+          - description: Selected option value. For single select data.
+            example: 663e0b79-c893-45ff-a1b2-f6dcabc098b5
+            format: uuid
+            title: OptionValue
+            type: string
       required:
-      - data
-      title: CreateEmploymentCustomFieldResponse
+      - value
+      title: UpdateEmploymentCustomFieldValueParams
       type: object
-    CreateGeneralCustomFieldDefinitionParams:
-      additionalProperties: false
-      description: Schema for creating a general custom field definition
-      example:
-        data_entry_access: company_admin_only
-        name: Internal ID
-        required: false
-        type: string
-        visibility_scope: everyone
-      properties:
-        data_entry_access:
-          $ref: '#/components/schemas/CustomFieldDataEntryAccess'
-        name:
-          type: string
-        required:
-          type: boolean
-        type:
-          $ref: '#/components/schemas/CustomFieldSimpleDataType'
-        visibility_scope:
-          $ref: '#/components/schemas/CustomFieldVisibilityScope'
-      required:
-      - name
-      - type
-      - required
-      - data_entry_access
-      - visibility_scope
-      title: CreateGeneralCustomFieldDefinitionParams
-      type: object
-    ListWebhookEventsResponse:
-      description: Response schema listing many webhook_events
-      example:
-        current_page: 1
-        total_count: 1
-        total_pages: 1
-        webhook_events:
-        - company_id: 123e4567-e89b-12d3-a456-426614174000
-          event_type: timesheet.created
-          first_triggered_at: '2025-01-01T00:00:00Z'
-          id: 0073fcb5-b669-4e4a-b963-2a47744e75a1
-          last_triggered_at: '2025-01-02T00:00:00Z'
-          successfully_delivered: true
-      properties:
-        data:
-          properties:
-            current_page:
-              description: The current page among all of the total_pages
-              type: integer
-            total_count:
-              description: The total number of records in the result
-              type: integer
-            total_pages:
-              description: The total number of pages the user can go through
-              type: integer
-            webhook_events:
-              items:
-                $ref: '#/components/schemas/WebhookEvent'
-              type: array
-          type: object
-      title: ListWebhookEventsResponse
-      type: object
+    CurrencyCode:
+      description: Currency code of the SWIFT fee. Only present when processing_fee is set.
+      example: BRL
+      maxLength: 3
+      minLength: 3
+      title: CurrencyCode
+      type:
+      - string
+      - 'null'
   securitySchemes:
     BasicAuth:
       description: 'Authenticate using the basic authentication for partners.
